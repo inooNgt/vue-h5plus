@@ -1,18 +1,15 @@
 <template>
   <div>
-    My
-    <Navbar />
+    mmmmmmmmmmm
+    <br>mmmmmmmmm
+    <br>mmmmmmmmm
+    <br>mmmmmmmmm
   </div>
 </template>
 
 <script>
-import Nav from "../../../components/Nav";
-
 export default {
   name: "Index",
-  components: {
-    Navbar: Nav
-  },
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
@@ -21,3 +18,9 @@ export default {
 };
 </script>
 
+<style scoped>
+body {
+  background: #000;
+  color: #fff;
+}
+</style>

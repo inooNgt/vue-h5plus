@@ -8,6 +8,7 @@ body {
   background: #333;
   color: #fff;
   font-size: 14px;
+  word-break: break-all;
 }
 #app {
   height: 100%;

@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
-    <Navbar />
+    <MFooter />
   </div>
 </template>
 
 <script>
-import Nav from "../../components/Nav";
+import Footer from "../../components/Footer";
 export default {
   name: "App",
   components: {
-    Navbar: Nav
+    MFooter: Footer
   }
 };
 </script>
