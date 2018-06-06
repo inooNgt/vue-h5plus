@@ -1,18 +1,22 @@
 <template>
   <div id="app">
     <router-view/>
+    <Navbar />
   </div>
 </template>
 
 <script>
-import "mint-ui/lib/style.css";
-
+import Nav from "../../components/Nav";
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    Navbar: Nav
+  }
 };
 </script>
 
 
 
-<style>
+<style >
+@import "../../assets/css/base.css";
 </style>

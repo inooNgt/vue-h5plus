@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import "mint-ui/lib/style.css";
-
 export default {
   name: "App"
 };
@@ -14,5 +12,6 @@ export default {
 
 
 
-<style>
+<style >
+@import "../../assets/css/base.css";
 </style>
