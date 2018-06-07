@@ -259,14 +259,14 @@
 				"href": "index.html",
 				"priority": 29,
 				"resources": [
-					
+					"/mui/mui.js",
+					"vigour.html"
 				],
 				"refer": [
-					
+					"my.html"
 				]
 			}
-			
-		},	
+		},
 		"idle": {
 			"resources": [
 				"plus/webview_pullrefresh.html",

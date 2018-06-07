@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <router-view/>
     <MFooter />
   </div>
 </template>
 
 <script>
 import Footer from "../../components/Footer";
+
 export default {
   name: "App",
   components: {
     MFooter: Footer
   },
+
   created() {
-    console.log("app created");
+    console.log("index created");
+  },
+  mounted() {
+    console.log("index mounted");
   }
 };
 </script>

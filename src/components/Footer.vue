@@ -1,19 +1,24 @@
 <template>
   <div class="footer">
-    <router-link class="footer-link" to="/index">
+    <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
       <van-icon class="footer-icon" name="wap-home" />
-      <span>首页</span>
-    </router-link>
-    <router-link class="footer-link" to="/my">
+      <span>Home</span>
+    </div>
+    <div class="footer-link" v-bind:class="{ active: activePath === 'vigour.html' }" @click="handleNavTap('vigour.html',$event)">
+      <van-icon class="footer-icon" name="wap-home" />
+      <span>Vigour</span>
+    </div>
+    <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
       <van-icon class="footer-icon" name="contact" />
-      <span>我的</span>
-    </router-link>
+      <span>My</span>
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 import { Button, Icon } from "vant";
+import MTOOL from "mtool";
 
 Vue.use(Icon);
 Vue.use(Button);
@@ -23,11 +28,46 @@ export default {
   props: ["selected"],
   data() {
     return {
+      activePath: "vigour.html",
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      console.log("footer nav mounted");
+    });
+  },
+  methods: {
+    handleNavTap: function(path, event) {
+      if (this.activePath === path && MTOOL.isPlus) {
+        return;
+      }
+
+      MTOOL.switchNav({
+        from: this.activePath,
+        to: path
+      });
+
+      this.activePath = path;
+    }
   }
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style lang="scss" scoped>
 .footer {
   position: fixed;

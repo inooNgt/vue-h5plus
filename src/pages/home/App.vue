@@ -10,14 +10,14 @@
 
 // import mui from "mui";
 
-
-
 export default {
   name: "App",
   // components: {
   //   MFooter: Footer
   // }
-
+  mounted() {
+    console.log("home mounted");
+  }
 };
 </script>
 

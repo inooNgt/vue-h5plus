@@ -1,31 +1,34 @@
 {
-  "index.html": {
-    "resources": [
-      "static/js/manifest.63685c9aefaaf417d1f5.js",
-      "static/js/vendor.e36046e04bbf735bb6e9.js",
-      "static/css/index.48baff464c96df696fc74882d639a5a2.css",
-      "static/js/index.47daa42888add229a7a6.js",
-      "static/js/index.353c475a86fc4517fd42.js",
-      "static/js/manifest.08389d9f9318d147de8e.js",
-      "static/js/vendor.8d554586d13fae5867a7.js",
-      "static/js/manifest.73e90b01c8f8a821bd27.js",
-      "static/js/index.9e9eb6e97a758cb054e4.js",
-      "static/css/index.f52256a32f5f54caf6e13919a7455ff9.css",
-      "static/js/manifest.30c5e270e1061a1f4cd1.js"
-    ],
-    "refer": [
-      "my.html"
-    ]
-  },
-  "my.html": {
-    "resources": [
-      "static/js/manifest.63685c9aefaaf417d1f5.js",
-      "static/js/vendor.e36046e04bbf735bb6e9.js",
-      "static/js/my.d0241340a9ad544262bb.js",
-      "static/css/my.9257d654a04bafabe3fca2b42f5cfe73.css"
-    ],
-    "refer": [
-      "index.html"
-    ]
-  }
+	"index.html": {
+		"resources": [
+			"static/js/manifest.63685c9aefaaf417d1f5.js",
+			"static/js/vendor.e36046e04bbf735bb6e9.js",
+			"static/css/index.48baff464c96df696fc74882d639a5a2.css",
+			"static/js/index.47daa42888add229a7a6.js",
+			"static/js/index.353c475a86fc4517fd42.js",
+			"static/js/manifest.08389d9f9318d147de8e.js",
+			"static/js/vendor.8d554586d13fae5867a7.js",
+			"static/js/manifest.73e90b01c8f8a821bd27.js",
+			"static/js/index.9e9eb6e97a758cb054e4.js",
+			"static/css/index.f52256a32f5f54caf6e13919a7455ff9.css",
+			"static/js/manifest.30c5e270e1061a1f4cd1.js",
+			"/mui/mui.js",
+			"vigour.html"
+		],
+		"refer": [
+			"my.html",
+			"vigour.html"
+		]
+	},
+	"my.html": {
+		"resources": [
+			"static/js/manifest.63685c9aefaaf417d1f5.js",
+			"static/js/vendor.e36046e04bbf735bb6e9.js",
+			"static/js/my.d0241340a9ad544262bb.js",
+			"static/css/my.9257d654a04bafabe3fca2b42f5cfe73.css"
+		],
+		"refer": [
+			"index.html"
+		]
+	}
 }

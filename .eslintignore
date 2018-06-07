@@ -1,4 +1,5 @@
 /build/
 /config/
-./app
+/app/
+/src/assets/js/*.js
 /*.js

@@ -10,14 +10,11 @@
 
 // import mui from "mui";
 
-
-
 export default {
-  name: "App",
+  name: "App"
   // components: {
   //   MFooter: Footer
   // }
-
 };
 </script>
 

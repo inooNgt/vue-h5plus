@@ -11,19 +11,38 @@
 <body>
   <div id="app"></div>
   <!-- built files will be auto injected -->
+  <script src="mui/mui.js"></script>
+  <script src="mui/mtool.js"></script>
   <script>
-    //取消浏览器的所有事件，使得active的样式在手机上正常生效
-    document.addEventListener('touchstart', function () {
-      return false;
-    }, true);
-    function plusReady() {
-      console.log("plusReady", plus)
-    }
-    if (window.plus) {
-      plusReady();
-    } else {
-      document.addEventListener('plusready', plusReady, false);
-    }
+    (function () {
+      // var styles = {
+      //   top: "0px",
+      //   bottom: "50px"
+      // };
+      // mui.init({
+      //   subpages: [
+      //     {
+      //       url: "vigour.html",
+      //       id: "vigour.html",
+      //       styles: styles
+      //     },
+      //     {
+      //       url: "my.html",
+      //       id: "my.html",
+      //       tyles: styles
+      //     }
+      //   ]
+      // });
+      if (MTOOL.isPlus) {
+        mui.plusReady(function () {
+          console.log("index plus ready");
+          MTOOL.initWebview(0);
+        });
+      }
+
+
+    })();
+
   </script>
 </body>
 
