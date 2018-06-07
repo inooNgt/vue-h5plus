@@ -1,9 +1,17 @@
 <template>
-  <div>
-    mmmmmmmmmmm
-    <br>mmmmmmmmm
-    <br>mmmmmmmmm
-    <br>mmmmmmmmm
+  <div class="page-content">
+    <div class="cell-header">
+      <div class="cell-img">header</div>
+      <div class="cell-msg">
+        <div class="msg-name">name</div>
+        <div class="msg-phone">phone</div>
+      </div>
+
+    </div>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+    </ul>
   </div>
 </template>
 
@@ -19,8 +27,7 @@ export default {
 </script>
 
 <style scoped>
-body {
-  background: #000;
-  color: #fff;
+.cell-header {
+  display: flex;
 }
 </style>

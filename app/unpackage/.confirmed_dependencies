@@ -17,7 +17,8 @@
 		],
 		"refer": [
 			"my.html",
-			"vigour.html"
+			"vigour.html",
+			"home.html"
 		]
 	},
 	"my.html": {

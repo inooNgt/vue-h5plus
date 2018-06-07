@@ -19,3 +19,7 @@ a {
 a:active {
   color: #333;
 }
+
+.page-content {
+  padding: 20px;
+}

@@ -1,6 +1,6 @@
 window.MTOOL = (function() {
   var config = {
-    subpages: ["vigour.html", "my.html"],
+    subpages: ["home.html", "vigour.html", "my.html"],
     top: "0px",
     bottom: "50px"
   };
@@ -82,7 +82,7 @@ window.MTOOL = (function() {
     switchNav: switchNav,
     ready: ready,
     isPlus: isPlus
-  };  
+  };
 })();
 
 MTOOL.initPage();

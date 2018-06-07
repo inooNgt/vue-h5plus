@@ -263,7 +263,8 @@
 					"vigour.html"
 				],
 				"refer": [
-					"my.html"
+					"my.html",
+					"home.html"
 				]
 			}
 		},
