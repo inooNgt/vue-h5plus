@@ -1,8 +1,6 @@
 <template>
   <div>
-    IndexIndexIndexIndexIn
-    <br>dexIndexIndexIndexIndexIndexIndexIndexInde
-    <br>xIndexIndexIndexInd exIndexIndexIndexIndex IndexIndexIndexIndexIndexIndexIndexIndexIndexIndex xIndexIndexIndexInd exIndexIndexIndexIndexIndexIndex IndexIndexIndexIndexIndexIndexIndexIndexxIndexIndexIndexInd exIndexIndexIndexIndexIndexIndexIndexIndexIndexIndexIndex IndexIndexIndexxIndexIndexIndexInd exIndexIndexIndexIndex IndexIndexIndexIndexIndexIndexIndexIndexIndexIndexxIndex IndexIndexInd exIndexIndexIndexIndexIndexIndexIndexIndex IndexIndexIndexIndexIndexIndexxIndexIndexIndexInd exIndex IndexIndexIndexIndexIndexIndexIndexIndexIndexIndexIndexIndex
+    hello
   </div>
 </template>
 

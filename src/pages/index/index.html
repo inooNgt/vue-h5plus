@@ -16,6 +16,14 @@
     document.addEventListener('touchstart', function () {
       return false;
     }, true);
+    function plusReady() {
+      console.log("plusReady", plus)
+    }
+    if (window.plus) {
+      plusReady();
+    } else {
+      document.addEventListener('plusready', plusReady, false);
+    }
   </script>
 </body>
 

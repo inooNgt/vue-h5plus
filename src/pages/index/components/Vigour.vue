@@ -1,14 +1,12 @@
 <template>
-  <div class="page-my">
-    MYmmmmmmmmmmmm
-    <br>MYmmmmmmmmmmmm
-  </div>
+    <div>
+        vigour
+    </div>
 </template>
 
 <script>
 export default {
   name: "Index",
-
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
@@ -18,9 +16,8 @@ export default {
 </script>
 
 <style scoped>
-.page-my {
-  height: 100%;
-  background: #fff;
-  color: #333;
+body {
+  background: #000;
+  color: #fff;
 }
 </style>

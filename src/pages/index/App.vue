@@ -11,6 +11,9 @@ export default {
   name: "App",
   components: {
     MFooter: Footer
+  },
+  created() {
+    console.log("app created");
   }
 };
 </script>

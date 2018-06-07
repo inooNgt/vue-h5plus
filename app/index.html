@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta name="misapplication-tap-highlight" content="no">
   <title>plusapp</title>
-  <link href="static/css/index.06e3e8e6310402f5387368f2a12639f4.css" rel="stylesheet">
+  <link href="static/css/index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -14,10 +14,18 @@
   <script>//取消浏览器的所有事件，使得active的样式在手机上正常生效
     document.addEventListener('touchstart', function () {
       return false;
-    }, true);</script>
-  <script type="text/javascript" src="static/js/manifest.93b1346560906edd796e.js"></script>
-  <script type="text/javascript" src="static/js/vendor.171f7c547972fc3f59b1.js"></script>
-  <script type="text/javascript" src="static/js/index.34b817becb2436033cf7.js"></script>
+    }, true);
+    function plusReady() {
+      console.log("plusReady", plus)
+    }
+    if (window.plus) {
+      plusReady();
+    } else {
+      document.addEventListener('plusready', plusReady, false);
+    }</script>
+  <script type="text/javascript" src="static/js/manifest.js"></script>
+  <script type="text/javascript" src="static/js/vendor.js"></script>
+  <script type="text/javascript" src="static/js/index.js"></script>
 </body>
 
 </html>
