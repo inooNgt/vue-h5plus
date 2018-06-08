@@ -1,16 +1,13 @@
 <template>
   <div class="page-content">
     <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+    <van-tabs v-model="active">
+      <van-tab v-for="item in tablist" :title="item.title" v-bind:key="item.id">
+        item.title内容
+      </van-tab>
+    </van-tabs>
     <div>
       <van-button size="large" @click="shareSystem">系统分享</van-button>
-      <van-button size="large" @click="getAddress">获取通信录好友</van-button>
-      <ul>
-        <li v-for="item in list" v-bind:key="item.id">
-          <div>id:{{item.id}}</div>
-          <div>displayName:{{item.displayName}}</div>
-          <div v-for="phone in item.phoneNumbers" v-bind:key="phone.id">phoneNumbers:{{phone.value}}</div>
-        </li>
-      </ul>
     </div>
   </div>
 </template>
@@ -19,19 +16,33 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
-import { Button, NavBar } from "vant";
+import { Button, NavBar, Tab, Tabs } from "vant";
 
-Vue.use(Button).use(NavBar);
+Vue.use(Button)
+  .use(NavBar)
+  .use(Tab)
+  .use(Tabs);
 
 export default {
   name: "Index",
   data() {
     return {
+      tablist: [
+        {
+          id: 0,
+          title: "专属地址"
+        },
+        {
+          id: 1,
+          title: "专属海报"
+        }
+      ],
+      active: 0,
       list: [
         {
-          id: "",
-          displayName: "",
-          phoneNumbers: [{ id: "", value: "" }]
+          id: "1",
+          displayName: "name",
+          phoneNumbers: [{ id: "1", value: "10086" }]
         }
       ],
       msg: "Welcome to Your Vue.js App"
@@ -55,60 +66,22 @@ export default {
           console.log("share error", e);
         }
       });
-    },
-    getAddress: function() {
-      let list = [];
-      if (typeof plus !== "undefined") {
-        plus.contacts.getAddressBook(
-          plus.contacts.ADDRESSBOOK_PHONE,
-          addressbook => {
-            // 可通过addressbook进行通讯录操作
-            console.log("Get address book success!");
-            console.log(addressbook);
-
-            addressbook.find(
-              null,
-              contacts => {
-                console.log("address find success");
-                contacts.forEach(item => {
-                  let temp = {};
-                  console.log(`contacts item displayName:${item.displayName}`);
-                  console.log(`contacts item id:${item.id}`);
-                  if (item.phoneNumbers && item.phoneNumbers.length) {
-                    item.phoneNumbers.forEach((v, k) => {
-                      console.log(`phoneNumbers ${k} value :${v.value}`);
-                    });
-                  }
-
-                  temp.id = item.id;
-                  temp.displayName = item.displayName;
-                  temp.phoneNumbers = item.phoneNumbers;
-
-                  list.push(temp);
-                });
-
-                this.list = list;
-              },
-              () => {
-                console.log("address find error");
-              },
-              { multiple: true }
-            );
-          },
-          e => {
-            console.log("Get address book failed: " + e.message);
-          }
-        );
-      }
     }
   }
 };
 </script>
 
-
-
-
-
 <style lang="scss" scoped>
 @import "~assets/scss/var";
+.list {
+  padding-top: 20px;
+  font-size: 16px;
+}
+.list-item {
+  padding: 0 20px;
+  line-height: 50px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+}
 </style>

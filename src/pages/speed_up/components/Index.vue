@@ -4,7 +4,7 @@
     <div>
       <van-button size="large">实名认证 +100</van-button>
       <van-button size="large" @click="shareToWX">分享朋友圈 +100</van-button>
-      <van-button size="large">分享给通讯录好友 +100</van-button>
+      <van-button size="large" @click="shareToContacts">分享给通讯录好友 +100</van-button>
     </div>
   </div>
 </template>
@@ -34,6 +34,17 @@ export default {
         url: "vigour_share.html",
         extras: {
           name: "vigour_share.html"
+        },
+        waiting: {
+          autoShow: false
+        }
+      });
+    },
+    shareToContacts: function() {
+      mui.openWindow({
+        url: "contacts.html",
+        extras: {
+          name: "contacts.html"
         },
         waiting: {
           autoShow: false
