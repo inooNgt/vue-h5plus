@@ -1,3 +1,6 @@
+@import "var";
+@import "cover";
+
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +12,7 @@ body {
   word-break: break-all;
   background: #fff;
   color: #000;
+  overflow-x: hidden;
 }
 #app {
   height: 100%;
@@ -18,8 +22,4 @@ a {
 }
 a:active {
   color: #333;
-}
-
-.page-content {
-  padding: 20px;
 }

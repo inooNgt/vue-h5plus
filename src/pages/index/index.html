@@ -15,29 +15,16 @@
   <script src="mui/mtool.js"></script>
   <script>
     (function () {
-      // var styles = {
-      //   top: "0px",
-      //   bottom: "50px"
-      // };
-      // mui.init({
-      //   subpages: [
-      //     {
-      //       url: "vigour.html",
-      //       id: "vigour.html",
-      //       styles: styles
-      //     },
-      //     {
-      //       url: "my.html",
-      //       id: "my.html",
-      //       tyles: styles
-      //     }
-      //   ]
-      // });
+
       if (MTOOL.isPlus) {
         mui.plusReady(function () {
           console.log("index plus ready");
           MTOOL.initWebview(0);
+          // 隐藏滚动条
+          // plus.webview.currentWebview().setStyle({ scrollIndicator: 'none' });
         });
+      } else {
+        window.location.href = "home.html";
       }
 
 

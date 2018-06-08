@@ -1,9 +1,11 @@
 <template>
-  <van-tabs v-model="active">
-    <van-tab v-for="(item, index)  in list" :title="item.title" v-bind:key="index">
-      内容 {{ index }}
-    </van-tab>
-  </van-tabs>
+  <div class="page-content">
+    <van-tabs v-model="active">
+      <van-tab v-for="(item, index)  in list" :title="item.title" v-bind:key="index">
+        test {{ index }}
+      </van-tab>
+    </van-tabs>
+  </div>
 </template>
 
 <script>
@@ -24,9 +26,9 @@ export default {
 };
 </script>
 
-<style scoped>
-body {
-  background: #000;
-  color: #fff;
+<style lang="scss" >
+.van-tabs__content {
+  padding: 0 20px;
 }
 </style>
+

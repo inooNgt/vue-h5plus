@@ -13,7 +13,10 @@
 			"static/css/index.f52256a32f5f54caf6e13919a7455ff9.css",
 			"static/js/manifest.30c5e270e1061a1f4cd1.js",
 			"/mui/mui.js",
-			"vigour.html"
+			"vigour.html",
+			"home.html",
+			"static/js/index.js",
+			"static/css/index.css"
 		],
 		"refer": [
 			"my.html",
@@ -30,6 +33,18 @@
 		],
 		"refer": [
 			"index.html"
+		]
+	},
+	"vigour.html": {
+		"resources": [
+			"static/css/vigour.css",
+			"static/js/vigour.js"
+		]
+	},
+	"home.html": {
+		"resources": [
+			"static/js/home.js",
+			"static/css/home.css"
 		]
 	}
 }

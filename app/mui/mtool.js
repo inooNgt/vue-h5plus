@@ -76,12 +76,38 @@ window.MTOOL = (function() {
     }
   }
 
+  function shareSystem(opt) {
+    // if ("iOS" == plus.os.name) {
+    //   //iOS平台添加链接地址
+    //   opt.msg.href = "http://www.dcloud.io/";
+    // }
+
+    if (!opt.success) {
+      opt.success = function() {
+        console.log("success");
+      };
+    }
+
+    if (!opt.fail) {
+      opt.fail = function() {
+        console.log("fail");
+      };
+    }
+
+    if (isPlus && plus.share.sendWithSystem) {
+      plus.share.sendWithSystem(opt.msg, opt.success, opt.fail);
+    } else {
+      console.log("非H5+环境，无分享功能");
+    }
+  }
+
   return {
     initPage: initPage,
     initWebview: initWebview,
     switchNav: switchNav,
     ready: ready,
-    isPlus: isPlus
+    isPlus: isPlus,
+    shareSystem: shareSystem
   };
 })();
 

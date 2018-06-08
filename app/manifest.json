@@ -260,12 +260,30 @@
 				"priority": 29,
 				"resources": [
 					"/mui/mui.js",
-					"vigour.html"
+					"vigour.html",
+					"home.html",
+					"static/js/index.js",
+					"static/css/index.css"
 				],
 				"refer": [
-					"my.html",
-					"home.html"
+					"my.html"
 				]
+			},
+			"vigour.html": {
+				"resources": [
+					"static/css/vigour.css",
+					"static/js/vigour.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"home.html": {
+				"resources": [
+					"static/js/home.js",
+					"static/css/home.css"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {

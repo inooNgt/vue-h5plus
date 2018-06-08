@@ -1,29 +1,30 @@
 <template>
   <div id="app">
+    <router-view/>
     <MFooter />
   </div>
 </template>
 
 <script>
 import Footer from "../../components/Footer";
+import MTOOL from "mtool";
 
 export default {
   name: "App",
   components: {
     MFooter: Footer
   },
-
-  created() {
-    console.log("index created");
+  data() {
+    return {
+      showFooter: !MTOOL.isPlus
+    };
   },
   mounted() {
-    console.log("index mounted");
+    console.log("my mounted");
   }
 };
 </script>
 
-
-
-<style >
-@import "../../assets/css/base.css";
+<style lang="scss">
+@import "../../assets/scss/base.scss";
 </style>

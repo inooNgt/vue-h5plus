@@ -28,7 +28,7 @@ export default {
   props: ["selected"],
   data() {
     return {
-      activePath: "vigour.html",
+      activePath: "home.html",
       msg: "Welcome to Your Vue.js App"
     };
   },
@@ -36,6 +36,11 @@ export default {
     this.$nextTick(() => {
       console.log("footer nav mounted");
     });
+    let pathname = window.location.pathname || "";
+    pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
+    console.log("pathname:");
+    console.log(pathname);
+    this.activePath = pathname === "index.html" ? "home.html" : pathname;
   },
   methods: {
     handleNavTap: function(path, event) {
@@ -69,6 +74,7 @@ export default {
 
 
 <style lang="scss" scoped>
+@import "~assets/scss/var";
 .footer {
   position: fixed;
   right: 0;
@@ -102,6 +108,9 @@ export default {
     transition: 0.2s ease;
     &:active {
       box-shadow: 0 0 100px inset #ddd;
+    }
+    &.active {
+      color: $color-main;
     }
   }
   .router-link-active {
