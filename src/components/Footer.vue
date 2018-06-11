@@ -47,11 +47,11 @@ export default {
       }
 
       // todo by ngt
-      var logined = false;
+      var logined = true;
       if (MTOOL.needLogin(path) && !logined) {
         MTOOL.checkLogin(path);
         return;
-      }   
+      }
 
       MTOOL.switchNav({
         from: this.activePath,

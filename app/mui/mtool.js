@@ -67,7 +67,7 @@ window.MTOOL = (function() {
     }
 
     //todo by ngt
-    var logined = false;
+    var logined = true;
 
     if (!logined) {
       if (isPlus) {
