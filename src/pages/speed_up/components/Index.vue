@@ -30,26 +30,10 @@ export default {
       mui.back();
     },
     shareToWX: function() {
-      mui.openWindow({
-        url: "vigour_share.html",
-        extras: {
-          name: "vigour_share.html"
-        },
-        waiting: {
-          autoShow: false
-        }
-      });
+      MTOOL.openWindow("vigour_share.html");
     },
     shareToContacts: function() {
-      mui.openWindow({
-        url: "contacts.html",
-        extras: {
-          name: "contacts.html"
-        },
-        waiting: {
-          autoShow: false
-        }
-      });
+      MTOOL.openWindow("contacts.html");
     }
   }
 };

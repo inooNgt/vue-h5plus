@@ -266,7 +266,8 @@
 					"static/css/index.css"
 				],
 				"refer": [
-					"my.html"
+					"my.html",
+					"login.html"
 				]
 			},
 			"vigour.html": {
@@ -280,7 +281,19 @@
 			"home.html": {
 				"resources": [
 					"static/js/home.js",
-					"static/css/home.css"
+					"static/css/home.css",
+					"static/js/manifest.js",
+					"static/js/vendor.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my.html": {
+				"resources": [
+					"static/css/my.css",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my.js"
 				],
 				"refer": [],
 				"priority": 0

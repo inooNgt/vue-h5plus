@@ -21,7 +21,8 @@
 		"refer": [
 			"my.html",
 			"vigour.html",
-			"home.html"
+			"home.html",
+			"login.html"
 		]
 	},
 	"my.html": {
@@ -29,7 +30,11 @@
 			"static/js/manifest.63685c9aefaaf417d1f5.js",
 			"static/js/vendor.e36046e04bbf735bb6e9.js",
 			"static/js/my.d0241340a9ad544262bb.js",
-			"static/css/my.9257d654a04bafabe3fca2b42f5cfe73.css"
+			"static/css/my.9257d654a04bafabe3fca2b42f5cfe73.css",
+			"static/css/my.css",
+			"static/js/manifest.js",
+			"static/js/vendor.js",
+			"static/js/my.js"
 		],
 		"refer": [
 			"index.html"
@@ -44,7 +49,9 @@
 	"home.html": {
 		"resources": [
 			"static/js/home.js",
-			"static/css/home.css"
+			"static/css/home.css",
+			"static/js/manifest.js",
+			"static/js/vendor.js"
 		]
 	}
 }

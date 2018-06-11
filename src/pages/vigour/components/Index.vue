@@ -14,6 +14,7 @@
 import Vue from "vue";
 import { Button } from "vant";
 import mui from "mui";
+import MTOOL from "mtool";
 
 Vue.use(Button);
 
@@ -26,22 +27,14 @@ export default {
   },
   methods: {
     speedUp: function() {
-      mui.openWindow({
-        url: "speed_up.html",
-        extras: {
-          name: "speed_up.html"
-        },
-        waiting: {
-          autoShow: false
-        }
-      });
+      MTOOL.openWindow("speed_up.html");
     }
   }
 };
 </script>
 
 
-
+    
 
 
 <style lang="scss" scoped>

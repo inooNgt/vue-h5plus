@@ -23,7 +23,6 @@ export default {
     };
   },
   mounted() {
-    console.log("home mounted");
   }
 };
 </script>

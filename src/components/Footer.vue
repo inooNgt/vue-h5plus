@@ -33,13 +33,11 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      console.log("footer nav mounted");
-    });
+    this.$nextTick(() => {});
     let pathname = window.location.pathname || "";
     pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
-    console.log("pathname:");
-    console.log(pathname);
+    // console.log("infooter pathname:");
+    // console.log(pathname);
     this.activePath = pathname === "index.html" ? "home.html" : pathname;
   },
   methods: {
@@ -48,29 +46,22 @@ export default {
         return;
       }
 
+      // todo by ngt
+      var logined = false;
+      if (MTOOL.needLogin(path) && !logined) {
+        MTOOL.checkLogin(path);
+        return;
+      }   
+
       MTOOL.switchNav({
         from: this.activePath,
         to: path
       });
-
       this.activePath = path;
     }
   }
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <style lang="scss" scoped>
