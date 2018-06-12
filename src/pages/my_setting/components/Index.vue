@@ -3,7 +3,7 @@
     <div class="cell-header" @click="goSetting">
       <div class="cell-img"></div>
       <div class="cell-msg">
-        <div class="msg-name">This space for name</div>
+        <div class="msg-name">This is setting </div>
         <div class="msg-phone">177****5485</div>
       </div>
       <div class="cell-icon">
@@ -20,7 +20,6 @@
 
 <script>
 import Vue from "vue";
-import MTOOL from "mtool";
 import { Cell, CellGroup, Icon } from "vant";
 
 Vue.use(Cell)
@@ -36,7 +35,7 @@ export default {
   },
   methods: {
     goSetting: function() {
-      MTOOL.openWindow("my_setting.html");
+      console.log("goSetting", this);
     }
   }
 };

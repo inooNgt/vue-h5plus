@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     goBack: function() {
-      console.log("back");
       mui.back();
     },
     shareToWX: function() {

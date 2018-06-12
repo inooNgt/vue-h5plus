@@ -10,9 +10,11 @@
 
 <script>
 import Vue from "vue";
-import { Tab, Tabs } from "vant";
+import { Tab, Tabs, Icon } from "vant";
 
-Vue.use(Tab).use(Tabs);
+Vue.use(Tab)
+  .use(Tabs)
+  .use(Icon);
 
 export default {
   name: "Index",

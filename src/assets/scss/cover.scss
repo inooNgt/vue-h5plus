@@ -6,4 +6,22 @@
 .van-tabs__line {
   background-color: $color-main !important;
 }
-     
+.van-nav-bar.van-nav-bar {
+  height: 44px;
+  line-height: 44px;
+  .van-nav-bar__title {
+    color: #000;
+    font-size: 17px;
+  }
+  .van-nav-bar__text {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .van-icon.van-icon {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  &.van-hairline--bottom {
+    &::after {
+      border: none;
+    }
+  }
+}

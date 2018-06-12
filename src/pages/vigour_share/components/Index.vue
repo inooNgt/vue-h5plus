@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     goBack: function() {
-      console.log("back");
       mui.back();
     },
     shareSystem: function() {

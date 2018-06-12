@@ -1,16 +1,26 @@
 <template>
   <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+    <van-nav-bar title="标题" left-text="活力加速" fixed left-arrow @click-left="goBack" />
 
-    <div>
-      <van-button size="large" @click="getAddress">获取通信录好友</van-button>
-      <ul class="list">
-        <li v-for="item in list" class="list-item" v-bind:key="item.id">
-          <span>联系人:{{item.displayName}}</span>
-          <span>手机号:{{item.phoneNumbers[0].value}}</span>
-          <span>id:{{item.id}}</span>
-        </li>
-      </ul>
+    <div class="list-content">
+      <van-checkbox-group v-model="result">
+        <ul class="list">
+          <li v-for="item in list" class="list-item" v-bind:key="item.id">
+            <!-- <div class="item-img">联系人:{{item.displayName}}</div>
+          <div class="item-name">手机号:{{item.phoneNumbers[0].value}}</div>
+          <div class="item-check">id:{{item.id}}</div> -->
+
+            <van-checkbox :key="item.id" shape="square" :name="item.displayName">
+              <div class="item-img"><img :src="item.photos && item.photos[0] && item.photos[0].value" alt=""></div>
+              <div class="item-name">{{item.displayName}}</div>
+            </van-checkbox>
+          </li>
+        </ul>
+      </van-checkbox-group>
+
+      <div class="footer">
+        <van-button size="large" @click="send">发送</van-button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,9 +29,12 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
-import { Button, NavBar } from "vant";
+import { Button, NavBar, Checkbox, CheckboxGroup } from "vant";
 
-Vue.use(Button).use(NavBar);
+Vue.use(Button)
+  .use(NavBar)
+  .use(Checkbox)
+  .use(CheckboxGroup);
 
 export default {
   name: "Index",
@@ -30,17 +43,97 @@ export default {
       list: [
         {
           id: "1",
-          displayName: "name",
-          phoneNumbers: [{ id: "1", value: "10086" }]
+          displayName: "aname1",
+          phoneNumbers: [{ id: "1", value: "10086" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "2",
+          displayName: "bname2",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "3",   
+          displayName: "cnam3",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "4",
+          displayName: "dname4",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "5",
+          displayName: "ename5",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "6",
+          displayName: "fname6",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "7",
+          displayName: "name7",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "8",
+          displayName: "name8",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "9",
+          displayName: "name9",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "10",
+          displayName: "name10",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "11",
+          displayName: "name11",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "12",
+          displayName: "name12",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "13",
+          displayName: "name13",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
         }
       ],
+      result: [],
       msg: "Welcome to Your Vue.js App"
     };
   },
+  mounted() {
+    this.$nextTick(() => {});
+  },
   methods: {
     goBack: function() {
-      console.log("back");
       mui.back();
+    },
+    send: function() {
+      this.getAddress();
+      console.log("send");
     },
     getAddress: function() {
       let list = [];
@@ -60,15 +153,19 @@ export default {
                   let temp = {};
                   console.log(`contacts item displayName:${item.displayName}`);
                   console.log(`contacts item id:${item.id}`);
-                  if (item.phoneNumbers && item.phoneNumbers.length) {
-                    item.phoneNumbers.forEach((v, k) => {
-                      console.log(`phoneNumbers ${k} value :${v.value}`);
+                  console.log(`contacts item photos:${item.photos}`);
+                  if (item.photos && item.photos.length) {
+                    item.photos.forEach((v, k) => {
+                      for (let key in v) {
+                        console.log("photos." + key + ": " + v[key]);
+                      }
                     });
                   }
 
                   temp.id = item.id;
                   temp.displayName = item.displayName;
                   temp.phoneNumbers = item.phoneNumbers;
+                  temp.photos = item.photos;
 
                   list.push(temp);
                 });
@@ -91,6 +188,62 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "~assets/scss/var";
+ <style lang="scss">
+.list-content {
+  .van-checkbox {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  .van-checkbox__label {
+    display: flex;
+    align-items: center;
+    flex: 1 0 auto;
+    margin: 0;
+    height: 48px;
+  }
+  .van-checkbox__icon {
+    width: 20px;
+  }
+}
 </style>
+  
+
+<style lang="scss" scoped>
+@import "~assets/scss/common";
+.list-content {
+  width: 100%;
+  padding: 79px 35px 50px;
+  .van-checkbox__label {
+    display: flex;
+  }
+}
+.list-item {
+  margin-bottom: 18px;
+}
+.item-name {
+  @extend %text-over;
+  flex: 1 0 auto;
+  padding: 0 9px;
+  color: #210248;
+  font-size: 14px;
+  max-width: 200px;
+}
+.item-img {
+  // width: 45px;
+  // height: 45px;
+  background-color: #fff;
+  border-radius: 5px;
+
+  & > img {
+    display: block;
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    border: none;
+  }
+}
+.item-check {
+  width: 30px;
+}
+</style>  
