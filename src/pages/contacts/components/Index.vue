@@ -10,7 +10,7 @@
           <div class="item-name">手机号:{{item.phoneNumbers[0].value}}</div>
           <div class="item-check">id:{{item.id}}</div> -->
 
-            <van-checkbox :key="item.id" shape="square" :name="item.displayName">
+            <van-checkbox :key="item.id" shape="square" :name="item.id">
               <div class="item-img"><img :src="item.photos && item.photos[0] && item.photos[0].value" alt=""></div>
               <div class="item-name">{{item.displayName}}</div>
             </van-checkbox>
@@ -44,25 +44,28 @@ export default {
         {
           id: "1",
           displayName: "aname1",
-          phoneNumbers: [{ id: "1", value: "10086" }],
+          phoneNumbers: [
+            { id: "1", value: "10086" },
+            { id: "2", value: "10010" }
+          ],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "2",
           displayName: "bname2",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
+          phoneNumbers: [{ id: "1", value: "1008601" }],
           photos: [{ id: "1", value: "" }]
         },
         {
-          id: "3",   
+          id: "3",
           displayName: "cnam3",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
+          phoneNumbers: [{ id: "1", value: "1008602" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "4",
           displayName: "dname4",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
+          phoneNumbers: [{ id: "1", value: "1008603" }],
           photos: [{ id: "1", value: "" }]
         },
         {
@@ -125,15 +128,45 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {});
+    this.$nextTick(() => {
+      mui.plusReady(() => {
+        this.list = this.getAddress();
+      });
+    });
   },
   methods: {
     goBack: function() {
       mui.back();
     },
     send: function() {
-      this.getAddress();
-      console.log("send");
+      if (MTOOL.isPlus) {
+        let msg = plus.messaging.createMessage(plus.messaging.TYPE_SMS);
+        msg.to = this.getPhoneNumbersById(this.result);
+        msg.body = "This is DIC test message.";
+        plus.messaging.sendMessage(msg);
+      }
+      console.log("send to:", this.getPhoneNumbersById(this.result));
+    },
+    getPhoneNumbersById(ids) {
+      let result = [];
+      if (!ids.length) {
+        return result;
+      }
+      this.list.forEach((item, k) => {
+        if (ids.indexOf(item.id) !== -1) {
+          if (item.phoneNumbers.length) {
+            item.phoneNumbers.forEach((v, k) => {
+              result.push(v.value);
+            });
+          }
+        }
+      });
+
+      result = [...new Set(result)];
+
+      // console.log("getPhoneNumbersById", result);
+
+      return result;
     },
     getAddress: function() {
       let list = [];
@@ -169,8 +202,6 @@ export default {
 
                   list.push(temp);
                 });
-
-                this.list = list;
               },
               () => {
                 console.log("address find error");
@@ -183,6 +214,8 @@ export default {
           }
         );
       }
+
+      return list;
     }
   }
 };
@@ -213,7 +246,7 @@ export default {
 @import "~assets/scss/common";
 .list-content {
   width: 100%;
-  padding: 79px 35px 50px;
+  padding: 79px 37px 50px 35px;
   .van-checkbox__label {
     display: flex;
   }

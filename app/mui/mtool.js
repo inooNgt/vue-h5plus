@@ -92,9 +92,9 @@ window.MTOOL = (function() {
       extras: {
         name: url
       },
-      show: {
-        aniShow: "slide-in-bottom"
-      },
+      // show: {
+      //   aniShow: "slide-in-bottom"
+      // },
       waiting: {
         autoShow: false
       }
