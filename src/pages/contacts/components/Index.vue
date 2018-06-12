@@ -3,21 +3,7 @@
     <van-nav-bar title="标题" left-text="活力加速" fixed left-arrow @click-left="goBack" />
 
     <div class="list-content">
-      <van-checkbox-group v-model="result">
-        <ul class="list">
-          <li v-for="item in list" class="list-item" v-bind:key="item.id">
-            <!-- <div class="item-img">联系人:{{item.displayName}}</div>
-          <div class="item-name">手机号:{{item.phoneNumbers[0].value}}</div>
-          <div class="item-check">id:{{item.id}}</div> -->
-
-            <van-checkbox :key="item.id" shape="square" :name="item.id">
-              <div class="item-img"><img :src="item.photos && item.photos[0] && item.photos[0].value" alt=""></div>
-              <div class="item-name">{{item.displayName}}</div>
-            </van-checkbox>
-          </li>
-        </ul>
-      </van-checkbox-group>
-
+      <Contacts :groups="groups" :letters="letters" />
       <div class="footer">
         <van-button size="large" @click="send">发送</van-button>
       </div>
@@ -29,6 +15,10 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
+import pinyin from "pinyin";
+
+import Contacts from "./Contacts";
+
 import { Button, NavBar, Checkbox, CheckboxGroup } from "vant";
 
 Vue.use(Button)
@@ -38,12 +28,14 @@ Vue.use(Button)
 
 export default {
   name: "Index",
+  components: { Contacts },
   data() {
     return {
       list: [
         {
           id: "1",
-          displayName: "aname1",
+          displayName: "aname",
+          displayName_py: "",
           phoneNumbers: [
             { id: "1", value: "10086" },
             { id: "2", value: "10010" }
@@ -52,91 +44,169 @@ export default {
         },
         {
           id: "2",
-          displayName: "bname2",
+          displayName: "吃吃",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008601" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "3",
-          displayName: "cnam3",
+          displayName: "安安1",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008602" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "4",
-          displayName: "dname4",
+          displayName: "宝宝",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008603" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "5",
           displayName: "ename5",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "6",
           displayName: "fname6",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "7",
           displayName: "name7",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "8",
           displayName: "name8",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "9",
           displayName: "name9",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "10",
           displayName: "name10",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "11",
           displayName: "name11",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "12",
           displayName: "name12",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         },
         {
           id: "13",
-          displayName: "name13",
+          displayName: "44name13",
+          displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
         }
       ],
-      result: [],
+      groups: [],
+      letters: this.generateChars(),
+
       msg: "Welcome to Your Vue.js App"
     };
   },
   mounted() {
     this.$nextTick(() => {
-      mui.plusReady(() => {
-        this.list = this.getAddress();
+      MTOOL.plusReady(() => {
+        if (MTOOL.isPlus) {
+          this.list = this.getAddress();
+        }
+        this.groups = this.pySegSort(this.list, this.letters);
+        console.log("pinyin:", this.pinyin("123"));
       });
     });
   },
   methods: {
     goBack: function() {
       mui.back();
+    },
+
+    pySegSort: function(list, letters) {
+      let temp = {};
+      let result = [];
+
+      if (!letters.length || !list.length) {
+        return result;
+      }
+
+      letters.forEach(c => {
+        temp = { letter: c, data: [] };
+
+        // 按需分组
+        list.forEach(item => {
+          // 首字母
+          var han = item.displayName_py[0] || this.pinyin(item.displayName)[0];
+
+          // 非字母组
+          if (!/^[A-Za-z]$/.test(han) && c === "#") {
+            temp.data.push(item);
+          }
+          // 字母组
+          if (han.toUpperCase() === c) {
+            temp.data.push(item);
+          }
+        });
+
+        // 组内排序
+        if (temp.data.length) {
+          temp.data.sort((a, b) => {
+            let apy = a.displayName_py || this.pinyin(a.displayName);
+            let bpy = b.displayName_py || this.pinyin(a.displayName);
+            return apy.localeCompare(bpy);
+          });
+        }
+
+        result.push(temp);
+      });
+
+      console.log("pySegSort result", result);
+
+      return result;
+    },
+
+    pinyin: function(str) {
+      return (
+        pinyin(str, {
+          style: pinyin.STYLE_NORMAL
+        })[0][0][0] || ""
+      );
+    },
+
+    generateChars: function() {
+      var str = [];
+      for (var i = 65; i < 91; i++) {
+        str.push(String.fromCharCode(i));
+      }
+      str.push("#");
+      return str;
     },
     send: function() {
       if (MTOOL.isPlus) {
@@ -197,6 +267,7 @@ export default {
 
                   temp.id = item.id;
                   temp.displayName = item.displayName;
+                  temp.displayName_py = this.pinyin(item.displayName);
                   temp.phoneNumbers = item.phoneNumbers;
                   temp.photos = item.photos;
 
@@ -221,26 +292,6 @@ export default {
 };
 </script>
 
- <style lang="scss">
-.list-content {
-  .van-checkbox {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-  }
-  .van-checkbox__label {
-    display: flex;
-    align-items: center;
-    flex: 1 0 auto;
-    margin: 0;
-    height: 48px;
-  }
-  .van-checkbox__icon {
-    width: 20px;
-  }
-}
-</style>
-  
 
 <style lang="scss" scoped>
 @import "~assets/scss/common";
@@ -250,33 +301,5 @@ export default {
   .van-checkbox__label {
     display: flex;
   }
-}
-.list-item {
-  margin-bottom: 18px;
-}
-.item-name {
-  @extend %text-over;
-  flex: 1 0 auto;
-  padding: 0 9px;
-  color: #210248;
-  font-size: 14px;
-  max-width: 200px;
-}
-.item-img {
-  // width: 45px;
-  // height: 45px;
-  background-color: #fff;
-  border-radius: 5px;
-
-  & > img {
-    display: block;
-    width: 45px;
-    height: 45px;
-    border-radius: 5px;
-    border: none;
-  }
-}
-.item-check {
-  width: 30px;
 }
 </style>  

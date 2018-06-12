@@ -47,7 +47,7 @@ export default {
       }
 
       // todo by ngt
-      var logined = true;
+      var logined = false;
       if (MTOOL.needLogin(path) && !logined) {
         MTOOL.checkLogin(path);
         return;

@@ -67,7 +67,7 @@ window.MTOOL = (function() {
     }
 
     //todo by ngt
-    var logined = true;
+    var logined = false;
 
     if (!logined) {
       if (isPlus) {
@@ -196,6 +196,16 @@ window.MTOOL = (function() {
     }
   }
 
+  function plusReady(fn) {
+    if (isPlus) {
+      return mui.plusReady(fn);
+    } else {
+      setTimeout(function() {
+        fn && fn();
+      }, 0);
+    }
+  }
+
   return {
     initPage: initPage,
     initWebview: initWebview,
@@ -203,6 +213,7 @@ window.MTOOL = (function() {
     isPlus: isPlus,
     storage: storage,
     config: config,
+    plusReady: plusReady,
     needLogin: needLogin,
     checkLogin: checkLogin,
     shareSystem: shareSystem,
