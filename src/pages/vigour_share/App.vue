@@ -14,11 +14,10 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/base.scss";
+@import "~assets/scss/base.scss";
 </style>

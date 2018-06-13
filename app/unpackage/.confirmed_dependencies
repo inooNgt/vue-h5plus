@@ -16,7 +16,9 @@
 			"vigour.html",
 			"home.html",
 			"static/js/index.js",
-			"static/css/index.css"
+			"static/css/index.css",
+			"static/js/manifest.js",
+			"static/js/vendor.js"
 		],
 		"refer": [
 			"my.html",
@@ -43,7 +45,9 @@
 	"vigour.html": {
 		"resources": [
 			"static/css/vigour.css",
-			"static/js/vigour.js"
+			"static/js/vigour.js",
+			"static/js/manifest.js",
+			"static/js/vendor.js"
 		]
 	},
 	"home.html": {

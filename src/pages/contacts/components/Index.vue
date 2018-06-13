@@ -3,7 +3,7 @@
     <van-nav-bar title="标题" left-text="活力加速" fixed left-arrow @click-left="goBack" />
 
     <div class="list-content">
-      <Contacts :groups="groups" :letters="letters" />
+      <Contacts :groups="groups" :letters="letters" ref="contacts" />
       <div class="footer">
         <van-button size="large" @click="send">发送</van-button>
       </div>
@@ -125,22 +125,38 @@ export default {
           displayName_py: "",
           phoneNumbers: [{ id: "1", value: "1008600" }],
           photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "14",
+          displayName: "44name13",
+          displayName_py: "",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "15",
+          displayName: "44name13",
+          displayName_py: "",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
+        },
+        {
+          id: "16",
+          displayName: "44name13",
+          displayName_py: "",
+          phoneNumbers: [{ id: "1", value: "1008600" }],
+          photos: [{ id: "1", value: "" }]
         }
       ],
       groups: [],
       letters: this.generateChars(),
-
-      msg: "Welcome to Your Vue.js App"
+      msg: "This is DIC test message."
     };
   },
   mounted() {
     this.$nextTick(() => {
       MTOOL.plusReady(() => {
-        if (MTOOL.isPlus) {
-          this.list = this.getAddress();
-        }
-        this.groups = this.pySegSort(this.list, this.letters);
-        console.log("pinyin:", this.pinyin("123"));
+        this.initList();
       });
     });
   },
@@ -149,6 +165,28 @@ export default {
       mui.back();
     },
 
+    // 初始化列表数据
+    initList: async function() {
+      if (MTOOL.isPlus) {
+        try {
+          let addressbook = await this.getAddressBook();
+          let address = await this.extractAddressBook(addressbook);
+          if (address.length) {
+            this.list = address;
+          }
+          this.groups = this.pySegSort(this.list, this.letters);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        // 非plus下测试数据
+        this.groups = this.pySegSort(this.list, this.letters);
+      }
+
+      console.log("pinyin:" + this.pinyin("123"));
+    },
+
+    // 拼音分组排序
     pySegSort: function(list, letters) {
       let temp = {};
       let result = [];
@@ -208,15 +246,17 @@ export default {
       str.push("#");
       return str;
     },
+
     send: function() {
+      let result = this.$refs.contacts.result;
       if (MTOOL.isPlus) {
         let msg = plus.messaging.createMessage(plus.messaging.TYPE_SMS);
-        msg.to = this.getPhoneNumbersById(this.result);
-        msg.body = "This is DIC test message.";
+        msg.to = this.getPhoneNumbersById(result);
+        msg.body = this.msg;
         plus.messaging.sendMessage(msg);
       }
-      console.log("send to:", this.getPhoneNumbersById(this.result));
     },
+
     getPhoneNumbersById(ids) {
       let result = [];
       if (!ids.length) {
@@ -238,61 +278,67 @@ export default {
 
       return result;
     },
-    getAddress: function() {
-      let list = [];
-      if (typeof plus !== "undefined") {
+
+    getAddressBook: function() {
+      return new Promise((resolve, reject) => {
         plus.contacts.getAddressBook(
           plus.contacts.ADDRESSBOOK_PHONE,
           addressbook => {
             // 可通过addressbook进行通讯录操作
             console.log("Get address book success!");
-            console.log(addressbook);
 
-            addressbook.find(
-              null,
-              contacts => {
-                console.log("address find success");
-                contacts.forEach(item => {
-                  let temp = {};
-                  console.log(`contacts item displayName:${item.displayName}`);
-                  console.log(`contacts item id:${item.id}`);
-                  console.log(`contacts item photos:${item.photos}`);
-                  if (item.photos && item.photos.length) {
-                    item.photos.forEach((v, k) => {
-                      for (let key in v) {
-                        console.log("photos." + key + ": " + v[key]);
-                      }
-                    });
-                  }
-
-                  temp.id = item.id;
-                  temp.displayName = item.displayName;
-                  temp.displayName_py = this.pinyin(item.displayName);
-                  temp.phoneNumbers = item.phoneNumbers;
-                  temp.photos = item.photos;
-
-                  list.push(temp);
-                });
-              },
-              () => {
-                console.log("address find error");
-              },
-              { multiple: true }
-            );
+            resolve(addressbook);
           },
-          e => {
-            console.log("Get address book failed: " + e.message);
-          }
+          reject
         );
-      }
+      });
+    },
 
-      return list;
+    extractAddressBook: function(addressbook) {
+      return new Promise((resolve, reject) => {
+        addressbook.find(
+          null,
+          contacts => {
+            let list = [];
+            contacts.forEach(item => {
+              let temp = {};
+
+              temp.id = item.id;
+              temp.displayName = item.displayName;
+              temp.displayName_py = this.pinyin(item.displayName);
+              temp.phoneNumbers = item.phoneNumbers;
+              temp.photos = item.photos;
+
+              list.push(temp);
+
+              console.log(`contacts item displayName:${item.displayName}`);
+              // console.log(`contacts item id:${item.id}`);
+              // console.log(`contacts item photos:${item.photos}`);
+              // if (item.photos && item.photos.length) {
+              //   item.photos.forEach((v, k) => {
+              //     for (let key in v) {
+              //       console.log("photos." + key + ": " + v[key]);
+              //     }
+              //   });
+              // }
+            });
+            resolve(list);
+            console.log("forEach list" + list.length);
+          },
+          reject,
+          { multiple: true }
+        );
+      });
     }
   }
 };
 </script>
 
-
+<style lang="scss">
+body {
+  overflow-x: initial;
+}
+</style>
 <style lang="scss" scoped>
 @import "~assets/scss/common";
 .list-content {

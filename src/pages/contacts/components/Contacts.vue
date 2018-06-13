@@ -1,22 +1,22 @@
 <template>
-    <div class="cts-content">
-        <van-checkbox-group v-model="result">
-            <ul v-for="(group,index) in groups" :class="'group-'+index" v-bind:key="group.letter">
-                <li v-for="item in group.data" class="list-item" v-bind:key="item.id">
-                    <van-checkbox :key="item.id" shape="square" :name="item.id">
-                        <div class="item-img"><img :src="item.photos && item.photos[0] && item.photos[0].value" alt=""></div>
-                        <div class="item-name">{{item.displayName}}</div>
-                    </van-checkbox>
-                </li>
-            </ul>
+  <div class="cts-content">
+    <van-checkbox-group v-model="result">
+      <ul v-for="group in groups" class="group" :class="'group-'+group.letter" :ref="'group-'+group.letter" v-bind:key="group.letter">
+        <li v-for="item in group.data" class="list-item" v-bind:key="item.id">
+          <van-checkbox :key="item.id" shape="square" :name="item.id">
+            <div class="item-img"><img :src="item.photos && item.photos[0] && item.photos[0].value" alt=""></div>
+            <div class="item-name">{{item.displayName}}</div>
+          </van-checkbox>
+        </li>
+      </ul>
 
-        </van-checkbox-group>
-        <div class="contacts-hook">
-            <span class="hook-item" v-for="char in letters" :key="char" @click="toHook(char)">
-                {{char}}
-            </span>
-        </div>
+    </van-checkbox-group>
+    <div class="contacts-hook">
+      <span class="hook-item" v-for="char in letters" :key="char" @click="toHook(char)">
+        {{char}}
+      </span>
     </div>
+  </div>
 </template>
 
 <script>
@@ -44,46 +44,22 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      console.log("groups:", this.groups);
+      console.log("refs:", this.$refs);
     });
   },
   updated() {
-    console.log("groups---:", this.groups);
+    // console.log("groups---:" + this.groups.length);
   },
   methods: {
     toHook: function(char) {
-      console.log("to hook: ", char);
-    },
-
-    send: function() {
-      if (MTOOL.isPlus) {
-        let msg = plus.messaging.createMessage(plus.messaging.TYPE_SMS);
-        msg.to = this.getPhoneNumbersById(this.result);
-        msg.body = "This is DIC test message.";
-        plus.messaging.sendMessage(msg);
+      let element = this.$refs["group-" + char][0];
+      // console.log(element.children.length);
+      let y = Math.max(0, MTOOL.elementPosition(element).y - 44);
+      if (element && element.children.length) {
+        // element.scrollIntoView();
+        window.scrollTo(0, y);
+        console.log("scrollToP:", document.body.scrollTop);
       }
-      console.log("send to:", this.getPhoneNumbersById(this.result));
-    },
-    getPhoneNumbersById(ids) {
-      let result = [];
-      if (!ids.length) {
-        return result;
-      }
-      this.list.forEach((item, k) => {
-        if (ids.indexOf(item.id) !== -1) {
-          if (item.phoneNumbers.length) {
-            item.phoneNumbers.forEach((v, k) => {
-              result.push(v.value);
-            });
-          }
-        }
-      });
-
-      result = [...new Set(result)];
-
-      // console.log("getPhoneNumbersById", result);
-
-      return result;
     }
   }
 };

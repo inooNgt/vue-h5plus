@@ -5,7 +5,7 @@
       <span>Home</span>
     </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'vigour.html' }" @click="handleNavTap('vigour.html',$event)">
-      <van-icon class="footer-icon" name="wap-home" />
+      <van-icon class="footer-icon" name="shop" />
       <span>Vigour</span>
     </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
@@ -43,11 +43,11 @@ export default {
   methods: {
     handleNavTap: function(path, event) {
       if (this.activePath === path && MTOOL.isPlus) {
-        return;
+        return;   
       }
 
       // todo by ngt
-      var logined = false;
+      var logined = true;
       if (MTOOL.needLogin(path) && !logined) {
         MTOOL.checkLogin(path);
         return;
