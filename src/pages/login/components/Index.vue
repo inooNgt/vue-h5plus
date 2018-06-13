@@ -1,5 +1,8 @@
 <template>
   <div class="page-content">
+    <div class="logo">
+      <img class="logo-img" src="~assets/img/empty.png" alt="">
+    </div>
     <div>
       <van-tabs v-model="active">
         <van-tab title="密码登录">
@@ -18,7 +21,7 @@
           </van-cell-group>
         </van-tab>
       </van-tabs>
-      <van-button slot="button" size="large" type="primary">登录</van-button>
+      <van-button slot="button" size="large" >登录</van-button>
     </div>
   </div>
 </template>
@@ -75,5 +78,14 @@ export default {
 .head-name {
   padding-top: 10px;
   text-align: center;
+}
+.logo {
+  padding: 54px 0;
+}
+.logo-img {
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
 }
 </style>

@@ -205,6 +205,20 @@ window.MTOOL = (function() {
       }, 0);
     }
   }
+  // 获取元素位置
+  function elementPosition(obj) {
+    var curleft = 0,
+      curtop = 0;
+    if (obj.offsetParent) {
+      curleft = obj.offsetLeft;
+      curtop = obj.offsetTop;
+      while ((obj = obj.offsetParent)) {
+        curleft += obj.offsetLeft;
+        curtop += obj.offsetTop;
+      }
+    }
+    return { x: curleft, y: curtop };
+  }
 
   return {
     initPage: initPage,
@@ -217,7 +231,8 @@ window.MTOOL = (function() {
     needLogin: needLogin,
     checkLogin: checkLogin,
     shareSystem: shareSystem,
-    openWindow: openWindow
+    openWindow: openWindow,
+    elementPosition: elementPosition
   };
 })();
 
