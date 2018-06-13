@@ -15,11 +15,11 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
-import pinyin from "pinyin";
 
 import Contacts from "./Contacts";
-
 import { Button, NavBar, Checkbox, CheckboxGroup } from "vant";
+
+const pinyin = require("pinyin");
 
 Vue.use(Button)
   .use(NavBar)

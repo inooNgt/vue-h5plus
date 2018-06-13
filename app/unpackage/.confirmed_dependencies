@@ -57,5 +57,13 @@
 			"static/js/manifest.js",
 			"static/js/vendor.js"
 		]
+	},
+	"contacts.html": {
+		"resources": [
+			"static/css/contacts.css",
+			"static/js/contacts.js",
+			"static/js/manifest.js",
+			"static/js/vendor.js"
+		]
 	}
 }

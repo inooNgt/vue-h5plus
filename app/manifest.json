@@ -301,6 +301,16 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"contacts.html": {
+				"resources": [
+					"static/css/contacts.css",
+					"static/js/contacts.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {

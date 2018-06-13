@@ -63,7 +63,8 @@ module.exports = {
         include: [
           resolve("src"),
           resolve("test"),
-          resolve("node_modules/webpack-dev-server/client")
+          resolve("node_modules/webpack-dev-server/client"),
+          resolve("node_modules/pinyin") // 此库未打包😭
         ]
       },
       {

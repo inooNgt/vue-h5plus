@@ -13,7 +13,7 @@
       <li class="list-item">
         <div class="item-left">昵称</div>
         <div class="item-right">
-          name
+          name111     
         </div>
         <div class="item-arrow">
           <van-icon name="arrow" />
