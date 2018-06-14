@@ -1,4 +1,4 @@
-window.MTOOL = (function() {
+(function(global, undefined) {
   /**
    * tabbar子页面配置
    */
@@ -67,14 +67,14 @@ window.MTOOL = (function() {
     }
 
     //todo by ngt
-    var logined = true;
+    var logined = false;
 
     if (!logined) {
       if (isPlus) {
         mui.plusReady(function() {
           var ws = plus.webview.currentWebview();
           console.log("当前Webview窗口：" + ws.getURL());
-          MTOOL.openWindow("login.html");
+          openWindow("login.html");
         });
       } else {
         window.location.href = config.loginPath;
@@ -196,6 +196,10 @@ window.MTOOL = (function() {
     }
   }
 
+  /**
+   * plusready or execute
+   * @param {Function} fn
+   */
   function plusReady(fn) {
     if (isPlus) {
       return mui.plusReady(fn);
@@ -205,7 +209,11 @@ window.MTOOL = (function() {
       }, 0);
     }
   }
-  // 获取元素位置
+
+  /**
+   * 获取元素位置
+   * @param {Object} obj
+   */
   function elementPosition(obj) {
     var curleft = 0,
       curtop = 0;
@@ -220,7 +228,11 @@ window.MTOOL = (function() {
     return { x: curleft, y: curtop };
   }
 
-  return {
+  function ajax(url, options) {
+    return mui.ajax(url, options);
+  }
+
+  var MTOOL = {
     initPage: initPage,
     initWebview: initWebview,
     switchNav: switchNav,
@@ -234,6 +246,8 @@ window.MTOOL = (function() {
     openWindow: openWindow,
     elementPosition: elementPosition
   };
-})();
+
+  global.MTOOL = MTOOL;
+})(window, undefined);
 
 MTOOL.initPage();

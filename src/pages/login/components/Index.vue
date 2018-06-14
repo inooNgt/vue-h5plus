@@ -7,21 +7,23 @@
       <van-tabs v-model="active">
         <van-tab title="密码登录">
           <van-cell-group>
-            <van-field v-model="username" label="用户名" icon="clear" placeholder="请输入用户名" required @click-icon="username = ''" />
+            <van-field v-model="username" label="用户名" icon="clear" placeholder="请输入用户名" @click-icon="username = ''" />
 
-            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required @click-icon="password = ''" />
+            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" @click-icon="password = ''" />
           </van-cell-group>
         </van-tab>
         <van-tab title="验证码登录">
           <van-cell-group>
-            <van-field v-model="username" label="用户名" icon="clear" placeholder="请输入用户名" required @click-icon="username = ''" />
+            <van-field v-model="username" label="手机号" icon="clear" placeholder="请输入用户名" @click-icon="username = ''" />
             <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码" icon="clear" @click-icon="sms = ''">
               <van-button slot="button" size="small" type="primary">发送验证码</van-button>
             </van-field>
           </van-cell-group>
         </van-tab>
       </van-tabs>
-      <van-button slot="button" size="large" >登录</van-button>
+      <van-button slot="button" size="large" @click="login">登录</van-button>
+      <van-button slot="button" size="large" @click="goRegister">去注册</van-button>
+      <van-button slot="button" size="large" @click="goFindPS">忘记密码</van-button>
     </div>
   </div>
 </template>
@@ -44,15 +46,38 @@ export default {
   data() {
     return {
       active: 0,
-      msg: "Welcome to Your Vue.js App",
-      username: "username",
-      password: "password",
+      msg: "",
+      username: "",
+      password: "",
+      phone: "",
       sms: ""
     };
   },
+  mounted: function() {},
   methods: {
-    speedUp: function() {
-      MTOOL.openWindow("speed_up.html");
+    login: function() {
+      let param = {};
+      if (this.active === 0) {
+        param = {
+          type: "psd",
+          username: this.username,
+          password: this.password
+        };
+      } else {
+        param = {
+          type: "codde",
+          phone: this.phone,
+          code: this.code
+        };
+      }
+
+      console.log("Login param:", param);
+    },
+    goFindPS: function() {
+      MTOOL.openWindow("login_findps.html");
+    },
+    goRegister: function() {
+      MTOOL.openWindow("login_register.html");
     }
   }
 };

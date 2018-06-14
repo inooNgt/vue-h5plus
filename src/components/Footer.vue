@@ -43,11 +43,11 @@ export default {
   methods: {
     handleNavTap: function(path, event) {
       if (this.activePath === path && MTOOL.isPlus) {
-        return;   
+        return;
       }
 
       // todo by ngt
-      var logined = true;
+      var logined = false;
       if (MTOOL.needLogin(path) && !logined) {
         MTOOL.checkLogin(path);
         return;
