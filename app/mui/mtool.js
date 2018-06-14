@@ -7,7 +7,9 @@
     top: "0px",
     bottom: "50px",
     loginPages: ["my.html"],
-    loginPath: "login.html"
+    loginPath: "login.html",
+    navKey: "md.index.activeNavPath",
+    loginstatus: "ml.login.isLogin"
   };
 
   var isPlus = false;
@@ -24,7 +26,9 @@
    * 本地存储
    */
   var storage = (function() {
-    return isPlus && typeof plus !== "undefined" ? plus.storage : localStorage;
+    return isPlus && typeof plus !== "undefined"
+      ? plus.storage
+      : global.localStorage;
   })();
 
   /**
@@ -50,12 +54,32 @@
 
     //Plus环境下的tabbar子页面检查activeNavPath
     if (isPlus && config.subpages.indexOf(pathname) !== -1) {
-      pathname = storage.getItem("activeNavPath") || config.subpages[0];
+      pathname = storage.getItem(config.navKey) || config.subpages[0];
     }
 
     console.log("current pathname: " + pathname);
+
+    // cwmc注册接口
+    initExpose();
+
     //检查登录
     checkLogin(pathname);
+  }
+
+  function initExpose() {
+    if (!isPlus) return;
+    // 暴露统一接口
+    MTOOL.cwcs.expose("forceUpdate", function() {
+      console.log("forceUpdate");
+      location.reload();
+    });
+
+    //为tabar子页面注册登陆回调
+    // if (config.subpages.indexOf(pathname) !== -1) {
+    //   MTOOL.cwcs.expose("tabbarUpdate", function() {
+    //     console.log("tabbarUpdate");
+    //   });
+    // }
   }
 
   /**
@@ -67,16 +91,17 @@
     }
 
     //todo by ngt
-    var logined = false;
+    var logined = MTOOL.storage.getItem(config.loginstatus);
 
     if (!logined) {
       if (isPlus) {
         mui.plusReady(function() {
           var ws = plus.webview.currentWebview();
           console.log("当前Webview窗口：" + ws.getURL());
-          openWindow("login.html");
+          openWindow(config.loginPath, { from: path });
         });
       } else {
+        // todo by ngt 可以带参数
         window.location.href = config.loginPath;
       }
     }
@@ -86,11 +111,17 @@
    * 快速新开webview
    * @param {String} url
    */
-  function openWindow(url) {
+
+  function openWindow(url, options) {
+    var from = "";
+    if (typeof options !== "undefined" && typeof options.from !== "undefined") {
+      from = options.from;
+    }
     mui.openWindow({
       url: url,
       extras: {
-        name: url
+        name: url,
+        from: from
       },
       // show: {
       //   aniShow: "slide-in-bottom"
@@ -120,6 +151,7 @@
     mui.plusReady(function() {
       //获取当前页面所属的Webview窗口对象
       var self = plus.webview.currentWebview();
+
       for (var i = 0; i < subpages.length; i++) {
         //创建webview子页
         var sub = plus.webview.create(
@@ -138,7 +170,7 @@
         self.append(sub);
       }
 
-      storage.setItem("activeNavPath", subpages[index]);
+      storage.setItem(config.navKey, subpages[index]);
 
       // var loginwv = plus.webview.create("login.html", "login.html");
     });
@@ -161,10 +193,15 @@
     if (typeof plus !== "undefined") {
       plus.webview.show(options.to);
       plus.webview.hide(options.from);
+
+      //检查更新
+      // if (needLogin(options.to)) {
+      //   MTOOL.cwcs.invoke(options.to, "tabbarUpdate");
+      // }
     } else {
       window.location.href = options.to;
     }
-    storage.setItem("activeNavPath", options.to);
+    storage.setItem(config.navKey, options.to);
   }
 
   /**
@@ -228,9 +265,47 @@
     return { x: curleft, y: curtop };
   }
 
-  function ajax(url, options) {
-    return mui.ajax(url, options);
-  }
+  /**
+   *跨webview通信系统（ Cross webview communication syetem）
+   */
+  var cwcs = {
+    exposed: {},
+    // 注册可被调用的接口
+    expose: function(fnName, fn) {
+      var self = this;
+      if (self.exposed[fnName] !== undefined) {
+        throw new Error("cwcs.expose: function already exists: " + fnName);
+      }
+      self.exposed[fnName] = fn;
+    },
+    // 被其它webview调用的入口
+    invoked: function(fnName, params) {
+      var fn = this.exposed[fnName];
+      if (typeof fn != "function") {
+        throw new Error("cwcs.invoke: function not found: " + fnName);
+      }
+      fn(params);
+    },
+    // 调用其它webview js函数
+    invoke: function(vId, fnName, params) {
+      plusReady(function() {
+        var view = plus.webview.getWebviewById(vId);
+        if (!view) {
+          throw new Error("cwcs webview not found: " + vId);
+        }
+
+        var js = "MTOOL.cwcs.invoked(" + JSON.stringify(fnName);
+        if (params) js += "," + JSON.stringify(params);
+        js += ")";
+
+        try {
+          view.evalJS(js);
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    }
+  };
 
   var MTOOL = {
     initPage: initPage,
@@ -239,6 +314,7 @@
     isPlus: isPlus,
     storage: storage,
     config: config,
+    cwcs: cwcs,
     plusReady: plusReady,
     needLogin: needLogin,
     checkLogin: checkLogin,

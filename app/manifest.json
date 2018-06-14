@@ -311,6 +311,14 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"login.html": {
+				"resources": [],
+				"refer": [
+					"login_register.html",
+					"login_findps.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

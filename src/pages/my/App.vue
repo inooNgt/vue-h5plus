@@ -23,6 +23,10 @@ export default {
     };
   },
   mounted() {
+    MTOOL.cwcs.expose("tabbarUpdate", function() { 
+      console.log("my tabbarUpdate");
+      location.reload();
+    });
   }
 };
 </script>

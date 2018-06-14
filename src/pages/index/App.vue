@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
-    <MFooter />
+    <MFooter ref="footer" />
   </div>
 </template>
 
@@ -20,6 +20,11 @@ export default {
     };
   },
   mounted() {
+    console.log("this.$refs.footer.activePath", this.$refs.footer.activePath);
+    MTOOL.cwcs.expose("updateTab", data => {
+      console.log("updateTab:" + data.to);
+      if (data.to) this.$refs.footer.activePath = data.to;
+    });
   }
 };
 </script>

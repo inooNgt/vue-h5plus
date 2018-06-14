@@ -2,7 +2,7 @@
   <div id="app">
     <router-view/>
     <!-- <MFooter /> -->
-    <MFooter v-show="showFooter" />
+    <MFooter v-show="showFooter" ref="footer" />
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
     };
   },
   mounted() {
+    // console.log("this.$refs.footer.activePath", this.$refs.footer.activePath);
   }
 };
 </script>

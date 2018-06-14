@@ -30,9 +30,10 @@
 
 <script>
 import Vue from "vue";
-import { Button, Field, Cell, CellGroup, Tab, Tabs } from "vant";
+import { Button, Field, Cell, CellGroup, Tab, Tabs, Toast } from "vant";
 import mui from "mui";
 import MTOOL from "mtool";
+import { keys } from "utils/config";
 
 Vue.use(Button)
   .use(Field)
@@ -58,20 +59,61 @@ export default {
     login: function() {
       let param = {};
       if (this.active === 0) {
+        // if (this.username.trim() === "") {
+        //   Toast("用户名不能为空");
+        //   return;
+        // }
+        // if (this.password.trim() === "") {
+        //   Toast("密码不能为空");
+        //   return;
+        // }
+
         param = {
           type: "psd",
-          username: this.username,
-          password: this.password
+          username: this.username.trim(),
+          password: this.password.trim()
         };
       } else {
         param = {
           type: "codde",
-          phone: this.phone,
-          code: this.code
+          phone: this.phone.trim(),
+          code: this.code.trim()
         };
       }
 
       console.log("Login param:", param);
+      this.loginSucceed();
+    },
+    loginSucceed: function() {
+      console.log("loginSucceed");
+      // 存储信息
+      let data = { username: this.username, sessionkey: new Date().getTime() };
+      MTOOL.storage.setItem(keys.loginstatus, true);
+      MTOOL.storage.setItem(keys.session, JSON.stringify(data));
+      // 跳转
+
+      console.log("session info:", MTOOL.storage.getItem(keys.session));
+
+      // plus环境
+      if (MTOOL.isPlus) {
+        MTOOL.plusReady(function() {
+          var wv = plus.webview.currentWebview();
+          var origin = wv.from;
+          // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
+          console.log("origin: " + origin);
+          if (origin && MTOOL.config.subpages.indexOf(origin)) {
+            mui.back();
+            MTOOL.switchNav({
+              from: "login.html",
+              to: origin
+            });
+            MTOOL.cwcs.invoke(origin, "tabbarUpdate");
+            MTOOL.cwcs.invoke("HBuilder", "updateTab", { to: origin });
+          }
+        });
+      } else {
+        history.back();
+      }
     },
     goFindPS: function() {
       MTOOL.openWindow("login_findps.html");
