@@ -2,9 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
 import App from "./App";
-import { http } from "utils/utils";
+import { http, get, post, del } from "utils/utils";
 
 Vue.prototype.$http = http;
+Vue.prototype.$get = get;
+Vue.prototype.$post = post;
+Vue.prototype.$del = del;
 
 Vue.config.productionTip = false;
 

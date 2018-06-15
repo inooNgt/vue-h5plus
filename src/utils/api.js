@@ -4,7 +4,8 @@ const api = {
   areacodelist: "/v1/common/codes",
   register: "/v1/common/user",
   smscode: "/v1/common/sms-code",
-  
+  del: "/v1/common/token/TOKEN",
+  login: "/v1/common/token",
 };
 
 export default api;

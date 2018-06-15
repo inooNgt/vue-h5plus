@@ -8,8 +8,10 @@
     bottom: "50px",
     loginPages: ["my.html"],
     loginPath: "login.html",
-    navKey: "md.index.activeNavPath",
-    loginstatus: "ml.login.isLogin"
+    keys: {
+      activenav: "md.index.activeNavPath",
+      token: "ml.login.token"
+    }
   };
 
   var isPlus = false;
@@ -29,6 +31,10 @@
     return isPlus && typeof plus !== "undefined"
       ? plus.storage
       : global.localStorage;
+  })();
+
+  const logined = (function() {
+    return !!storage.getItem(config.keys.token);
   })();
 
   /**
@@ -54,7 +60,7 @@
 
     //Plus环境下的tabbar子页面检查activeNavPath
     if (isPlus && config.subpages.indexOf(pathname) !== -1) {
-      pathname = storage.getItem(config.navKey) || config.subpages[0];
+      pathname = storage.getItem(config.keys.activenav) || config.subpages[0];
     }
 
     console.log("current pathname: " + pathname);
@@ -91,7 +97,7 @@
     }
 
     //todo by ngt
-    // var logined = MTOOL.storage.getItem(config.loginstatus);
+    // var logined = MTOOL.storage.getItem(config.token);
     // var logined = false;
     // if (!logined) {
     //   if (isPlus) {
@@ -170,7 +176,7 @@
         self.append(sub);
       }
 
-      storage.setItem(config.navKey, subpages[index]);
+      storage.setItem(config.keys.activenav, subpages[index]);
 
       // var loginwv = plus.webview.create("login.html", "login.html");
     });
@@ -201,7 +207,7 @@
     } else {
       window.location.href = options.to;
     }
-    storage.setItem(config.navKey, options.to);
+    storage.setItem(config.keys.activenav, options.to);
   }
 
   /**
@@ -315,6 +321,7 @@
     storage: storage,
     config: config,
     cwcs: cwcs,
+    logined: logined,
     plusReady: plusReady,
     needLogin: needLogin,
     checkLogin: checkLogin,

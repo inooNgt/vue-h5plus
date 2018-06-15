@@ -4,6 +4,13 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 
+import { http, get, post, del } from "utils/utils";
+
+Vue.prototype.$http = http;
+Vue.prototype.$get = get;
+Vue.prototype.$post = post;
+Vue.prototype.$del = del;
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

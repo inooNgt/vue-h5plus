@@ -18,6 +18,14 @@ const get = (url, options) => {
   return axios.get(url, options);
 };
 
+const del = (url, options) => {
+  if (typeof url !== "undefined") {
+    url = config.host + url;
+  }
+
+  return axios.delete(url, options);
+};
+
 const post = (url, data, options) => {
   if (typeof url !== "undefined") {
     url = config.host + url;
@@ -28,4 +36,4 @@ const post = (url, data, options) => {
   return axios.post(url, data, options);
 };
 
-export { http, get, post };
+export { http, get, post, del };

@@ -15,15 +15,17 @@
       <van-cell title="单元格" is-link value="内容" />
       <van-cell title="单元格" is-link value="内容" />
     </van-cell-group>
-    <van-button slot="button" size="large" @click="loginout">退 出</van-button>
+    <van-button slot="button" size="large" v-if="logined" @click="logout">退出</van-button>
+    <van-button slot="button" size="large" v-if="!logined" @click="login">登录</van-button>
   </div>
-</template>
+</template>             
 
 <script>
 import Vue from "vue";
 import MTOOL from "mtool";
-import { Cell, CellGroup, Icon } from "vant";
+import { Cell, CellGroup, Icon, Toast } from "vant";
 import config from "utils/config";
+import API from "utils/api";
 
 Vue.use(Cell)
   .use(CellGroup)
@@ -33,28 +35,47 @@ export default {
   name: "Index",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to Your Vue.js App",
+      logined: MTOOL.logined
     };
   },
+  mounted() {
+    console.log("logined", this.logined);
+  },
   methods: {
-    goSetting: function() {
+    login() {
+      MTOOL.openWindow("login.html");
+    },
+    goSetting() {
       MTOOL.openWindow("my_setting.html");
     },
-    loginout: function() {
-      MTOOL.storage.setItem(config.keys.loginstatus, "");
-      MTOOL.storage.setItem(config.keys.session, "");
-      console.log("退出成功！");
+    logout() {
+      // test
+      MTOOL.storage.setItem(config.keys.token, "");
 
-      // 回到首页
-      if (MTOOL.isPlus) {
-        MTOOL.switchNav({
-          from: "my.html",
-          to: "home.html"
-        });
-        MTOOL.cwcs.invoke("HBuilder", "updateTab", { to: "home.html" });
-      } else {
-        location.href = "home.html";
-      }
+      this.$del(API.del).then(res => {
+        let data = res.data;
+        if (data.status !== 200) {
+          Toast(data.message);
+          return;
+        }
+        MTOOL.storage.setItem(config.keys.token, "");
+
+        Toast("退出成功");
+
+        // 回到首页
+        setTimeout(() => {
+          if (MTOOL.isPlus) {
+            MTOOL.switchNav({
+              from: "my.html",
+              to: "home.html"
+            });
+            MTOOL.cwcs.invoke("HBuilder", "updateTab", { to: "home.html" });
+          } else {
+            location.href = "home.html";
+          }
+        }, 200);
+      });
     }
   }
 };
