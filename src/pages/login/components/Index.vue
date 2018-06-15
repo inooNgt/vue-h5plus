@@ -33,7 +33,7 @@ import Vue from "vue";
 import { Button, Field, Cell, CellGroup, Tab, Tabs, Toast } from "vant";
 import mui from "mui";
 import MTOOL from "mtool";
-import { keys } from "utils/config";
+import config from "utils/config";
 
 Vue.use(Button)
   .use(Field)
@@ -88,11 +88,11 @@ export default {
       console.log("loginSucceed");
       // 存储信息
       let data = { username: this.username, sessionkey: new Date().getTime() };
-      MTOOL.storage.setItem(keys.loginstatus, true);
-      MTOOL.storage.setItem(keys.session, JSON.stringify(data));
+      MTOOL.storage.setItem(config.keys.loginstatus, true);
+      MTOOL.storage.setItem(config.keys.session, JSON.stringify(data));
       // 跳转
 
-      console.log("session info:", MTOOL.storage.getItem(keys.session));
+      console.log("session info:", MTOOL.storage.getItem(config.keys.session));
 
       // plus环境
       if (MTOOL.isPlus) {

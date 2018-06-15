@@ -299,7 +299,9 @@
 					"static/js/vendor.js",
 					"static/js/my.js"
 				],
-				"refer": [],
+				"refer": [
+					"login.html"
+				],
 				"priority": 0
 			},
 			"contacts.html": {

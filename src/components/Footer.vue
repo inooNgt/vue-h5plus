@@ -19,7 +19,7 @@
 import Vue from "vue";
 import { Button, Icon } from "vant";
 import MTOOL from "mtool";
-import { keys } from "utils/config";
+import config from "utils/config";
 
 Vue.use(Icon);
 Vue.use(Button);
@@ -44,13 +44,6 @@ export default {
   methods: {
     handleNavTap: function(path, event) {
       if (this.activePath === path && MTOOL.isPlus) {
-        return;
-      }
-
-      // todo by ngt
-      var logined = MTOOL.storage.getItem(keys.loginstatus);
-      if (MTOOL.needLogin(path) && !logined) {
-        MTOOL.checkLogin(path);
         return;
       }
 

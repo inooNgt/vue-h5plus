@@ -15,7 +15,7 @@
       <van-cell title="单元格" is-link value="内容" />
       <van-cell title="单元格" is-link value="内容" />
     </van-cell-group>
-    <van-button slot="button" size="large" @click="loginout">登 出</van-button>
+    <van-button slot="button" size="large" @click="loginout">退 出</van-button>
   </div>
 </template>
 
@@ -23,7 +23,7 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import { Cell, CellGroup, Icon } from "vant";
-import { keys } from "utils/config";
+import config from "utils/config";
 
 Vue.use(Cell)
   .use(CellGroup)
@@ -41,9 +41,20 @@ export default {
       MTOOL.openWindow("my_setting.html");
     },
     loginout: function() {
-      MTOOL.storage.setItem(keys.loginstatus, "");
-      MTOOL.storage.setItem(keys.session, "");
-      location.reload();
+      MTOOL.storage.setItem(config.keys.loginstatus, "");
+      MTOOL.storage.setItem(config.keys.session, "");
+      console.log("退出成功！");
+
+      // 回到首页
+      if (MTOOL.isPlus) {
+        MTOOL.switchNav({
+          from: "my.html",
+          to: "home.html"
+        });
+        MTOOL.cwcs.invoke("HBuilder", "updateTab", { to: "home.html" });
+      } else {
+        location.href = "home.html";
+      }
     }
   }
 };

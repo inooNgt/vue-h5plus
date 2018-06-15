@@ -39,7 +39,8 @@
       "static/js/my.js"
     ],
     "refer": [
-      "index.html"
+      "index.html",
+      "login.html"
     ]
   },
   "vigour.html": {

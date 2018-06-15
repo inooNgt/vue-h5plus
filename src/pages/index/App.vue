@@ -25,6 +25,11 @@ export default {
       console.log("updateTab:" + data.to);
       if (data.to) this.$refs.footer.activePath = data.to;
     });
+
+    // 更新所有子页面
+    MTOOL.cwcs.expose("updateSubpages", data => {
+      console.log("updateSubpages:" + data.to);
+    }); 
   }
 };
 </script>

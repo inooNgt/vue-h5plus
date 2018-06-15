@@ -91,20 +91,20 @@
     }
 
     //todo by ngt
-    var logined = MTOOL.storage.getItem(config.loginstatus);
-
-    if (!logined) {
-      if (isPlus) {
-        mui.plusReady(function() {
-          var ws = plus.webview.currentWebview();
-          console.log("当前Webview窗口：" + ws.getURL());
-          openWindow(config.loginPath, { from: path });
-        });
-      } else {
-        // todo by ngt 可以带参数
-        window.location.href = config.loginPath;
-      }
-    }
+    // var logined = MTOOL.storage.getItem(config.loginstatus);
+    // var logined = false;
+    // if (!logined) {
+    //   if (isPlus) {
+    //     mui.plusReady(function() {
+    //       var ws = plus.webview.currentWebview();
+    //       console.log("当前Webview窗口：" + ws.getURL());
+    //       openWindow(config.loginPath, { from: path });
+    //     });
+    //   } else {
+    //     // todo by ngt 可以带参数
+    //     window.location.href = config.loginPath;
+    //   }
+    // }
   }
 
   /**
