@@ -300,7 +300,8 @@
 					"static/js/my.js"
 				],
 				"refer": [
-					"login.html"
+					"login.html",
+					"my_setting.html"
 				],
 				"priority": 0
 			},

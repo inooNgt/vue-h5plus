@@ -60,6 +60,7 @@ function setHeaders(url, options) {
   return options;
 }
 
+
 function checkAuth(url) {
   let result = false;
   for (let key in API.auth) {

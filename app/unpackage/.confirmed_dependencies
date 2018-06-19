@@ -40,7 +40,8 @@
     ],
     "refer": [
       "index.html",
-      "login.html"
+      "login.html",
+      "my_setting.html"
     ]
   },
   "vigour.html": {

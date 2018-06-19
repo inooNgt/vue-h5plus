@@ -46,6 +46,7 @@
 import Vue from "vue";
 import { Cell, CellGroup, NavBar, Icon } from "vant";
 
+
 Vue.use(Cell)
   .use(CellGroup)
   .use(NavBar)
