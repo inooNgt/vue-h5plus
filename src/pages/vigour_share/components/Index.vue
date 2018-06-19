@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script> 
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";

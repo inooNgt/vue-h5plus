@@ -1,7 +1,8 @@
 <template>
   <div class="page-content">
-    <ul class="list">
-      <li class="list-item">
+    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+    <ul class="my-list">
+      <li class="list-item" @click="setHead">
         <div class="item-left">头像</div>
         <div class="item-right">
           <img class="head-img" src="~assets/img/head.png" alt="">
@@ -10,16 +11,16 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="setNickname">
         <div class="item-left">昵称</div>
         <div class="item-right">
-          name111     
+          name111
         </div>
         <div class="item-arrow">
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="setPhone">
         <div class="item-left">手机号</div>
         <div class="item-right">
           131****1234
@@ -43,10 +44,11 @@
 
 <script>
 import Vue from "vue";
-import { Cell, CellGroup, Icon } from "vant";
+import { Cell, CellGroup, NavBar, Icon } from "vant";
 
 Vue.use(Cell)
   .use(CellGroup)
+  .use(NavBar)
   .use(Icon);
 
 export default {
@@ -57,8 +59,17 @@ export default {
     };
   },
   methods: {
-    goSetting: function() {
-      console.log("goSetting", this);
+    goBack() {
+      mui.back();
+    },
+    setHead() {
+      MTOOL.openWindow("my_setting_head.html");
+    },
+    setNickname() {
+      MTOOL.openWindow("my_setting_name.html");
+    },
+    setPhone() {
+      MTOOL.openWindow("my_setting_phone.html");
     }
   }
 };
@@ -66,29 +77,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
-.list-item {
-  display: flex;
-  height: 60px;
-  line-height: 60px;
-  background: #fff;
-  padding: 0 20px;
-  margin-bottom: 18px;
-}
-.item-left {
-  width: 100px;
-}
-.item-right {
-  flex: 1 0 auto;
-  text-align: right;
-  padding: 0 10px;
-}
-.item-arrow {
-  width: 20px;
-  text-align: right;
-}
-.head-img {
-  margin: 10px 0;
-  width: 40px;
-  height: 40px;
-}
 </style>

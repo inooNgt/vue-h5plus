@@ -6,6 +6,9 @@ const api = {
   smscode: "/v1/common/sms-code",
   del: "/v1/common/token/TOKEN",
   login: "/v1/common/token",
+  auth: {
+    user: "/v1/user"
+  }
 };
 
 export default api;

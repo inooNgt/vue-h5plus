@@ -19,17 +19,32 @@ export default {
       showFooter: !MTOOL.isPlus
     };
   },
-  mounted() {
-    console.log("this.$refs.footer.activePath", this.$refs.footer.activePath);
-    MTOOL.cwcs.expose("updateTab", data => {
-      console.log("updateTab:" + data.to);
+  created() {
+    // 更新tab
+    window.addEventListener("index_update_tab", function(event) {
+      // 获得事件参数
+      let detail = event.detail;
+      console.log("detail.to" + detail.to);
       if (data.to) this.$refs.footer.activePath = data.to;
     });
 
     // 更新所有子页面
-    MTOOL.cwcs.expose("updateSubpages", data => {
-      console.log("updateSubpages:" + data.to);
-    }); 
+    window.addEventListener("index_update_subpages", function(event) {
+      // 获得事件参数
+      let detail = event.detail;
+      console.log("index_update_subpages");
+      console.log("detail.to" + detail.to);
+
+      // 更新
+      MTOOL.config.subpages.forEach(path => {
+        MTOOL.invoke(path, "event_update", { to: path });
+      });
+    });
+  },
+  mounted() {
+    console.log(
+      "this.$refs.footer.activePath: " + this.$refs.footer.activePath
+    );
   }
 };
 </script>

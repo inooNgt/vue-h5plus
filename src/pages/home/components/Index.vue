@@ -18,6 +18,15 @@ Vue.use(Tab)
 
 export default {
   name: "Index",
+  created() {
+    // 更新所有子页面
+    window.addEventListener("event_update", function(event) {
+      // 获得事件参数
+      let detail = event.detail;
+      console.log("event_nav_update");
+      console.log("detail.to" + detail.to);
+    });
+  },
   data() {
     return {
       active: 0,

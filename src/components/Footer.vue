@@ -51,7 +51,10 @@ export default {
         from: this.activePath,
         to: path
       });
-      this.activePath = path;
+      this.activePath = path;                        
+
+      // 更新
+      MTOOL.invoke(path, "event_update", { to: path });
     }
   }
 };

@@ -9,6 +9,8 @@
 .van-nav-bar.van-nav-bar {
   height: 44px;
   line-height: 44px;
+  border-bottom: solid 1px #dddddd;
+
   .van-nav-bar__title {
     color: #000;
     font-size: 17px;
@@ -23,5 +25,8 @@
     &::after {
       border: none;
     }
+  }
+  .van-nav-bar__left {
+    left: 18px;
   }
 }

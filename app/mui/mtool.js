@@ -33,9 +33,9 @@
       : global.localStorage;
   })();
 
-  const logined = (function() {
+  const logined = function() {
     return !!storage.getItem(config.keys.token);
-  })();
+  };
 
   /**
    * 初始化页面
@@ -313,6 +313,12 @@
     }
   };
 
+  // 封装mui.fire
+  var invoke = function(targetId, event, data) {
+    let page = plus.webview.getWebviewById(targetId);
+    return mui.fire(page, event, data);
+  };
+
   var MTOOL = {
     initPage: initPage,
     initWebview: initWebview,
@@ -327,6 +333,7 @@
     checkLogin: checkLogin,
     shareSystem: shareSystem,
     openWindow: openWindow,
+    invoke: invoke,
     elementPosition: elementPosition
   };
 

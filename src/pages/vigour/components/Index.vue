@@ -20,10 +20,19 @@ Vue.use(Button);
 
 export default {
   name: "Index",
-  data() {
+  data() { 
     return {
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  created() {
+    // 更新所有子页面
+    window.addEventListener("event_update", function(event) {
+      // 获得事件参数
+      let detail = event.detail;
+      console.log("event_nav_update");
+      console.log("detail.to" + detail.to);
+    });
   },
   methods: {
     speedUp: function() {

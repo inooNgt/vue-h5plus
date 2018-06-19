@@ -8,15 +8,15 @@
         <van-tab title="密码登录">
           <van-cell-group>
             <v-select v-model="selectedAreacode" label="label" :options="areacodeOptions"></v-select>
-            <van-field v-model="phone1" label="手机号" icon="clear" placeholder="请输入用户名" @click-icon="username = ''" />
+            <van-field v-model="phone1" label="手机号" placeholder="请输入用户名" />
 
-            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" @click-icon="password = ''" />
+            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" />
           </van-cell-group>
         </van-tab>
         <van-tab title="验证码登录">
           <van-cell-group>
-            <van-field v-model="phone2" label="手机号" icon="clear" placeholder="请输入用户名" @click-icon="username = ''" />
-            <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码" icon="clear" @click-icon="sms = ''">
+            <van-field v-model="phone2" label="手机号" placeholder="请输入用户名" />
+            <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码">
               <van-button slot="button" size="small" type="primary">发送验证码</van-button>
             </van-field>
           </van-cell-group>
@@ -136,7 +136,13 @@ export default {
     },
     loginSucceed: function(data) {
       // 存储信息
-      MTOOL.storage.setItem(config.keys.token, JSON.stringify(data));
+      MTOOL.storage.setItem(
+        config.keys.token,
+        JSON.stringify(data.access_token)
+      );
+      MTOOL.storage.setItem(config.keys.user, JSON.stringify(data.user));
+
+      console.log("登录成功 :" + MTOOL.logined());
 
       // 跳转 plus环境
       if (MTOOL.isPlus) {
@@ -145,15 +151,21 @@ export default {
           var origin = wv.from;
           // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
           console.log("origin: " + origin);
-          if (origin && MTOOL.config.subpages.indexOf(origin)) {
+          setTimeout(() => {
+            // 关闭当前页
             mui.back();
-            MTOOL.switchNav({
-              from: "login.html",
-              to: origin
-            });
-            MTOOL.cwcs.invoke(origin, "tabbarUpdate");
-            MTOOL.cwcs.invoke("HBuilder", "updateTab", { to: origin });
-          }
+            // 更新页面
+            MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
+          }, 400);
+
+          // 带参处理
+          // if (origin && MTOOL.config.subpages.indexOf(origin)) {
+          //   MTOOL.switchNav({
+          //     from: "login.html",
+          //     to: origin
+          //   });
+          //   MTOOL.invoke("HBuilder", "index_update_tab", { to: origin });
+          // }
         });
       } else {
         location.href = "home.html";

@@ -95,7 +95,7 @@ export default {
       if (this.invitecode.trim() === "") Toast("邀请码不能为空");
 
       console.log("param", param);
-
+      // todo by ngt 需要loading
       this.$post(API.register, param, {
         crossDomain: true
       })
@@ -108,24 +108,29 @@ export default {
           }
 
           Toast("注册成功");
-          // 存储信息
-          MTOOL.storage.setItem(config.keys.token, JSON.stringify(data.data));
-          if (MTOOL.isPlus) {
-            let loginwv = plus.webview.getWebviewById("login.html");
-            if (loginwv) {
-              plus.webview.close(loginwv);
-            }
-            mui.back();
-            MTOOL.cwcs.invoke("HBuilder", "updateSubpages", { to: "to" });
-          } else {
-            setTimeout(() => {
-              location.href = "home.html";
-            }, 200);
-          }
+          this.registerSuccess(data.data);
         })
         .catch(e => {
           Toast(e.message);
         });
+    },
+    registerSuccess(token) {
+      // 存储信息
+      MTOOL.storage.setItem(config.keys.token, JSON.stringify(token));
+
+      if (MTOOL.isPlus) {
+        let loginwv = plus.webview.getWebviewById("login.html");
+        if (loginwv) {
+          plus.webview.close(loginwv);
+        }
+        mui.back();
+        // 更新页面
+        MTOOL.invoke("HBuilder", "index_update_subpages", { to: "" });
+      } else {
+        // setTimeout(() => {
+        //   location.href = "home.html";
+        // }, 200);
+      }
     },
     setAreaInfo: async function() {
       // countries code

@@ -37,3 +37,66 @@ img {
   width: 100%;
   background: #fff;
 }
+
+.btn.btn.btn {
+  width: 135px;
+  height: 44px;
+  line-height: 44px;
+}
+
+/* my list start */
+.my-list {
+  background: #fff;
+  padding: 0 18px;
+  .list-item {
+    display: flex;
+    height: 52px;
+    line-height: 52px;
+    background: #fff;
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-image: linear-gradient(
+          90deg,
+          #ffffff -10%,
+          #dddddd 50%,
+          #ffffff 111%
+        ),
+        linear-gradient(#311455, #311455);
+      background-blend-mode: normal, normal;
+    }
+  }
+  .item-left {
+    width: 100px;
+    font-size: 16px;
+    color: #000;
+  }
+  .item-right {
+    flex: 1 0 auto;
+    text-align: right;
+    padding: 0 10px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+  .item-arrow {
+    width: 20px;
+    text-align: right;
+    & i {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 600;
+    }
+  }
+  .head-img {
+    margin: 4px 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+}
+/* my list end */
