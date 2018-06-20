@@ -39,6 +39,8 @@ const post = (url, data, options) => {
     url = config.host + url;
   }
 
+  console.log("post options:", options);
+
   if (typeof data === "object") data = encodeURI(Qs.stringify(data));
 
   return axios.post(url, data, options);
@@ -60,7 +62,6 @@ function setHeaders(url, options) {
   return options;
 }
 
-
 function checkAuth(url) {
   let result = false;
   for (let key in API.auth) {
@@ -72,4 +73,34 @@ function checkAuth(url) {
   return result;
 }
 
-export { http, get, post, del };
+// 获取缓存的用户信息
+const getCachedUser = () => {
+  let cachedUser = config.userTpl;
+  try {
+    cachedUser = JSON.parse(MTOOL.storage.getItem(config.keys.user));
+  } catch (error) {
+    console.log(error);
+  }
+  return cachedUser;
+};
+
+// 获取最新的用户信息
+const loadUserInfo = () => {
+  return new Promise((resolve, reject) => {
+    get(API.auth.user)
+      .then(res => {
+        let user = res.data.data;
+        if (res.data.status === 200) {
+          MTOOL.storage.setItem(config.keys.user, JSON.stringify(user));
+          resolve(user);
+        } else {
+          reject(res.data);
+        }
+      })
+      .catch(e => {
+        reject(e);
+      });
+  });
+};
+
+export { http, get, post, del, getCachedUser, loadUserInfo };

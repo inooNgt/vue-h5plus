@@ -11,6 +11,13 @@
 import Vue from "vue";
 import { Cell, CellGroup, NavBar, Icon, Field, Toast } from "vant";
 
+import MTOOL from "mtool";
+import mui from "mui";
+import config from "utils/config";
+import { getCachedUser, loadUserInfo } from "utils/utils";
+import API from "utils/api";
+import vueTap from "v-tap";
+
 Vue.use(Cell)
   .use(CellGroup)
   .use(NavBar)
@@ -18,11 +25,14 @@ Vue.use(Cell)
   .use(Field)
   .use(Icon);
 
+// 缓存的用户信息
+const cachedUser = getCachedUser();
+
 export default {
   name: "Index",
   data() {
     return {
-      phone: "13163702121"
+      phone: cachedUser.mobile_phone || "- -"
     };
   },
   methods: {
@@ -30,7 +40,17 @@ export default {
       mui.back();
     },
     save() {
-      console.log("save");
+      if (this.phone.trim() === "") {
+        Toast("手机号不能为空");
+      }
+    },
+    async updateUserInfo() {
+      try {
+        let user = await loadUserInfo();
+        if (user.username) this.username = user.username;
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

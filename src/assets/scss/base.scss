@@ -1,5 +1,6 @@
 @import "var";
 @import "cover";
+@import "common";
 
 * {
   margin: 0;
@@ -11,7 +12,7 @@ body {
   // height: 100%;
   font-size: 14px;
   word-break: break-all;
-  background: #e8e8e8;   
+  background: #e8e8e8;
   color: #000;
   // overflow-x: hidden;
 }
@@ -50,8 +51,8 @@ img {
   padding: 0 18px;
   .list-item {
     display: flex;
-    height: 52px;
-    line-height: 52px;
+    height: 59px;
+    line-height: 59px;
     background: #fff;
     position: relative;
     &:after {
@@ -72,9 +73,15 @@ img {
     }
   }
   .item-left {
-    width: 100px;
+    width: 200px;
     font-size: 16px;
     color: #000;
+    display: flex;
+    align-items: center;
+    .item-title {
+      width: 150px;
+      @extend %text-over;
+    }
   }
   .item-right {
     flex: 1 0 auto;

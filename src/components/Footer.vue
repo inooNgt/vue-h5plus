@@ -51,7 +51,7 @@ export default {
         from: this.activePath,
         to: path
       });
-      this.activePath = path;                        
+      this.activePath = path;
 
       // 更新
       MTOOL.invoke(path, "event_update", { to: path });
@@ -73,16 +73,9 @@ export default {
   display: flex;
   text-align: center;
 
-  background-image: linear-gradient(
-    180deg,
-    #d9d9d9,
-    #d9d9d9 50%,
-    transparent 0
-  );
-  background-size: 100% 1px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-color: #fafafa;
+  border: solid 1px #dddddd;
+  background-color: #ffffff;
+
   .footer-icon {
     display: block;
     font-size: 18px;
@@ -90,6 +83,7 @@ export default {
   }
   .footer-link {
     display: block;
+    font-size: 10px;
     padding: 5px 0;
     flex: 1 0 auto;
     border-radius: 0;

@@ -4,19 +4,30 @@
       <nav class="bar-setting">
         <van-icon class="icon-setting" v-tap="{ methods:goSetting }" name="setting" />
       </nav>
-      <div class="row-msg">
-        <div class="msg-name">{{username}}</div>
-        <div class="msg-phone">
-          <van-icon name="phone" />{{phone}}</div>
-      </div>
       <div class="row-img">
         <img class="header-img" v-if="avatar" :src="avatar" />
         <img class="header-img" v-if="!avatar" src="~assets/img/head.png" />
       </div>
+      <div class="row-msg">
+        <div class="msg-name">{{username}}</div>
+      </div>
+    </div>
+    <div class="my-info">
+      <div class="info-left">
+        <div class="info-title">DIC</div>
+        <div class="info-value">1000</div>
+      </div>
+      <div class="info-right">
+        <div class="info-title">活力值</div>
+        <div class="info-value">1000</div>
+      </div>
     </div>
     <ul class="my-list">
       <li class="list-item">
-        <div class="item-left">实名认证</div>
+        <div class="item-left">
+          <span class="my-icon"></span>
+          <span class="item-title">实名认证</span>
+        </div>
         <div class="item-right">
           认证中
         </div>
@@ -25,7 +36,10 @@
         </div>
       </li>
       <li class="list-item">
-        <div class="item-left">我的资产</div>
+        <div class="item-left">
+          <span class="my-icon"></span>
+          <div class="item-title">我的资产</div>
+        </div>
         <div class="item-right">
           100 DIC
         </div>
@@ -34,7 +48,10 @@
         </div>
       </li>
       <li class="list-item">
-        <div class="item-left">我的课程</div>
+        <div class="item-left">
+          <span class="my-icon"></span>
+          <div class="item-title">我的课程</div>
+        </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
@@ -42,7 +59,10 @@
         </div>
       </li>
       <li class="list-item">
-        <div class="item-left">我的活动</div>
+        <div class="item-left">
+          <span class="my-icon"></span>
+          <div class="item-title">我的活动</div>
+        </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
@@ -50,7 +70,10 @@
         </div>
       </li>
       <li class="list-item">
-        <div class="item-left">帮助中心</div>
+        <div class="item-left">
+          <span class="my-icon"></span>
+          <div class="item-title">帮助中心</div>
+        </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
@@ -58,7 +81,10 @@
         </div>
       </li>
       <li class="list-item">
-        <div class="item-left">关于我们</div>
+        <div class="item-left">
+          <span class="my-icon"></span>
+          <div class="item-title">关于我们</div>
+        </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
@@ -66,10 +92,7 @@
         </div>
       </li>
     </ul>
-    <div class="box-btn">
-      <van-button slot="button" class="btn" size="large" v-if="logined" @click="logout">退出</van-button>
-      <van-button slot="button" class="btn" size="large" v-if="!logined" @click="login">登录</van-button>
-    </div>
+
   </div>
 </template>             
 
@@ -77,20 +100,19 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
-import { Cell, CellGroup, Icon, Toast } from "vant";
 import config from "utils/config";
+import { getCachedUser, loadUserInfo } from "utils/utils";
 import API from "utils/api";
 import vueTap from "v-tap";
+import { Cell, CellGroup, Icon, Toast } from "vant";
 
 Vue.use(Cell)
   .use(CellGroup)
   .use(Icon)
   .use(vueTap);
 
-// 使用缓存初始化
-const cachedUser = JSON.parse(MTOOL.storage.getItem(config.keys.user));
-
-console.log("cachedUser", cachedUser);
+// 缓存的用户信息
+const cachedUser = getCachedUser();
 
 export default {
   name: "Index",
@@ -98,8 +120,7 @@ export default {
     return {
       logined: MTOOL.logined(),
       isPlus: MTOOL.isPlus,
-      username: cachedUser.username || "--",
-      phone: cachedUser.mobile_phone || "--",
+      username: cachedUser.username || "- -",
       avatar: cachedUser.avatar_base_url || ""
     };
   },
@@ -138,9 +159,17 @@ export default {
   },
   methods: {
     init() {
-      this.$get(API.auth.user).then(res => {
-        console.log("user:", res);
-      });
+      this.updateUserInfo();
+    },
+    async updateUserInfo() {
+      try {
+        let user = await loadUserInfo();
+        if (user.username) this.username = user.username;
+        if (user.avatar_base_url) this.avatar = user.avatar_base_url;
+      } catch (error) {
+        console.log(error);
+        Toast("Network error");
+      }
     },
     login() {
       MTOOL.openWindow("login.html");
@@ -151,37 +180,6 @@ export default {
     },
     goSetting() {
       MTOOL.openWindow("my_setting.html");
-    },
-    logout() {
-      // test
-      MTOOL.storage.setItem(config.keys.token, "");
-      console.log("logout: " + MTOOL.storage.getItem(config.keys.token));
-      this.update();
-
-      this.$post(API.del).then(res => {
-        let data = res.data;
-        if (data.status !== 200) {
-          Toast(data.message);
-          return;
-        }
-        MTOOL.storage.setItem(config.keys.token, "");
-
-        Toast("退出成功");
-        this.update();
-
-        // 回到首页
-        // setTimeout(() => {
-        //   if (MTOOL.isPlus) {
-        //     MTOOL.switchNav({
-        //       from: "my.html",
-        //       to: "home.html"
-        //     });
-        //     MTOOL.invoke("HBuilder", "index_update_tab", { to: "home.html" });
-        //   } else {
-        //     location.href = "home.html";
-        //   }
-        // }, 200);
-      });
     }
   }
 };
@@ -190,35 +188,101 @@ export default {
 <style lang="scss">
 .mui-pull-top-pocket {
   display: none !important;
-  // &.mui-visibility {
-  //   display: block !important;
-  // }
 }
+// .page-content {
+//   background-image: url(~assets/img/1.png);
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+//   background-position: 0 -20px;
+// }
 </style>
 
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
-.broswer-content {
-  padding-bottom: 50px;
+@import "~assets/scss/common";
+.page-content {
+  padding-bottom: 18px;
+}
+.page-content.broswer-content {
+  padding-bottom: 68px;
+}
+.my-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-image: url(~assets/img/icon_empty.png);
+}
+
+.my-info {
+  height: 88px;
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  margin-bottom: 18px;
+  background-color: #335b4e;
+  .info-left,
+  .info-right {
+    padding: 0 $padding-main;
+    // flex: 1;
+    width: 50%;
+    text-align: center;
+  }
+  .info-left {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      margin-top: -20px;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(0deg, #335b4e 0%, #1f4438 50%, #335b4e 100%);
+      border-image-slice: 1;
+    }
+  }
+  .info-title {
+    height: 44px;
+    padding-top: 15px;
+    font-family: San-Francisco-Text-Medium;
+    font-size: 20px;
+  }
+  .info-value {
+    font-family: San-Francisco-Text-Regular;
+    font-size: 18px;
+    padding-top: 5px;
+    color: rgba(255, 255, 255, 0.6);
+    @extend %text-over;
+  }
 }
 .my-header {
-  padding: 0 18px;
+  height: 250px;
+  padding: 0 $padding-main;
+  background: $color-main;
+  color: #fff;
 }
 .row-img {
-  text-align: right;
-  padding: 38px 0 18px;
+  text-align: center;
+  padding: 25px 0 8px;
 }
-
 .header-img {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
+  border: 2px solid #fff;
 }
-
 .row-msg {
-  margin-left: 20px;
   line-height: 30px;
+  text-align: center;
+  .msg-name {
+    @extend %text-over;
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
 .bar-setting {
   height: 44px;
@@ -228,9 +292,5 @@ export default {
 }
 .icon-setting {
   font-size: 20px;
-}
-.box-btn {
-  text-align: center;
-  padding: 36px 0;
 }
 </style>
