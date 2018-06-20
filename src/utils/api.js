@@ -9,7 +9,10 @@ const api = {
     user: "/v1/user",
     del: "/v1/common/token/TOKEN",
     alterusername: "/v1/user/username",
-    altergender: "/v1/user/username"
+    altergender: "/v1/user/username",
+    alterphone: "/v1/user/mobile-phone",
+    smskey: "/v1/user/sms-key",
+    usersmscode: "/v1/user/sms-code"
   }
 };
 

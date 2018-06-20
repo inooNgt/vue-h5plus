@@ -77,5 +77,19 @@
       "login_findps.html"
     ],
     "resources": []
+  },
+  "my_setting.html": {
+    "refer": [
+      "my_setting_head.html",
+      "my_setting_name.html",
+      "my_setting_phone.html",
+      "login.html"
+    ],
+    "resources": []
+  },
+  "my_setting_phone.html": {
+    "refer": [
+      "my_setting_phone_done.html"
+    ]
   }
 }

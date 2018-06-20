@@ -2,7 +2,7 @@
   <div class="page-content" :class="!isPlus?'broswer-content':''">
     <div class="my-header">
       <nav class="bar-setting">
-        <van-icon class="icon-setting" v-tap="{ methods:goSetting }" name="setting" />
+        <van-icon class="icon-setting" @click="goSetting" name="setting" />
       </nav>
       <div class="row-img">
         <img class="header-img" v-if="avatar" :src="avatar" />
@@ -103,13 +103,11 @@ import mui from "mui";
 import config from "utils/config";
 import { getCachedUser, loadUserInfo } from "utils/utils";
 import API from "utils/api";
-import vueTap from "v-tap";
 import { Cell, CellGroup, Icon, Toast } from "vant";
 
 Vue.use(Cell)
   .use(CellGroup)
-  .use(Icon)
-  .use(vueTap);
+  .use(Icon);
 
 // 缓存的用户信息
 const cachedUser = getCachedUser();
@@ -179,7 +177,7 @@ export default {
       console.log("update logined:" + this.logined);
     },
     goSetting() {
-      MTOOL.openWindow("my_setting.html");
+      MTOOL.openWindow("my_setting.html"); 
     }
   }
 };

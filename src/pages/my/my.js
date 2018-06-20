@@ -4,6 +4,9 @@ import Vue from "vue";
 import App from "./App";
 
 import { http, get, post, del } from "utils/utils";
+import FastClick from "fastclick";
+
+FastClick.attach(document.body);
 
 Vue.prototype.$http = http;
 Vue.prototype.$get = get;

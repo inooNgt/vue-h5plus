@@ -322,6 +322,23 @@
 					"login_findps.html"
 				],
 				"priority": 0
+			},
+			"my_setting.html": {
+				"resources": [],
+				"refer": [
+					"my_setting_head.html",
+					"my_setting_name.html",
+					"my_setting_phone.html",
+					"login.html"
+				],
+				"priority": 0
+			},
+			"my_setting_phone.html": {
+				"resources": [],
+				"refer": [
+					"my_setting_phone_done.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

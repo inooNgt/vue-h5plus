@@ -53,9 +53,9 @@ export default {
       active: 0,
       username: "",
       password: "000000",
-      phone1: "13163704201",
-      phone2: "13163704201",
-      sms: "0000",
+      phone1: "1310002010",
+      phone2: "1310002010",
+      sms: "000000",
       areacodeOptions: [{ code: "CN", label: "CN 0086" }],
       selectedAreacode: { code: "CN", label: "CN 0086" }
     };
@@ -111,7 +111,7 @@ export default {
           calling_code: this.selectedAreacode.label,
           mobile_phone: this.phone1,
           password: this.password.trim(),
-          sms_code: ""
+          sms_code: this.sms
         };
       } else {
         param = {

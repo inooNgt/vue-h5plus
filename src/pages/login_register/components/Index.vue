@@ -25,6 +25,7 @@ import Vue from "vue";
 import { Button, Field, Cell, CellGroup, Toast } from "vant";
 import { VueSelect } from "vue-select";
 import API from "utils/api";
+import { loadUserInfo } from "utils/utils";
 import config from "utils/config";
 import Qs from "qs";
 import mui from "mui";
@@ -44,10 +45,10 @@ export default {
       active: 0,
       msg: "",
       name: "",
-      phone: "13163704201",
+      phone: "1310002010",
       password: "000000",
-      sms: "0000",
-      invitecode: "000",
+      sms: "000000",
+      invitecode: "000000",
       countryOptions: [{ code: "CN", label: "CN China" }],
       selectedCountry: { code: "CN", label: "CN China" },
       areacodeOptions: [{ code: "CN", label: "CN 0086" }],
@@ -70,7 +71,11 @@ export default {
       })
         .then(res => {
           console.log(res);
-          if (res.status === 200) Toast("短信验证码发送成功");
+          if (res.status === 200) {
+            Toast("短信验证码发送成功");
+          } else {
+            Toast(res.message);
+          }
         })
         .catch(e => {
           Toast(e.message);
@@ -103,6 +108,7 @@ export default {
           let data = res.data;
           console.log(data);
           if (data.status !== 200) {
+            console.log("not 200", data);
             data.message && Toast(data.message);
             return;
           }
@@ -111,12 +117,18 @@ export default {
           this.registerSuccess(data.data);
         })
         .catch(e => {
+          console.log("catch:", e);
           Toast(e.message);
         });
     },
     registerSuccess(token) {
       // 存储信息
-      MTOOL.storage.setItem(config.keys.token, JSON.stringify(token));
+      try {
+        MTOOL.storage.setItem(config.keys.token, JSON.stringify(token));
+        loadUserInfo();
+      } catch (e) {
+        console.log(e);
+      }
 
       if (MTOOL.isPlus) {
         let loginwv = plus.webview.getWebviewById("login.html");
@@ -132,6 +144,7 @@ export default {
         // }, 200);
       }
     },
+
     setAreaInfo: async function() {
       // countries code
       let countriesRes = await this.$get(API.countries);

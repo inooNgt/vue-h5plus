@@ -16,7 +16,6 @@ import mui from "mui";
 import config from "utils/config";
 import { getCachedUser, loadUserInfo } from "utils/utils";
 import API from "utils/api";
-import vueTap from "v-tap";
 
 Vue.use(Cell)
   .use(CellGroup)

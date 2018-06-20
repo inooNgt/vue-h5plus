@@ -1,7 +1,8 @@
 const config = {
   keys: {
     token: "ml.login.token",
-    user: "ml.login.user"
+    user: "ml.login.user",
+    smskey: "ml.setting.smskey"
   },
   userTpl: {
     avatar_base_url: null,

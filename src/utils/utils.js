@@ -39,9 +39,17 @@ const post = (url, data, options) => {
     url = config.host + url;
   }
 
-  console.log("post options:", options);
+  if (typeof data === "object") data = Qs.stringify(data);
+  // if (typeof data === "object") {
+  //   data = encodeURI(
+  //     Qs.stringify(data, {
+  //       encode: false
+  //     })
+  //   );
+  // }
 
-  if (typeof data === "object") data = encodeURI(Qs.stringify(data));
+  console.log("post options:", options, url);
+  console.log("post data:", data);
 
   return axios.post(url, data, options);
 };

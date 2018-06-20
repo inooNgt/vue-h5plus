@@ -2,13 +2,13 @@
   <div class="page-content">
     <van-nav-bar title="标题" left-arrow @click-left="goBack" />
     <van-cell-group>
-      <van-field v-model="phone" label="手机号" readonly placeholder="请输入手机号" />
+      <van-field v-model="phone" label="新手机号" placeholder="请输入手机号" />
       <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码">
         <van-button slot="button" type="primary" @click="getSmscode">发送验证码</van-button>
       </van-field>
     </van-cell-group>
     <div class="btn-box">
-      <van-button class="btn" slot="button" @click="next">下一步</van-button>
+      <van-button class="btn" slot="button" @click="save">修改</van-button>
     </div>
   </div>
 </template>
@@ -42,6 +42,9 @@ export default {
       phone: cachedUser.mobile_phone || "- -"
     };
   },
+  mounted() {
+    this.$nextTick(() => {});
+  },
   methods: {
     goBack: function() {
       mui.back();
@@ -50,6 +53,26 @@ export default {
       if (this.phone.trim() === "") {
         Toast("手机号不能为空");
       }
+      let smskey = MTOOL.storage.getItem(config.keys.smskey);
+      this.$post(API.auth.alterphone, {
+        sms_key: smskey,
+        sms_code: this.sms
+      })
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            Toast("修改成功");
+
+            // 更新信息
+            loadUserInfo();
+          } else {
+            Toast(res.message);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+          Toast(e.message);
+        });
     },
     getSmscode() {
       this.$post(API.auth.usersmscode)
@@ -65,38 +88,7 @@ export default {
           console.log(e);
           Toast(e.message);
         });
-    },
-    next() {
-      if (this.sms.trim() === "") {
-        Toast("验证码不能为空");
-      }
-
-      this.$post(API.auth.smskey)
-        .then(res => {
-          console.log(res);
-          if (res.status === 200) {
-            console.log("smskey:", res.data.data);
-            MTOOL.storage.setItem(config.keys.smskey, res.data.data);
-            setTimeout(() => {
-              MTOOL.openWindow("my_setting_phone_done.html");
-            }, 0);
-          } else {
-            Toast(res.message);
-          }
-        })
-        .catch(e => {
-          console.log(e);
-          Toast(e.message);
-        });
     }
-    // async updateUserInfo() {
-    //   try {
-    //     let user = await loadUserInfo();
-    //     if (user.username) this.username = user.username;
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
   }
 };
 </script>
