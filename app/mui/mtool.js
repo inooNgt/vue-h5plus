@@ -55,6 +55,9 @@
       return false;
     };
 
+    // 隐藏滚动条
+    plus.webview.currentWebview().setStyle({ scrollIndicator: "none" });
+
     var pathname = window.location.pathname || "";
     pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
 

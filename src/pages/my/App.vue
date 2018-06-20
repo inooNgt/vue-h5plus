@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+    <Index />
+    <!-- <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll">
         <Index />    
-        <!-- <MFooter /> -->
       </div>
-    </div>
+    </div> -->
     <MFooter v-show="showFooter" />
   </div>
 </template>
@@ -36,6 +36,4 @@ export default {
 
 <style lang="scss">
 @import "~assets/scss/base.scss";
-.mui-scroll-wrapper {
-}
 </style>

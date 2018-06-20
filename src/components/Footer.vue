@@ -63,6 +63,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
+@import "~assets/scss/common";
 .footer {
   position: fixed;
   right: 0;
@@ -84,7 +85,7 @@ export default {
   .footer-link {
     display: block;
     font-size: 10px;
-    padding: 5px 0;
+    padding: px2rem(5px) 0;
     flex: 1 0 auto;
     border-radius: 0;
     transition: 0.2s ease;
@@ -100,4 +101,4 @@ export default {
   }
 }
 </style>
-
+ 

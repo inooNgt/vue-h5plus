@@ -132,23 +132,23 @@ export default {
       this.update();
     });
 
-    mui.init({
-      pullRefresh: {
-        container: "#pullrefresh", // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-        down: {
-          style: "circle", // 必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-          callback: () => {
-            this.update();
-            setTimeout(() => {
-              console.log("endPulldown");
-              mui("#pullrefresh")
-                .pullRefresh()
-                .endPulldown();
-            }, 1000);
-          } // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-        }
-      }
-    });
+    // mui.init({
+    //   pullRefresh: {
+    //     container: "#pullrefresh", // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+    //     down: {
+    //       style: "circle", // 必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+    //       callback: () => {
+    //         this.update();
+    //         setTimeout(() => {
+    //           console.log("endPulldown");
+    //           mui("#pullrefresh")
+    //             .pullRefresh()
+    //             .endPulldown();
+    //         }, 1000);
+    //       } // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+    //     }
+    //   }
+    // });
   },
   mounted() {
     this.$nextTick(() => {
@@ -177,7 +177,7 @@ export default {
       console.log("update logined:" + this.logined);
     },
     goSetting() {
-      MTOOL.openWindow("my_setting.html"); 
+      MTOOL.openWindow("my_setting.html");
     }
   }
 };
@@ -201,6 +201,7 @@ export default {
 @import "~assets/scss/common";
 .page-content {
   padding-bottom: 18px;
+  overflow-x: hidden;
 }
 .page-content.broswer-content {
   padding-bottom: 68px;
@@ -216,7 +217,7 @@ export default {
 }
 
 .my-info {
-  height: 88px;
+  height: px2rem(88px);
   overflow: hidden;
   color: #fff;
   display: flex;
@@ -244,37 +245,37 @@ export default {
     }
   }
   .info-title {
-    height: 44px;
-    padding-top: 15px;
+    height: px2rem(44px);
+    padding-top: px2rem(15px);
     font-family: San-Francisco-Text-Medium;
     font-size: 20px;
   }
   .info-value {
     font-family: San-Francisco-Text-Regular;
     font-size: 18px;
-    padding-top: 5px;
+    padding-top: px2rem(5px);
     color: rgba(255, 255, 255, 0.6);
     @extend %text-over;
   }
 }
 .my-header {
-  height: 250px;
+  height: px2rem(250px);
   padding: 0 $padding-main;
   background: $color-main;
   color: #fff;
 }
 .row-img {
   text-align: center;
-  padding: 25px 0 8px;
+  padding: px2rem(25px) 0 px2rem(8px);
 }
 .header-img {
-  width: 120px;
-  height: 120px;
+  width: px2rem(120px);
+  height: px2rem(120px);
   border-radius: 50%;
   border: 2px solid #fff;
 }
 .row-msg {
-  line-height: 30px;
+  line-height: px2rem(30px);
   text-align: center;
   .msg-name {
     @extend %text-over;
@@ -283,7 +284,7 @@ export default {
   }
 }
 .bar-setting {
-  height: 44px;
+  height: px2rem(44px);
   display: flex;
   justify-content: flex-end;
   align-items: center;

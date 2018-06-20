@@ -5,3 +5,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@function px2rem($px) {
+  $rem: 50px;
+  @return ($px/$rem) + rem;
+}
