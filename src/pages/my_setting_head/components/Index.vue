@@ -1,6 +1,6 @@
 <template>
-  <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
+  <div class="page-content nav-content">
+    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
     <van-cell-group>
       <van-field v-model="phone" label="头像" placeholder="请输入头像" />
     </van-cell-group>

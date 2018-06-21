@@ -57,7 +57,10 @@ const post = (url, data, options) => {
 // 授权headers
 function setHeaders(url, options) {
   const isAuth = checkAuth(url);
-  const token = MTOOL.storage.getItem(config.keys.token).replace(/^"|"$/g, "");
+  const token = (MTOOL.storage.getItem(config.keys.token) || "").replace(
+    /^"|"$/g,
+    ""
+  );
 
   options = options || {};
   if (isAuth) {
@@ -83,11 +86,12 @@ function checkAuth(url) {
 
 // 获取缓存的用户信息
 const getCachedUser = () => {
-  let cachedUser = config.userTpl;
+  let cachedUser = {};
   try {
-    cachedUser = JSON.parse(MTOOL.storage.getItem(config.keys.user));
+    cachedUser =
+      JSON.parse(MTOOL.storage.getItem(config.keys.user)) || config.userTpl;
   } catch (error) {
-    console.log(error);
+    console.log("getCachedUser error", error);
   }
   return cachedUser;
 };

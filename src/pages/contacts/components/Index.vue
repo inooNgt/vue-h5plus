@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div class="page-content nav-content">
     <van-nav-bar title="标题" left-text="活力加速" fixed left-arrow @click-left="goBack" />
 
     <div class="list-content">

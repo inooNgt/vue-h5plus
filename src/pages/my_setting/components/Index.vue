@@ -1,6 +1,6 @@
 <template>
-  <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+  <div class="page-content nav-content">
+    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" />
     <ul class="my-list">
       <li class="list-item" @click="setHead">
         <div class="item-left">头像</div>
@@ -135,9 +135,5 @@ export default {
   .item-title {
     width: 170px;
   }
-}
-.box-btn {
-  text-align: center;
-  padding: 36px 0;
 }
 </style>

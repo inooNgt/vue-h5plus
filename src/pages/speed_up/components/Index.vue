@@ -1,6 +1,6 @@
 <template>
-  <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+  <div class="page-content nav-content">
+    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" />
     <div>
       <van-button size="large">实名认证 +100</van-button>
       <van-button size="large" @click="shareToWX">分享朋友圈 +100</van-button>

@@ -7,6 +7,7 @@
   background-color: $color-main !important;
 }
 .van-nav-bar.van-nav-bar {
+  z-index: 999 !important;
   height: 44px;
   line-height: 44px;
   border-bottom: solid 1px #dddddd;
@@ -29,4 +30,8 @@
   .van-nav-bar__left {
     left: 18px;
   }
+}
+
+.nav-content {
+  padding-top: 44px !important;
 }

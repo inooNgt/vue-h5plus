@@ -1,6 +1,6 @@
 <template>
-  <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+  <div class="page-content nav-content">
+    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" />
     <van-tabs v-model="active">
       <van-tab v-for="item in tablist" :title="item.title" v-bind:key="item.id">
         item.title内容
@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script> 
+<script>
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";

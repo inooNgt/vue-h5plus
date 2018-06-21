@@ -301,7 +301,9 @@
 				],
 				"refer": [
 					"login.html",
-					"my_setting.html"
+					"my_setting.html",
+					"my_fund.html",
+					"my_auth.html"
 				],
 				"priority": 0
 			},
@@ -324,7 +326,12 @@
 				"priority": 0
 			},
 			"my_setting.html": {
-				"resources": [],
+				"resources": [
+					"static/css/my_setting.css",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_setting.js"
+				],
 				"refer": [
 					"my_setting_head.html",
 					"my_setting_name.html",
@@ -334,9 +341,29 @@
 				"priority": 0
 			},
 			"my_setting_phone.html": {
-				"resources": [],
+				"resources": [
+					"static/css/my_setting_phone.css",
+					"static/js/my_setting_phone.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js"
+				],
 				"refer": [
 					"my_setting_phone_done.html"
+				],
+				"priority": 0
+			},
+			"my_setting_phone_done.html": {
+				"resources": [
+					"static/css/my_setting_phone_done.css",
+					"static/js/my_setting_phone_done.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_auth.html": {
+				"resources": [],
+				"refer": [
+					"my_auth_msg.html"
 				],
 				"priority": 0
 			}

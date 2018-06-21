@@ -23,7 +23,7 @@
       </div>
     </div>
     <ul class="my-list">
-      <li class="list-item">
+      <li class="list-item" @click="goAuth">
         <div class="item-left">
           <span class="my-icon"></span>
           <span class="item-title">实名认证</span>
@@ -35,7 +35,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="goFund">
         <div class="item-left">
           <span class="my-icon"></span>
           <div class="item-title">我的资产</div>
@@ -131,24 +131,6 @@ export default {
       console.log("my event_update");
       this.update();
     });
-
-    // mui.init({
-    //   pullRefresh: {
-    //     container: "#pullrefresh", // 下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-    //     down: {
-    //       style: "circle", // 必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-    //       callback: () => {
-    //         this.update();
-    //         setTimeout(() => {
-    //           console.log("endPulldown");
-    //           mui("#pullrefresh")
-    //             .pullRefresh()
-    //             .endPulldown();
-    //         }, 1000);
-    //       } // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-    //     }
-    //   }
-    // });
   },
   mounted() {
     this.$nextTick(() => {
@@ -178,6 +160,12 @@ export default {
     },
     goSetting() {
       MTOOL.openWindow("my_setting.html");
+    },
+    goFund() {
+      MTOOL.openWindow("my_fund.html");
+    },
+    goAuth() {
+      MTOOL.openWindow("my_auth.html");
     }
   }
 };

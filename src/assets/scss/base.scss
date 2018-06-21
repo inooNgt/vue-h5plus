@@ -8,13 +8,17 @@
   box-sizing: border-box;
 }
 
+body,
+html {
+  background: #e8e8e8;
+  color: #000;
+  overflow-x: hidden;
+}
+
 body {
   // height: 100%;
   font-size: 14px;
   word-break: break-all;
-  background: #e8e8e8;   
-  color: #000;
-  overflow-x: hidden;
 }
 // #app {
 //   height: 100%;
@@ -129,6 +133,13 @@ img {
   line-height: 44px;
 }
 
+.btn-sub.btn-sub.btn-sub {
+  border-radius: 0;
+  background-color: #305085;
+  color: #fff;
+  font-size: 17px;
+}
+
 /* my list start */
 .my-list {
   background: #fff;
@@ -155,6 +166,9 @@ img {
         linear-gradient(#311455, #311455);
       background-blend-mode: normal, normal;
     }
+    &:last-child:after {
+      display: none;
+    }
   }
   .item-left {
     width: 200px;
@@ -178,6 +192,8 @@ img {
     width: 20px;
     text-align: right;
     & i {
+      position: relative;
+      top: 1px;
       font-size: 12px;
       color: rgba(0, 0, 0, 0.5);
       font-weight: 600;
@@ -189,5 +205,27 @@ img {
     height: px2rem(44px);
     border-radius: px2rem(10px);
   }
+}
+.md-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.md-icon-close {
+  background-image: url(~assets/img/close.png);
+}
+.md-icon-correct {
+  background-image: url(~assets/img/correct.png);
+}
+.md-icon-add {
+  background-image: url(~assets/img/add.png);
+}
+.box-btn {
+  text-align: center;
+  padding: px2rem(36px) 0;
 }
 /* my list end */

@@ -1,6 +1,6 @@
 <template>
-  <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+  <div class="page-content nav-content">
+    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" />
     <van-cell-group>
       <van-field v-model="phone" label="新手机号" placeholder="请输入手机号" />
       <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码">
@@ -42,12 +42,30 @@ export default {
       phone: cachedUser.mobile_phone || "- -"
     };
   },
+  created() {
+    if (MTOOL.isPlus) this.closePrev();
+  },
   mounted() {
     this.$nextTick(() => {});
   },
   methods: {
     goBack: function() {
       mui.back();
+    },
+    closePrev() {
+      MTOOL.plusReady(() => {
+        let prevwv = plus.webview.getWebviewById("my_setting_phone.html");
+
+        console.log("close prevwv:");
+        console.log(prevwv);
+        if (prevwv) {              
+          console.log("prevwv closed");
+          plus.webview.hide(prevwv, null, 1);
+          setTimeout(() => {
+            plus.webview.close(prevwv, null, 1);
+          }, 50);    
+        }
+      });
     },
     save() {
       if (this.phone.trim() === "") {
@@ -62,9 +80,16 @@ export default {
           console.log(res);
           if (res.status === 200) {
             Toast("修改成功");
-
             // 更新信息
             loadUserInfo();
+            setTimeout(() => {
+              if (MTOOL.isPlus) {
+                MTOOL.plusReady(() => {
+                  let currwv = plus.webview.currentWebview();
+                  if (currwv) plus.webview.close(currwv);
+                });
+              }
+            }, 400);
           } else {
             Toast(res.message);
           }

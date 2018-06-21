@@ -26,6 +26,15 @@ Vue.use(Cell)
 
 // 缓存的用户信息
 const cachedUser = getCachedUser();
+    
+MTOOL.plusReady(function() {
+  var wv = plus.webview.currentWebview();
+
+  console.log("wv.param_value:");
+  console.log(wv.param_value);
+  console.log("wv.param_type:");
+  console.log(wv.param_type); 
+});
 
 export default {
   name: "Index",

@@ -11,6 +11,9 @@
     keys: {
       activenav: "md.index.activeNavPath",
       token: "ml.login.token"
+    },
+    style: {
+      background: "#e8e8e8"
     }
   };
 
@@ -55,8 +58,12 @@
       return false;
     };
 
-    // 隐藏滚动条
-    plus.webview.currentWebview().setStyle({ scrollIndicator: "none" });
+    if (isPlus) {
+      plusReady(function() {
+        // 隐藏滚动条
+        plus.webview.currentWebview().setStyle({ scrollIndicator: "none" });
+      });
+    }
 
     var pathname = window.location.pathname || "";
     pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
@@ -123,18 +130,35 @@
 
   function openWindow(url, options) {
     var from = "";
-    if (typeof options !== "undefined" && typeof options.from !== "undefined") {
+    var style = config.style;
+    if (options && options.from) {
       from = options.from;
     }
+
+    if (options && typeof options.style === "object") {
+      style = Object.assign(style, options.style);
+    }
+
+    var extras = {
+      name: url,
+      from: from
+    };
+
+    if (options && typeof options.extras === "object") {
+      extras = Object.assign(extras, options.extras);
+    }
+
+    console.log("extras:");
+    console.log(extras);
+
     mui.openWindow({
       url: url,
-      extras: {
-        name: url,
-        from: from
-      },
+      id: url,
+      extras: extras,
       // show: {
       //   aniShow: "slide-in-bottom"
       // },
+      style: style,
       waiting: {
         autoShow: false
       }

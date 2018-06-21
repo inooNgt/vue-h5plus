@@ -1,6 +1,6 @@
 <template>
-  <div class="page-content">
-    <van-nav-bar title="标题" left-arrow @click-left="goBack" />
+  <div class="page-content nav-content">
+    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" />
     <van-cell-group>
       <van-field v-model="phone" label="手机号" readonly placeholder="请输入手机号" />
       <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码">
