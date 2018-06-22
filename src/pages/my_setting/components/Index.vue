@@ -94,8 +94,8 @@ export default {
     },
     logout() {
       // test
-      // MTOOL.storage.setItem(config.keys.token, "");
-      // console.log("logout: " + MTOOL.storage.getItem(config.keys.token));
+      MTOOL.storage.setItem(config.keys.token, "");
+      console.log("logout: " + MTOOL.storage.getItem(config.keys.token));
       // mui.back();
 
       this.$post(API.auth.del).then(res => {
