@@ -1,47 +1,32 @@
 <template>
-  <div class="page-content">
+  <div class="page-content nav-content">
+    <van-nav-bar title="" class="login-nav" fixed left-text="注册" @click-left="goRegister" right-text="zh" />
     <div class="logo">
-      <img class="logo-img" src="~assets/img/empty.png" alt="">
+      <img class="logo-img" src="~assets/img/logo.png" alt="">
     </div>
-    <div>
-      <van-tabs v-model="active">
-        <van-tab title="密码登录">
-          <van-cell-group>
-            <v-select v-model="selectedAreacode" label="label" :options="areacodeOptions"></v-select>
-            <van-field v-model="phone1" label="手机号" placeholder="请输入用户名" />
 
-            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" />
-          </van-cell-group>
-        </van-tab>
-        <van-tab title="验证码登录">
-          <van-cell-group>
-            <van-field v-model="phone2" label="手机号" placeholder="请输入用户名" />
-            <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码">
-              <van-button slot="button" size="small" type="primary">发送验证码</van-button>
-            </van-field>
-          </van-cell-group>
-        </van-tab>
-      </van-tabs>
-      <van-button slot="button" size="large" @click="login">登录</van-button>
-      <van-button slot="button" size="large" @click="goRegister">去注册</van-button>
+    <div class="btn-box">
+      <van-button slot="button" class="btn-main" size="large" @click="msgLogin">
+        <span class="md-icon md-icon-msg"></span>短信快捷登录</van-button>
+      <van-button slot="button" class="btn-main" size="large" @click="accountLogin">
+        <span class="md-icon md-icon-lock"></span>账号密码登录</van-button>
     </div>
+
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import { Button, Field, Cell, CellGroup, Tab, Tabs, Toast } from "vant";
-import { VueSelect } from "vue-select";
-import mui from "mui";
-import MTOOL from "mtool";
-import config from "utils/config";
-import API from "utils/api";
-
-Vue.component("v-select", VueSelect);
+import { Button, Field, Cell, CellGroup, Tab, Tabs, Toast, NavBar } from "vant";
+// import mui from "mui";
+// import MTOOL from "mtool";
+// import config from "utils/config";
+// import API from "utils/api";
 
 Vue.use(Button)
   .use(Field)
   .use(Cell)
+  .use(NavBar)
   .use(Tab)
   .use(Tabs)
   .use(CellGroup);
@@ -50,129 +35,20 @@ export default {
   name: "Index",
   data() {
     return {
-      active: 0,
-      username: "",
-      password: "000000",
-      phone1: "1310002010",
-      phone2: "1310002010",
-      sms: "000000",
       areacodeOptions: [{ code: "CN", label: "CN 0086" }],
       selectedAreacode: { code: "CN", label: "CN 0086" }
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.setAreaInfo();
-    });
+    this.$nextTick(() => {});
   },
   methods: {
-    setAreaInfo: async function() {
-      // countries code
-      let areacodelistRes = await this.$get(API.areacodelist);
-      let envRes = await this.$get(API.env);
-
-      // areacode
-      let areacodelist = areacodelistRes.data.data;
-      this.areacodeOptions = this.formatOptions(areacodelist, 0);
-
-      // env
-      let env = envRes.data.data;
-
-      this.selectedAreacode = {
-        code: env.calling_code,
-        label: areacodelist[env.calling_code]
-      };
+    accountLogin() {
+      MTOOL.openWindow("login_account.html");
     },
-    formatOptions(data, adorn) {
-      let result = [];
-      for (let key in data) {
-        let label = data[key];
-        if (adorn) label = key + " " + data[key];
-        result.push({
-          code: key,
-          label: label
-        });
-      }
-      return result;
-    },
-    login: function() {
-      let param = {};
-      if (this.active === 0) {
-        if (this.phone1.trim() === "") {
-          Toast("手机号不能为空");
-          return;
-        }
-        if (this.password.trim() === "") {
-          Toast("密码不能为空");
-          return;
-        }
-
-        param = {
-          calling_code: this.selectedAreacode.label,
-          mobile_phone: this.phone1,
-          password: this.password.trim(),
-          sms_code: this.sms
-        };
-      } else {
-        param = {
-          calling_code: this.selectedAreacode.label,
-          mobile_phone: this.phone2,
-          password: "",
-          sms_code: this.sms.trim()
-        };
-      }
-
-      this.$post(API.login, param).then(res => {
-        let data = res.data;
-        console.log(data);
-        if (data.status !== 200) {
-          Toast(data.message);
-          return;
-        }
-
-        Toast("登录成功");
-        this.loginSucceed(data.data);
-      });
-    },
-    loginSucceed: function(data) {
-      // 存储信息
-      MTOOL.storage.setItem(
-        config.keys.token,
-        JSON.stringify(data.access_token)
-      );
-      MTOOL.storage.setItem(config.keys.user, JSON.stringify(data.user));
-
-      console.log("登录成功 :" + MTOOL.logined());
-
-      // 跳转 plus环境
-      if (MTOOL.isPlus) {
-        MTOOL.plusReady(function() {
-          var wv = plus.webview.currentWebview();
-          var origin = wv.from;
-          // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
-          console.log("origin: " + origin);
-          setTimeout(() => {
-            // 关闭当前页
-            mui.back();
-            // 更新页面
-            MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
-          }, 400);
-
-          // 带参处理
-          // if (origin && MTOOL.config.subpages.indexOf(origin)) {
-          //   MTOOL.switchNav({
-          //     from: "login.html",
-          //     to: origin
-          //   });
-          //   MTOOL.invoke("HBuilder", "index_update_tab", { to: origin });
-          // }
-        });
-      } else {
-        location.href = "home.html";
-      }
-    },
-    goFindPS: function() {
-      MTOOL.openWindow("login_findps.html");
+    msgLogin() {
+      console.log("msg login");
+      MTOOL.openWindow("login_msg.html");
     },
     goRegister: function() {
       MTOOL.openWindow("login_register.html");
@@ -182,10 +58,21 @@ export default {
 </script>
 
 <style lang="scss">
+body,
+html {
+  background: #fff;
+}
 .dropdown-toggle {
   .clear {
     display: none !important;
   }
+}
+
+.page-content {
+  // background-image: url(~assets/img/1.png);
+  // background-repeat: no-repeat;
+  // background-size: 100%;
+  // background-position: 0 -20px;
 }
 </style>
 
@@ -209,12 +96,24 @@ export default {
   text-align: center;
 }
 .logo {
-  padding: 54px 0;
+  padding: 69px 0 226px;
 }
 .logo-img {
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 84px;
   margin: 0 auto;
+}
+.btn-box {
+  text-align: center;
+  padding: 0 20px 50px;
+  .btn-main {
+    margin-bottom: 10px;
+  }
+  .md-icon {
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+  }
 }
 </style>

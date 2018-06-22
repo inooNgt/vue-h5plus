@@ -54,6 +54,15 @@ const post = (url, data, options) => {
   return axios.post(url, data, options);
 };
 
+// 检查手机号格式
+const checkPhone = phone => {
+  let result = true;
+  let reg = /^[0-9]*$/;
+  result = reg.test(phone);
+
+  return result;
+};
+
 // 授权headers
 function setHeaders(url, options) {
   const isAuth = checkAuth(url);
@@ -115,4 +124,4 @@ const loadUserInfo = () => {
   });
 };
 
-export { http, get, post, del, getCachedUser, loadUserInfo };
+export { http, get, post, del, getCachedUser, loadUserInfo, checkPhone };

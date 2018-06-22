@@ -140,6 +140,18 @@ img {
   font-size: 17px;
 }
 
+.btn-main.btn-main.btn-main {
+  width: 255px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  background-color: $color-main;
+}
+
 /* my list start */
 .my-list {
   background: #fff;
@@ -223,6 +235,21 @@ img {
 }
 .md-icon-add {
   background-image: url(~assets/img/add.png);
+}
+.md-icon-msg {
+  width: 15px;
+  height: 13px;
+  background-image: url(~assets/img/msg.png);
+}
+.md-icon-lock {
+  width: 15px;
+  height: 17px;
+  background-image: url(~assets/img/lock.png);
+}
+.md-icon-closenav {
+  width: 14px;   
+  height: 14px;
+  background-image: url(~assets/img/close_nav.png);
 }
 .box-btn {
   text-align: center;

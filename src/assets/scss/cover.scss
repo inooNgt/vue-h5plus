@@ -35,3 +35,20 @@
 .nav-content {
   padding-top: 44px !important;
 }
+
+.van-toast.van-toast {
+  top: initial;
+  bottom: 65px;
+  min-width: 105px;
+  padding: 8px 18px;
+  border-radius: 0;
+  font-size: 12px;
+}
+
+.login-nav.login-nav.login-nav {
+  .van-nav-bar__text {
+    font-family: PingFang-SC-Bold;
+    font-size: 14px;
+    color: #000;
+  }
+}

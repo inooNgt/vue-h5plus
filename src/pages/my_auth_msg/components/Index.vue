@@ -1,9 +1,18 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
-    <van-cell-group>
-      <van-field v-model="username" label="昵称" placeholder="请输入昵称" />
-    </van-cell-group>
+    <div v-if="type === 'name'">
+      <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
+      <van-cell-group>
+        <van-field v-model="username" label="昵称" placeholder="请输入昵称" />
+      </van-cell-group>
+    </div>
+    <div v-if="type === 'country'">
+      <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
+      <van-cell-group>
+        <van-field v-model="username" label="国家" placeholder="请选择国家" />
+      </van-cell-group>
+    </div>
+
   </div>
 </template>
 
@@ -26,22 +35,26 @@ Vue.use(Cell)
 
 // 缓存的用户信息
 const cachedUser = getCachedUser();
-    
-MTOOL.plusReady(function() {
-  var wv = plus.webview.currentWebview();
-
-  console.log("wv.param_value:");
-  console.log(wv.param_value);
-  console.log("wv.param_type:");
-  console.log(wv.param_type); 
-});
 
 export default {
   name: "Index",
   data() {
     return {
+      type: "name",
       username: cachedUser.username || "- -"
     };
+  },
+  created() {
+    MTOOL.plusReady(() => {
+      var wv = plus.webview.currentWebview();
+
+      console.log("wv.param_value:");
+      console.log(wv.param_value);
+      console.log("wv.param_type:");
+      console.log(wv.param_type);
+
+      this.type = wv.param_type;
+    });
   },
   methods: {
     goBack: function() {

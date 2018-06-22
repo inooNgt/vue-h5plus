@@ -7,59 +7,46 @@
     <div class="logo">
       <img class="logo-img" src="~assets/img/logo.png" alt="">
     </div>
+
     <section class="login-box">
       <van-cell-group>
         <div class="row-country">
           <div class="col-left">国家代码</div>
-          <div class="col-right" @click="goAreaCode">
+          <div class="col-right" @click="goAreaCode"> 
             <span>中国CN</span>
             <van-icon name="arrow" />
           </div>
         </div>
         <van-field class="row-phone" v-model="phone" label="+86" placeholder="请输入手机号" />
         <van-field class="row-sms" center v-model="sms" placeholder="请输入短信验证码">
-          <van-button slot="button" @click="getSmscode" size="large">发送验证码</van-button>
+          <van-button slot="button" size="large">发送验证码</van-button>
         </van-field>
-        <div class="row-msg">
-          我以阅读并同意《DIC用户协议》
-        </div>
       </van-cell-group>
       <div class="btn-box">
-        <van-button slot="button" class="btn-main" size="large" @click="register">注册</van-button>
+        <van-button slot="button" class="btn-main" size="large" @click="login">登录</van-button>
       </div>
     </section>
-    <!-- <div>
-      <van-cell-group>
-        <v-select v-model="selectedCountry" label="label" :options="countryOptions"></v-select>
-        <v-select v-model="selectedAreacode" label="label" :options="areacodeOptions"></v-select>
-        <van-field v-model="phone" placeholder="请输入手机号" />
-        <van-field v-model="password" type="password" placeholder="密码" />
-        <van-field center v-model="sms" label="短信验证码" placeholder="请输入短信验证码">
-          <van-button slot="button" @click="getSmscode">发送验证码</van-button>
-        </van-field>
-        <van-field v-model="invitecode" placeholder="邀请码" />
-      </van-cell-group>
-      <van-button slot="button" size="large" @click="register">注册</van-button>
-      <van-button slot="button" size="large" @click="goLogin">去登录</van-button>
-    </div> -->
+
   </div>
-</template>  
+</template>
 
 <script>
 import Vue from "vue";
 import { Button, Field, Cell, CellGroup, Toast, NavBar, Icon } from "vant";
-import API from "utils/api";
-import { loadUserInfo } from "utils/utils";
-import config from "utils/config";
+import { VueSelect } from "vue-select";
 import mui from "mui";
 import MTOOL from "mtool";
+import config from "utils/config";
+import { checkPhone } from "utils/utils";
+import API from "utils/api";
+
+Vue.component("v-select", VueSelect);
 
 Vue.use(Button)
   .use(Field)
-  .use(Toast)
+  .use(Cell)
   .use(Icon)
   .use(NavBar)
-  .use(Cell)
   .use(CellGroup);
 
 export default {
@@ -67,119 +54,27 @@ export default {
   data() {
     return {
       active: 0,
-      msg: "",
-      name: "",
-      phone: "1310002010",
+      username: "",
       password: "000000",
+      phone: "13100004001",
       sms: "000000",
-      invitecode: "000000",
-      countryOptions: [{ code: "CN", label: "CN China" }],
-      selectedCountry: { code: "CN", label: "CN China" },
       areacodeOptions: [{ code: "CN", label: "CN 0086" }],
       selectedAreacode: { code: "CN", label: "CN 0086" }
     };
   },
-
   mounted() {
     this.$nextTick(() => {
       this.setAreaInfo();
     });
   },
   methods: {
-    back() {
+    back: function() {
       mui.back();
     },
-    goLogin() {
-      MTOOL.openWindow("login.html");
-    },
-    getSmscode() {
-      this.$post(API.smscode, {
-        mobile_phone: this.phone
-      })
-        .then(res => {
-          console.log(res);
-          if (res.status === 200) {
-            Toast("短信验证码发送成功");
-          } else {
-            Toast(res.message);
-          }
-        })
-        .catch(e => {
-          Toast(e.message);
-        });
-    },
-    register() {
-      let param = {
-        country_code: this.selectedCountry.code,
-        calling_code: this.selectedAreacode.code,
-        mobile_phone: this.phone,
-        password: this.password,
-        sms_code: this.sms,
-        invite_code: this.invitecode
-      };
-
-      if (this.phone.trim() === "") Toast("手机号不能为空");
-
-      if (this.sms.trim() === "") Toast("输入短信验证码");
-
-      if (this.password.trim() === "") Toast("密码不能为空");
-
-      if (this.invitecode.trim() === "") Toast("邀请码不能为空");
-
-      console.log("param", param);
-      // todo by ngt 需要loading
-      this.$post(API.register, param, {
-        crossDomain: true
-      })
-        .then(res => {
-          let data = res.data;
-          console.log(data);
-          if (data.status !== 200) {
-            console.log("not 200", data);
-            data.message && Toast(data.message);
-            return;
-          }
-
-          Toast("注册成功");
-          this.registerSuccess(data.data);
-        })
-        .catch(e => {
-          console.log("catch:", e);
-          Toast(e.message);
-        });
-    },
-    registerSuccess(token) {
-      // 存储信息
-      try {
-        MTOOL.storage.setItem(config.keys.token, JSON.stringify(token));
-        loadUserInfo();
-      } catch (e) {
-        console.log(e);
-      }
-
-      if (MTOOL.isPlus) {
-        let loginwv = plus.webview.getWebviewById("login.html");
-        if (loginwv) {
-          plus.webview.close(loginwv);
-        }
-        mui.back();
-        // 更新页面
-        MTOOL.invoke("HBuilder", "index_update_subpages", { to: "" });
-      } else {
-        // setTimeout(() => {
-        //   location.href = "home.html";
-        // }, 200);
-      }
-    },
-
     setAreaInfo: async function() {
       // countries code
-      let countriesRes = await this.$get(API.countries);
       let areacodelistRes = await this.$get(API.areacodelist);
       let envRes = await this.$get(API.env);
-
-      let countries = countriesRes.data.data;
-      this.countryOptions = this.formatOptions(countries, 1);
 
       // areacode
       let areacodelist = areacodelistRes.data.data;
@@ -187,11 +82,6 @@ export default {
 
       // env
       let env = envRes.data.data;
-
-      this.selectedCountry = {
-        code: env.country_code,
-        label: env.country_code + " " + countries[env.country_code]
-      };
 
       this.selectedAreacode = {
         code: env.calling_code,
@@ -210,13 +100,87 @@ export default {
       }
       return result;
     },
+    login: function() {
+      let param = {};
+      if (this.phone.trim() === "") {
+        Toast("手机号不能为空");
+        return;
+      }
+
+      if (!checkPhone(this.phone)) {
+        Toast("请输入正确格式的手机号");
+        return;
+      }
+
+      if (this.sms.trim() === "") {
+        Toast("验证码不能为空");
+        return;
+      }
+
+      param = {
+        calling_code: this.selectedAreacode.label,
+        mobile_phone: this.phone,
+        sms_code: this.sms.trim()
+      };
+
+      this.$post(API.login, param).then(res => {
+        let data = res.data;
+        console.log(data);
+        if (data.status !== 200) {
+          Toast(data.message);
+          return;
+        }
+
+        Toast("登录成功");
+        this.loginSucceed(data.data);
+      });
+    },
+    loginSucceed: function(data) {
+      // 存储信息
+      MTOOL.storage.setItem(
+        config.keys.token,
+        JSON.stringify(data.access_token)
+      );
+      MTOOL.storage.setItem(config.keys.user, JSON.stringify(data.user));
+
+      console.log("登录成功 :" + MTOOL.logined());
+
+      // 跳转 plus环境
+      if (MTOOL.isPlus) {
+        MTOOL.plusReady(function() {
+          var wv = plus.webview.currentWebview();
+          var origin = wv.from;
+          // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
+          console.log("origin: " + origin);
+          setTimeout(() => {
+            // 关闭当前页
+            mui.back();
+            // 更新页面
+            MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
+          }, 400);
+
+          // 带参处理
+          // if (origin && MTOOL.config.subpages.indexOf(origin)) {
+          //   MTOOL.switchNav({
+          //     from: "login.html",
+          //     to: origin
+          //   });
+          //   MTOOL.invoke("HBuilder", "index_update_tab", { to: origin });
+          // }
+        });
+      } else {
+        location.href = "home.html";
+      }
+    },
+    goFindPS() {
+      MTOOL.openWindow("login_findps.html");
+    },
     goAreaCode() {
       MTOOL.openWindow("login_areacode.html");
     }
   }
 };
-</script>
-
+</script>   
 
 <style lang="scss">
 @import "~assets/scss/var";
@@ -360,9 +324,4 @@ html {
     text-align: right;
   }
 }
-.row-msg {
-  font-size: 11px;
-  color: #000;
-}
 </style>
-
