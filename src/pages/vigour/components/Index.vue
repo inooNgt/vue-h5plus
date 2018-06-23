@@ -3,7 +3,7 @@
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll">
         <header class="header">
-          <div class="bg-img"></div>
+          <img src="~assets/img/bg.png" class="bg-img">
           <div class="header-content"></div>
         </header>
         <section class="section">
@@ -198,11 +198,6 @@ body,
   left: 0;
   width: 100%;
   height: 100%;
-}
-.bg-img {
-  background-image: url("~assets/img/bg.png");  
-  background-size: 100%;
-  background-repeat: no-repeat;       
 }
 .header-content {
   z-index: 1;

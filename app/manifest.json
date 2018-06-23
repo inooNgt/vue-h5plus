@@ -306,7 +306,10 @@
 					"my_setting.html",
 					"my_fund.html",
 					"my_auth.html",
-					"my_course.html"
+					"my_course.html",
+					"my_help.html",
+					"my_about.html",
+					"my_activity.html"
 				],
 				"priority": 0
 			},

@@ -268,14 +268,20 @@ img {
   background-image: url(~assets/img/close_nav.png);
 }
 /* icon end */
-
-
 /* common start */
+.vigour-bg-img {
+  background-image: url("~assets/img/bg.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
 .box-btn {
   text-align: center;
   padding: px2rem(36px) 0;
 }
-.text-black{
-  color:#000 !important;
+.text-black {
+  color: #000 !important;
+}
+.text-main {
+  color: $color-main !important;
 }
 /* common end */

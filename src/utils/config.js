@@ -19,7 +19,8 @@ const config = {
     updated_at: "",
     username: ""
   },
-  host: "http://api.dic.club"
+  host: "http://api.dic.club",
+  version: 1.0
 };
 
 export default config;

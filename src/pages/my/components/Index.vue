@@ -69,7 +69,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="goHelp">   
         <div class="item-left">
           <span class="my-icon"></span>
           <div class="item-title">帮助中心</div>
@@ -80,7 +80,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="goAbout">
         <div class="item-left">
           <span class="my-icon"></span>
           <div class="item-title">关于我们</div>
@@ -167,8 +167,14 @@ export default {
     goCourse() {
       MTOOL.openWindow("my_course.html");
     },
+    goHelp() {
+      MTOOL.openWindow("my_help.html");
+    },
     goActivity() {
       MTOOL.openWindow("my_activity.html");
+    },
+    goAbout() {
+      MTOOL.openWindow("my_about.html");
     },
     goAuth() {
       MTOOL.openWindow("my_auth.html");
