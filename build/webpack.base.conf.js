@@ -39,6 +39,7 @@ module.exports = {
       "@": resolve("src"),
       // mui: resolve("src/assets/js/mui.js"),
       utils: resolve("src/utils"),
+      components: resolve("src/components"),
       assets: resolve("src/assets")
     }
   },

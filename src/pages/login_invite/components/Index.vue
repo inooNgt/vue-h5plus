@@ -306,6 +306,7 @@ html {
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
+@import "~assets/scss/common";
 .header {
   padding: 20px;
 }
@@ -322,7 +323,7 @@ html {
   text-align: center;
 }
 .logo {
-  padding: 69px 0 120px;
+  padding: px2rem(69px) 0 px2rem(120px);
 }
 .logo-img {
   display: block;
@@ -332,7 +333,7 @@ html {
 }
 .btn-box {
   text-align: center;
-  padding: 27px 0 50px;
+  padding: px2rem(27px) 0;
   .btn-main {
     margin-bottom: 10px;
   }
@@ -376,7 +377,7 @@ html {
     color: rgba(0, 0, 0, 0.6);
   }
   .invite-input-focus {
-    border: 1px solid $color-main;
+    // border: 1px solid $color-main;
   }
   .invite-input-hide,
   .invite-mark {

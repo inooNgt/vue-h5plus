@@ -1,11 +1,6 @@
 <template>
   <div id="app">
     <Index />
-    <!-- <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-      <div class="mui-scroll">
-        <Index />    
-      </div>
-    </div> -->
     <MFooter v-show="showFooter" />
   </div>
 </template>

@@ -279,7 +279,9 @@
 					"static/js/manifest.js",
 					"static/js/vendor.js"
 				],
-				"refer": [],
+				"refer": [
+					"speed_up.html"
+				],
 				"priority": 0
 			},
 			"home.html": {
@@ -303,7 +305,8 @@
 					"login.html",
 					"my_setting.html",
 					"my_fund.html",
-					"my_auth.html"
+					"my_auth.html",
+					"my_course.html"
 				],
 				"priority": 0
 			},
@@ -321,7 +324,9 @@
 				"resources": [],
 				"refer": [
 					"login_register.html",
-					"login_findps.html"
+					"login_findps.html",
+					"login_msg.html",
+					"login_account.html"
 				],
 				"priority": 0
 			},
@@ -364,6 +369,20 @@
 				"resources": [],
 				"refer": [
 					"my_auth_msg.html"
+				],
+				"priority": 0
+			},
+			"login_msg.html": {
+				"resources": [],
+				"refer": [
+					"login_areacode.html"
+				],
+				"priority": 0
+			},
+			"login_account.html": {
+				"resources": [],
+				"refer": [
+					"login_areacode.html"
 				],
 				"priority": 0
 			}

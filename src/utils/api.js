@@ -1,4 +1,4 @@
-const api = {
+const API = {
   countries: "/v1/common/countries",
   env: "/v1/common/env",
   areacodelist: "/v1/common/codes",
@@ -16,4 +16,4 @@ const api = {
   }
 };
 
-export default api;
+export default API;

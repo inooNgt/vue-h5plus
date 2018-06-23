@@ -30,6 +30,11 @@ a:active {
   color: #333;
 }
 
+ul,
+li {
+  list-style: none;
+}
+
 img {
   border: none;
 }
@@ -118,6 +123,10 @@ img {
   }
 }
 
+.index-content {
+  padding-bottom: 49px;
+}
+
 .footer {
   position: fixed;
   bottom: 0;
@@ -145,7 +154,7 @@ img {
   height: 40px;
   line-height: 40px;
   text-align: center;
-  font-size: 17px;          
+  font-size: 17px;
   color: #fff;
   border: none;
   border-radius: 0;
@@ -218,6 +227,8 @@ img {
     border-radius: px2rem(10px);
   }
 }
+/* my list end */
+/* icon start */
 .md-icon {
   display: inline-block;
   width: 20px;
@@ -246,13 +257,25 @@ img {
   height: 17px;
   background-image: url(~assets/img/lock.png);
 }
+.md-icon-arrow-left {
+  width: 11px;
+  height: 20px;
+  background-image: url(~assets/img/arrow_left.png);
+}
 .md-icon-closenav {
-  width: 14px;   
+  width: 14px;
   height: 14px;
   background-image: url(~assets/img/close_nav.png);
 }
+/* icon end */
+
+
+/* common start */
 .box-btn {
   text-align: center;
   padding: px2rem(36px) 0;
 }
-/* my list end */
+.text-black{
+  color:#000 !important;
+}
+/* common end */

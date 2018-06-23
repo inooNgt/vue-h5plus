@@ -5,7 +5,7 @@
   var config = {
     subpages: ["home.html", "vigour.html", "my.html"],
     top: "0px",
-    bottom: "50px",
+    bottom: "49px",
     loginPages: ["my.html"],
     loginPath: "login.html",
     keys: {

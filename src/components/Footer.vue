@@ -1,17 +1,17 @@
 <template>
   <div class="footer">
-    <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
-      <van-icon class="footer-icon" name="wap-home" />
-      <span>Home</span>
-    </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'vigour.html' }" @click="handleNavTap('vigour.html',$event)">
       <van-icon class="footer-icon" name="shop" />
-      <span>Vigour</span>
+      <span>Vitality</span>
+    </div>
+    <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
+      <van-icon class="footer-icon" name="wap-home" />
+      <span>Activity</span>
     </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
       <van-icon class="footer-icon" name="contact" />
       <span>My</span>
-    </div>
+    </div>   
   </div>
 </template>
 
@@ -70,6 +70,7 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 9999;
+  height: 49px;
 
   display: flex;
   text-align: center;
@@ -79,13 +80,15 @@ export default {
 
   .footer-icon {
     display: block;
+    height: 21px;
+    line-height: 21px;
     font-size: 18px;
     margin: 0 auto;
   }
   .footer-link {
     display: block;
     font-size: 10px;
-    padding: px2rem(5px) 0;
+    padding: 5px 0;
     flex: 1 0 auto;
     border-radius: 0;
     transition: 0.2s ease;

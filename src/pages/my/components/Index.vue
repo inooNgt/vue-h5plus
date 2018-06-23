@@ -47,7 +47,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="goCourse">
         <div class="item-left">
           <span class="my-icon"></span>
           <div class="item-title">我的课程</div>
@@ -58,7 +58,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="goActivity">
         <div class="item-left">
           <span class="my-icon"></span>
           <div class="item-title">我的活动</div>
@@ -163,6 +163,12 @@ export default {
     },
     goFund() {
       MTOOL.openWindow("my_fund.html");
+    },
+    goCourse() {
+      MTOOL.openWindow("my_course.html");
+    },
+    goActivity() {
+      MTOOL.openWindow("my_activity.html");
     },
     goAuth() {
       MTOOL.openWindow("my_auth.html");

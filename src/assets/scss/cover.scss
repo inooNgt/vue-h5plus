@@ -1,11 +1,5 @@
 @import "var";
 
-.van-tab--active {
-  color: $color-main !important;
-}
-.van-tabs__line {
-  background-color: $color-main !important;
-}
 .van-nav-bar.van-nav-bar {
   z-index: 999 !important;
   height: 44px;
@@ -29,6 +23,15 @@
   }
   .van-nav-bar__left {
     left: 18px;
+    i {
+      width: 11px;
+      height: 20px;
+      transform: none;
+      background-image: url(~assets/img/arrow_left.png);
+      &::before {
+        display: none;
+      }
+    }
   }
 }
 
@@ -52,3 +55,87 @@
     color: #000;
   }
 }
+
+/* tabs start */
+.van-tab--active {
+  color: $color-main !important;
+}
+.van-tabs__line {
+  background-color: $color-main !important;
+}
+.van-tabs {
+  &.van-tabs-fixed {
+    .van-tabs__wrap {
+      position: fixed;
+      top: 44px;
+      width: 100%;
+    }
+  }
+  &.van-tabs-main {
+    .van-tabs__wrap {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    &.van-tabs--line {
+      padding-top: 44px;
+      & .van-tabs__wrap {
+        height: 44px;
+        line-height: 44px;
+      }
+    }
+    .van-tab {
+      font-size: 16px;
+      line-height: 44px;
+      &::after {
+        margin-top: -20px;
+        height: 40px;
+        background: linear-gradient(0deg, #ffffff 7%, #dddddd 50%, #ffffff 93%);
+      }
+    }
+  }
+
+  .van-tabs__content {
+    background: #fff;
+  }
+  &.van-tabs--line {
+    padding-top: 40px;
+    & .van-tabs__wrap {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+  .van-tab {
+    position: relative;
+    font-size: 14px;
+    color: $color-gray;
+    line-height: 40px;
+    &.van-tab--active {
+      color: $color-main;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      right: -0.5px;
+      top: 50%;
+      z-index: 1;
+      margin-top: -18px;
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(0deg, #ffffff 3%, #dddddd 50%, #ffffff 97%);
+    }
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
+
+/* tabs end */
+
+/* mui start  */
+.mui-content.mui-content {
+  background: none;
+}
+/* mui end */

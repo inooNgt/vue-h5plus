@@ -43,7 +43,8 @@
 			"login.html",
 			"my_setting.html",
 			"my_fund.html",
-			"my_auth.html"
+			"my_auth.html",
+			"my_course.html"
 		]
 	},
 	"vigour.html": {
@@ -53,7 +54,9 @@
 			"static/js/manifest.js",
 			"static/js/vendor.js"
 		],
-		"refer": []
+		"refer": [
+			"speed_up.html"
+		]
 	},
 	"home.html": {
 		"resources": [
@@ -76,7 +79,9 @@
 	"login.html": {
 		"refer": [
 			"login_register.html",
-			"login_findps.html"
+			"login_findps.html",
+			"login_msg.html",
+			"login_account.html"
 		],
 		"resources": []
 	},
@@ -115,6 +120,16 @@
 	"my_auth.html": {
 		"refer": [
 			"my_auth_msg.html"
+		]
+	},
+	"login_msg.html": {
+		"refer": [
+			"login_areacode.html"
+		]
+	},
+	"login_account.html": {
+		"refer": [
+			"login_areacode.html"
 		]
 	}
 }

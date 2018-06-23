@@ -258,6 +258,7 @@ html {
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
+@import "~assets/scss/common";
 .header {
   padding: 20px;
 }
@@ -274,7 +275,7 @@ html {
   text-align: center;
 }
 .logo {
-  padding: 69px 0 145px;
+  padding: px2rem(69px) 0 px2rem(145px);
 }
 .logo-img {
   display: block;
@@ -284,7 +285,7 @@ html {
 }
 .btn-box {
   text-align: center;
-  padding: 27px 0 50px;
+  padding: px2rem(27px) 0;
   .btn-main {
     margin-bottom: 10px;
   }
