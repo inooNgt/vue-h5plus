@@ -265,7 +265,11 @@
 					"static/js/index.js",
 					"static/css/index.css",
 					"static/js/manifest.js",
-					"static/js/vendor.js"
+					"static/js/vendor.js",
+					"static/js/index.c35643d4.js",
+					"static/js/manifest.f01ddb6b.js",
+					"static/css/index.c35643d4.css",
+					"static/js/vendor.bda0a263.js"
 				],
 				"refer": [
 					"my.html",
@@ -278,7 +282,11 @@
 					"static/js/vigour.js",
 					"static/js/manifest.js",
 					"static/js/vendor.js",
-					"static/js/vigour.6ac092cb.js"
+					"static/js/vigour.6ac092cb.js",
+					"static/js/manifest.f01ddb6b.js",
+					"static/css/vigour.ff34adfe.css",
+					"static/js/vigour.ff34adfe.js",
+					"static/js/vendor.bda0a263.js"
 				],
 				"refer": [
 					"speed_up.html"
@@ -290,7 +298,11 @@
 					"static/js/home.js",
 					"static/css/home.css",
 					"static/js/manifest.js",
-					"static/js/vendor.js"
+					"static/js/vendor.js",
+					"static/css/home.b911ac76.css",
+					"static/js/manifest.f01ddb6b.js",
+					"static/js/home.b911ac76.js",
+					"static/js/vendor.bda0a263.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -300,7 +312,11 @@
 					"static/css/my.css",
 					"static/js/manifest.js",
 					"static/js/vendor.js",
-					"static/js/my.js"
+					"static/js/my.js",
+					"static/css/my.cec143f2.css",
+					"static/js/my.cec143f2.js",
+					"static/js/manifest.f01ddb6b.js",
+					"static/js/vendor.bda0a263.js"
 				],
 				"refer": [
 					"login.html",
@@ -351,7 +367,11 @@
 					"static/css/my_setting.45d2dbd8.css",
 					"static/js/my_setting.3e432b32.js",
 					"static/css/my_setting.3e432b32.css",
-					"static/css/my_setting.e2b14c4b.css"
+					"static/css/my_setting.e2b14c4b.css",
+					"static/js/my_setting.badf1cbf.js",
+					"static/css/my_setting.badf1cbf.css",
+					"static/js/manifest.f01ddb6b.js",
+					"static/js/vendor.bda0a263.js"
 				],
 				"refer": [
 					"my_setting_head.html",
@@ -412,6 +432,16 @@
 					"static/js/my_setting_head.7b319251.js",
 					"static/js/my_setting_head.749952a6.js",
 					"static/css/my_setting_head.749952a6.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_setting_name.html": {
+				"resources": [
+					"static/css/my_setting_name.87d00212.css",
+					"static/js/my_setting_name.87d00212.js",
+					"static/js/manifest.f01ddb6b.js",
+					"static/js/vendor.bda0a263.js"
 				],
 				"refer": [],
 				"priority": 0

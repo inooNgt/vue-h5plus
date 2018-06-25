@@ -110,7 +110,7 @@ exports.createNotifierCallback = () => {
 //多入口配置
 exports.entries = function(path) {
   path = path || PAGE_PATH;
-  var entryFiles = glob.sync(path + "/**/*.js");
+  var entryFiles = glob.sync(path + "/*/*.js");
   var map = {};
   entryFiles.forEach(filePath => {
     var filename = filePath.substring(
