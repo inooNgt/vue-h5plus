@@ -120,7 +120,6 @@ exports.entries = function(path) {
     map[filename] = filePath;
   });
 
-  console.log("entries:", map);
   return map;
 };
 

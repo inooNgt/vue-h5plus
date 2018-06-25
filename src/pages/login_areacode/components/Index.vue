@@ -3,7 +3,7 @@
     <van-nav-bar title="国家代码" fixed left-arrow @click-left="goBack" />
 
     <div class="list-content">
-      <Contacts :groups="groups" :letters="letters" ref="contacts" />
+      <Areacodes :groups="groups" :radio-change="handleRadioChange" :letters="letters" ref="contacts" />
     </div>
   </div>
 </template>
@@ -12,140 +12,38 @@
 import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
-
-import Contacts from "./Contacts";
+import API from "utils/api";
+import config from "utils/config";
+import { groupSort, getCachedObject } from "utils/utils";
+import Areacodes from "./Areacodes";
 import { Button, NavBar, Checkbox, CheckboxGroup } from "vant";
-
-const pinyin = require("pinyin");
 
 Vue.use(Button)
   .use(NavBar)
   .use(Checkbox)
   .use(CheckboxGroup);
 
+// 获取缓存
+const cachedAreacodes = getCachedObject(config.keys.codelist);
+
+console.log("cachedAreacodes", cachedAreacodes);
+
 export default {
   name: "Index",
-  components: { Contacts },
+  components: { Areacodes },
   data() {
     return {
-      list: [
+      list: cachedAreacodes,
+      commonuse: {
+        label: "常用",
+        data: []
+      },
+      groups: [
         {
-          id: "1",
-          displayName: "aname",
-          displayName_py: "",
-          phoneNumbers: [
-            { id: "1", value: "10086" },
-            { id: "2", value: "10010" }
-          ],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "2",
-          displayName: "吃吃",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008601" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "3",
-          displayName: "安安1",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008602" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "4",
-          displayName: "宝宝",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008603" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "5",
-          displayName: "ename5",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "6",
-          displayName: "fname6",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "7",
-          displayName: "name7",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "8",
-          displayName: "name8",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "9",
-          displayName: "name9",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "10",
-          displayName: "name10",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "11",
-          displayName: "name11",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "12",
-          displayName: "name12",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "13",
-          displayName: "44name13",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "14",
-          displayName: "44name13",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "15",
-          displayName: "44name13",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
-        },
-        {
-          id: "16",
-          displayName: "44name13",
-          displayName_py: "",
-          phoneNumbers: [{ id: "1", value: "1008600" }],
-          photos: [{ id: "1", value: "" }]
+          label: "",
+          data: []
         }
       ],
-      groups: [],
       letters: this.generateChars(),
       msg: "This is DIC test message."
     };
@@ -164,62 +62,58 @@ export default {
 
     // 初始化列表数据
     init: async function() {
-      // 非plus下测试数据
-      this.groups = this.pySegSort(this.list, this.letters);
-
-      console.log("pinyin:" + this.pinyin("123"));
-    },
-
-    // 拼音分组排序
-    pySegSort: function(list, letters) {
-      let temp = {};
-      let result = [];
-
-      if (!letters.length || !list.length) {
-        return result;
+      // 先使用缓存
+      if (typeof cachedAreacodes === "object") {
+        this.setGroups(this.list);
       }
-
-      letters.forEach(c => {
-        temp = { letter: c, data: [] };
-
-        // 按需分组
-        list.forEach(item => {
-          // 首字母
-          var han = item.displayName_py[0] || this.pinyin(item.displayName)[0];
-
-          // 非字母组
-          if (!/^[A-Za-z]$/.test(han) && c === "#") {
-            temp.data.push(item);
-          }
-          // 字母组
-          if (han.toUpperCase() === c) {
-            temp.data.push(item);
-          }
-        });
-
-        // 组内排序
-        if (temp.data.length) {
-          temp.data.sort((a, b) => {
-            let apy = a.displayName_py || this.pinyin(a.displayName);
-            let bpy = b.displayName_py || this.pinyin(a.displayName);
-            return apy.localeCompare(bpy);
-          });
-        }
-
-        result.push(temp);
-      });
-
-      console.log("pySegSort result", result);
-
-      return result;
+      this.updateList();
     },
 
-    pinyin: function(str) {
-      return (
-        pinyin(str, {
-          style: pinyin.STYLE_NORMAL
-        })[0][0][0] || ""
-      );
+    // 更新列表数据
+    updateList: async function() {
+      let countriesRes = await this.$get(API.countries);
+      let list = countriesRes.data.data;
+
+      // 更新缓存
+      MTOOL.storage.setItem(config.keys.codelist, JSON.stringify(list));
+
+      this.list = list;
+      this.setGroups(list);
+    },
+
+    setGroups(list) {
+      let groups = groupSort(list);
+
+      // 常用areacodes
+      groups.unshift({
+        label: "oftenused",
+        data: [
+          {
+            id: "CN",
+            value: "CN 中国"
+          }
+        ]
+      });
+      this.groups = groups;
+
+      console.log("groups", groups);
+    },
+
+    handleRadioChange(id) {
+      console.log(this.getAreaCodeById(id));
+      const code = this.getAreaCodeById(id);
+      const areacode = {
+        id,
+        code
+      };
+      // 缓存
+      MTOOL.storage.setItem(config.keys.countrycode, JSON.stringify(areacode));
+
+      mui.back()
+
+      if(MTOOL.isPlus){
+        
+      }
     },
 
     generateChars: function() {
@@ -227,45 +121,39 @@ export default {
       for (var i = 65; i < 91; i++) {
         str.push(String.fromCharCode(i));
       }
-      str.push("#");
+      str.unshift("oftenused");
       return str;
     },
 
-    getPhoneNumbersById(ids) {
-      let result = [];
-      if (!ids.length) {
-        return result;
-      }
-      this.list.forEach((item, k) => {
-        if (ids.indexOf(item.id) !== -1) {
-          if (item.phoneNumbers.length) {
-            item.phoneNumbers.forEach((v, k) => {
-              result.push(v.value);
-            });
-          }
-        }
-      }); 
-
-      result = [...new Set(result)];
-
-      // console.log("getPhoneNumbersById", result);
-
-      return result;
+    getAreaCodeById(id) {
+      return this.list[id];
     }
-  }   
+  }
 };
 </script>
 
 <style lang="scss">
+body,
+html {
+  background: #fff;
+}
 body {
   overflow-x: initial;
 }
+
+// .page-content {
+//   background-image: url(~assets/img/1.png);
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+//   background-position: 0 -20px;
+// }
 </style>
 <style lang="scss" scoped>
+@import "~assets/scss/var";
 @import "~assets/scss/common";
 .list-content {
   width: 100%;
-  padding: 79px 37px 50px 35px;
+  padding: 0 $padding-main 50px $padding-main;
   .van-checkbox__label {
     display: flex;
   }
