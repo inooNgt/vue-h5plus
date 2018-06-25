@@ -49,7 +49,7 @@ const my = {
 
 module.exports = {
   context: path.resolve(__dirname, "../"),
-  entry: my || utils.entries(),
+  entry: utils.entries(),
   output: {
     path: config.build.assetsRoot,
     filename: "[name].js",
