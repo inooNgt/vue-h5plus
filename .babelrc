@@ -3,9 +3,14 @@
     [
       "env",
       {
-        // "modules": false,  提高兼容性
+        // 提高兼容性可去掉
+        "modules": false,
         "targets": {
-          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+          "browsers": [
+            "> 1%",
+            "last 2 versions",
+            "not ie <= 8"
+          ]
         }
       }
     ],
