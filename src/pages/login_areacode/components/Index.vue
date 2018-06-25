@@ -153,7 +153,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       MTOOL.plusReady(() => {
-        this.initList();
+        this.init();
       });
     });
   },
@@ -163,22 +163,9 @@ export default {
     },
 
     // 初始化列表数据
-    initList: async function() {
-      if (MTOOL.isPlus) {
-        try {
-          let addressbook = await this.getAddressBook();
-          let address = await this.extractAddressBook(addressbook);
-          if (address.length) {
-            this.list = address;
-          }
-          this.groups = this.pySegSort(this.list, this.letters);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        // 非plus下测试数据
-        this.groups = this.pySegSort(this.list, this.letters);
-      }
+    init: async function() {
+      // 非plus下测试数据
+      this.groups = this.pySegSort(this.list, this.letters);
 
       console.log("pinyin:" + this.pinyin("123"));
     },
@@ -257,67 +244,15 @@ export default {
             });
           }
         }
-      });
+      }); 
 
       result = [...new Set(result)];
 
       // console.log("getPhoneNumbersById", result);
 
       return result;
-    },
-
-    getAddressBook: function() {
-      return new Promise((resolve, reject) => {
-        plus.contacts.getAddressBook(
-          plus.contacts.ADDRESSBOOK_PHONE,
-          addressbook => {
-            // 可通过addressbook进行通讯录操作
-            console.log("Get address book success!");
-
-            resolve(addressbook);
-          },
-          reject
-        );
-      });
-    },
-
-    extractAddressBook: function(addressbook) {
-      return new Promise((resolve, reject) => {
-        addressbook.find(
-          null,
-          contacts => {
-            let list = [];
-            contacts.forEach(item => {
-              let temp = {};
-
-              temp.id = item.id;
-              temp.displayName = item.displayName;
-              temp.displayName_py = this.pinyin(item.displayName);
-              temp.phoneNumbers = item.phoneNumbers;
-              temp.photos = item.photos;
-
-              list.push(temp);
-
-              console.log(`contacts item displayName:${item.displayName}`);
-              // console.log(`contacts item id:${item.id}`);
-              // console.log(`contacts item photos:${item.photos}`);
-              // if (item.photos && item.photos.length) {
-              //   item.photos.forEach((v, k) => {
-              //     for (let key in v) {
-              //       console.log("photos." + key + ": " + v[key]);
-              //     }
-              //   });
-              // }
-            });
-            resolve(list);
-            console.log("forEach list" + list.length);
-          },
-          reject,
-          { multiple: true }
-        );
-      });
     }
-  }
+  }   
 };
 </script>
 

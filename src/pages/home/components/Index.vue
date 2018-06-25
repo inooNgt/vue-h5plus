@@ -16,7 +16,7 @@
           <div class="card-list">
             <Card v-for="(item,index) in list2" :key="index" :data="item" />
           </div>
-        </section>
+        </section> 
 
       </div>
     </div>

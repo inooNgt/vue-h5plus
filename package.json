@@ -5,7 +5,7 @@
   "author": "ngt <inoongt@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --hot --config build/webpack.dev.conf.js",
     "start": "set NODE_ENV=production&&webpack --watch --cache --config build/webpack.prod.conf.js",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"

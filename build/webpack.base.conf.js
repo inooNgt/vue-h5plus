@@ -21,9 +21,11 @@ const createLintingRule = () => ({
   }
 });
 
+const testpath = path.resolve(__dirname, "../src/pages/login_areacode");
+
 module.exports = {
   context: path.resolve(__dirname, "../"),
-  entry: utils.entries(),
+  entry: utils.entries(testpath),
   output: {
     path: config.build.assetsRoot,
     filename: "[name].js",

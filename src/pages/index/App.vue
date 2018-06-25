@@ -10,7 +10,7 @@ import Footer from "../../components/Footer";
 import MTOOL from "mtool";
 
 export default {
-  name: "App",
+  name: "App", 
   components: {
     MFooter: Footer
   },
