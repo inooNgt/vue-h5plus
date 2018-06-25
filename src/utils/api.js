@@ -7,6 +7,7 @@ const API = {
   login: "/v1/common/token",
   auth: {
     user: "/v1/user",
+    settings: "/v1/user/settings",
     del: "/v1/common/token/TOKEN",
     alterusername: "/v1/user/username",
     altergender: "/v1/user/username",

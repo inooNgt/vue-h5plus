@@ -21,9 +21,16 @@
             <span class="invite-input" :class="inputFocus && inviteCode.length>=3?'invite-input-focus':''" :ref="'inviteInput3'">{{inviteCode[3]}}</span>
           </div>
         </div>
-        <van-field class="row-phone" v-model="phone" label="+86" placeholder="请输入手机号" />
+        <div class="row-country">
+          <div class="col-left">国家代码</div>
+          <div class="col-right" @click="goAreaCode">
+            <span>{{areacode}}</span>
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <van-field class="row-phone" v-model="phone" :label="phonecode" placeholder="请输入手机号" />
         <van-field class="row-sms" center v-model="sms" placeholder="请输入短信验证码">
-          <van-button slot="button" size="large">发送验证码</van-button>
+          <van-button slot="button" size="large" @click="getSmscode">发送验证码</van-button>
         </van-field>
       </van-cell-group>
       <div class="btn-box">
@@ -41,8 +48,14 @@ import { VueSelect } from "vue-select";
 import mui from "mui";
 import MTOOL from "mtool";
 import config from "utils/config";
-import { checkPhone } from "utils/utils";
 import API from "utils/api";
+import {
+  checkPhone,
+  loadUserInfo,
+  getCachedData,
+  getCachedObject,
+  getPhoneCode
+} from "utils/utils";
 
 Vue.component("v-select", VueSelect);
 
@@ -53,6 +66,14 @@ Vue.use(Button)
   .use(NavBar)
   .use(CellGroup);
 
+// 获取缓存
+const cachedCountrycode = getCachedObject(config.keys.countrycode) || {
+  id: "",
+  code: ""
+};
+const cachedPhonecode = getCachedData(config.keys.phonecode);
+const cachedPhonecodekey = getCachedData(config.keys.phonecodekey);
+
 export default {
   name: "Index",
   data() {
@@ -61,21 +82,32 @@ export default {
       username: "",
       inviteCode: "",
       password: "000000",
-      phone: "13100004001",
+      phone: "1310002010",
       sms: "000000",
       inputFocus: false,
-      areacodeOptions: [{ code: "CN", label: "CN 0086" }],
-      selectedAreacode: { code: "CN", label: "CN 0086" }
+      areacode: cachedPhonecode && cachedCountrycode.code,
+      phonecode: cachedPhonecode,
+      phonecodekey: cachedPhonecodekey
     };
+  },
+  created() {
+    // 更新页面
+    window.addEventListener("event_update", function(event) {
+      console.log("event_update");
+      this.init();
+    });
   },
   mounted() {
     this.$nextTick(() => {
-      this.setAreaInfo();
+      this.init();
     });
   },
   methods: {
     back: function() {
       mui.back();
+    },
+    init() {
+      this.setAreaInfo();
     },
     onBlur() {
       this.inputFocus = false;
@@ -104,34 +136,61 @@ export default {
       this.inviteCode = value;
     },
     setAreaInfo: async function() {
-      // countries code
-      let areacodelistRes = await this.$get(API.areacodelist);
-      let envRes = await this.$get(API.env);
+      console.log(cachedCountrycode);
+      let phonecode;
+      let phonecodekey;
 
-      // areacode
-      let areacodelist = areacodelistRes.data.data;
-      this.areacodeOptions = this.formatOptions(areacodelist, 0);
+      // 有cachedCountrycode缓存
+      if (cachedCountrycode && cachedCountrycode.id) {
+        // areacode
+        let areacodelistRes = await this.$get(API.areacodelist);
+        let areacodelist = areacodelistRes.data.data;
+        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id)
+          .code;
+        phonecode = phonecodeObj.code;
+        phonecodekey = phonecodeObj.key;
+      } else {
+        // env
+        let envRes = await this.$get(API.env);
+        let env = envRes.data.data;
 
-      // env
-      let env = envRes.data.data;
+        let countriesRes = await this.$get(API.countries);
+        let countries = countriesRes.data.data;
 
-      this.selectedAreacode = {
-        code: env.calling_code,
-        label: areacodelist[env.calling_code]
-      };
-    },
-    formatOptions(data, adorn) {
-      let result = [];
-      for (let key in data) {
-        let label = data[key];
-        if (adorn) label = key + " " + data[key];
-        result.push({
-          code: key,
-          label: label
-        });
+        phonecodekey = env.calling_code;
+        phonecode = (env.calling_code || "").replace(/[A-Z]/gi, "");
+
+        this.areacode = `${env.country_code} ${countries[env.country_code]}`;
+
+        if (envRes.data.status !== 200) {
+          Toast("获取环境信息失败");
+        }
+
+        if (phonecode) this.phonecode = phonecode;
+        if (phonecodekey) this.phonecodekey = phonecodekey;
+        // 缓存
+        MTOOL.storage.setItem(config.keys.phonecode, phonecode);
+        MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
       }
-      return result;
     },
+
+    getSmscode() {
+      this.$post(API.smscode, {
+        mobile_phone: this.phone
+      })
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            Toast("短信验证码发送成功");
+          } else {
+            Toast(res.message);
+          }
+        })
+        .catch(e => {
+          Toast(e.message);
+        });
+    },
+
     login: function() {
       let param = {};
       if (this.phone.trim() === "") {
@@ -150,12 +209,10 @@ export default {
       }
 
       param = {
-        calling_code: this.selectedAreacode.label,
-        mobile_phone: this.phone,
-        sms_code: this.sms.trim()
+        invite_code: this.inviteCode
       };
 
-      this.$post(API.login, param).then(res => {
+      this.$post(API.auth.settings, param).then(res => {
         let data = res.data;
         console.log(data);
         if (data.status !== 200) {
@@ -163,19 +220,13 @@ export default {
           return;
         }
 
-        Toast("登录成功");
-        this.loginSucceed(data.data);
+        Toast("激活成功");
+        this.loginSucceed();
       });
     },
     loginSucceed: function(data) {
-      // 存储信息
-      MTOOL.storage.setItem(
-        config.keys.token,
-        JSON.stringify(data.access_token)
-      );
-      MTOOL.storage.setItem(config.keys.user, JSON.stringify(data.user));
-
-      console.log("登录成功 :" + MTOOL.logined());
+      // 获取用户信息并缓存
+      loadUserInfo();
 
       // 跳转 plus环境
       if (MTOOL.isPlus) {
@@ -190,18 +241,9 @@ export default {
             // 更新页面
             MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
           }, 400);
-
-          // 带参处理
-          // if (origin && MTOOL.config.subpages.indexOf(origin)) {
-          //   MTOOL.switchNav({
-          //     from: "login.html",
-          //     to: origin
-          //   });
-          //   MTOOL.invoke("HBuilder", "index_update_tab", { to: origin });
-          // }
         });
       } else {
-        location.href = "home.html";
+        // location.href = "home.html";
       }
     },
     goFindPS() {
@@ -361,6 +403,7 @@ html {
     text-align: right;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     position: relative;
   }
   .invite-input {

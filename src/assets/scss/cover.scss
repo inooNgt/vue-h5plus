@@ -1,5 +1,6 @@
 @import "var";
 
+
 .van-nav-bar.van-nav-bar {
   z-index: 999 !important;
   height: 44px;
@@ -138,8 +139,11 @@
 .mui-content.mui-content {
   background: none;
 }
-.mui-pull-caption.mui-pull-caption{
-  color:$color-gray;
-  font-size:14px;      
+.mui-pull-caption.mui-pull-caption {
+  color: $color-gray;
+  font-size: 14px;
+}
+.mui-pull {
+  font-weight: normal;
 }
 /* mui end */

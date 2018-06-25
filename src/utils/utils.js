@@ -74,6 +74,7 @@ function setHeaders(url, options) {
   options = options || {};
   if (isAuth) {
     if (!options.headers) options.headers = {};
+
     options.headers = Object.assign(options.headers, {
       Authorization: "Bearer " + token
     });

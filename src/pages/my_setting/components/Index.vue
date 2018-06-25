@@ -81,7 +81,59 @@ export default {
       mui.back();
     },
     setHead() {
-      MTOOL.openWindow("my_setting_head.html");
+      // MTOOL.openWindow("my_setting_head.html");
+      MTOOL.plusReady(() => {
+        plus.nativeUI.actionSheet(
+          {
+            cancel: "取消",
+            buttons: [{ title: "相册" }, { title: "拍照" }]
+          },
+          e => {
+            console.log("User pressed: " + e.index);
+            if (e.index === 1) {
+              plus.gallery.pick(this.gallerySuccess, this.galleryFail, {});
+            }
+            if (e.index === 2) {
+              this.captureImage();
+            }
+          }
+        );
+      });
+    },
+    gallerySuccess(path) {
+      console.log("gallerySuccess");
+      console.log(path);
+      this.changeToLocalUrl(path);
+    },
+    galleryFail(error) {
+      console.log("galleryFail");
+      console.log(error);
+    },
+    captureImage() {
+      let cmr = plus.camera.getCamera();
+      let res = cmr.supportedImageResolutions[0];
+      let fmt = cmr.supportedImageFormats[0];
+      console.log("Resolution: " + res + ", Format: " + fmt);
+      cmr.captureImage(
+        path => {
+          console.log("Capture image success: " + path);
+          this.changeToLocalUrl(path);
+        },
+        error => {
+          console.log("Capture image failed: " + error.message);
+        },
+        { resolution: res, format: fmt }
+      );
+    },
+    changeToLocalUrl(path) {
+      plus.io.resolveLocalFileSystemURL(path, entry => {
+        MTOOL.openWindow("my_setting_head.html", {
+          extras: {
+            localurl: entry.toLocalURL(),
+            imgpath: path  
+          }
+        });
+      });
     },
     setNickname() {
       MTOOL.openWindow("my_setting_name.html");

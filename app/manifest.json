@@ -277,7 +277,8 @@
 					"static/css/vigour.css",
 					"static/js/vigour.js",
 					"static/js/manifest.js",
-					"static/js/vendor.js"
+					"static/js/vendor.js",
+					"static/js/vigour.6ac092cb.js"
 				],
 				"refer": [
 					"speed_up.html"
@@ -338,7 +339,19 @@
 					"static/css/my_setting.css",
 					"static/js/manifest.js",
 					"static/js/vendor.js",
-					"static/js/my_setting.js"
+					"static/js/my_setting.js",
+					"static/css/my_setting.df3dd985.css",
+					"static/css/my_setting.5c69278b.css",
+					"static/js/my_setting.5c69278b.js",
+					"static/css/my_setting.bfc1c102.css",
+					"static/js/my_setting.bfc1c102.js",
+					"static/js/my_setting.4f49139f.js",
+					"static/js/my_setting.bf48400e.js",
+					"static/js/my_setting.dcbd6d0b.js",
+					"static/css/my_setting.45d2dbd8.css",
+					"static/js/my_setting.3e432b32.js",
+					"static/css/my_setting.3e432b32.css",
+					"static/css/my_setting.e2b14c4b.css"
 				],
 				"refer": [
 					"my_setting_head.html",
@@ -387,6 +400,20 @@
 				"refer": [
 					"login_areacode.html"
 				],
+				"priority": 0
+			},
+			"my_setting_head.html": {
+				"resources": [
+					"static/js/my_setting_head.62338e34.js",
+					"static/css/my_setting_head.62338e34.css",
+					"static/js/my_setting_head.b09bbc00.js",
+					"static/css/my_setting_head.b09bbc00.css",
+					"static/css/my_setting_head.7b319251.css",
+					"static/js/my_setting_head.7b319251.js",
+					"static/js/my_setting_head.749952a6.js",
+					"static/css/my_setting_head.749952a6.css"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},

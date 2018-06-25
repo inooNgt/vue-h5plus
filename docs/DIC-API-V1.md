@@ -337,6 +337,7 @@ username=username
 gender=gender
 locale=locale
 timezone=timezone
+invite_code=invite_code
 ```
 
 ### 登录用户获取手机验证码
