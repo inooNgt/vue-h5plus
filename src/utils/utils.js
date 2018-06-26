@@ -39,7 +39,12 @@ const post = (url, data, options) => {
     url = config.host + url;
   }
 
-  if (typeof data === "object") data = Qs.stringify(data);
+  let disableQs =
+    options &&
+    options.headers &&
+    options.headers["Content-Type"] === "image/png";
+
+  if (typeof data === "object" && !disableQs) data = Qs.stringify(data);
   // if (typeof data === "object") {
   //   data = encodeURI(
   //     Qs.stringify(data, {
@@ -315,6 +320,30 @@ const extractAddressBook = addressbook => {
   });
 };
 
+const dataURLtoFile = (dataurl, filename) => {
+  let arr = dataurl.split(",");
+  let mime = arr[0].match(/:(.*?);/)[1];
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+};
+
+const dataURLtoBlob = dataurl => {
+  let arr = dataurl.split(",");
+  let mime = arr[0].match(/:(.*?);/)[1];
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+};
+
 export {
   http,
   get,
@@ -328,5 +357,7 @@ export {
   checkPhone,
   pySegSort,
   getPhoneCode,
+  dataURLtoBlob,
+  dataURLtoFile,
   groupSort
 };

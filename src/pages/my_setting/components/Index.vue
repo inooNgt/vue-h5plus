@@ -1,6 +1,6 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" />
+    <van-nav-bar title="个人设置" fixed left-arrow @click-left="goBack" />
     <ul class="my-list">
       <li class="list-item" @click="setHead">
         <div class="item-left">头像</div>
@@ -40,9 +40,9 @@
         </div>
       </li>
     </ul>
-    <div class="box-btn">
-      <van-button slot="button" class="btn" size="large" v-if="logined" @click="logout">退出</van-button>
-      <van-button slot="button" class="btn" size="large" v-if="!logined" @click="login">登录</van-button>
+    <div class="box-btn box-btn-fixed">
+      <van-button slot="button" class="btn btn-sub" size="large" v-if="logined" @click="logout">退出</van-button>
+      <van-button slot="button" class="btn btn-sub" size="large" v-if="!logined" @click="login">登录</van-button>
     </div>
   </div>
 </template>
@@ -73,15 +73,41 @@ export default {
       logined: MTOOL.logined(),
       username: cachedUser.username || "- -",
       phone: cachedUser.mobile_phone || "- -",
-      avatar: cachedUser.avatar_base_url || ""
+      avatar: cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
     };
+  },
+  created() {
+    console.log("created", this.logined);
+    // 更新所有子页面
+    window.addEventListener("event_update", event => {
+      // 获得事件参数
+      let detail = event.detail;
+      console.log("my event_update");
+      this.update();
+    });
   },
   methods: {
     goBack() {
       mui.back();
     },
+    update() {
+      this.updateUserInfo();
+    },
+    async updateUserInfo() {
+      try {
+        let user = await loadUserInfo();
+        if (user.username) this.username = user.username;
+        if (user.avatar_base_url && user.avatar_path)
+          this.avatar = user.avatar_base_url + "/" + user.avatar_path;
+      } catch (error) {
+        Toast("Network error");
+      }
+    },
     setHead() {
-      // MTOOL.openWindow("my_setting_head.html");
+      if (!MTOOL.isPlus) {
+        Toast("请在app中修改头像");
+        return;
+      }
       MTOOL.plusReady(() => {
         plus.nativeUI.actionSheet(
           {
@@ -130,7 +156,7 @@ export default {
         MTOOL.openWindow("my_setting_head.html", {
           extras: {
             localurl: entry.toLocalURL(),
-            imgpath: path  
+            imgpath: path
           }
         });
       });
@@ -182,6 +208,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
+
+.page-content {
+  padding-bottom: 50px;
+}
 .item-left {
   width: 170px;
   .item-title {

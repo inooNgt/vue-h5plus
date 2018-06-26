@@ -47,8 +47,10 @@
     this.img.src = option.image_src;
 
     this.cancel_btn = document.createElement("a");
+    this.cancel_btn.className = "crop-btn-cancel";
     this.cancel_btn.innerHTML = this.cancel_text;
     this.ok_btn = document.createElement("a");
+    this.ok_btn.className = "crop-btn-ok";
     this.ok_btn.innerHTML = this.ok_text;
 
     this.croppingBox.appendChild(this.ok_btn);
@@ -175,16 +177,16 @@
       this.setStyle();
     },
     _cancel: function() {
-      this._css(this.croppingBox, {
-        display: "none"
-      });
+      // this._css(this.croppingBox, {
+      //   display: "none"
+      // });
       this.cancel();
     },
     _ok: function() {
       this.crop();
-      this._css(this.croppingBox, {
-        display: "none"
-      });
+      // this._css(this.croppingBox, {
+      //   display: "none"
+      // });
       this.ok(this.canvas.toDataURL("image/" + this.type), this.canvas);
     },
     renderCover: function() {
@@ -195,7 +197,7 @@
         ch = this.height;
       ctx.save();
       ctx.fillStyle = "black";
-      ctx.globalAlpha = 0.7;
+      ctx.globalAlpha = 0.64;
       ctx.fillRect(0, 0, this.cover.width, this.cover.height);
       ctx.restore();
       ctx.save();

@@ -69,7 +69,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item" @click="goHelp">   
+      <li class="list-item" @click="goHelp">
         <div class="item-left">
           <span class="my-icon"></span>
           <div class="item-title">帮助中心</div>
@@ -119,7 +119,7 @@ export default {
       logined: MTOOL.logined(),
       isPlus: MTOOL.isPlus,
       username: cachedUser.username || "- -",
-      avatar: cachedUser.avatar_base_url || ""
+      avatar: cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
     };
   },
   created() {
@@ -145,7 +145,10 @@ export default {
       try {
         let user = await loadUserInfo();
         if (user.username) this.username = user.username;
-        if (user.avatar_base_url) this.avatar = user.avatar_base_url;
+        if (user.avatar_base_url && user.avatar_path)
+          this.avatar = user.avatar_base_url + "/" + user.avatar_path;
+
+        console.log("user:", user);
       } catch (error) {
         console.log(error);
         Toast("Network error");
@@ -222,7 +225,7 @@ export default {
   color: #fff;
   display: flex;
   margin-bottom: 18px;
-  background-color: #335b4e;
+  background-color: $color-main;
   .info-left,
   .info-right {
     padding: 0 $padding-main;
@@ -240,7 +243,12 @@ export default {
       margin-top: -20px;
       width: 1px;
       height: 40px;
-      background: linear-gradient(0deg, #335b4e 0%, #1f4438 50%, #335b4e 100%);
+      background: linear-gradient(
+        0deg,
+        $color-main 0%,
+        #183970 50%,
+        $color-main 100%
+      );
       border-image-slice: 1;
     }
   }

@@ -4,7 +4,6 @@
     <div class="crop-content">
       <div id="cropView" ref="cropView" class="crop-view"></div>
     </div>
-    <img :src="imgurl">
   </div>
 </template>
 
@@ -12,6 +11,8 @@
 import Vue from "vue";
 import { Cell, CellGroup, NavBar, Icon, Field, Toast } from "vant";
 import mAlloyCrop from "mAlloyCrop";
+import { dataURLtoBlob } from "utils/utils";
+import API from "utils/api";
 
 Vue.use(Cell)
   .use(CellGroup)
@@ -41,6 +42,7 @@ export default {
           this.initCrop();
         });
       } else {
+        // test
         this.initCrop("http://p42jcfxfo.bkt.clouddn.com/images/thinkin/bg.jpg");
       }
     });
@@ -57,18 +59,38 @@ export default {
         height: 241,
         output: 1,
         className: "m-clip-box",
-        ok: (base64, canvas) => {
+        ok: (dataurl, canvas) => {
           cropView.appendChild(canvas);
           cropView.querySelector("canvas").style.borderRadius = "0%";
           // mAlloyCrop.destroy();
-          this.imgurl = base64;
-          console.log("base64");
-          console.log(base64);
+          this.imgurl = dataurl;
+          let file = dataURLtoBlob(dataurl);
+
+          console.log(file);
+          this.upload(file);
         },
-        cancel: () => {
-          // mAlloyCrop.destroy();
-        }
+        ok_text: "设置头像"
       });
+    },
+    upload(file) {
+      this.$post(API.auth.avatar, file, {
+        headers: {
+          "Content-Type": "image/png"
+        }
+      })
+        .then(res => {
+          let data = res.data;
+          if (data.status === 200) {
+            Toast("上传成功");
+          } else {
+            data.message && Toast(data.message);
+          }
+          console.log(data);
+        })
+        .catch(e => {
+          console.log(e);
+          Toast("上传失败");
+        });
     },
     save() {
       console.log("save");
@@ -79,10 +101,33 @@ export default {
 
 <style lang="scss" >
 @import "~assets/scss/var";
+body,
+html {
+  background-color: rgba(0, 0, 0, 0.64);
+}
 .crop-view {
+  display: flex;
+  opacity: 0;
+  justify-content: center;
+  overflow: hidden;
+  height: 0;
   canvas {
-    display: block;
-    margin: 0 auto;
+  }
+}
+.m-clip-box {
+  img {
+  }
+  .crop-btn-cancel {
+    display: none !important;
+  }
+  .crop-btn-ok {
+    background: $color-blue !important;
+    width: 100% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    height: 49px !important;
+    line-height: 49px !important;
+    font-size: 17px !important;
   }
 }
 </style>

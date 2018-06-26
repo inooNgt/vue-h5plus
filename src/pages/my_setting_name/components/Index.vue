@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
     <van-cell-group>
-      <van-field v-model="username" label="昵称" placeholder="请输入昵称" />
+      <van-field v-model="username" placeholder="请输入昵称" @click-icon="username = ''" />
     </van-cell-group>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
         Toast("用户名不能为空");
       }
 
-      this.$post(API.auth.alterusername, {
+      this.$post(API.auth.settings, {
         username: this.username
       })
         .then(res => {

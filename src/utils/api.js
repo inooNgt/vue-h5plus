@@ -13,6 +13,7 @@ const API = {
     altergender: "/v1/user/username",
     alterphone: "/v1/user/mobile-phone",
     smskey: "/v1/user/sms-key",
+    avatar: "/v1/user/avatar",
     usersmscode: "/v1/user/sms-code"
   }
 };

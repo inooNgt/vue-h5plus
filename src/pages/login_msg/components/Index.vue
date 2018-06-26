@@ -70,7 +70,7 @@ export default {
       active: 0,
       username: "",
       password: "000000",
-      phone: "13100004001",
+      phone: "1310002010",
       sms: "000000",
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,
@@ -153,7 +153,7 @@ export default {
       }
 
       param = {
-        calling_code: this.selectedAreacode.label,
+        calling_code: this.phonecodekey,
         mobile_phone: this.phone,
         sms_code: this.sms.trim()
       };

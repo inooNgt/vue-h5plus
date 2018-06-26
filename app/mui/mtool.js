@@ -346,6 +346,13 @@
     return mui.fire(page, event, data);
   };
 
+  var invokeAll = function(event, data) {
+    let pages = plus.webview.all();
+    for (var i = 0; i < pages.length; i++) {
+      mui.fire(wvs[i], event, data);
+    }
+  };
+
   var MTOOL = {
     initPage: initPage,
     initWebview: initWebview,
@@ -361,6 +368,7 @@
     shareSystem: shareSystem,
     openWindow: openWindow,
     invoke: invoke,
+    invokeAll: invokeAll,
     elementPosition: elementPosition
   };
 

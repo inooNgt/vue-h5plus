@@ -286,7 +286,8 @@
 					"static/js/manifest.f01ddb6b.js",
 					"static/css/vigour.ff34adfe.css",
 					"static/js/vigour.ff34adfe.js",
-					"static/js/vendor.bda0a263.js"
+					"static/js/vendor.bda0a263.js",
+					"static/img/bg.png"
 				],
 				"refer": [
 					"speed_up.html"
@@ -316,7 +317,9 @@
 					"static/css/my.cec143f2.css",
 					"static/js/my.cec143f2.js",
 					"static/js/manifest.f01ddb6b.js",
-					"static/js/vendor.bda0a263.js"
+					"static/js/vendor.bda0a263.js",
+					"static/css/my.b5aae99b.css",
+					"static/js/my.b5aae99b.js"
 				],
 				"refer": [
 					"login.html",

@@ -21,33 +21,6 @@ const createLintingRule = () => ({
   }
 });
 
-const testpath = path.resolve(__dirname, "../src/pages/login_invite");
-
-const my = {
-  my: path.resolve(__dirname, "../src/pages/my/my.js"),
-  index: path.resolve(__dirname, "../src/pages/index/index.js"),
-  home: path.resolve(__dirname, "../src/pages/home/home.js"),
-  vigour: path.resolve(__dirname, "../src/pages/vigour/vigour.js"),
-  my_setting: path.resolve(__dirname, "../src/pages/my_setting/my_setting.js"),
-  my_setting_head: path.resolve(
-    __dirname,
-    "../src/pages/my_setting_head/my_setting_head.js"
-  ),
-  // my_setting_name: path.resolve(
-  //   __dirname,
-  //   "../src/pages/my_setting_name/my_setting_name.js"
-  // ),
-  // my_setting_phone: path.resolve(
-  //   __dirname,
-  //   "../src/pages/my_setting_phone/my_setting_phone.js"
-  // ),
-  // my_setting_phone_done: path.resolve(
-  //   __dirname,
-  //   "../src/pages/my_setting_phone_done/my_setting_phone_done.js"
-  // )
-};
-
-
 module.exports = {
   context: path.resolve(__dirname, "../"),
   entry: utils.entries(),
@@ -67,13 +40,13 @@ module.exports = {
       // mui: resolve("src/assets/js/mui.js"),
       utils: resolve("src/utils"),
       components: resolve("src/components"),
-      assets: resolve("src/assets"),
+      assets: resolve("src/assets")
     }
   },
   externals: {
     mui: "window.mui",
     mtool: "window.MTOOL",
-    mAlloyCrop: "window.mAlloyCrop",
+    mAlloyCrop: "window.mAlloyCrop"
   },
   plugins: [
     new HappyPack({
