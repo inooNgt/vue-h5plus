@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       sms: "000",
-      phone: cachedUser.identity || "- -"
+      phone: cachedUser.mobile_phone || "- -"
     };
   },
   methods: {

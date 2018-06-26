@@ -103,10 +103,11 @@ export default {
         // areacode
         let areacodelistRes = await this.$get(API.areacodelist);
         let areacodelist = areacodelistRes.data.data;
-        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id)
-          .code;
+        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id);
         phonecode = phonecodeObj.code;
         phonecodekey = phonecodeObj.key;
+
+        console.log("phonecodeObj", phonecodeObj);
       } else {
         // env
         let envRes = await this.$get(API.env);
@@ -123,13 +124,14 @@ export default {
         if (envRes.data.status !== 200) {
           Toast("获取环境信息失败");
         }
-
-        if (phonecode) this.phonecode = phonecode;
-        if (phonecodekey) this.phonecodekey = phonecodekey;
-        // 缓存
-        MTOOL.storage.setItem(config.keys.phonecode, phonecode);
-        MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
       }
+      if (phonecode) this.phonecode = phonecode;
+      if (phonecodekey) this.phonecodekey = phonecodekey;
+
+      console.log("phonecode", phonecode);
+      // 缓存
+      MTOOL.storage.setItem(config.keys.phonecode, phonecode);
+      MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
     },
 
     login: function() {
@@ -151,7 +153,7 @@ export default {
 
       param = {
         calling_code: this.phonecodekey,
-        mobile_phone: this.phone,  
+        mobile_phone: this.phone,
         password: this.password.trim()
       };
 

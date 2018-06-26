@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="修改手机" fixed left-arrow @click-left="goBack" />
     <ul class="step-list">
-      <li class="step-item step-item1 ">
+      <li class="step-item step-item1 step-active">
         <span class="step-num">1</span>
         <div class="step-text">身份验证</div>
       </li>
@@ -20,7 +20,14 @@
         <p>请输入要绑定的新手机号码</p>
       </div>
       <van-cell-group class="box-field">
-        <van-field v-model="phone" center clearable placeholder="请输入新手机号">
+        <div class="row-country">
+          <div class="col-left">国家代码</div>
+          <div class="col-right" @click="goAreaCode">
+            <span>{{areacode}}</span>
+            <van-icon name="arrow" />
+          </div>
+        </div>
+        <van-field v-model="phone" :label="phonecode" center clearable placeholder="请输入新手机号">
           <van-button slot="button" class="btn-sub btn-getsms" @click="getSmscode" size="small">获取验证码</van-button>
         </van-field>
         <van-field v-model="sms" label="验证码：" placeholder="请输入验证码" />
@@ -40,7 +47,13 @@ import { Cell, CellGroup, NavBar, Icon, Field, Toast, Button } from "vant";
 import MTOOL from "mtool";
 import mui from "mui";
 import config from "utils/config";
-import { getCachedUser, loadUserInfo } from "utils/utils";
+import {
+  getCachedUser,
+  getCachedObject,
+  getCachedData,
+  getPhoneCode,
+  loadUserInfo
+} from "utils/utils";
 import API from "utils/api";
 
 Vue.use(Cell)
@@ -54,6 +67,14 @@ Vue.use(Cell)
 // 缓存的用户信息
 const cachedUser = getCachedUser();
 
+// 获取缓存
+const cachedCountrycode = getCachedObject(config.keys.countrycode) || {
+  id: "",
+  code: ""
+};
+const cachedPhonecode = getCachedData(config.keys.phonecode);
+const cachedPhonecodekey = getCachedData(config.keys.phonecodekey);
+
 export default {
   name: "Index",
   data() {
@@ -61,31 +82,64 @@ export default {
       sms: "000",
       alteringPhone: "131****0000",
       loading: false,
-      phone: cachedUser.mobile_phone || "- -"
+      phone: cachedUser.mobile_phone || "- -",
+      areacode: cachedPhonecode && cachedCountrycode.code,
+      phonecode: cachedPhonecode,
+      phonecodekey: cachedPhonecodekey
     };
   },
   created() {},
   mounted() {
-    this.$nextTick(() => {});
+    this.$nextTick(() => {
+      this.init();
+    });
   },
   methods: {
     goBack: function() {
       mui.back();
     },
-    closePrev() {
-      MTOOL.plusReady(() => {
-        let prevwv = plus.webview.getWebviewById("my_setting_phone.html");
+    init() {
+      this.setAreaInfo();
+    },
+    setAreaInfo: async function() {
+      console.log(cachedCountrycode);
+      let phonecode;
+      let phonecodekey;
 
-        console.log("close prevwv:");
-        console.log(prevwv);
-        if (prevwv) {
-          console.log("prevwv closed");
-          plus.webview.hide(prevwv, null, 1);
-          setTimeout(() => {
-            plus.webview.close(prevwv, null, 1);
-          }, 50);
+      // 有cachedCountrycode缓存
+      if (cachedCountrycode && cachedCountrycode.id) {
+        // areacode
+        let areacodelistRes = await this.$get(API.areacodelist);
+        let areacodelist = areacodelistRes.data.data;
+        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id);
+        phonecode = phonecodeObj.code;
+        phonecodekey = phonecodeObj.key;
+
+        console.log("phonecodeObj", phonecodeObj);
+      } else {
+        // env
+        let envRes = await this.$get(API.env);
+        let env = envRes.data.data;
+
+        let countriesRes = await this.$get(API.countries);
+        let countries = countriesRes.data.data;
+
+        phonecodekey = env.calling_code;
+        phonecode = (env.calling_code || "").replace(/[A-Z]/gi, "");
+
+        this.areacode = `${env.country_code} ${countries[env.country_code]}`;
+
+        if (envRes.data.status !== 200) {
+          Toast("获取环境信息失败");
         }
-      });
+      }
+      if (phonecode) this.phonecode = phonecode;
+      if (phonecodekey) this.phonecodekey = phonecodekey;
+
+      console.log("phonecode", phonecode);
+      // 缓存
+      MTOOL.storage.setItem(config.keys.phonecode, phonecode);
+      MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
     },
     save() {
       if (this.phone.trim() === "") {
@@ -93,6 +147,7 @@ export default {
       }
       let callingcode = MTOOL.storage.getItem(config.keys.phonecodekey) || "";
       let smskey = MTOOL.storage.getItem(config.keys.smskey) || "";
+      this.loading = true;
       this.$post(API.auth.alterphone, {
         sms_key: smskey,
         mobile_phone: this.phone,
@@ -102,12 +157,27 @@ export default {
         .then(res => {
           console.log(res);
           if (res.status === 200) {
-            Toast("修改成功");
             // 更新信息
             loadUserInfo();
+
+            MTOOL.invoke("my_setting.html", "event_update");
+            MTOOL.invoke("my.html", "event_update");
+
+            if (MTOOL.isPlus) {
+              let phonewv = plus.webview.getWebviewById(
+                "my_setting_phone_one.html"
+              );
+              console.log("phonewv_one");
+              console.log(phonewv);
+              if (phonewv) {
+                plus.webview.close(phonewv, "none");
+                console.log("closed" + "my_setting_phone_one");
+              }
+            }
             setTimeout(() => {
-              MTOOL.openWindow("my_setting_phone_three.html");
+              // MTOOL.openWindow("my_setting_phone_three.html");
             }, 400);
+            Toast("修改成功");
           } else {
             Toast(res.message);
           }
@@ -115,6 +185,9 @@ export default {
         .catch(e => {
           console.log(e);
           Toast(e.message);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     getSmscode() {
@@ -131,6 +204,9 @@ export default {
           console.log(e);
           Toast(e.message);
         });
+    },
+    goAreaCode() {
+      MTOOL.openWindow("login_areacode.html");
     }
   }
 };
@@ -198,5 +274,19 @@ html {
 .btn-getsms.btn-getsms.btn-getsms {
   font-size: 12px;
   @extend %text-over;
+}
+
+.row-country {
+  display: flex;
+  font-size: 12px;
+  color: #000;
+  padding-bottom: 8px;
+  .col-left {
+    width: 50%;
+  }
+  .col-right {
+    width: 50%;
+    text-align: right;
+  }
 }
 </style>

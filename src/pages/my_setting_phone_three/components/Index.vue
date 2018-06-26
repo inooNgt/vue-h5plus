@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="修改手机" fixed left-arrow @click-left="goBack" />
     <ul class="step-list">
-      <li class="step-item step-item1 ">
+      <li class="step-item step-item1 step-active">
         <span class="step-num">1</span>
         <div class="step-text">身份验证</div>
       </li>
@@ -10,25 +10,23 @@
         <span class="step-num">2</span>
         <div class="step-text">绑定手机</div>
       </li>
-      <li class="step-item step-item3">
+      <li class="step-item step-item3 step-active">
         <span class="step-num">3</span>
         <div class="step-text">设置密码</div>
       </li>
     </ul>
     <div class="box">
       <div class="box-msg">
-        <p>请输入要绑定的新手机号码</p>
+        <p>请为绑定的新手机号设置登录密码</p>
       </div>
       <van-cell-group class="box-field">
-        <van-field v-model="phone" center clearable placeholder="请输入新手机号">
-          <van-button slot="button" class="btn-sub btn-getsms" @click="getSmscode" size="small">获取验证码</van-button>
-        </van-field>
-        <van-field v-model="sms" label="验证码：" placeholder="请输入验证码" />
+        <van-field v-model="password1" type="password" label="设置密码" placeholder="请设置8-16位字母+数字的密码组合" />
+        <van-field v-model="password2" type="password" label="重复密码" placeholder="请再次输入密码" />
       </van-cell-group>
     </div>
     <div class="btn-box box-btn-fixed">
-      <van-button class="btn btn-sub" slot="button" v-show="!loading" @click="save">立即绑定</van-button>
-      <van-button class="btn btn-sub" slot="button" v-show="loading">绑定中...</van-button>
+      <van-button class="btn btn-sub" slot="button" v-show="!loading" @click="save">确定</van-button>
+      <van-button class="btn btn-sub" slot="button" v-show="loading">设置中...</van-button>
     </div>
   </div>
 </template>
@@ -58,8 +56,8 @@ export default {
   name: "Index",
   data() {
     return {
-      sms: "000",
-      alteringPhone: "131****0000",
+      password1: "131****0000",
+      password2: "131****0000",
       loading: false,
       phone: cachedUser.mobile_phone || "- -"
     };
@@ -72,42 +70,43 @@ export default {
     goBack: function() {
       mui.back();
     },
-    closePrev() {
-      MTOOL.plusReady(() => {
-        let prevwv = plus.webview.getWebviewById("my_setting_phone.html");
-
-        console.log("close prevwv:");
-        console.log(prevwv);
-        if (prevwv) {
-          console.log("prevwv closed");
-          plus.webview.hide(prevwv, null, 1);
-          setTimeout(() => {
-            plus.webview.close(prevwv, null, 1);
-          }, 50);
-        }
-      });
-    },
     save() {
       if (this.phone.trim() === "") {
         Toast("手机号不能为空");
       }
-      let callingcode = MTOOL.storage.getItem(config.keys.phonecodekey) || "";
       let smskey = MTOOL.storage.getItem(config.keys.smskey) || "";
+
+      this.loading = true;
       this.$post(API.auth.alterphone, {
         sms_key: smskey,
-        mobile_phone: this.phone,
-        calling_code: callingcode,
-        sms_code: this.sms
+        password: this.password2
       })
         .then(res => {
-          console.log(res);
           if (res.status === 200) {
-            Toast("修改成功");
-            // 更新信息
-            loadUserInfo();
-            setTimeout(() => {
-              MTOOL.openWindow("my_setting_phone_three");
-            }, 400);
+            // 第二步中已经更新信息，此处无需更新，直接返回
+            if (MTOOL.isPlus) {
+              let phonewv = plus.webview.getWebviewById(
+                "my_setting_phone.html"
+              );
+              let phonewv2 = plus.webview.getWebviewById(
+                "my_setting_phone_two.html"
+              );
+              if (phonewv) {
+                plus.webview.close(phonewv, "none");
+                console.log("colsed" + "my_setting_phone");
+              }
+              if (phonewv2) {
+                plus.webview.close(phonewv2, "none");
+                console.log("colsed" + "my_setting_phone_two");
+              }
+              plus.webview.close(phonewv, "none");
+              setTimeout(() => {
+                mui.back();
+              }, 400);
+            } else {
+              location.href = "my_setting.html";
+            }
+            Toast("设置成功");
           } else {
             Toast(res.message);
           }
@@ -115,21 +114,9 @@ export default {
         .catch(e => {
           console.log(e);
           Toast(e.message);
-        });
-    },
-    getSmscode() {
-      this.$post(API.auth.usersmscode)
-        .then(res => {
-          console.log(res);
-          if (res.status === 200) {
-            Toast("短信验证码发送成功");
-          } else {
-            Toast(res.message);
-          }
         })
-        .catch(e => {
-          console.log(e);
-          Toast(e.message);
+        .finally(() => {
+          this.loading = false;
         });
     }
   }

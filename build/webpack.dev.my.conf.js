@@ -24,20 +24,21 @@ const entrypath = entryArr => {
 
 const my = [
   "my",
-  // "index",
-  // "home",
-  // "vigour",
+  "index",
+  "home",
+  "vigour",
   "my_setting",
-  // "my_auth",
-  // "my_setting_head",
+  "my_auth",
+  "my_setting_head",
   "my_setting_name",
   "my_setting_phone",
   "my_setting_phone_one",
   "my_setting_phone_three",
-  "my_setting_phone_two"
-  // "login",
-  // "login_register",
-  // "login_msg"
+  "my_setting_phone_two",
+  "login",
+  "login_areacode",
+  "login_register",
+  "login_msg"
 ];
 
 const entries = entrypath(my);

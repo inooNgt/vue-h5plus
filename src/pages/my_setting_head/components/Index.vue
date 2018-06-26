@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       phone: "xxx",
-      imgurl: ""
+      imgurl: "",
+      loading: false
     };
   },
   created() {},
@@ -36,9 +37,7 @@ export default {
         MTOOL.plusReady(() => {
           let wv = plus.webview.currentWebview();
           console.log("localurl: " + wv.localurl);
-          console.log("imgpath: " + wv.imgpath);
           this.imgurl = wv.localurl;
-          this.imgpath = wv.imgpath;
           this.initCrop();
         });
       } else {
@@ -54,7 +53,7 @@ export default {
     initCrop(path) {
       let cropView = this.$refs.cropView;
       let mAlloyCrop = new AlloyCrop({
-        image_src: this.imgpath || path,
+        image_src: this.imgurl || path,
         width: 241,
         height: 241,
         output: 1,
@@ -73,6 +72,7 @@ export default {
       });
     },
     upload(file) {
+      this.loading = true;
       this.$post(API.auth.avatar, file, {
         headers: {
           "Content-Type": "image/png"
@@ -82,6 +82,11 @@ export default {
           let data = res.data;
           if (data.status === 200) {
             Toast("上传成功");
+            MTOOL.invoke("my_setting.html", "event_update");
+            MTOOL.invoke("my.html", "event_update");
+            setTimeout(() => {
+              mui.back();
+            }, 400);
           } else {
             data.message && Toast(data.message);
           }
@@ -90,6 +95,9 @@ export default {
         .catch(e => {
           console.log(e);
           Toast("上传失败");
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     save() {

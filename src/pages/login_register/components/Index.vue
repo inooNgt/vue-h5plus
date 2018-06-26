@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="" class="login-nav" fixed left-arrow @click-left="back">
       <!-- <van-icon name="search"  /> -->
-      <span class="md-icon md-icon-closenav" slot="right"></span>
+      <!-- <span class="md-icon md-icon-closenav" slot="right"></span> -->
     </van-nav-bar>
     <div class="logo">
       <img class="logo-img" src="~assets/img/logo.png" alt="">
@@ -196,11 +196,10 @@ export default {
 
       // 有cachedCountrycode缓存
       if (cachedCountrycode && cachedCountrycode.id) {
-        // areacode
+        // areacode 拉取国际手机区号列表
         let areacodelistRes = await this.$get(API.areacodelist);
         let areacodelist = areacodelistRes.data.data;
-        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id)
-          .code;
+        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id);
         phonecode = phonecodeObj.code;
         phonecodekey = phonecodeObj.key;
       } else {
@@ -219,13 +218,12 @@ export default {
         if (envRes.data.status !== 200) {
           Toast("获取环境信息失败");
         }
-
-        if (phonecode) this.phonecode = phonecode;
-        if (phonecodekey) this.phonecodekey = phonecodekey;
-        // 缓存
-        MTOOL.storage.setItem(config.keys.phonecode, phonecode);
-        MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
       }
+      if (phonecode) this.phonecode = phonecode;
+      if (phonecodekey) this.phonecodekey = phonecodekey;
+      // 缓存
+      MTOOL.storage.setItem(config.keys.phonecode, phonecode);
+      MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
     },
 
     goAreaCode() {

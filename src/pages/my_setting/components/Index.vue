@@ -30,7 +30,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" v-if="false">
         <div class="item-left">语言</div>
         <div class="item-right">
           简体中文
@@ -82,7 +82,7 @@ export default {
     window.addEventListener("event_update", event => {
       // 获得事件参数
       let detail = event.detail;
-      console.log("my event_update");
+      console.log("my_setting event_update");
       this.update();
     });
   },
@@ -91,8 +91,30 @@ export default {
       mui.back();
     },
     update() {
+      try {
+        this.updateByCached();
+      } catch (e) {
+        console.log(e);
+      }
       this.updateUserInfo();
     },
+    // 先用缓存更新
+    updateByCached() {
+      let user = getCachedUser();
+      this.logined = MTOOL.logined();
+      if (user.username && user.username !== this.username) {
+        this.username = user.username;
+      }
+      if (user.mobile_phone && user.mobile_phone !== this.phone) {
+        this.phone = user.mobile_phone;
+      }
+
+      let avatar = user.avatar_base_url + "/" + user.avatar_path;
+      if (avatar && avatar !== this.avatar) {
+        this.avatar = avatar;
+      }
+    },
+    // 从服务器拉取数据
     async updateUserInfo() {
       try {
         let user = await loadUserInfo();

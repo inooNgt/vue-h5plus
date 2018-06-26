@@ -222,6 +222,9 @@ img {
     padding: 0 10px;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
   .item-arrow {
     width: 20px;

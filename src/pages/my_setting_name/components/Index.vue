@@ -50,6 +50,11 @@ export default {
           if (res.status === 200) {
             Toast("修改成功");
             this.updateUserInfo();
+            MTOOL.invoke("my_setting.html", "event_update");
+            MTOOL.invoke("my.html", "event_update");
+            setTimeout(() => {
+              mui.back();
+            }, 400);
           }
         })
         .catch(e => {
@@ -59,7 +64,6 @@ export default {
     async updateUserInfo() {
       try {
         let user = await loadUserInfo();
-        if (user.username) this.username = user.username;
       } catch (error) {
         console.log(error);
       }

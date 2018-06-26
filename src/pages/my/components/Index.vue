@@ -5,8 +5,10 @@
         <van-icon class="icon-setting" @click="goSetting" name="setting" />
       </nav>
       <div class="row-img">
-        <img class="header-img" v-if="avatar" :src="avatar" />
-        <img class="header-img" v-if="!avatar" src="~assets/img/head.png" />
+        <div class="img-wrap">
+          <img class="header-img" v-if="avatar" :src="avatar" />
+          <img class="header-img" v-if="!avatar" src="~assets/img/head.png" />
+        </div>
       </div>
       <div class="row-msg">
         <div class="msg-name">{{username}}</div>
@@ -141,6 +143,24 @@ export default {
     init() {
       this.updateUserInfo();
     },
+    update() {
+      this.logined = MTOOL.logined();
+      this.updateByCached();
+      this.updateUserInfo();
+    },
+    // 先用缓存更新
+    updateByCached() {
+      let user = getCachedUser();
+      this.logined = MTOOL.logined();
+      if (user.username && user.username !== this.username) {
+        this.username = user.username;
+      }
+      let avatar = user.avatar_base_url + "/" + user.avatar_path;
+      if (avatar && avatar !== this.avatar) {
+        this.avatar = avatar;
+      }
+    },
+    // 再从服务器拉取数据
     async updateUserInfo() {
       try {
         let user = await loadUserInfo();
@@ -157,10 +177,7 @@ export default {
     login() {
       MTOOL.openWindow("login.html");
     },
-    update() {
-      this.logined = MTOOL.logined();
-      console.log("update logined:" + this.logined);
-    },
+
     goSetting() {
       MTOOL.openWindow("my_setting.html");
     },
@@ -225,7 +242,7 @@ export default {
   color: #fff;
   display: flex;
   margin-bottom: 18px;
-  background-color: $color-main;
+  background-color: #2c3648;
   .info-left,
   .info-right {
     padding: 0 $padding-main;
@@ -245,9 +262,9 @@ export default {
       height: 40px;
       background: linear-gradient(
         0deg,
-        $color-main 0%,
-        #183970 50%,
-        $color-main 100%
+        #2c3648 0%,
+        $color-main 50%,
+        #2c3648 100%
       );
       border-image-slice: 1;
     }
@@ -276,11 +293,22 @@ export default {
   text-align: center;
   padding: px2rem(25px) 0 px2rem(8px);
 }
-.header-img {
+.img-wrap {
+  position: relative;
   width: px2rem(120px);
   height: px2rem(120px);
   border-radius: 50%;
   border: 2px solid #fff;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #fff;
+}
+.header-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 .row-msg {
   line-height: px2rem(30px);

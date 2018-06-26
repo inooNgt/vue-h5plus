@@ -303,7 +303,8 @@
 					"static/css/home.b911ac76.css",
 					"static/js/manifest.f01ddb6b.js",
 					"static/js/home.b911ac76.js",
-					"static/js/vendor.bda0a263.js"
+					"static/js/vendor.bda0a263.js",
+					"static/js/vendor.c0628292.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -319,7 +320,14 @@
 					"static/js/manifest.f01ddb6b.js",
 					"static/js/vendor.bda0a263.js",
 					"static/css/my.b5aae99b.css",
-					"static/js/my.b5aae99b.js"
+					"static/js/my.b5aae99b.js",
+					"static/css/my.74c46b28.css",
+					"static/js/my.74c46b28.js",
+					"static/js/my.14ec862a.js",
+					"static/css/my.14ec862a.css",
+					"static/js/vendor.c0628292.js",
+					"static/css/my.2c560ba7.css",
+					"static/js/my.2c560ba7.js"
 				],
 				"refer": [
 					"login.html",
@@ -374,7 +382,16 @@
 					"static/js/my_setting.badf1cbf.js",
 					"static/css/my_setting.badf1cbf.css",
 					"static/js/manifest.f01ddb6b.js",
-					"static/js/vendor.bda0a263.js"
+					"static/js/vendor.bda0a263.js",
+					"static/js/my_setting.5d28fef7.js",
+					"static/css/my_setting.5d28fef7.css",
+					"static/js/my_setting.453b63d8.js",
+					"static/css/my_setting.453b63d8.css",
+					"static/css/my_setting.06c4b17d.css",
+					"static/js/my_setting.06c4b17d.js",
+					"static/js/my_setting.3e4e35f3.js",
+					"static/css/my_setting.3e4e35f3.css",
+					"static/js/vendor.c0628292.js"
 				],
 				"refer": [
 					"my_setting_head.html",
@@ -389,10 +406,12 @@
 					"static/css/my_setting_phone.css",
 					"static/js/my_setting_phone.js",
 					"static/js/manifest.js",
-					"static/js/vendor.js"
+					"static/js/vendor.js",
+					"static/js/vendor.c0628292.js"
 				],
 				"refer": [
-					"my_setting_phone_done.html"
+					"my_setting_phone_done.html",
+					"my_setting_phone_one.html"
 				],
 				"priority": 0
 			},
@@ -434,7 +453,9 @@
 					"static/css/my_setting_head.7b319251.css",
 					"static/js/my_setting_head.7b319251.js",
 					"static/js/my_setting_head.749952a6.js",
-					"static/css/my_setting_head.749952a6.css"
+					"static/css/my_setting_head.749952a6.css",
+					"static/js/my_setting_head.bbe8fd26.js",
+					"static/css/my_setting_head.bbe8fd26.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -445,6 +466,35 @@
 					"static/js/my_setting_name.87d00212.js",
 					"static/js/manifest.f01ddb6b.js",
 					"static/js/vendor.bda0a263.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my_setting_phone_two.html": {
+				"resources": [
+					"static/js/my_setting_phone_two.e246aaa3.js",
+					"static/css/my_setting_phone_two.e246aaa3.css"
+				],
+				"refer": [
+					"my_setting_phone_three.html"
+				],
+				"priority": 0
+			},
+			"my_setting_phone_one.html": {
+				"resources": [],
+				"refer": [
+					"my_setting_phone_two.html"
+				],
+				"priority": 0
+			},
+			"my_setting_phone_three.html": {
+				"resources": [
+					"static/css/my_setting_phone_three.1f5a396a.css",
+					"static/js/my_setting_phone_three.1f5a396a.js",
+					"static/js/my_setting_phone_three.4a0cd49d.js",
+					"static/css/my_setting_phone_three.4a0cd49d.css",
+					"static/js/my_setting_phone_three.9faa80c5.js",
+					"static/css/my_setting_phone_three.9faa80c5.css"
 				],
 				"refer": [],
 				"priority": 0
