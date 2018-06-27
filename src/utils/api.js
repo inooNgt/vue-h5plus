@@ -7,6 +7,8 @@ const API = {
   login: "/v1/common/token",
   auth: {
     user: "/v1/user",
+    userfile: "/v1/user/file",
+    identity: "/v1/user/identity",
     settings: "/v1/user/settings",
     del: "/v1/common/token/TOKEN",
     alterusername: "/v1/user/username",

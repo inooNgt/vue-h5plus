@@ -320,6 +320,22 @@ const extractAddressBook = addressbook => {
   });
 };
 
+const readAsDataURL = (entry, options) => {
+  let reader = null;
+  entry.file(
+    file => {
+      reader = new plus.io.FileReader();
+      if (options && options.onloadend) {
+        reader.onloadend = options.onloadend;
+      }
+      reader.readAsDataURL(file);
+    },
+    e => {
+      alert(e.message);
+    }
+  );
+};
+
 const dataURLtoFile = (dataurl, filename) => {
   let arr = dataurl.split(",");
   let mime = arr[0].match(/:(.*?);/)[1];
@@ -359,5 +375,6 @@ export {
   getPhoneCode,
   dataURLtoBlob,
   dataURLtoFile,
+  readAsDataURL,
   groupSort
 };

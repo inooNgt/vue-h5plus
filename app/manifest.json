@@ -269,7 +269,13 @@
 					"static/js/index.c35643d4.js",
 					"static/js/manifest.f01ddb6b.js",
 					"static/css/index.c35643d4.css",
-					"static/js/vendor.bda0a263.js"
+					"static/js/vendor.bda0a263.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/vendor.e002ddca.js",
+					"static/css/index.5258ea3d.css",
+					"static/js/index.5258ea3d.js",
+					"static/js/manifest.a933dbb5.js"
 				],
 				"refer": [
 					"my.html",
@@ -304,7 +310,9 @@
 					"static/js/manifest.f01ddb6b.js",
 					"static/js/home.b911ac76.js",
 					"static/js/vendor.bda0a263.js",
-					"static/js/vendor.c0628292.js"
+					"static/js/vendor.c0628292.js",
+					"static/js/vendor.e002ddca.js",
+					"static/js/manifest.a933dbb5.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -327,7 +335,8 @@
 					"static/css/my.14ec862a.css",
 					"static/js/vendor.c0628292.js",
 					"static/css/my.2c560ba7.css",
-					"static/js/my.2c560ba7.js"
+					"static/js/my.2c560ba7.js",
+					"static/js/vendor.e002ddca.js"
 				],
 				"refer": [
 					"login.html",
@@ -424,9 +433,16 @@
 				"priority": 0
 			},
 			"my_auth.html": {
-				"resources": [],
+				"resources": [
+					"static/css/my_auth.99a26e1b.css",
+					"static/js/my_auth.99a26e1b.js"
+				],
 				"refer": [
-					"my_auth_msg.html"
+					"my_auth_msg.html",
+					"my_auth_name.html",
+					"my_auth_number.html",
+					"my_auth_type.html",
+					"my_auth_areacode.html"
 				],
 				"priority": 0
 			},

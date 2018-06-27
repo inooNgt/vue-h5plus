@@ -100,27 +100,16 @@ export default {
     },
 
     handleRadioChange(id) {
-      console.log(this.getAreaCodeById(id));
       const code = this.getAreaCodeById(id);
-      const areacode = {
-        id,
-        code
-      };
-      // 缓存
-      MTOOL.storage.setItem(config.keys.countrycode, JSON.stringify(areacode));
 
-      // 通知各父级页面更新
-      MTOOL.invoke("my_auth.html", "event_update");
-      MTOOL.invoke("login_msg.html", "event_update");
-      MTOOL.invoke("login_register.html", "event_update");
-      MTOOL.invoke("login_account.html", "event_update");
+      MTOOL.invoke("my_auth.html", "event_edit_country", {
+        country: code,
+        countryId: id
+      });
 
       setTimeout(() => {
         mui.back();
-      }, 0);
-
-      if (MTOOL.isPlus) {
-      }
+      });
     },
 
     generateChars: function() {

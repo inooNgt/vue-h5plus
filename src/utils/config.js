@@ -2,12 +2,16 @@ const config = {
   keys: {
     token: "ml.login.token",
     user: "ml.login.user",
+    realname: "ml.my.realname",
+    authnumber: "ml.my.authnumber",
+    authtype: "ml.my.authtype",
     codelist: "ml.areacodes.codelist",
     countrycode: "ml.areacodes.countrycode",
+    authcountrycode: "ml.areacodes.authcountrycode",
     phonecode: "ml.areacodes.phonecode",
     phonecodekey: "ml.areacodes.phonecodekey",
     smskey: "ml.setting.smskey"
-  },  
+  },
   userTpl: {
     avatar_base_url: null,
     avatar_path: null,
