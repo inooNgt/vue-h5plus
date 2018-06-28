@@ -1,6 +1,6 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="" class="login-nav" fixed left-text="注册" @click-left="goRegister" right-text="zh" />
+    <van-nav-bar title="" class="login-nav" fixed left-text="注册" @click-left="goRegister" />
     <div class="logo">
       <img class="logo-img" src="~assets/img/logo.png" alt="">
     </div>

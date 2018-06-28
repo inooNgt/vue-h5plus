@@ -1,26 +1,26 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="我的活动" fixed left-arrow @click-left="goBack" />
+    <van-nav-bar title="我的课程" fixed left-arrow @click-left="goBack" />
     <van-tabs class="van-tabs-fixed" v-model="active" :line-width="75" @click="onTabsClick">
-      <van-tab title="我参与的活动" v-bind:key="1"></van-tab>
-      <van-tab title="我发布的活动" v-bind:key="2"></van-tab>
+      <van-tab title="我参与的课程" v-bind:key="1"></van-tab>
+      <van-tab title="我发布的课程" v-bind:key="2"></van-tab>
     </van-tabs>
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll">
         <section class="md-tab-content" v-show="active==0">
           <div class="card-list">
-            <Card v-for="(item,index) in list" :key="index" :data="item" />
+            <Card v-for="(item,index) in courseJoinedList" :key="index" :data="item" />
           </div>
         </section>
         <section class="md-tab-content" v-show="active==1">
           <div class="card-list">
-            <Card v-for="(item,index) in list" :key="index" :data="item" />
+            <Card v-for="(item,index) in courseOwnedList" :key="index" :data="item" />
           </div>
         </section>
 
       </div>
     </div>
- 
+
   </div>
 </template>
 
@@ -66,19 +66,10 @@ export default {
   data() {
     return {
       active: 0,
-      list: [
-        {
-          title: "我的活动这排名字有这么长",
-          cover: "",
-          status: "Continued"
-        },
-        {
-          title: "我的活动这排名字有这么长",
-          cover: "",
-          status: "Finished"
-        }
-      ],
-      msg: "Welcome to Your Vue.js App"
+      courseJoinedList: [],
+      courseOwnedList: [],
+      msg: "Welcome to Your Vue.js App",
+      loading: false
     };
   },
   methods: {
@@ -98,6 +89,51 @@ export default {
           }
         }
       });
+
+      this.loadJoinedCourse();
+      this.loadPublishedCourse();
+    },
+    loadJoinedCourse() {
+      this.loading = true;
+      this.$post(API.auth.coursejoining)
+        .then(res => {
+          res = res && res.data;
+          let data = res.data;
+          if (res.status === 200 && data) {
+            this.courseJoinedList = data;
+          } else {
+            res.message && Toast(res.message);
+          }
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    loadPublishedCourse() {
+      this.loading = true;
+      this.$post(API.auth.courseown)
+        .then(res => {
+          res = res && res.data;
+          let data = res.data;
+          if (res.status === 200 && data) {
+            this.courseOwnedList = data;
+          } else {
+            res.message && Toast(res.message);
+          }
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     goBack() {
       mui.back();
@@ -124,6 +160,12 @@ export default {
     },
     onTabsClick(index, title) {
       let pullRefreshApi = mui(refreshId).pullRefresh();
+      console.log(index);
+      if (index === 0) {
+        this.loadJoinedCourse();
+      } else {
+        this.loadPublishedCourse();
+      }
       setTimeout(() => {
         pullRefreshApi.refresh(true);
       });
@@ -144,12 +186,12 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/var";
 @import "~assets/scss/common";
-.mui-content {
-    // background-image: url(~assets/img/1.png);
-    // background-repeat: no-repeat;
-    // background-size: 100%;
-    // background-position: 0 -104px;
-}
+// .mui-content {
+//   background-image: url(~assets/img/1.png);
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+//   background-position: 0 -104px;
+// }
 
 .card-list {
   padding: $padding-main;

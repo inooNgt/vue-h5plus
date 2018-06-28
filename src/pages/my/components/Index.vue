@@ -114,6 +114,10 @@ Vue.use(Cell)
 // 缓存的用户信息
 const cachedUser = getCachedUser();
 
+const STATUS_NOT_ACTIVE = 1; // 未激活
+const STATUS_ACTIVE = 2; // 正常状态
+const STATUS_DELETED = 3; // 被禁止的用户
+
 export default {
   name: "Index",
   data() {
@@ -121,7 +125,10 @@ export default {
       logined: MTOOL.logined(),
       isPlus: MTOOL.isPlus,
       username: cachedUser.username || "- -",
-      avatar: cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
+      avatar:
+        cachedUser.avatar_base_url &&
+        cachedUser.avatar_path &&
+        cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
     };
   },
   created() {
@@ -155,7 +162,10 @@ export default {
       if (user.username && user.username !== this.username) {
         this.username = user.username;
       }
-      let avatar = user.avatar_base_url + "/" + user.avatar_path;
+      let avatar =
+        user.avatar_base_url &&
+        user.avatar_path &&
+        user.avatar_base_url + "/" + user.avatar_path;
       if (avatar && avatar !== this.avatar) {
         this.avatar = avatar;
       }
@@ -169,35 +179,82 @@ export default {
           this.avatar = user.avatar_base_url + "/" + user.avatar_path;
 
         console.log("user:", user);
+        this.checkUserStatus(user);
       } catch (error) {
         console.log(error);
-        Toast("Network error");
+        if (error && error.status * 1 === 401) {
+          MTOOL.openWindow("login.html");
+        } else {
+          error.message && Toast(error.message);
+        }
       }
     },
+    checkUserStatus(user) {
+      user = user || getCachedUser();
+      return new Promise((resolve, reject) => {
+        // 已激活
+        if (user && user.status * 1 === STATUS_ACTIVE) {
+          // 跳转 plus环境
+          console.log("用户已激活");
+          resolve();
+        }
+        // 未激活
+        if (user && user.status * 1 === STATUS_NOT_ACTIVE) {
+          Toast("该账户未激活");
+          setTimeout(() => {
+            MTOOL.openWindow("login_invite.html");
+          }, 500);
+        }
+        // 已禁止
+        if (user && user.status * 1 === STATUS_DELETED) {
+          Toast("该账户已被禁止");
+        }
+        reject(new Error());
+      });
+    },
+
     login() {
       MTOOL.openWindow("login.html");
     },
 
+    isLogin() {
+      this.logined = MTOOL.logined();
+      if (!this.logined) {
+        Toast("未登录");
+        setTimeout(() => {
+          this.login();
+        }, 400);
+      }
+      return this.logined;
+    },
+
+    openAuthPage(url) {
+      if (!this.isLogin()) return;
+      this.checkUserStatus().then(() => {
+        MTOOL.openWindow(url);
+      });
+    },
+
     goSetting() {
-      MTOOL.openWindow("my_setting.html");
+      this.openAuthPage("my_setting.html");
     },
     goFund() {
-      MTOOL.openWindow("my_fund.html");
+      this.openAuthPage("my_fund.html");
     },
     goCourse() {
-      MTOOL.openWindow("my_course.html");
+      this.openAuthPage("my_course.html");
     },
     goHelp() {
       MTOOL.openWindow("my_help.html");
     },
     goActivity() {
-      MTOOL.openWindow("my_activity.html");
+      this.openAuthPage("my_activity.html");
     },
     goAbout() {
       MTOOL.openWindow("my_about.html");
     },
     goAuth() {
-      MTOOL.openWindow("my_auth.html");
+      this.openAuthPage("my_auth.html");
     }
   }
 };

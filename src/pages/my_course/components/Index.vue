@@ -9,12 +9,12 @@
       <div class="mui-scroll">
         <section class="md-tab-content" v-show="active==0">
           <div class="card-list">
-            <Card v-for="(item,index) in list" :key="index" :data="item" />
+            <Card v-for="(item,index) in courseJoinedList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
           </div>
         </section>
         <section class="md-tab-content" v-show="active==1">
           <div class="card-list">
-            <Card v-for="(item,index) in list" :key="index" :data="item" />
+            <Card v-for="(item,index) in courseOwnedList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
           </div>
         </section>
 
@@ -66,19 +66,10 @@ export default {
   data() {
     return {
       active: 0,
-      list: [
-        {
-          title: "我的课程这排名字有这么长",
-          cover: "",
-          status: "Continued"
-        },
-        {
-          title: "我的课程这排名字有这么长",
-          cover: "",
-          status: "Finished"
-        }
-      ],
-      msg: "Welcome to Your Vue.js App"
+      courseJoinedList: [],
+      courseOwnedList: [],
+      msg: "Welcome to Your Vue.js App",
+      loading: false
     };
   },
   methods: {
@@ -90,19 +81,69 @@ export default {
             style: "circle",
             offset: "44px", // 可选 默认0px,下拉刷新控件的起始位置
             callback: this.pulldownRefresh
-          },
-          up: {
-            auto: false,
-            contentrefresh: "正在加载更多数据...",
-            callback: this.pullupRefresh
           }
+          // up: {
+          //   auto: false,
+          //   contentrefresh: "正在加载更多数据...",
+          //   callback: this.pullupRefresh
+          // }
         }
       });
+
+      this.loadJoinedCourse();
+      this.loadPublishedCourse();
+    },
+    updagte() {
+      this.loadJoinedCourse();
+      this.loadPublishedCourse();
+    },
+    loadJoinedCourse() {
+      this.loading = true;
+      this.$post(API.auth.coursejoining)
+        .then(res => {
+          res = res && res.data;
+          let data = res.data;
+          if (res.status === 200 && data) {
+            this.courseJoinedList = data;
+          } else {
+            res.message && Toast(res.message);
+          }
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    loadPublishedCourse() {
+      this.loading = true;
+      this.$post(API.auth.courseown)
+        .then(res => {
+          res = res && res.data;
+          let data = res.data;
+          if (res.status === 200 && data) {
+            this.courseOwnedList = data;
+          } else {
+            res.message && Toast(res.message);
+          }
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     goBack() {
       mui.back();
     },
     pulldownRefresh() {
+      this.updagte();
       let pullRefreshApi = mui(refreshId).pullRefresh();
       setTimeout(() => {
         // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
@@ -122,8 +163,25 @@ export default {
         pullRefreshApi.endPullupToRefresh();
       }, 1000);
     },
+    goInfo(id) {
+      if (id === undefined) {
+        return;
+      }
+      MTOOL.storage.setItem(config.keys.mycourseid, id);
+      MTOOL.openWindow("info_course.html");
+    },
+    goSignup(e) {
+      e.cancelBubble = true;
+      MTOOL.openWindow("signup_course.html");
+    },
     onTabsClick(index, title) {
       let pullRefreshApi = mui(refreshId).pullRefresh();
+      console.log(index);
+      if (index === 0) {
+        this.loadJoinedCourse();
+      } else {
+        this.loadPublishedCourse();
+      }
       setTimeout(() => {
         pullRefreshApi.refresh(true);
       });
@@ -144,12 +202,12 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/var";
 @import "~assets/scss/common";
-.mui-content {
-  // background-image: url(~assets/img/1.png);
-  // background-repeat: no-repeat;
-  // background-size: 100%;
-  // background-position: 0 -104px;
-}
+// .mui-content {
+//   background-image: url(~assets/img/1.png);
+//   background-repeat: no-repeat;
+//   background-size: 100%;
+//   background-position: 0 -104px;
+// }
 
 .card-list {
   padding: $padding-main;

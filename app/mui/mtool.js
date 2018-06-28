@@ -285,6 +285,8 @@
    * @param {Object} obj
    */
   function elementPosition(obj) {
+    if (!obj) return;
+
     var curleft = 0,
       curtop = 0;
     if (obj.offsetParent) {

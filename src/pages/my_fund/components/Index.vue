@@ -144,6 +144,11 @@ export default {
 @import "~assets/scss/var";
 @import "~assets/scss/common";
 
+body,
+html {
+  background: #fff;
+}
+
 .mui-scroll-wrapper.mui-scroll-wrapper {
   top: 84px;
 }

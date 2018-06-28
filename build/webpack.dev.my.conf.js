@@ -27,26 +27,35 @@ const my = [
   // "index",
   "home",
   // "vigour",
-  "my_setting",
-  "my_auth",
-  "my_auth_name",
-  "login_areacode",
-  "my_auth_areacode",
-  "my_auth_number",
-  "my_auth_type",
-  "my_fund",
-  "my_about",
-  "my_help",
+  // "my_setting",
+  // "my_auth",
+  // "my_auth_name",
+  // "my_auth_areacode",
+  // "my_auth_number",
+  // "my_auth_type",
+  // "my_fund",
+  // "my_about",
+  // "my_help",
+  // "my_contactus",
+  // "my_help_question",
+  "my_activity",
+  "my_course",
+  "signup_course",
+  "signup_course_msg",
+  "info_course",
+  "info_activity",
   // "my_setting_head",
   // "my_setting_name",
   // "my_setting_phone",
   // "my_setting_phone_one",
   // "my_setting_phone_three",
   // "my_setting_phone_two",
-  "login",
-  "login_areacode",
+  // "login",
+  // "login_areacode",
+  "login_account"
   // "login_register",
-  "login_msg"
+  // "login_invite",
+  // "login_msg"
 ];
 
 const entries = entrypath(my);
@@ -107,7 +116,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 });
 
 devWebpackConfig.entry = entries;
-console.log(devWebpackConfig);
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port;

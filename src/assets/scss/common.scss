@@ -10,3 +10,10 @@
   $rem: 50px;
   @return ($px/$rem) + rem;
 }
+
+@mixin clamp($line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+}

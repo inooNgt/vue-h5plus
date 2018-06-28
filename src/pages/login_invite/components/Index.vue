@@ -195,6 +195,16 @@ export default {
 
     login: function() {
       let param = {};
+      if (this.inviteCode.trim() === "") {
+        Toast("邀请码不能为空");
+        return;
+      }
+
+      if (this.inviteCode.length !== 4) {
+        Toast("邀请码格式不正确");
+        return;
+      }
+
       if (this.phone.trim() === "") {
         Toast("手机号不能为空");
         return;
@@ -228,25 +238,21 @@ export default {
     },
     loginSucceed: function(data) {
       // 获取用户信息并缓存
-      loadUserInfo();
-
-      // 跳转 plus环境
-      if (MTOOL.isPlus) {
-        MTOOL.plusReady(function() {
-          var wv = plus.webview.currentWebview();
-          var origin = wv.from;
-          // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
-          console.log("origin: " + origin);
-          setTimeout(() => {
-            // 关闭当前页
-            mui.back();
-            // 更新页面
-            MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
-          }, 400);
-        });
-      } else {
-        // location.href = "home.html";
-      }
+      loadUserInfo().then(res => {
+        console.log(res);
+        // 跳转 plus环境
+        if (MTOOL.isPlus) {
+          MTOOL.plusReady(function() {
+            let loginwv = plus.webview.getWebviewById("login.html");
+            if (loginwv) plus.webview.close(loginwv, "none");
+            setTimeout(() => {
+              mui.back();
+            }, 400);
+          });
+        } else {
+          location.href = "home.html";
+        }
+      });
     },
     goFindPS() {
       MTOOL.openWindow("login_findps.html");

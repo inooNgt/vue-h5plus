@@ -77,6 +77,10 @@ const cachedCountrycode = getCachedObject(config.keys.countrycode) || {
 const cachedPhonecode = getCachedData(config.keys.phonecode);
 const cachedPhonecodekey = getCachedData(config.keys.phonecodekey);
 
+const STATUS_NOT_ACTIVE = 1; // 未激活
+const STATUS_ACTIVE = 2; // 正常状态
+const STATUS_DELETED = 3; // 被禁止的用户
+
 export default {
   name: "Index",
   data() {
@@ -167,25 +171,45 @@ export default {
     },
     registerSuccess(token) {
       // 存储信息
-      try {
-        MTOOL.storage.setItem(config.keys.token, JSON.stringify(token));
-        loadUserInfo();
-      } catch (e) {
-        console.log(e);
-      }
+      MTOOL.storage.setItem(config.keys.token, JSON.stringify(token));
 
-      if (MTOOL.isPlus) {
-        let loginwv = plus.webview.getWebviewById("login.html");
-        if (loginwv) {
-          plus.webview.close(loginwv);
+      // 更新用户信息
+      this.updateUserInfo();
+    },
+
+    // 从服务器拉取用户数据
+    async updateUserInfo() {
+      try {
+        let user = await loadUserInfo();
+        console.log("user:", user);
+        // 已激活
+        if (user && user.status * 1 === STATUS_ACTIVE) {
+          // 跳转 plus环境
+          if (MTOOL.isPlus) {
+            MTOOL.plusReady(function() {
+              let loginwv = plus.webview.getWebviewById("login.html");
+              if (loginwv) plus.webview.close(loginwv, "none");
+              setTimeout(() => {
+                mui.back();
+              }, 400);
+            });
+          } else {
+            location.href = "home.html";
+          }
         }
-        mui.back();
-        // 更新页面
-        MTOOL.invoke("HBuilder", "index_update_subpages", { to: "" });
-      } else {
-        // setTimeout(() => {
-        //   location.href = "home.html";
-        // }, 200);
+        // 未激活
+        if (user && user.status * 1 === STATUS_NOT_ACTIVE) {
+          Toast("该账户未激活");
+          setTimeout(() => {
+            MTOOL.openWindow("login_invite.html");
+          }, 400);
+        }
+        // 已禁止
+        if (user && user.status * 1 === STATUS_DELETED) {
+          Toast("该账户已被禁止");
+        }
+      } catch (error) {
+        error && error.message && Toast(error.message);
       }
     },
 

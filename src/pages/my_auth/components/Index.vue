@@ -264,7 +264,7 @@ export default {
       this.$get(API.auth.identity)
         .then(res => {
           let data = res.data && res.data.data;
-          if (res.status === 200) {
+          if (res.status === 200 && data) {
             this.name = data.real_name;
             this.authtype = data.id_type;
             this.number = data.id_number;
@@ -292,13 +292,13 @@ export default {
 
             this.status = data.status;
           } else {
-            data.message && Toast(data.message);
+            data && data.message && Toast("发送错误" + data.message);
           }
           console.log("identity", data);
         })
         .catch(e => {
           console.log(e);
-          Toast(e);
+          Toast("发生错误" + e);
         });
     },
     async getCountryById(id) {
@@ -406,9 +406,9 @@ export default {
           } else {
             data.message && Toast(data.message);
           }
-          console.log("data.data.url");
-          console.log(data.data.url);
           this.uploadSuccess(data.data, index);
+          console.log("data.data.url");
+          console.log(data.data && data.data.url);
         })
         .catch(e => {
           console.log(e);
@@ -500,10 +500,8 @@ export default {
           let data = res.data;
           if (data.status === 200) {
             Toast("提交成功");
+            this.getIdentity();
             MTOOL.invoke("my.html", "event_update");
-            setTimeout(() => {
-              // mui.back();
-            }, 400);
           } else {
             data.message && Toast(data.message);
           }

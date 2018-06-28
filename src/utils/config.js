@@ -8,8 +8,18 @@ const config = {
     codelist: "ml.areacodes.codelist",
     countrycode: "ml.areacodes.countrycode",
     authcountrycode: "ml.areacodes.authcountrycode",
+    oftenuselist: "ml.areacodes.oftenuselist",
     phonecode: "ml.areacodes.phonecode",
     phonecodekey: "ml.areacodes.phonecodekey",
+    helpdetail: "ml.help.helpdetail",
+    mycourseid: "ml.help.mycourseid",
+    myactivityid: "ml.help.myactivityid",
+    coursesignupmsg: "ml.help.coursesignupmsg",
+    coursesignupname: "ml.help.coursesignupname",
+    coursesignupqq: "ml.help.coursesignupqq",
+    coursesignupphone: "ml.help.coursesignphoneme",
+    coursesignupwx: "ml.help.coursesignuwxe",
+    signupcourseid: "ml.help.signupcourseid",
     smskey: "ml.setting.smskey"
   },
   userTpl: {

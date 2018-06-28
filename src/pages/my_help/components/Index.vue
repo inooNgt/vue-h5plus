@@ -1,19 +1,9 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="关于我们" fixed left-arrow @click-left="goBack" right-text="联系客服" />
+    <van-nav-bar title="关于我们" fixed left-arrow @click-left="goBack" @click-right="contactus" right-text="联系客服" />
     <ul class="my-list">
-      <li class="list-item">
-        <div class="item-left text-main">什么是DIC？</div>
-        <div class="item-right">
-        </div>
-        <div class="item-arrow">
-          <van-icon name="arrow" />
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="item-left text-main">什么是活力值？</div>
-        <div class="item-right">
-        </div>
+      <li class="list-item" v-for="(item,index) in list" :key="item.id" @click="goDetail(item.id,index)">
+        <div class="item-left text-main">{{item.title}}</div>
         <div class="item-arrow">
           <van-icon name="arrow" />
         </div>
@@ -38,14 +28,59 @@ Vue.use(NavBar)
 export default {
   name: "Index",
   data() {
-    return {};
+    return {
+      list: [
+        {
+          id: "",
+          title: "",
+          body: ""
+        }
+      ]
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.init();
+    });
   },
   methods: {
     goBack() {
       mui.back();
     },
-    login() {
-      MTOOL.openWindow("login.html");
+    init() {
+      this.$get(API.help)
+        .then(res => {
+          let data = res.data;
+          console.log(data);
+          if (data.status === 200) {
+            if (data.data) this.list = data.data;
+          } else {
+            data.message && Toast(data.message);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+          Toast("发生错误" + e);
+        });
+    },
+    contactus() {
+      MTOOL.openWindow("my_contactus.html");
+    },
+    goDetail(id, index) {
+      console.log(id, index);
+
+      if (!MTOOL.isPlus) {
+        let detail = this.list[index];
+        if (detail)
+          MTOOL.storage.setItem(config.keys.helpdetail, JSON.stringify(detail));
+      }
+      if (id) {
+        MTOOL.openWindow("my_help_question.html", {
+          extras: {
+            questionId: id
+          }
+        });
+      }
     }
   }
 };
@@ -53,10 +88,11 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
+@import "~assets/scss/common";
 .item-left {
-  width: 170px;
+  flex: 1 0 auto;
+  @extend %text-over;
   .item-title {
-    width: 170px;
   }
 }
 </style>

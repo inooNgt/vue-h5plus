@@ -6,7 +6,8 @@
         <div class="item-left">头像</div>
         <div class="item-right">
           <img class="head-img" v-if="avatar" :src="avatar" />
-          <img class="head-img" v-if="!avatar" src="~assets/img/head.png" />
+          <span v-if="!avatar">- -</span>
+          <!-- <img class="head-img" v-if="!avatar" src="~assets/img/head.png" /> -->
         </div>
         <div class="item-arrow">
           <van-icon name="arrow" />
@@ -41,7 +42,7 @@
       </li>
     </ul>
     <div class="box-btn box-btn-fixed">
-      <van-button slot="button" class="btn btn-sub" size="large" v-if="logined" @click="logout">退出</van-button>
+      <van-button slot="button" class="btn btn-sub" size="large" v-if="logined" @click="logout">退出登录</van-button>
       <van-button slot="button" class="btn btn-sub" size="large" v-if="!logined" @click="login">登录</van-button>
     </div>
   </div>
@@ -73,7 +74,10 @@ export default {
       logined: MTOOL.logined(),
       username: cachedUser.username || "- -",
       phone: cachedUser.mobile_phone || "- -",
-      avatar: cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
+      avatar:
+        cachedUser.avatar_base_url &&
+        cachedUser.avatar_path &&
+        cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
     };
   },
   created() {
@@ -193,12 +197,7 @@ export default {
       MTOOL.openWindow("login.html");
     },
     logout() {
-      // test
-      MTOOL.storage.setItem(config.keys.token, "");
-      console.log("logout: " + MTOOL.storage.getItem(config.keys.token));
-      // mui.back();
-
-      this.$post(API.auth.del).then(res => {
+      this.$post(API.auth.logout).then(res => {
         let data = res.data;
         if (data.status !== 200) {
           Toast(data.message);
@@ -207,21 +206,13 @@ export default {
         MTOOL.storage.setItem(config.keys.token, "");
         MTOOL.storage.setItem(config.keys.user, "");
 
-        Toast("退出成功");
-        // mui.back();
+        this.logined = false;
 
-        // 回到首页
-        // setTimeout(() => {
-        //   if (MTOOL.isPlus) {
-        //     MTOOL.switchNav({
-        //       from: "my.html",
-        //       to: "home.html"
-        //     });
-        //     MTOOL.invoke("HBuilder", "index_update_tab", { to: "home.html" });
-        //   } else {
-        //     location.href = "home.html";
-        //   }
-        // }, 200);
+        Toast("退出登录成功");
+
+        setTimeout(() => {
+          mui.back();
+        }, 400);
       });
     }
   }

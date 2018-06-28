@@ -3,6 +3,10 @@ import config from "utils/config";
 import API from "utils/api";
 import Qs from "qs";
 
+const STATUS_NOT_ACTIVE = 1; // 未激活
+const STATUS_ACTIVE = 2; // 正常状态
+const STATUS_DELETED = 3; // 被禁止的用户
+
 const http = options => {
   options = setHeaders(url, options);
   if (typeof options.url !== "undefined") {

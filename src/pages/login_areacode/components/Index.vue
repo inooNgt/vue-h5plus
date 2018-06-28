@@ -14,7 +14,7 @@ import MTOOL from "mtool";
 import mui from "mui";
 import API from "utils/api";
 import config from "utils/config";
-import { groupSort, getCachedObject } from "utils/utils";
+import { groupSort, getCachedObject, getCachedData } from "utils/utils";
 import Areacodes from "components/Areacodes";
 import { Button, NavBar, Checkbox, CheckboxGroup } from "vant";
 
@@ -26,6 +26,8 @@ Vue.use(Button)
 // 获取缓存
 const cachedAreacodes = getCachedObject(config.keys.codelist);
 
+const MAX_OFTENUSE_LENGTH = 5;
+
 console.log("cachedAreacodes", cachedAreacodes);
 
 export default {
@@ -34,7 +36,7 @@ export default {
   data() {
     return {
       list: cachedAreacodes,
-      commonuse: {
+      oftenuse: {
         label: "常用",
         data: []
       },
@@ -84,15 +86,22 @@ export default {
     setGroups(list) {
       let groups = groupSort(list);
 
-      // 常用areacodes
-      groups.unshift({
-        label: "oftenused",
-        data: [
+      let oftenusedlist = this.getOftenusedList();
+
+      console.log("getOftenusedList", oftenusedlist);
+
+      if (!oftenusedlist.length) {
+        oftenusedlist = [
           {
             id: "CN",
             value: "CN 中国"
           }
-        ]
+        ];
+      }
+      // 常用areacodes
+      groups.unshift({
+        label: "oftenused",
+        data: oftenusedlist
       });
       this.groups = groups;
 
@@ -106,8 +115,6 @@ export default {
         id,
         code
       };
-      // 缓存
-      MTOOL.storage.setItem(config.keys.countrycode, JSON.stringify(areacode));
 
       // 通知各父级页面更新
       MTOOL.invoke("my_auth.html", "event_update");
@@ -115,12 +122,50 @@ export default {
       MTOOL.invoke("login_register.html", "event_update");
       MTOOL.invoke("login_account.html", "event_update");
 
+      // 缓存
+      MTOOL.storage.setItem(config.keys.countrycode, JSON.stringify(areacode));
+      // 更新常用
+      this.setOftenusedList({
+        id,
+        value: id + " " + code
+      });
       setTimeout(() => {
         mui.back();
       }, 0);
+    },
+    getOftenusedList() {
+      let oftenuselist = getCachedObject(config.keys.oftenuselist) || [];
+      return oftenuselist;
+    },
 
-      if (MTOOL.isPlus) {
+    setOftenusedList(areacode) {
+      let oftenuselist = getCachedObject(config.keys.oftenuselist) || [];
+      console.log("oftenuselist--", oftenuselist, oftenuselist.length);
+
+      // 去重
+      if (!this.hasRepeat(oftenuselist, areacode.id)) {
+        oftenuselist.push(areacode);
+        if (oftenuselist.length > MAX_OFTENUSE_LENGTH) {
+          oftenuselist.shift();
+        }
       }
+
+      MTOOL.storage.setItem(
+        config.keys.oftenuselist,
+        JSON.stringify(oftenuselist)
+      );
+    },
+
+    hasRepeat(list, id) {
+      let result = false;
+      if (list.length) {
+        list.forEach(element => {
+          if (element.id === id) {
+            result = true;
+          }
+        });
+      }
+      return result;
     },
 
     generateChars: function() {

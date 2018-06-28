@@ -23,7 +23,9 @@
         </van-field>
       </van-cell-group>
       <div class="btn-box">
-        <van-button slot="button" class="btn-main" size="large" @click="login">登录</van-button>
+        <van-button slot="button" class="btn-main" v-if="!loading" size="large" @click="login">登录</van-button>
+        <van-button slot="button" class="btn-main" v-if="loading" size="large" @click="login">
+          登录中...</van-button>
       </div>
     </section>
 
@@ -32,7 +34,16 @@
 
 <script>
 import Vue from "vue";
-import { Button, Field, Cell, CellGroup, Toast, NavBar, Icon } from "vant";
+import {
+  Button,
+  Field,
+  Cell,
+  CellGroup,
+  Toast,
+  NavBar,
+  Icon,
+  Loading
+} from "vant";
 import { VueSelect } from "vue-select";
 import mui from "mui";
 import MTOOL from "mtool";
@@ -52,6 +63,7 @@ Vue.use(Button)
   .use(Field)
   .use(Cell)
   .use(Icon)
+  .use(Loading)
   .use(NavBar)
   .use(CellGroup);
 
@@ -72,6 +84,7 @@ export default {
       password: "000000",
       phone: "1310002010",
       sms: "000000",
+      loading: false,
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,
       phonecodekey: cachedPhonecodekey
@@ -160,17 +173,22 @@ export default {
         sms_code: this.sms.trim()
       };
 
-      this.$post(API.login, param).then(res => {
-        let data = res.data;
-        console.log(data);
-        if (data.status !== 200) {
-          Toast(data.message);
-          return;
-        }
+      this.loading = true;
+      this.$post(API.login, param)
+        .then(res => {
+          let data = res.data;
+          console.log(data);
+          if (data.status !== 200) {
+            Toast(data.message);
+            return;
+          }
 
-        Toast("登录成功");
-        this.loginSucceed(data.data);
-      });
+          Toast("登录成功");
+          this.loginSucceed(data.data);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     loginSucceed: function(data) {
       // 存储信息
@@ -185,25 +203,11 @@ export default {
       // 跳转 plus环境
       if (MTOOL.isPlus) {
         MTOOL.plusReady(function() {
-          var wv = plus.webview.currentWebview();
-          var origin = wv.from;
-          // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
-          console.log("origin: " + origin);
+          let loginwv = plus.webview.getWebviewById("login.html");
+          if (loginwv) plus.webview.close(loginwv, "none");
           setTimeout(() => {
-            // 关闭当前页
             mui.back();
-            // 更新页面
-            MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
           }, 400);
-
-          // 带参处理
-          // if (origin && MTOOL.config.subpages.indexOf(origin)) {
-          //   MTOOL.switchNav({
-          //     from: "login.html",
-          //     to: origin
-          //   });
-          //   MTOOL.invoke("HBuilder", "index_update_tab", { to: origin });
-          // }
         });
       } else {
         location.href = "home.html";

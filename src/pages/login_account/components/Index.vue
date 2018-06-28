@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="" class="login-nav" fixed left-arrow @click-left="back">
       <!-- <van-icon name="search"  /> -->
-      <span class="md-icon md-icon-closenav" slot="right"></span>
+      <!-- <span class="md-icon md-icon-closenav" slot="right"></span> -->
     </van-nav-bar>
     <div class="logo">
       <img class="logo-img" src="~assets/img/logo.png" alt="">

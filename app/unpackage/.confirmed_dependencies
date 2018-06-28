@@ -28,7 +28,9 @@
 			"static/js/vendor.e002ddca.js",
 			"static/css/index.5258ea3d.css",
 			"static/js/index.5258ea3d.js",
-			"static/js/manifest.a933dbb5.js"
+			"static/js/manifest.a933dbb5.js",
+			"static/js/index.2c36a427.js",
+			"static/css/index.2c36a427.css"
 		],
 		"refer": [
 			"my.html",
@@ -60,7 +62,9 @@
 			"static/js/vendor.c0628292.js",
 			"static/css/my.2c560ba7.css",
 			"static/js/my.2c560ba7.js",
-			"static/js/vendor.e002ddca.js"
+			"static/js/vendor.e002ddca.js",
+			"static/js/my.cda26dde.js",
+			"static/css/my.cda26dde.css"
 		],
 		"refer": [
 			"index.html",
@@ -71,7 +75,8 @@
 			"my_course.html",
 			"my_help.html",
 			"my_about.html",
-			"my_activity.html"
+			"my_activity.html",
+			"login_invite.html"
 		]
 	},
 	"vigour.html": {
@@ -85,7 +90,8 @@
 			"static/css/vigour.ff34adfe.css",
 			"static/js/vigour.ff34adfe.js",
 			"static/js/vendor.bda0a263.js",
-			"static/img/bg.png"
+			"static/img/bg.png",
+			"static/js/vigour.d867fbd3.js"
 		],
 		"refer": [
 			"speed_up.html"
@@ -103,7 +109,9 @@
 			"static/js/vendor.bda0a263.js",
 			"static/js/vendor.c0628292.js",
 			"static/js/vendor.e002ddca.js",
-			"static/js/manifest.a933dbb5.js"
+			"static/js/manifest.a933dbb5.js",
+			"static/css/home.03a2f7f1.css",
+			"static/js/home.03a2f7f1.js"
 		],
 		"refer": []
 	},
@@ -194,17 +202,23 @@
 		],
 		"resources": [
 			"static/css/my_auth.99a26e1b.css",
-			"static/js/my_auth.99a26e1b.js"
+			"static/js/my_auth.99a26e1b.js",
+			"static/js/vendor.e002ddca.js",
+			"mui/mui.js",
+			"mui/mtool.js",
+			"static/css/my_auth.11573a5b.css"
 		]
 	},
 	"login_msg.html": {
 		"refer": [
-			"login_areacode.html"
+			"login_areacode.html",
+			"login_account.html"
 		]
 	},
 	"login_account.html": {
 		"refer": [
-			"login_areacode.html"
+			"login_areacode.html",
+			"login_msg.html"
 		]
 	},
 	"my_setting_head.html": {
@@ -231,7 +245,8 @@
 	},
 	"my_setting_phone_two.html": {
 		"refer": [
-			"my_setting_phone_three.html"
+			"my_setting_phone_three.html",
+			"login_areacode.html"
 		],
 		"resources": [
 			"static/js/my_setting_phone_two.e246aaa3.js",
@@ -251,6 +266,43 @@
 			"static/css/my_setting_phone_three.4a0cd49d.css",
 			"static/js/my_setting_phone_three.9faa80c5.js",
 			"static/css/my_setting_phone_three.9faa80c5.css"
+		]
+	},
+	"my_help.html": {
+		"refer": [
+			"my_help_question.html"
+		]
+	},
+	"login_register.html": {
+		"refer": [
+			"login_invite.html"
+		]
+	},
+	"my_help_question.html": {
+		"resources": [
+			"static/css/my_help_question.31191aa7.css",
+			"static/js/my_help_question.31191aa7.js"
+		]
+	},
+	"my_course.html": {
+		"refer": [
+			"signup.html",
+			"info_course.html",
+			"signup_course.html"
+		]
+	},
+	"info_course.html": {
+		"refer": [
+			"signup_course.html"
+		]
+	},
+	"signup_course.html": {
+		"refer": [
+			"signup_course_msg.html"
+		],
+		"resources": [
+			"static/css/signup_course.77ddad93.css",
+			"static/js/signup_course.77ddad93.js"
 		]
 	}
 }

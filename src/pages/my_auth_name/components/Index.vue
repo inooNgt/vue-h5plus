@@ -24,14 +24,11 @@ Vue.use(Cell)
   .use(Field)
   .use(Icon);
 
-// 缓存的用户信息
-const cachedName = getCachedData(config.keys.realname) || "";
-
 export default {
   name: "Index",
   data() {
     return {
-      name: cachedName
+      name: ""
     };
   },
   mounted() {

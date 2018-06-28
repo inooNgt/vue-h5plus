@@ -30,12 +30,31 @@ export default {
   name: "Index",
   data() {
     return {
+      title: "",
+      article: "",
       version: config.version
     };
   },
   methods: {
     goBack() {
       mui.back();
+    },
+    getArtical() {
+      this.$get(API.about)
+        .then(res => {
+          let data = res.data && res.data.data;
+          console.log(data);
+          if (res.status === 200) {
+            if (data.title) this.title = data.title;
+            if (data.body) this.article = data.body;
+          } else {
+            data.message && Toast(data.message);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+          Toast(e);
+        });
     }
   }
 };
@@ -67,7 +86,7 @@ body {
 }
 .msg-wx {
   padding-top: 10px;
-  font-size:12px;     
+  font-size: 12px;
 }
 .msg-row {
   line-height: 20px;

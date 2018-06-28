@@ -53,8 +53,10 @@ export default {
   },
   methods: {
     toHook: function(char) {
+      // element是组内的第一个元素
       let element = this.$refs["group-" + char][0];
       let y = Math.max(0, MTOOL.elementPosition(element).y - 44);
+      // 组内无数据不滚动
       if (element && element.children.length) {
         window.scrollTo(0, y);
         // console.log(
