@@ -42,20 +42,22 @@ const my = [
   "my_course",
   "signup_course",
   "signup_course_msg",
+  "signup_activity",
+  "signup_activity_msg",
   "info_course",
   "info_activity",
-  // "my_setting_head",
-  // "my_setting_name",
-  // "my_setting_phone",
-  // "my_setting_phone_one",
-  // "my_setting_phone_three",
-  // "my_setting_phone_two",
-  // "login",
-  // "login_areacode",
-  "login_account"
-  // "login_register",
-  // "login_invite",
-  // "login_msg"
+  "my_setting_head",
+  "my_setting_name",
+  "my_setting_phone",
+  "my_setting_phone_one",
+  "my_setting_phone_three",
+  "my_setting_phone_two",
+  "login_areacode",
+  "login_account",
+  "login",
+  "login_register",
+  "login_invite",
+  "login_msg"
 ];
 
 const entries = entrypath(my);

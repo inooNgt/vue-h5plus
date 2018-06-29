@@ -175,7 +175,7 @@ export default {
               }
             }
             setTimeout(() => {
-              // MTOOL.openWindow("my_setting_phone_three.html");
+              MTOOL.openWindow("my_setting_phone_three.html");
             }, 400);
             Toast("修改成功");
           } else {

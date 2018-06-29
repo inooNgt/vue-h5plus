@@ -30,7 +30,10 @@
 			"static/js/index.5258ea3d.js",
 			"static/js/manifest.a933dbb5.js",
 			"static/js/index.2c36a427.js",
-			"static/css/index.2c36a427.css"
+			"static/css/index.2c36a427.css",
+			"static/js/index.5b78f963.js",
+			"static/css/index.5b78f963.css",
+			"static/js/manifest.9359d106.js"
 		],
 		"refer": [
 			"my.html",
@@ -64,7 +67,12 @@
 			"static/js/my.2c560ba7.js",
 			"static/js/vendor.e002ddca.js",
 			"static/js/my.cda26dde.js",
-			"static/css/my.cda26dde.css"
+			"static/css/my.cda26dde.css",
+			"static/css/my.366b1cdc.css",
+			"static/js/my.366b1cdc.js",
+			"static/js/manifest.9359d106.js",
+			"static/js/my.12efd095.js",
+			"static/css/my.12efd095.css"
 		],
 		"refer": [
 			"index.html",
@@ -91,7 +99,13 @@
 			"static/js/vigour.ff34adfe.js",
 			"static/js/vendor.bda0a263.js",
 			"static/img/bg.png",
-			"static/js/vigour.d867fbd3.js"
+			"static/js/vigour.d867fbd3.js",
+			"static/css/vigour.87534fb0.css",
+			"static/js/vendor.e002ddca.js",
+			"static/js/vigour.87534fb0.js",
+			"static/js/manifest.9359d106.js",
+			"static/js/vigour.1d0c4add.js",
+			"static/css/vigour.1d0c4add.css"
 		],
 		"refer": [
 			"speed_up.html"
@@ -111,7 +125,12 @@
 			"static/js/vendor.e002ddca.js",
 			"static/js/manifest.a933dbb5.js",
 			"static/css/home.03a2f7f1.css",
-			"static/js/home.03a2f7f1.js"
+			"static/js/home.03a2f7f1.js",
+			"static/js/home.bfff8abe.js",
+			"static/css/home.bfff8abe.css",
+			"static/js/manifest.9359d106.js",
+			"static/css/home.675686a0.css",
+			"static/js/home.675686a0.js"
 		],
 		"refer": []
 	},
@@ -131,7 +150,12 @@
 			"login_msg.html",
 			"login_account.html"
 		],
-		"resources": []
+		"resources": [
+			"static/js/login.1ac75167.js",
+			"static/css/login.1ac75167.css",
+			"static/js/manifest.9359d106.js",
+			"static/js/vendor.e002ddca.js"
+		]
 	},
 	"my_setting.html": {
 		"refer": [
@@ -275,7 +299,8 @@
 	},
 	"login_register.html": {
 		"refer": [
-			"login_invite.html"
+			"login_invite.html",
+			"login_areacode.html"
 		]
 	},
 	"my_help_question.html": {
@@ -303,6 +328,12 @@
 		"resources": [
 			"static/css/signup_course.77ddad93.css",
 			"static/js/signup_course.77ddad93.js"
+		]
+	},
+	"login_areacode.html": {
+		"resources": [
+			"static/js/vendor.e002ddca.js",
+			"static/js/manifest.9359d106.js"
 		]
 	}
 }

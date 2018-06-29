@@ -9,12 +9,12 @@
       <div class="mui-scroll">
         <section class="md-tab-content" v-show="active==0">
           <div class="card-list">
-            <Card v-for="(item,index) in courseJoinedList" :key="index" :data="item" />
+            <Card v-for="(item,index) in courseJoinedList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
           </div>
         </section>
         <section class="md-tab-content" v-show="active==1">
           <div class="card-list">
-            <Card v-for="(item,index) in courseOwnedList" :key="index" :data="item" />
+            <Card v-for="(item,index) in courseOwnedList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
           </div>
         </section>
 
@@ -81,15 +81,19 @@ export default {
             style: "circle",
             offset: "44px", // 可选 默认0px,下拉刷新控件的起始位置
             callback: this.pulldownRefresh
-          },
-          up: {
-            auto: false,
-            contentrefresh: "正在加载更多数据...",
-            callback: this.pullupRefresh
           }
+          // up: {
+          //   auto: false,
+          //   contentrefresh: "正在加载更多数据...",
+          //   callback: this.pullupRefresh
+          // }
         }
       });
 
+      this.loadJoinedCourse();
+      this.loadPublishedCourse();
+    },
+    updagte() {
       this.loadJoinedCourse();
       this.loadPublishedCourse();
     },
@@ -139,6 +143,7 @@ export default {
       mui.back();
     },
     pulldownRefresh() {
+      this.updagte();
       let pullRefreshApi = mui(refreshId).pullRefresh();
       setTimeout(() => {
         // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
@@ -157,6 +162,17 @@ export default {
       setTimeout(() => {
         pullRefreshApi.endPullupToRefresh();
       }, 1000);
+    },
+    goInfo(id) {
+      if (id === undefined) {
+        return;
+      }
+      MTOOL.storage.setItem(config.keys.mycourseid, id);
+      MTOOL.openWindow("info_course.html");
+    },
+    goSignup(e) {
+      e.cancelBubble = true;
+      MTOOL.openWindow("signup_course.html");
     },
     onTabsClick(index, title) {
       let pullRefreshApi = mui(refreshId).pullRefresh();

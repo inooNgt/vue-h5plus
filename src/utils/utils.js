@@ -364,6 +364,18 @@ const dataURLtoBlob = dataurl => {
   return new Blob([u8arr], { type: mime });
 };
 
+const getSubpageValueFromObjCached = (detail, cachedkey) => {
+  let result = "";
+  if (detail && detail[detailkey]) {
+    result = detail[detailkey];
+  } else {
+    let cachedObj = getCachedObject(config.keys[cachedkey]);
+    result = cachedObj && cachedObj[cachedkey];
+  }
+
+  return result;
+};
+
 export {
   http,
   get,
@@ -380,5 +392,6 @@ export {
   dataURLtoBlob,
   dataURLtoFile,
   readAsDataURL,
+  getSubpageValueFromObjCached,
   groupSort
 };

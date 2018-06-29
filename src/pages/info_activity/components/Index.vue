@@ -2,10 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="课程详情" fixed left-arrow @click-left="goBack" />
     <van-tabs class="van-tabs-fixed" v-model="active" :line-width="75" @click="onTabsClick">
-      <van-tab title="基本信息"></van-tab>
-      <van-tab title="课程介绍"></van-tab>
-      <van-tab title="课程大纲"></van-tab>
-      <van-tab title="讲师资源"></van-tab>
+      <van-tab v-for="(title,index) in tabs" :title="title" :key="index"></van-tab>
     </van-tabs>
     <article class="course-content">
       <section class="part part-cover">
@@ -75,7 +72,9 @@
           <div class="part-rich" v-html="data.resource"></div>
         </div>
       </section>
-
+      <div class="box-btn box-btn-fixed">
+        <van-button slot="button" class="btn btn-sub" size="large" @click="goSignup">立即报名</van-button>
+      </div>
     </article>
 
   </div>
@@ -112,6 +111,8 @@ export default {
       console.log("event_nav_update");
       console.log("detail.to" + detail.to);
     });
+
+    window.onscroll = this.handleScroll;
   },
   mounted() {
     this.$nextTick(() => {
@@ -127,6 +128,7 @@ export default {
       msg: "Welcome to Your Vue.js App",
       loading: false,
       data: {
+        id: "",
         picture: "",
         title: "",
         status_text: "",
@@ -138,7 +140,8 @@ export default {
         location_city: ""
       },
       starttime: "",
-      endtime: ""
+      endtime: "",
+      tabs: ["基本信息", "课程介绍", "课程大纲", "讲师资源"]
     };
   },
   methods: {
@@ -174,7 +177,10 @@ export default {
     goBack() {
       mui.back();
     },
-
+    goSignup() {
+      MTOOL.storage.setItem(config.keys.signupcourseid, this.data.id);
+      MTOOL.openWindow("signup_course.html");
+    },
     onTabsClick(index, title) {
       this.toHook(index);
     },
@@ -184,11 +190,20 @@ export default {
       console.log(element, y);
       if (element) {
         window.scrollTo(0, y);
-        // console.log(
-        //   "scrollToP: " + document.body.scrollTop ||
-        //     document.documentElement.scrollTop
-        // );
       }
+    },
+
+    handleScroll(e) {
+      let scrollTop =
+        document.body.scrollTop || document.documentElement.scrollTop;
+
+      this.tabs.forEach((v, index) => {
+        let element = this.$refs["hook-" + index];
+        let y = Math.max(0, MTOOL.elementPosition(element).y - 84);
+        if (scrollTop > y) {
+          this.active = index;
+        }
+      });
     }
   }
 };
@@ -220,7 +235,12 @@ body {
 //   background-position: 0 -80px;
 // }
 
+.page-content {
+  padding-bottom: 50px;
+}
+
 .part {
+  // height: 1000px;
   padding: $padding-main;
   &.part-cover {
     padding: $padding-main 35px 7px;
