@@ -1,259 +1,279 @@
 {
-	"@platforms": [
-		"android",
-		"iPhone",
-		"iPad"
-	],
-	"id": "H505FB26D",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "MultiPages",/*应用名称，程序桌面图标名称*/
-	"version": {
-		"name": "2.1.2",/*应用版本名称*/
-		"code": "20102"
-	},
-	"description": "Multipages",/*应用描述信息*/
-	"icons": {
-		"144": "icon.png"
-	},
-	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
-	"developer": {
-		"name": "",/*开发者名称*/
-		"email": "",/*开发者邮箱地址*/
-		"url": "http://www.dcloud.io"
-	},
-	"orientation": [
-		"portrait"
-	],
-	"permissions": {
-		"Accelerometer": {
-			"description": "加速度传感器"
-		},
-		"Audio": {
-			"description": "音频录制与播放"
-		},
-		"Cache": {
-			"description": "缓存管理"
-		},
-		"Camera": {
-			"description": "摄像头"
-		},
-		"Console": {
-			"description": "调试输出日志"
-		},
-		"Contacts": {
-			"description": "系统通讯录"
-		},
-		"Device": {
-			"description": "设备信息"
-		},
-		"Downloader": {
-			"description": "文件下载"
-		},
-		"Events": {
-			"description": "扩展事件"
-		},
-		"File": {
-			"description": "本地文件系统"
-		},
-		"Gallery": {
-			"description": "系统相册"
-		},
-		"Geolocation": {
-			"description": "位置信息"
-		},
-		"Invocation": {
-			"description": "Native.js能力"
-		},
-		"Messaging": {
-			"description": "消息通讯"
-		},
-		"Orientation": {
-			"description": "方向传感器"
-		},
-		"Proximity": {
-			"description": "距离传感器"
-		},
-		"Storage": {
-			"description": "本地数据存储"
-		},
-		"Webview": {
-			"description": "窗口管理"
-		},
-		"NativeObj": {
-			"description": "原生控件"
-		},
-		"NativeUI": {
-			"description": "原生UI控件"
-		},
-		"Navigator": {
-			"description": "浏览器信息"
-		},
-		"Uploader": {
-			"description": "文件上传"
-		},
-		"Runtime": {
-			"description": "运行环境"
-		},
-		"XMLHttpRequest": {
-			"description": "跨域网络请求"
-		},
-		"Zip": {
-			"description": "压缩与解压"
-		},
-		"Barcode": {
-			"description": "二维码扫描"
-		},
-		"Maps": {},
-		"OAuth": {},
-		"Fingerprint": {}
-	},
-	"plus": {
-		"splashscreen": {
-			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": false,"delay":"0"
-		},
-		"statusbar": {
-			"immersed": "none",
-			"style": "light"
-		},
-		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
-		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
-		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {
-			"apple": {
-				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
-				"mobileprovision": "",/*iOS应用打包配置文件*/
-				"password": "",/*iOS应用打包个人证书导入密码*/
-				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
-				"devices": "iphone",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"urlschemewhitelist": [/*iOS9调用第三方应用urlscheme白名单*/
-					"baidumap",
-					"iosamap"
-				],
-				"shortcuts": [/*3D Touch快捷菜单项*/
-					{
-						"type": "share",
-						"title": "分 享",
-						"subtitle": "分享到微信、微博、QQ",
-						"icontype": "UIApplicationShortcutIconTypeShare"
-					}, {
-						"type": "about",
-						"title": "关 于",
-						"subtitle": "www.dcloud.io",
-						"iconfile": "sa.png",
-						"userinfo": {
-							"key3": "value3"
-						}
-					}
-				],
-				"frameworks": []
-			},
-			"google": {
-				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
-				"keystore": "",/*Android应用打包使用的密钥库文件*/
-				"password": "",/*Android应用打包使用密钥库中证书的密码*/
-				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"ImmersedStatusbar": true,/*Android平台开启沉浸式状态栏样式*/
-				"permissions": [
-					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
-					"<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
-					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.INTERNET\"/>",
-					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-					"<uses-feature android:name=\"android.hardware.camera\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
-					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
-					"<uses-permission android:name=\"android.permission.CAMERA\"/>",
-					"<uses-permission android:name=\"android.permission.READ_SMS\"/>"
-				]
-			},
-			"orientation": [
-				"portrait-primary"
-			],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
-			"icons": {
-				"ios": {
-					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
-					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
-					"iphone": {
-						"normal": "", /*iPhone3/3GS程序图标，分辨率：57x57*/
-						"retina": "", /*iPhone4程序图标，分辨率：114x114*/
-						"retina7": "", /*iPhone4S/5/6程序图标，分辨率：120x120*/
-						"retina8": "", /*iPhone6 Plus程序图标，分辨率：180x180*/
-						"spotlight-normal": "", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
-						"spotlight-retina7": "", /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "", /*iPhone4设置页面程序图标，分辨率：29x29*/
-						"settings-retina": "", /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
-						"settings-retina8": ""
-					},
-					"ipad": {
-						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
-						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
-						"normal7": "", /*iPad iOS7程序图标，分辨率：76x76*/
-						"retina7": "", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
-						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
-						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
-						"spotlight-normal7": "",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
-						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
-					}
-				},
-				"android": {
-					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": ""
-				}
-			},
-			"splashscreen": {
-				"ios": {
-					"iphone": {
-						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "C:/Users/admin/Downloads/0.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": "",/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
-						"retina47": "",/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
-						"retina55": "",/*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
-						"retina55l": ""
-					},
-					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": ""
-					}
-				},
-				"android": {
-					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/admin/Downloads/0.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/admin/Downloads/0.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/admin/Downloads/0.png"
-				}
-			},
-			"plugins": {
-				"statics": {},
-				"maps": {},
-				"push": {},
-				"share": {},
-				"payment": {},
-				"oauth": {}
-			}
-		}
-	},
-	"dependencies": {
+  "@platforms": ["android", "iPhone", "iPad"],
+  "id": "H505FB26D" /*应用的标识，创建应用时自动生成，勿手动修改*/,
+  "name": "MultiPages" /*应用名称，程序桌面图标名称*/,
+  "version": {
+    "name": "2.1.2" /*应用版本名称*/,
+    "code": "20102"
+  },
+  "description": "Multipages" /*应用描述信息*/,
+  "icons": {
+    "144": "icon.png"
+  },
+  "launch_path":
+    "index.html" /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/,
+  "developer": {
+    "name": "" /*开发者名称*/,
+    "email": "" /*开发者邮箱地址*/,
+    "url": "http://www.dcloud.io"
+  },
+  "orientation": ["portrait"],
+  "permissions": {
+    "Accelerometer": {
+      "description": "加速度传感器"
+    },
+    "Audio": {
+      "description": "音频录制与播放"
+    },
+    "Cache": {
+      "description": "缓存管理"
+    },
+    "Camera": {
+      "description": "摄像头"
+    },
+    "Console": {
+      "description": "调试输出日志"
+    },
+    "Contacts": {
+      "description": "系统通讯录"
+    },
+    "Device": {
+      "description": "设备信息"
+    },
+    "Downloader": {
+      "description": "文件下载"
+    },
+    "Events": {
+      "description": "扩展事件"
+    },
+    "File": {
+      "description": "本地文件系统"
+    },
+    "Gallery": {
+      "description": "系统相册"
+    },
+    "Geolocation": {
+      "description": "位置信息"
+    },
+    "Invocation": {
+      "description": "Native.js能力"
+    },
+    "Messaging": {
+      "description": "消息通讯"
+    },
+    "Orientation": {
+      "description": "方向传感器"
+    },
+    "Proximity": {
+      "description": "距离传感器"
+    },
+    "Storage": {
+      "description": "本地数据存储"
+    },
+    "Webview": {
+      "description": "窗口管理"
+    },
+    "NativeObj": {
+      "description": "原生控件"
+    },
+    "NativeUI": {
+      "description": "原生UI控件"
+    },
+    "Navigator": {
+      "description": "浏览器信息"
+    },
+    "Uploader": {
+      "description": "文件上传"
+    },
+    "Runtime": {
+      "description": "运行环境"
+    },
+    "XMLHttpRequest": {
+      "description": "跨域网络请求"
+    },
+    "Zip": {
+      "description": "压缩与解压"
+    },
+    "Barcode": {
+      "description": "二维码扫描"
+    },
+    "Maps": {},
+    "OAuth": {},
+    "Fingerprint": {}
+  },
+  "plus": {
+    "splashscreen": {
+      "autoclose": true /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/,
+      "waiting": false,
+      "delay": "0"
+    },
+    "statusbar": {
+      "immersed": "none",
+      "style": "light"
+    },
+    "popGesture":
+      "close" /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/,
+    "runmode":
+      "liberate" /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/,
+    "signature":
+      "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==" /*可选，保留给应用签名，暂不使用*/,
+    "distribute": {
+      "apple": {
+        "appid":
+          "" /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/,
+        "mobileprovision": "" /*iOS应用打包配置文件*/,
+        "password": "" /*iOS应用打包个人证书导入密码*/,
+        "p12": "" /*iOS应用打包个人证书，打包配置文件关联的个人证书*/,
+        "devices":
+          "iphone" /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/,
+        "urlschemewhitelist": [
+          /*iOS9调用第三方应用urlscheme白名单*/
+          "baidumap",
+          "iosamap"
+        ],
+        "shortcuts": [
+          /*3D Touch快捷菜单项*/
+          {
+            "type": "share",
+            "title": "分 享",
+            "subtitle": "分享到微信、微博、QQ",
+            "icontype": "UIApplicationShortcutIconTypeShare"
+          },
+          {
+            "type": "about",
+            "title": "关 于",
+            "subtitle": "www.dcloud.io",
+            "iconfile": "sa.png",
+            "userinfo": {
+              "key3": "value3"
+            }
+          }
+        ],
+        "frameworks": []
+      },
+      "google": {
+        "packagename": "" /*Android应用包名，如io.dcloud.HelloH5*/,
+        "keystore": "" /*Android应用打包使用的密钥库文件*/,
+        "password": "" /*Android应用打包使用密钥库中证书的密码*/,
+        "aliasname": "" /*Android应用打包使用密钥库中证书的别名*/,
+        "ImmersedStatusbar": true /*Android平台开启沉浸式状态栏样式*/,
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+          "<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
+          "<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
+          "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+          "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+          "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+          "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+          "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+          "<uses-feature android:name=\"android.hardware.camera\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+          "<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+          "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
+          "<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
+          "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+          "<uses-permission android:name=\"android.permission.READ_SMS\"/>"
+        ]
+      },
+      "orientation": [
+        "portrait-primary"
+      ] /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/,
+      "icons": {
+        "ios": {
+          "prerendered": true /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/,
+          "auto":
+            "" /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/,
+          "iphone": {
+            "normal": "" /*iPhone3/3GS程序图标，分辨率：57x57*/,
+            "retina": "" /*iPhone4程序图标，分辨率：114x114*/,
+            "retina7": "" /*iPhone4S/5/6程序图标，分辨率：120x120*/,
+            "retina8": "" /*iPhone6 Plus程序图标，分辨率：180x180*/,
+            "spotlight-normal":
+              "" /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/,
+            "spotlight-retina":
+              "" /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/,
+            "spotlight-retina7":
+              "" /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/,
+            "settings-normal": "" /*iPhone4设置页面程序图标，分辨率：29x29*/,
+            "settings-retina":
+              "" /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/,
+            "settings-retina8": ""
+          },
+          "ipad": {
+            "normal": "" /*iPad普通屏幕程序图标，分辨率：72x72*/,
+            "retina": "" /*iPad高分屏程序图标，分辨率：144x144*/,
+            "normal7": "" /*iPad iOS7程序图标，分辨率：76x76*/,
+            "retina7": "" /*iPad iOS7高分屏程序图标，分辨率：152x152*/,
+            "spotlight-normal":
+              "" /*iPad Spotlight搜索程序图标，分辨率：50x50*/,
+            "spotlight-retina":
+              "" /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/,
+            "spotlight-normal7":
+              "" /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/,
+            "spotlight-retina7":
+              "" /*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/,
+            "settings-normal": "" /*iPad设置页面程序图标，分辨率：29x29*/,
+            "settings-retina": ""
+          }
+        },
+        "android": {
+          "mdpi": "" /*普通屏程序图标，分辨率：48x48*/,
+          "ldpi": "" /*大屏程序图标，分辨率：48x48*/,
+          "hdpi": "" /*高分屏程序图标，分辨率：72x72*/,
+          "xhdpi": "" /*720P高分屏程序图标，分辨率：96x96*/,
+          "xxhdpi": ""
+        }
+      },
+      "splashscreen": {
+        "ios": {
+          "iphone": {
+            "default": "" /*iPhone3启动图片选，分辨率：320x480*/,
+            "retina35":
+              "C:/Users/admin/Downloads/0.png" /*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/,
+            "retina40":
+              "" /*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/,
+            "retina47": "" /*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/,
+            "retina55":
+              "" /*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/,
+            "retina55l": ""
+          },
+          "ipad": {
+            "portrait": "" /*iPad竖屏启动图片，分辨率：768x1004*/,
+            "portrait-retina": "" /*iPad高分屏竖屏图片，分辨率：1536x2008*/,
+            "landscape": "" /*iPad横屏启动图片，分辨率：1024x748*/,
+            "landscape-retina":
+              "" /*iPad高分屏横屏启动图片，分辨率：2048x1496*/,
+            "portrait7": "" /*iPad iOS7竖屏启动图片，分辨率：768x1024*/,
+            "portrait-retina7":
+              "" /*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/,
+            "landscape7": "" /*iPad iOS7横屏启动图片，分辨率：1024x768*/,
+            "landscape-retina7": ""
+          }
+        },
+        "android": {
+          "mdpi": "" /*普通屏启动图片，分辨率：240x282*/,
+          "ldpi": "" /*大屏启动图片，分辨率：320x442*/,
+          "hdpi":
+            "C:/Users/admin/Downloads/0.png" /*高分屏启动图片，分辨率：480x762*/,
+          "xhdpi":
+            "C:/Users/admin/Downloads/0.png" /*720P高分屏启动图片，分辨率：720x1242*/,
+          "xxhdpi": "C:/Users/admin/Downloads/0.png"
+        }
+      },
+      "plugins": {
+        "statics": {},
+        "maps": {},
+        "push": {},
+        "share": {},
+        "payment": {},
+        "oauth": {}
+      }
+    }
+  },
+  "dependencies": {
 		"pages": {
 			"index.html": {
 				"href": "index.html",
@@ -287,7 +307,9 @@
 					"static/js/index.be6d86d4.js",
 					"static/css/index.be6d86d4.css",
 					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js"
+					"static/js/vendor.8f6e52aa.js",
+					"static/js/index.c657ad73.js",
+					"static/js/manifest.c6392fab.js"
 				],
 				"refer": [
 					"my.html",
@@ -346,7 +368,8 @@
 					"static/css/home.b3ec4102.css",
 					"static/js/home.b3ec4102.js",
 					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js"
+					"static/js/vendor.8f6e52aa.js",
+					"static/js/manifest.c6392fab.js"
 				],
 				"refer": [
 					"speed_up.html"
@@ -390,7 +413,9 @@
 					"static/js/my.e3d083f2.js",
 					"static/js/my.47a7b92a.js",
 					"static/css/my.47a7b92a.css",
-					"static/js/my.9b3301d4.js"
+					"static/js/my.9b3301d4.js",
+					"static/css/my.9b3301d4.css",
+					"static/js/vendor.8f6e52aa.js"
 				],
 				"refer": [
 					"login.html",
@@ -633,7 +658,7 @@
 					"static/js/signup_course.77ddad93.js"
 				],
 				"refer": [
-					"signup_course_msg.html"
+					"signup_msg.html"
 				],
 				"priority": 0
 			},
@@ -676,7 +701,8 @@
 					"static/js/manifest.c6392fab.js",
 					"static/js/activity.bcfcd799.js",
 					"static/css/activity.bcfcd799.css",
-					"static/js/manifest.3f73e54a.js"
+					"static/js/manifest.3f73e54a.js",
+					"static/js/vendor.8f6e52aa.js"
 				],
 				"refer": [
 					"info_activity.html"
@@ -699,7 +725,5 @@
 			]
 		}
 	},
-	"unpackage": [
-		"js/update.json"
-	]
+  "unpackage": ["js/update.json"]
 }

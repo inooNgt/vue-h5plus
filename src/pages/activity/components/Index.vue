@@ -88,7 +88,7 @@ export default {
       this.loadData();
     },
     loadData() {
-      return this.$post(API.auth.activityjoining)
+      return this.$post(API.auth.activity)
         .then(res => {
           res = res && res.data;
           let data = res.data;

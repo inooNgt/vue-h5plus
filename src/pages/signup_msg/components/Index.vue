@@ -1,8 +1,8 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="报名课程" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
+    <van-nav-bar :title="title" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
     <van-cell-group>
-      <van-field ref="input" autofocus="autofocus" v-model="msg" :placeholder="placeholder" @click-icon="msg = ''" />
+      <van-field ref="input" v-model="msg" autofocus="autofocus" :placeholder="placeholder" />
     </van-cell-group>
   </div>
 </template>
@@ -14,7 +14,12 @@ import { Cell, CellGroup, NavBar, Icon, Field, Toast } from "vant";
 import MTOOL from "mtool";
 import mui from "mui";
 import config from "utils/config";
-import { loadUserInfo, getCachedData } from "utils/utils";
+import {
+  loadUserInfo,
+  getCachedData,
+  getCachedObject,
+  getPhoneCode
+} from "utils/utils";
 import API from "utils/api";
 
 Vue.use(Cell)
@@ -24,16 +29,19 @@ Vue.use(Cell)
   .use(Field)
   .use(Icon);
 
-// 缓存的用户信息
+// 获取缓存
 
+const signtype = getCachedData(config.keys.signupmsgtype);
 const signupmsg = getCachedData(config.keys.coursesignupmsg);
+
 let msgText = "";
 if (signupmsg === "name") msgText = "姓名";
 if (signupmsg === "phone") msgText = "手机号";
 if (signupmsg === "qq") msgText = "QQ";
 if (signupmsg === "wx") msgText = "微信";
 
-console.log("signupmsg:", signupmsg);
+console.log("signupmsg:" + signupmsg);
+console.log("signtype:" + signtype);
 
 try {
   MTOOL.plusReady(() => {
@@ -46,34 +54,34 @@ export default {
   name: "Index",
   data() {
     return {
+      title: signtype === "course" ? "报名课程" : "报名活动",
       msg: "",
       msgText: msgText,
+      isphone: signupmsg === "phone",
       placeholder: signupmsg && "请输入" + msgText
     };
   },
   created() {},
   mounted() {
-    this.$nextTick(() => {
-      console.log(this.$refs["input"]);
-      // this.$refs["input"] && this.$refs["input"].focus();
-    });
+    this.$nextTick(() => {});
   },
   methods: {
     goBack: function() {
       mui.back();
     },
+
     save() {
       if (signupmsg === "name" && this.msg.trim() === "") {
         Toast(`${msgText}不能为空`);
       }
-
+      let msg = this.msg;
       // 通过缓存传递参数
-      MTOOL.storage.setItem(config.keys[`coursesignup${signupmsg}`], this.msg);
+      MTOOL.storage.setItem(config.keys[`coursesignup${signupmsg}`], msg);
 
       if (MTOOL.isPlus) {
-        MTOOL.invoke("signup_course.html", "event_update", {
+        MTOOL.invoke(`signup_${signtype}.html`, "event_update", {
           type: signupmsg,
-          value: this.msg
+          value: msg
         });
       }
       setTimeout(() => {
@@ -84,6 +92,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~assets/scss/var";
+</style>
+
+
+<style lang="scss" scoped>
 </style>

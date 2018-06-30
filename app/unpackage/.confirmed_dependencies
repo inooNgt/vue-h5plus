@@ -40,7 +40,9 @@
 			"static/js/index.be6d86d4.js",
 			"static/css/index.be6d86d4.css",
 			"static/js/manifest.3f73e54a.js",
-			"static/js/vendor.8f6e52aa.js"
+			"static/js/vendor.8f6e52aa.js",
+			"static/js/index.c657ad73.js",
+			"static/js/manifest.c6392fab.js"
 		],
 		"refer": [
 			"my.html",
@@ -92,7 +94,9 @@
 			"static/js/my.e3d083f2.js",
 			"static/js/my.47a7b92a.js",
 			"static/css/my.47a7b92a.css",
-			"static/js/my.9b3301d4.js"
+			"static/js/my.9b3301d4.js",
+			"static/css/my.9b3301d4.css",
+			"static/js/vendor.8f6e52aa.js"
 		],
 		"refer": [
 			"index.html",
@@ -156,7 +160,8 @@
 			"static/css/home.b3ec4102.css",
 			"static/js/home.b3ec4102.js",
 			"static/js/manifest.3f73e54a.js",
-			"static/js/vendor.8f6e52aa.js"
+			"static/js/vendor.8f6e52aa.js",
+			"static/js/manifest.c6392fab.js"
 		],
 		"refer": [
 			"speed_up.html"
@@ -357,7 +362,7 @@
 	},
 	"signup_course.html": {
 		"refer": [
-			"signup_course_msg.html"
+			"signup_msg.html"
 		],
 		"resources": [
 			"static/css/signup_course.77ddad93.css",
@@ -401,7 +406,8 @@
 			"static/js/manifest.c6392fab.js",
 			"static/js/activity.bcfcd799.js",
 			"static/css/activity.bcfcd799.css",
-			"static/js/manifest.3f73e54a.js"
+			"static/js/manifest.3f73e54a.js",
+			"static/js/vendor.8f6e52aa.js"
 		]
 	}
 }

@@ -88,7 +88,7 @@ export default {
       this.loadData();
     },
     loadData() {
-      return this.$post(API.auth.coursejoining)
+      return this.$post(API.auth.course)
         .then(res => {
           res = res && res.data;
           let data = res.data;
@@ -115,20 +115,20 @@ export default {
         pullRefreshApi.endPulldownToRefresh();
       });
     },
-    pullupRefresh() {
-      let pullRefreshApi = mui(refreshId).pullRefresh();
-      console.log("pullupRefresh");
-      if (this.active === 1 && 1) {
-        // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
-        pullRefreshApi.endPullupToRefresh(false);
-      } else {
-        pullRefreshApi.refresh(true);
-      }
+    // pullupRefresh() {
+    //   let pullRefreshApi = mui(refreshId).pullRefresh();
+    //   console.log("pullupRefresh");
+    //   if (this.active === 1 && 1) {
+    //     // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
+    //     pullRefreshApi.endPullupToRefresh(false);
+    //   } else {
+    //     pullRefreshApi.refresh(true);
+    //   }
 
-      setTimeout(() => {
-        pullRefreshApi.endPullupToRefresh();
-      }, 1000);
-    },
+    //   setTimeout(() => {
+    //     pullRefreshApi.endPullupToRefresh();
+    //   }, 1000);
+    // },
     goInfo(id) {
       if (id === undefined) {
         return;

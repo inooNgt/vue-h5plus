@@ -17,11 +17,11 @@
     <div class="my-info">
       <div class="info-left">
         <div class="info-title">DIC</div>
-        <div class="info-value">1000</div>
+        <div class="info-value">{{tokenTotal}}</div>
       </div>
       <div class="info-right">
         <div class="info-title">活力值</div>
-        <div class="info-value">1000</div>
+        <div class="info-value">{{energyTotal}}</div>
       </div>
     </div>
     <ul class="my-list">
@@ -31,7 +31,7 @@
           <span class="item-title">实名认证</span>
         </div>
         <div class="item-right">
-          认证中
+          {{statustext}}
         </div>
         <div class="item-arrow">
           <span class="md-icon md-icon-arrow-right"></span>
@@ -43,7 +43,7 @@
           <div class="item-title">我的资产</div>
         </div>
         <div class="item-right">
-          100 DIC
+          {{tokenTotal}} DIC
         </div>
         <div class="item-arrow">
           <span class="md-icon md-icon-arrow-right"></span>
@@ -118,6 +118,11 @@ const STATUS_NOT_ACTIVE = 1; // 未激活
 const STATUS_ACTIVE = 2; // 正常状态
 const STATUS_DELETED = 3; // 被禁止的用户
 
+const STATUS_PENDING = 1; // 待认证
+const STATUS_CHECKING = 2; // 认证中
+const STATUS_SUCCESS = 3; // 认证成功
+const STATUS_FAIL = 4; // 认证失败
+
 export default {
   name: "Index",
   data() {
@@ -125,11 +130,22 @@ export default {
       logined: MTOOL.logined(),
       isPlus: MTOOL.isPlus,
       username: cachedUser.username || "- -",
+      energyTotal: "- -",
+      tokenTotal: "- -",
+      authstatus: "",
       avatar:
         cachedUser.avatar_base_url &&
         cachedUser.avatar_path &&
         cachedUser.avatar_base_url + "/" + cachedUser.avatar_path
     };
+  },
+  computed: {
+    statustext: () => {
+      if (this.authstatus * 1 === STATUS_PENDING) return "待认证";
+      if (this.authstatus * 1 === STATUS_CHECKING) return "认证中";
+      if (this.authstatus * 1 === STATUS_SUCCESS) return "认证成功";
+      if (this.authstatus * 1 === STATUS_FAIL) return "认证失败";
+    }
   },
   created() {
     console.log("created", this.logined);
@@ -169,15 +185,19 @@ export default {
       if (avatar && avatar !== this.avatar) {
         this.avatar = avatar;
       }
+
+      if (user && user.energy_total) this.energyTotal = user.energy_total;
+      if (user && user.token_total) this.tokenTotal = user.token_total;
     },
     // 再从服务器拉取数据
     async updateUserInfo() {
       try {
         let user = await loadUserInfo();
-        if (user.username) this.username = user.username;
-        if (user.avatar_base_url && user.avatar_path)
+        if (user && user.username) this.username = user.username;
+        if (user && user.avatar_base_url && user.avatar_path)
           this.avatar = user.avatar_base_url + "/" + user.avatar_path;
-
+        if (user && user.energy_total) this.energyTotal = user.energy_total;
+        if (user && user.token_total) this.tokenTotal = user.token_total;
         console.log("user:", user);
         this.checkUserStatus(user);
       } catch (error) {
@@ -191,6 +211,22 @@ export default {
           error.message && Toast(error.message);
         }
       }
+    },
+    // 获取认证状态
+    getIdentity() {
+      this.$get(API.auth.identity)
+        .then(res => {
+          let data = res.data && res.data.data;
+          if (res.status === 200 && data) {
+            if (data.status) this.authstatus = data.status;
+          } else {
+            data && data.message && Toast("发送错误" + data.message);
+          }
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        });
     },
     checkUserStatus(user) {
       user = user || getCachedUser();

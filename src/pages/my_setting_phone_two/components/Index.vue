@@ -92,11 +92,7 @@ export default {
     };
   },
   created() {
-    // 更新页面
-    window.addEventListener("event_update", event => {
-      console.log("event_update");
-      this.init();
-    });
+    this.listen();
   },
   mounted() {
     this.$nextTick(() => {
@@ -110,19 +106,48 @@ export default {
     init() {
       this.setAreaInfo();
     },
-    setAreaInfo: async function() {
-      console.log(cachedCountrycode);
+    listen() {
+      // 更新页面
+      window.addEventListener("event_update", event => {
+        // 获得事件参数
+        let detail = event.detail;
+
+        let countrycode = {};
+
+        if (detail && detail.id) {
+          countrycode = detail;
+        } else {
+          countrycode = getCachedObject(config.keys.countrycode) || {
+            id: "",
+            code: ""
+          };
+        }
+
+        console.log("event_update width countrycode1:" + countrycode.id);
+        console.log("this.update" + this.update);
+
+        this.update(countrycode);
+      });
+    },
+    update(countrycode) {
+      this.setAreaInfo(countrycode);
+    },
+    setAreaInfo: async function(countrycode) {
+      countrycode = countrycode || cachedCountrycode;
+      console.log(countrycode);
       let phonecode;
       let phonecodekey;
+      let areacode;
 
-      // 有cachedCountrycode缓存
-      if (cachedCountrycode && cachedCountrycode.id) {
+      // 有countrycode缓存
+      if (countrycode && countrycode.id) {
         // areacode
         let areacodelistRes = await this.$get(API.areacodelist);
         let areacodelist = areacodelistRes.data.data;
-        let phonecodeObj = getPhoneCode(areacodelist, cachedCountrycode.id);
+        let phonecodeObj = getPhoneCode(areacodelist, countrycode.id);
         phonecode = phonecodeObj.code;
         phonecodekey = phonecodeObj.key;
+        areacode = `${countrycode.id} ${countrycode.code}`;
 
         console.log("phonecodeObj", phonecodeObj);
       } else {
@@ -136,7 +161,7 @@ export default {
         phonecodekey = env.calling_code;
         phonecode = (env.calling_code || "").replace(/[A-Z]/gi, "");
 
-        this.areacode = `${env.country_code} ${countries[env.country_code]}`;
+        areacode = `${env.country_code} ${countries[env.country_code]}`;
 
         if (envRes.data.status !== 200) {
           Toast("获取环境信息失败");
@@ -144,8 +169,9 @@ export default {
       }
       if (phonecode) this.phonecode = phonecode;
       if (phonecodekey) this.phonecodekey = phonecodekey;
+      if (areacode) this.areacode = areacode;
 
-      console.log("phonecode", phonecode);
+      console.log("phonecode" + phonecode);
       // 缓存
       MTOOL.storage.setItem(config.keys.phonecode, phonecode);
       MTOOL.storage.setItem(config.keys.phonecodekey, phonecodekey);
@@ -303,7 +329,7 @@ html {
 }
 
 .box {
-  padding: 0 $padding-main;
+  padding: 0 $padding-main 60px;
 }
 .box-field {
   margin-top: 47px;

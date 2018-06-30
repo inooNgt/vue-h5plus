@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
   <meta name="misapplication-tap-highlight" content="no" />
-  <title>个人设置-修改昵称</title>
+  <title>报名</title>
 </head>
 
 <body>
@@ -14,7 +14,14 @@
   <script src="mui/mui.js"></script>
   <script src="mui/mtool.js"></script>
   <script>
+    try {
+      MTOOL.plusReady(() => {
+        if (MTOOL.isPlus) plus.key.showSoftKeybord();
+      });
+    } catch (error) {
+      console.log(error);
+    }
   </script>
-</body>   
+</body>
 
 </html>

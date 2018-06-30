@@ -58,11 +58,6 @@ export default {
         });
     },
 
-    setMsg(msg) {
-      MTOOL.storage.setItem(config.keys.coursesignupmsg, msg);
-      MTOOL.openWindow("signup_course_msg.html");
-    },
-
     login() {
       MTOOL.openWindow("login.html");
     }

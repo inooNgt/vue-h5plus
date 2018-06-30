@@ -9,32 +9,32 @@
       <div class="mui-scroll">
         <section class="md-tab-content" v-show="active==0">
           <ul class="fund-list">
-            <li class="fund-item" v-for="index in 10" :key="index">
+            <li class="fund-item" v-for="item in tokenList" :key="item.id">
               <div class="row-title">
-                <div class="col-left">登录</div>
+                <div class="col-left">{{item.summary}}</div>
                 <div class="col-right">
-                  <time>2018-05-23（01:30:43）</time>
+                  <time>{{item.time}}</time>
                 </div>
               </div>
               <div class="row-msg">
-                <div class="col-left">当前活力值：1000</div>
-                <div class="col-right">+10</div>
+                <div class="col-left">余额：{{tokenTotal}}</div>
+                <div class="col-right">{{item.title}}</div>
               </div>
             </li>
           </ul>
         </section>
         <section class="md-tab-content" v-show="active==1">
           <ul class="fund-list">
-            <li class="fund-item">
+            <li class="fund-item" v-for="item in energyList" :key="item.id">
               <div class="row-title">
-                <div class="col-left">注册</div>
+                <div class="col-left">{{item.summary}}</div>
                 <div class="col-right">
-                  <time>2018-05-23（01:30:43）</time>
+                  <time>{{item.time}}</time>
                 </div>
               </div>
               <div class="row-msg">
-                <div class="col-left">当前活力值：1000</div>
-                <div class="col-right">+10</div>
+                <div class="col-left">当前活力值：{{energyTotal}}</div>
+                <div class="col-right">{{item.title}}</div>
               </div>
             </li>
           </ul>
@@ -84,8 +84,11 @@ export default {
   data() {
     return {
       active: 0,
-      list: [{ title: "学知识" }, { title: "看路演" }],
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to Your Vue.js App",
+      tokenList: [],
+      energyList: [],
+      tokenTotal: "",
+      energyTotal: ""
     };
   },
   methods: {
@@ -98,38 +101,47 @@ export default {
             offset: "44px", // 可选 默认0px,下拉刷新控件的起始位置
             color: "#305085",
             callback: this.pulldownRefresh
-          },
-          up: {
-            auto: false,
-            contentrefresh: "正在加载更多数据...",
-            callback: this.pullupRefresh
           }
+          // up: {
+          //   auto: false,
+          //   contentrefresh: "正在加载更多数据...",
+          //   callback: this.pullupRefresh
+          // }
         }
       });
+      this.loadData();
     },
     goBack() {
       mui.back();
     },
     pulldownRefresh() {
       let pullRefreshApi = mui(refreshId).pullRefresh();
-      setTimeout(() => {
-        // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
-        pullRefreshApi.endPulldownToRefresh();
-      }, 1000);
-    },
-    pullupRefresh() {
-      let pullRefreshApi = mui(refreshId).pullRefresh();
-      console.log("pullupRefresh");
-      if (this.active === 1 && 1) {
-        pullRefreshApi.endPullupToRefresh(false);
-      } else {
-        pullRefreshApi.refresh(true);
-      }
 
-      setTimeout(() => {
-        pullRefreshApi.endPullupToRefresh();
-      }, 1000);
+      this.loadData().finally(() => {
+        pullRefreshApi.endPulldownToRefresh();
+      });
     },
+    loadData() {
+      return this.$get(API.auth.fund)
+        .then(res => {
+          res = res && res.data;
+          let data = res.data;
+          if (res.status === 200 && data) {
+            this.tokenList = data && data.latest_token_events;
+            this.energyList = data && data.latest_energy_events;
+            this.tokenTotal = data && data.token_total;
+            this.energyTotal = data && data.energy_total;
+          } else {
+            res.message && Toast(res.message);
+          }
+          console.log("data", data);
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        });
+    },
+
     onTabsClick(index, title) {
       console.log(index, title);
       let pullRefreshApi = mui(refreshId).pullRefresh();

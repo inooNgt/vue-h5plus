@@ -11,7 +11,10 @@ const API = {
   about: "/v1/help/about",
   helpview: "/v1/help/view",
   auth: {
+    course: "/v1/course",
+    activity: "/v1/activity",
     user: "/v1/user",
+    fund: "/v1/user/asset",
     userfile: "/v1/user/file",
     signup: "/v1/application",
     signin: "/v1/application/check",
@@ -23,10 +26,9 @@ const API = {
     alterphone: "/v1/user/mobile-phone",
     smskey: "/v1/user/sms-key",
     avatar: "/v1/user/avatar",
-    coursejoining: "/v1/course/joining",
+    activityjoining: "/v1/course/joining",
     courseown: "/v1/course/own",
     courseinfo: "/v1/course/view",
-    activityjoining: "/v1/activity/joining",
     activityown: "/v1/activity/own",
     activityinfo: "/v1/activity/view",
     usersmscode: "/v1/user/sms-code"

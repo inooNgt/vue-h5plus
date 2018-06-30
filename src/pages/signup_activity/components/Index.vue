@@ -134,7 +134,7 @@ export default {
       }
 
       this.loading = true;
-      this.$post(API.auth.signup)
+      this.$post(API.auth.signup, param)
         .then(res => {
           res = res && res.data;
           let data = res.data;
@@ -159,7 +159,8 @@ export default {
 
     setMsg(msg) {
       MTOOL.storage.setItem(config.keys.coursesignupmsg, msg);
-      MTOOL.openWindow("signup_course_msg.html");
+      MTOOL.storage.setItem(config.keys.signupmsgtype, "activity");
+      MTOOL.openWindow("signup_msg.html");
     },
 
     login() {

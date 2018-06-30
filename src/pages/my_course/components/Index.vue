@@ -148,19 +148,19 @@ export default {
       mui.back();
     },
 
-    pullupRefresh() {
-      let pullRefreshApi = mui(refreshId).pullRefresh();
-      console.log("pullupRefresh");
-      if (this.active === 1 && 1) {
-        pullRefreshApi.endPullupToRefresh(false);
-      } else {
-        pullRefreshApi.refresh(true);
-      }
+    // pullupRefresh() {
+    //   let pullRefreshApi = mui(refreshId).pullRefresh();
+    //   console.log("pullupRefresh");
+    //   if (this.active === 1 && 1) {
+    //     pullRefreshApi.endPullupToRefresh(false);
+    //   } else {
+    //     pullRefreshApi.refresh(true);
+    //   }
 
-      setTimeout(() => {
-        pullRefreshApi.endPullupToRefresh();
-      }, 1000);
-    },
+    //   setTimeout(() => {
+    //     pullRefreshApi.endPullupToRefresh();
+    //   }, 1000);
+    // },
     goInfo(id) {
       if (id === undefined) {
         return;
