@@ -18,7 +18,7 @@
           </div>
         </div>
         <van-field class="row-phone" v-model="phone" :label="phonecode" placeholder="请输入手机号" />
-        <van-field class="row-psd" center v-model="password" placeholder="请输入密码">
+        <van-field class="row-psd" type="password" center v-model="password" placeholder="请输入密码">
         </van-field>
         <div class="row-msg">
           <div class="col-left" @click="goMsgLogin">快捷登录</div>

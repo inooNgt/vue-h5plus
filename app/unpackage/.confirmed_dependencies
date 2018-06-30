@@ -39,7 +39,8 @@
 			"static/js/index.02275b92.js",
 			"static/js/index.be6d86d4.js",
 			"static/css/index.be6d86d4.css",
-			"static/js/manifest.3f73e54a.js"
+			"static/js/manifest.3f73e54a.js",
+			"static/js/vendor.8f6e52aa.js"
 		],
 		"refer": [
 			"my.html",
@@ -86,7 +87,12 @@
 			"static/js/manifest.c6392fab.js",
 			"static/css/my.3c5138a9.css",
 			"static/js/my.3c5138a9.js",
-			"static/js/manifest.3f73e54a.js"
+			"static/js/manifest.3f73e54a.js",
+			"static/css/my.e3d083f2.css",
+			"static/js/my.e3d083f2.js",
+			"static/js/my.47a7b92a.js",
+			"static/css/my.47a7b92a.css",
+			"static/js/my.9b3301d4.js"
 		],
 		"refer": [
 			"index.html",
@@ -149,7 +155,8 @@
 			"static/css/home.7016db54.css",
 			"static/css/home.b3ec4102.css",
 			"static/js/home.b3ec4102.js",
-			"static/js/manifest.3f73e54a.js"
+			"static/js/manifest.3f73e54a.js",
+			"static/js/vendor.8f6e52aa.js"
 		],
 		"refer": [
 			"speed_up.html"
@@ -214,7 +221,8 @@
 			"static/js/my_setting.06c4b17d.js",
 			"static/js/my_setting.3e4e35f3.js",
 			"static/css/my_setting.3e4e35f3.css",
-			"static/js/vendor.c0628292.js"
+			"static/js/vendor.c0628292.js",
+			"static/js/my_setting.393771a8.js"
 		]
 	},
 	"my_setting_phone.html": {
@@ -227,7 +235,8 @@
 			"static/js/my_setting_phone.js",
 			"static/js/manifest.js",
 			"static/js/vendor.js",
-			"static/js/vendor.c0628292.js"
+			"static/js/vendor.c0628292.js",
+			"static/js/my_setting_phone.f944d1cf.js"
 		]
 	},
 	"my_setting_phone_done.html": {
@@ -377,7 +386,8 @@
 			"static/js/course.4dc0893f.js",
 			"static/css/course.4dc0893f.css",
 			"static/js/vendor.e002ddca.js",
-			"static/js/manifest.3f73e54a.js"
+			"static/js/manifest.3f73e54a.js",
+			"static/js/vendor.8f6e52aa.js"
 		]
 	},
 	"activity.html": {

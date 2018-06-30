@@ -73,7 +73,20 @@ export default {
     save() {
       if (this.phone.trim() === "") {
         Toast("手机号不能为空");
+        return;
       }
+
+      let pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+
+      if (!pwdReg.test(this.password1) || !pwdReg.test(this.password2)) {
+        Toast("请输入8-16位字母+数字的密码组合");
+        return;
+      }
+      if (this.password1 !== this.password2) {
+        Toast("两次输入的密码不一致");
+        return;
+      }
+
       let smskey = MTOOL.storage.getItem(config.keys.smskey) || "";
 
       this.loading = true;
@@ -102,9 +115,11 @@ export default {
               plus.webview.close(phonewv, "none");
               setTimeout(() => {
                 mui.back();
-              }, 400);
+              }, 500);
             } else {
-              location.href = "my_setting.html";
+              setTimeout(() => {
+                location.href = "my_setting.html";
+              }, 500);
             }
             Toast("设置成功");
           } else {

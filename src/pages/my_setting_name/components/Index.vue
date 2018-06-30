@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="标题" fixed left-arrow @click-left="goBack" right-text="保存" @click-right="save" />
     <van-cell-group>
-      <van-field v-model="username" placeholder="请输入昵称" @click-icon="username = ''" />
+      <van-field v-model="username" autofocus="autofocus" placeholder="请输入昵称" @click-icon="username = ''" />
     </van-cell-group>
   </div>
 </template>

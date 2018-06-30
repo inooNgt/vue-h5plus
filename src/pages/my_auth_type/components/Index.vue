@@ -45,6 +45,8 @@ export default {
         MTOOL.invoke("my_auth.html", "event_edit_authtype", {
           authtype: type
         });
+      } else {
+        MTOOL.storage.setItem(config.keys.authtype, type);
       }
       setTimeout(() => {
         mui.back();

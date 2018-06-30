@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="填写姓名" fixed left-arrow @click-left="goBack" right-text="确定" @click-right="save" />
     <van-cell-group>
-      <van-field v-model="name" placeholder="请输入姓名" @click-icon="name = ''" />
+      <van-field v-model="name" autofocus="autofocus" placeholder="请输入姓名" @click-icon="name = ''" />
     </van-cell-group>
   </div>
 </template>
@@ -16,6 +16,14 @@ import mui from "mui";
 import config from "utils/config";
 import { getCachedData, loadUserInfo } from "utils/utils";
 import API from "utils/api";
+
+try {
+  MTOOL.plusReady(() => {
+    if (MTOOL.isPlus) plus.key.showSoftKeybord();
+  });
+} catch (error) {
+  console.log(error);
+}
 
 Vue.use(Cell)
   .use(CellGroup)
@@ -52,6 +60,9 @@ export default {
         MTOOL.invoke("my_auth.html", "event_edit_name", {
           name: this.name
         });
+      } else {
+        // 浏览器中传值
+        MTOOL.storage.setItem(config.keys.realname, this.name);
       }
       setTimeout(() => {
         mui.back();

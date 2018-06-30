@@ -21,7 +21,8 @@
         <p>向{{alteringPhone}}的手机号发送验证码</p>
       </div>
       <div class="box-sms-btn">
-        <van-button slot="button" class="btn btn-sub-small" @click="getSmscode">发送验证码</van-button>
+        <van-button slot="button" class="btn btn-sub-small" v-if="cansendsms" @click="getSmscode">发送验证码</van-button>
+        <van-button slot="button" class="btn btn-sub-small" v-if="!cansendsms">{{timing}}s</van-button>
       </div>
       <van-cell-group class="box-field">
         <van-field v-model="sms" label="验证码：" placeholder="请输入验证码" />
@@ -31,6 +32,7 @@
       </div>
     </div>
     <div class="btn-box box-btn-fixed">
+
       <van-button class="btn btn-sub" slot="button" v-show="!loading" @click="next">验证身份</van-button>
       <van-button class="btn btn-sub" slot="button" v-show="loading">验证中...</van-button>
     </div>
@@ -65,6 +67,8 @@ export default {
       sms: "",
       alteringPhone: "",
       loading: false,
+      cansendsms: true,
+      timing: "",
       phone: cachedUser.mobile_phone || "- -"
     };
   },
@@ -79,6 +83,7 @@ export default {
     next() {
       if (this.sms.trim() === "") {
         Toast("验证码不能为空");
+        return;
       }
       this.loading = true;
       this.$post(API.auth.smskey, { sms_code: this.sms })
@@ -108,14 +113,31 @@ export default {
           console.log(res);
           if (res.status === 200) {
             Toast("短信验证码发送成功");
+            this.cansendsms = false;
+            this.startCountDown().then(() => {
+              this.cansendsms = true;
+            });
           } else {
-            Toast(res.message);
+            res.message && Toast(res.message);
           }
         })
         .catch(e => {
           console.log(e);
-          Toast(e.message);
+          res.message && Toast(res.message);
         });
+    },
+
+    startCountDown(s) {
+      return new Promise((resolve, reject) => {
+        this.timing = s || 60;
+        let timmer = null;
+        timmer = setInterval(() => {
+          if (this.timing-- <= 0) {
+            clearInterval(timmer);
+            resolve();
+          }
+        }, 1000);
+      });
     }
   }
 };

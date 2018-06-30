@@ -2,16 +2,16 @@
   <div class="page-content nav-content">
     <van-nav-bar title="实名认证" fixed left-arrow @click-left="goBack" />
     <div class="auth-status" v-if="status*1 === 2">
-      <img class="status-img" src="~assets/img/icon_empty.png" alt="">
+      <img class="status-img" src="~assets/img/auth_going.png" alt="">
       <div class="status-text">正在审核中…</div>
     </div>
     <div class="auth-status" v-if="status*1 === 3">
-      <img class="status-img" src="~assets/img/icon_empty.png" alt="">
-      <div class="status-text">已审核…</div>
+      <img class="status-img" src="~assets/img/auth_finish.png" alt="">
+      <div class="status-text">已审核</div>
     </div>
     <div class="auth-status" v-if="status*1 === 4">
-      <img class="status-img" src="~assets/img/icon_empty.png" alt="">
-      <div class="status-text">认证失败…</div>
+      <img class="status-img" src="~assets/img/auth_fail.png" alt="">
+      <div class="status-text">认证失败</div>
     </div>
     <ul class="my-list">
       <li class="list-item" @click="getName">
@@ -20,8 +20,8 @@
           <span class="placeholder" v-if="!name">请输入姓名</span>
           <span class="right-text">{{name}}</span>
         </div>
-        <div class="item-arrow" v-if="status*1 === 1">
-          <van-icon name="arrow" />
+        <div class="item-arrow">
+          <van-icon name="arrow" v-if="status*1 === 1" />
         </div>
       </li>
       <li class="list-item" @click="getCountry">
@@ -30,8 +30,8 @@
           <span class="placeholder" v-if="!country">请选择国家</span>
           <span class="right-text">{{country}}</span>
         </div>
-        <div class="item-arrow" v-if="status*1 === 1">
-          <van-icon name="arrow" />
+        <div class="item-arrow">
+          <van-icon name="arrow" v-if="status*1 === 1" />
         </div>
       </li>
       <li class="list-item" @click="getType">
@@ -40,8 +40,8 @@
           <span class="placeholder" v-if="!authtype">请选择证件类型</span>
           <span class="right-text">{{expressedtype}}</span>
         </div>
-        <div class="item-arrow" v-if="status*1 === 1">
-          <van-icon name="arrow" />
+        <div class="item-arrow">
+          <van-icon name="arrow" v-if="status*1 === 1" />
         </div>
       </li>
       <li class="list-item" @click="getNumber">
@@ -50,8 +50,8 @@
           <span class="placeholder" v-if="!number">请选择证件号码</span>
           <span class="right-text">{{number}}</span>
         </div>
-        <div class="item-arrow" v-if="status*1 === 1">
-          <van-icon name="arrow" />
+        <div class="item-arrow">
+          <van-icon name="arrow" v-if="status*1 === 1" />
         </div>
       </li>
     </ul>
@@ -163,18 +163,22 @@ const cachedType = getCachedData(config.keys.authtype);
 
 let cachedCountrycode = getCachedObject(config.keys.authcountrycode);
 
-const testdata =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADxElEQVR4Xu2aS8hNURTHf593UkoZGCgSMiAx8UqKEgoDJUpGjJgxI68hM0aMpJQyoFDklTwHEhNFeWRAKaUkyat/rVPH4XbvOmevc7/bOWtyu/fusx7/s9drrz1Ew2mo4fbTAtDugIYj0LpAwzdAGwRbF2hdwIfAEmAscMv3WPjq0cBi4AXwwSPN4wJzgWfGfDdwwiMocO044CqwHHgJzPLI8gAwH3iSY74TOOURFrB2DHAZWGW8XwEzPHI8AIjvHuCoCfgNbAfOeAQmXDsKuAisNZ5fgBXAY48MLwDifRjYb0J+AVuBcx6hCdaOBM4DG43XV2Al8NDLuwwAkqFdoN0g+glsAi54hZdcPwI4C2y2578Bq4E7ZfiVBUCyTgI7TOgPYANwpYwSjmek72lgmz3zHVgHXHfw+GtpFQCSK9ODEceBXSlBrwKA9Ei6HbsAEOJ2VQGQzv8LSMrJrmjcxfiwwJsCAOleTEmfrTDJCqcednfHJaGpNxUA0r5YlHwClgHPK1gvf5ffZ5S8+EoJgJTMl6X6/hFYaiWqFwdlGGWajELK79QASNnxwA1gkWn+3kB47UBAaU7pLtNvL3DM8XzPSyMAkPAJwG1goWnyzkDQZzdSgaNCRxlGpAB4oNtDZf+PAkD6TLTqbJ4p9wZQO60d0YlU2qrEVWYR6a3r7YdRJABSehJwF5hjFqhdVUxQbCiSmho1N8ooIrXb8vtQigZAyk8G7gEzzRJlBWUHZYmM1M6qrVUmEanNVsQPpzoAkBFTgPvANLNI9YGKpaxe0IGGMohI7bXabLXb4VQXADJkKvDIwNB3VYry70uWOfSbOkp1luowa6E6AZBBcgO5g9xCpPOELNqrk1RHqc6yNqobABmmgPjAskRm6E1gDaD2tlYaTgDoUKPWty+k6wZgurmAgmLRBWr3/7oBUBCU/+uzUxDU2aLOGBUbaqG6dkCj02CjC6FGl8KNboZStsMHgUNRETEiCDb6QKTRR2KNPhSNPBbfBxyxGJB8Ip0iBhQHI6XG1F2CXH4qlHQiXRWAOkdj+bmgzgvWpxjGVgGgH8PR/ES68mS4ajM0HMbjle4GVAGguB37eUGi9O2QsgAoIisyZ/38cLgiUzrwemNA6KTWWe4mSb0eABYUZv7JJ7VOALS8WHy9zR2998TOA4BGXE+Na8iktieN/12UL791U3S2h48HAPHVbVHl/gwIj6zItboquwW4FnlVNtKAvvH27oC+KRoluAUgCtlB4dvugEF5U1F6tjsgCtlB4dvugEF5U1F6/gHAIOBBomZ+cQAAAABJRU5ErkJggg==";
+// const testdata =
+//   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAADxElEQVR4Xu2aS8hNURTHf593UkoZGCgSMiAx8UqKEgoDJUpGjJgxI68hM0aMpJQyoFDklTwHEhNFeWRAKaUkyat/rVPH4XbvOmevc7/bOWtyu/fusx7/s9drrz1Ew2mo4fbTAtDugIYj0LpAwzdAGwRbF2hdwIfAEmAscMv3WPjq0cBi4AXwwSPN4wJzgWfGfDdwwiMocO044CqwHHgJzPLI8gAwH3iSY74TOOURFrB2DHAZWGW8XwEzPHI8AIjvHuCoCfgNbAfOeAQmXDsKuAisNZ5fgBXAY48MLwDifRjYb0J+AVuBcx6hCdaOBM4DG43XV2Al8NDLuwwAkqFdoN0g+glsAi54hZdcPwI4C2y2578Bq4E7ZfiVBUCyTgI7TOgPYANwpYwSjmek72lgmz3zHVgHXHfw+GtpFQCSK9ODEceBXSlBrwKA9Ei6HbsAEOJ2VQGQzv8LSMrJrmjcxfiwwJsCAOleTEmfrTDJCqcednfHJaGpNxUA0r5YlHwClgHPK1gvf5ffZ5S8+EoJgJTMl6X6/hFYaiWqFwdlGGWajELK79QASNnxwA1gkWn+3kB47UBAaU7pLtNvL3DM8XzPSyMAkPAJwG1goWnyzkDQZzdSgaNCRxlGpAB4oNtDZf+PAkD6TLTqbJ4p9wZQO60d0YlU2qrEVWYR6a3r7YdRJABSehJwF5hjFqhdVUxQbCiSmho1N8ooIrXb8vtQigZAyk8G7gEzzRJlBWUHZYmM1M6qrVUmEanNVsQPpzoAkBFTgPvANLNI9YGKpaxe0IGGMohI7bXabLXb4VQXADJkKvDIwNB3VYry70uWOfSbOkp1luowa6E6AZBBcgO5g9xCpPOELNqrk1RHqc6yNqobABmmgPjAskRm6E1gDaD2tlYaTgDoUKPWty+k6wZgurmAgmLRBWr3/7oBUBCU/+uzUxDU2aLOGBUbaqG6dkCj02CjC6FGl8KNboZStsMHgUNRETEiCDb6QKTRR2KNPhSNPBbfBxyxGJB8Ip0iBhQHI6XG1F2CXH4qlHQiXRWAOkdj+bmgzgvWpxjGVgGgH8PR/ES68mS4ajM0HMbjle4GVAGguB37eUGi9O2QsgAoIisyZ/38cLgiUzrwemNA6KTWWe4mSb0eABYUZv7JJ7VOALS8WHy9zR2998TOA4BGXE+Na8iktieN/12UL791U3S2h48HAPHVbVHl/gwIj6zItboquwW4FnlVNtKAvvH27oC+KRoluAUgCtlB4dvugEF5U1F6tjsgCtlB4dvugEF5U1F6/gHAIOBBomZ+cQAAAABJRU5ErkJggg==";
+
+const canuseCached = !MTOOL.isPlus;
+
+console.log(cachedRealname, canuseCached);
 
 export default {
   name: "Index",
   data() {
     return {
-      name: "",
-      country: "",
-      countryId: "",
-      authtype: "",
-      number: "",
+      name: (canuseCached && cachedRealname) || "",
+      country: (cachedCountrycode && cachedCountrycode.code) || "",
+      countryId: (cachedCountrycode && cachedCountrycode.id) || "",
+      authtype: (canuseCached && cachedType) || "",
+      number: (canuseCached && cachedRealname) || "",
       logined: MTOOL.logined(),
       showView0: false,
       showView1: false,
@@ -265,10 +269,10 @@ export default {
         .then(res => {
           let data = res.data && res.data.data;
           if (res.status === 200 && data) {
-            this.name = data.real_name;
-            this.authtype = data.id_type;
-            this.number = data.id_number;
-            this.countryId = data.country_code;
+            if (data.real_name) this.name = data.real_name;
+            if (data.id_type) this.authtype = data.id_type;
+            if (data.id_number) this.number = data.id_number;
+            if (data.country_code) this.countryId = data.country_code;
             this.picturedata0 = data.picture1;
             this.picturedata1 = data.picture2;
             this.picturedata2 = data.picture3;
@@ -310,16 +314,16 @@ export default {
 
     addImg(uploadIndex) {
       if (!MTOOL.isPlus) {
-        Toast("请在app中修改头像");
+        Toast("请在app中进行操作");
 
         // test
-        this.uploadFile(
-          {
-            localurl: "",
-            fileblob: dataURLtoBlob(testdata)
-          },
-          uploadIndex
-        );
+        // this.uploadFile(
+        //   {
+        //     localurl: "",
+        //     fileblob: dataURLtoBlob(testdata)
+        //   },
+        //   uploadIndex
+        // );
         return;
       }
       MTOOL.plusReady(() => {

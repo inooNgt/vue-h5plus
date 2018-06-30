@@ -142,6 +142,19 @@
   }
 }
 
+.van-dialog {
+  .van-dialog__content {
+    text-align: center;
+    color: #000;
+  }
+}
+.dialog-out {
+  .van-dialog__confirm,
+  .van-dialog__confirm:active {
+    color: red;
+  }
+}
+
 /* van end */
 
 /* mui start  */

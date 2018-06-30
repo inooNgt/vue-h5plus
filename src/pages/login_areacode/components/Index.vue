@@ -120,6 +120,7 @@ export default {
       MTOOL.invoke("login_msg.html", "event_update", areacode);
       MTOOL.invoke("login_register.html", "event_update", areacode);
       MTOOL.invoke("login_account.html", "event_update", areacode);
+      MTOOL.invoke("my_setting_phone_two.html", "event_update", areacode);
 
       // 缓存
       MTOOL.storage.setItem(config.keys.countrycode, JSON.stringify(areacode));

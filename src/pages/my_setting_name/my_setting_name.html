@@ -14,7 +14,14 @@
   <script src="mui/mui.js"></script>
   <script src="mui/mtool.js"></script>
   <script>
+    try {
+      MTOOL.plusReady(() => {
+        if (MTOOL.isPlus) plus.key.showSoftKeybord();
+      });
+    } catch (error) {
+      console.log(error);
+    }
   </script>
-</body>   
+</body>
 
 </html>

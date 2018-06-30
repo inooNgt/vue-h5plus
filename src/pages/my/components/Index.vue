@@ -183,7 +183,10 @@ export default {
       } catch (error) {
         console.log(error);
         if (error && error.status * 1 === 401) {
-          MTOOL.openWindow("login.html");
+          error.message && Toast(error.message);
+          setTimeout(() => {
+            this.login();
+          }, 500);
         } else {
           error.message && Toast(error.message);
         }

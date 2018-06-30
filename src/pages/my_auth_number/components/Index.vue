@@ -2,7 +2,7 @@
   <div class="page-content nav-content">
     <van-nav-bar title="填写证件号码" fixed left-arrow @click-left="goBack" right-text="确定" @click-right="save" />
     <van-cell-group>
-      <van-field v-model="number" placeholder="请输入证件号码" @click-icon="name = ''" />
+      <van-field v-model="number" autofocus="autofocus" placeholder="请输入证件号码" @click-icon="name = ''" />
     </van-cell-group>
   </div>
 </template>
@@ -23,6 +23,14 @@ Vue.use(Cell)
   .use(Toast)
   .use(Field)
   .use(Icon);
+
+try {
+  MTOOL.plusReady(() => {
+    if (MTOOL.isPlus) plus.key.showSoftKeybord();
+  });
+} catch (error) {
+  console.log(error);
+}
 
 export default {
   name: "Index",
@@ -48,13 +56,15 @@ export default {
         Toast("证件号码不能为空");
       }
 
-      MTOOL.storage.setItem(config.keys.authnumber, this.number);
-
       if (MTOOL.isPlus) {
         MTOOL.invoke("my_auth.html", "event_edit_number", {
           number: this.number
         });
+      } else {
+        // 浏览器中传值
+        MTOOL.storage.setItem(config.keys.authnumber, this.number);
       }
+
       setTimeout(() => {
         mui.back();
       }, 0);

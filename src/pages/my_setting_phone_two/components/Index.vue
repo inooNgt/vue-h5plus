@@ -28,7 +28,8 @@
           </div>
         </div>
         <van-field v-model="phone" :label="phonecode" center clearable placeholder="请输入新手机号">
-          <van-button slot="button" class="btn-sub btn-getsms" @click="getSmscode" size="small">获取验证码</van-button>
+          <van-button slot="button" class="btn-sub btn-getsms" v-if="cansendsms" @click="getSmscode" size="small">获取验证码</van-button>
+          <van-button slot="button" class="btn-sub btn-getsms" v-if="!cansendsms" size="small">{{timing}}s</van-button>
         </van-field>
         <van-field v-model="sms" label="验证码：" placeholder="请输入验证码" />
       </van-cell-group>
@@ -82,13 +83,21 @@ export default {
       sms: "",
       alteringPhone: "",
       loading: false,
-      phone: cachedUser.mobile_phone || "- -",
+      phone: "",
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,
-      phonecodekey: cachedPhonecodekey
+      phonecodekey: cachedPhonecodekey,
+      cansendsms: true,
+      timing: ""
     };
   },
-  created() {},
+  created() {
+    // 更新页面
+    window.addEventListener("event_update", event => {
+      console.log("event_update");
+      this.init();
+    });
+  },
   mounted() {
     this.$nextTick(() => {
       this.init();
@@ -144,7 +153,13 @@ export default {
     save() {
       if (this.phone.trim() === "") {
         Toast("手机号不能为空");
+        return;
       }
+      if (this.sms.trim() === "") {
+        Toast("验证码不能为空");
+        return;
+      }
+
       let callingcode = MTOOL.storage.getItem(config.keys.phonecodekey) || "";
       let smskey = MTOOL.storage.getItem(config.keys.smskey) || "";
       this.loading = true;
@@ -176,7 +191,7 @@ export default {
             }
             setTimeout(() => {
               MTOOL.openWindow("my_setting_phone_three.html");
-            }, 400);
+            }, 500);
             Toast("修改成功");
           } else {
             Toast(res.message);
@@ -191,19 +206,41 @@ export default {
         });
     },
     getSmscode() {
-      this.$post(API.auth.usersmscode)
+      if (this.phone.trim() === "") {
+        Toast("手机号不能为空");
+        return;
+      }
+
+      this.$post(API.smscode, {
+        mobile_phone: `${this.phonecodekey}${this.phone}`
+      })
         .then(res => {
           console.log(res);
           if (res.status === 200) {
             Toast("短信验证码发送成功");
+            this.cansendsms = false;
+            this.startCountDown().then(() => {
+              this.cansendsms = true;
+            });
           } else {
-            Toast(res.message);
+            res.message && Toast(res.message);
           }
         })
         .catch(e => {
-          console.log(e);
-          Toast(e.message);
+          e.message && Toast(e.message);
         });
+    },
+    startCountDown(s) {
+      return new Promise((resolve, reject) => {
+        this.timing = s || 60;
+        let timmer = null;
+        timmer = setInterval(() => {
+          if (this.timing-- <= 0) {
+            clearInterval(timmer);
+            resolve();
+          }
+        }, 1000);
+      });
     },
     goAreaCode() {
       MTOOL.openWindow("login_areacode.html");
@@ -272,6 +309,8 @@ html {
   margin-top: 47px;
 }
 .btn-getsms.btn-getsms.btn-getsms {
+  height: 30px;
+  line-height: 30px;
   font-size: 12px;
   @extend %text-over;
 }

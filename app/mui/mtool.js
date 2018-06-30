@@ -4,6 +4,7 @@
    */
   var config = {
     subpages: ["home.html", "course.html", "activity.html", "my.html"],
+    mypreloadpages: ["my_course.html", "my_auth.html", "my_acitvity.html"],
     top: "0px",
     bottom: "49px",
     loginPages: ["my.html"],
@@ -12,6 +13,8 @@
       activenav: "md.index.activeNavPath",
       token: "ml.login.token"
     },
+    aniShow: "slide-in-bottom",
+    duration: 180,
     style: {
       background: "#e8e8e8"
     }
@@ -155,14 +158,31 @@
       url: url,
       id: url,
       extras: extras,
-      show: {
-        aniShow: "slide-in-bottom"
-      },
       style: style,
+      show: {
+        aniShow: config.aniShow
+      },
       waiting: {
         autoShow: false
       }
     });
+  }
+  /**
+   * 预加载页面配置
+   * @param {Array} pages
+   */
+  function genProadpages(pages) {
+    let result = [];
+    pages.forEach(pagepath => {
+      result.push({
+        url: pagepath,
+        id: pagepath,
+        styles: {
+          render: "always" //一直渲染
+        }
+      });
+    });
+    return result;
   }
 
   /**
@@ -227,8 +247,8 @@
    */
   function switchNav(options) {
     if (typeof plus !== "undefined") {
-      plus.webview.show(options.to);
-      plus.webview.hide(options.from);
+      plus.webview.hide(options.from, "none");
+      plus.webview.show(options.to, "none");
 
       //检查更新
       // if (needLogin(options.to)) {
@@ -376,6 +396,7 @@
     openWindow: openWindow,
     invoke: invoke,
     invokeAll: invokeAll,
+    genProadpages: genProadpages,
     elementPosition: elementPosition
   };
 

@@ -19,7 +19,8 @@
         </div>
         <van-field class="row-phone" v-model="phone" :label="phonecode" placeholder="请输入手机号" />
         <van-field class="row-sms" center v-model="sms" placeholder="请输入短信验证码">
-          <van-button slot="button" size="large">发送验证码</van-button>
+          <van-button slot="button" @click="getSmscode" v-if="cansendsms" size="large">发送验证码</van-button>
+          <van-button slot="button" @click="getSmscode" v-if="!cansendsms" size="large">{{timing}}s</van-button>
         </van-field>
       </van-cell-group>
       <div class="btn-box">
@@ -85,6 +86,8 @@ export default {
       phone: "",
       sms: "",
       loading: false,
+      cansendsms: true,
+      timing: "",
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,
       phonecodekey: cachedPhonecodekey
@@ -238,6 +241,42 @@ export default {
       } else {
         location.href = "home.html";
       }
+    },
+    getSmscode() {
+      if (this.phone.trim() === "") {
+        Toast("手机号不能为空");
+        return;
+      }
+      this.$post(API.smscode, {
+        mobile_phone: `${this.phonecodekey}${this.phone}`
+      })
+        .then(res => {
+          console.log(res);
+          if (res.status === 200) {
+            Toast("短信验证码发送成功");
+            this.cansendsms = false;
+            this.startCountDown().then(() => {
+              this.cansendsms = true;
+            });
+          } else {
+            res.message && Toast(res.message);
+          }
+        })
+        .catch(e => {
+          e.message && Toast(e.message);
+        });
+    },
+    startCountDown(s) {
+      return new Promise((resolve, reject) => {
+        this.timing = s || 60;
+        let timmer = null;
+        timmer = setInterval(() => {
+          if (this.timing-- <= 0) {
+            clearInterval(timmer);
+            resolve();
+          }
+        }, 1000);
+      });
     },
     goFindPS() {
       MTOOL.openWindow("login_findps.html");

@@ -42,7 +42,7 @@
       </li>
     </ul>
     <div class="box-btn box-btn-fixed">
-      <van-button slot="button" class="btn btn-sub" size="large" v-if="logined" @click="logout">退出登录</van-button>
+      <van-button slot="button" class="btn btn-sub" size="large" v-if="logined" @click="comfirmLogout">退出登录</van-button>
       <van-button slot="button" class="btn btn-sub" size="large" v-if="!logined" @click="login">登录</van-button>
     </div>
   </div>
@@ -50,7 +50,7 @@
 
 <script>
 import Vue from "vue";
-import { Cell, CellGroup, NavBar, Icon, Button, Toast } from "vant";
+import { Cell, CellGroup, NavBar, Icon, Button, Toast, Dialog } from "vant";
 import MTOOL from "mtool";
 import mui from "mui";
 import config from "utils/config";
@@ -62,6 +62,7 @@ Vue.use(Cell)
   .use(NavBar)
   .use(Toast)
   .use(Button)
+  .use(Dialog)
   .use(Icon);
 
 // 缓存的用户信息
@@ -196,6 +197,22 @@ export default {
     login() {
       MTOOL.openWindow("login.html");
     },
+    comfirmLogout() {
+      Dialog.confirm({
+        title: "提示",
+        message: "确认退出登录？",
+        confirmButtonText: "退出",
+        className: "dialog-out"
+      })
+        .then(() => {
+          // on confirm
+          this.logout();
+        })
+        .catch(() => {
+          // on cancel
+        });
+    },
+
     logout() {
       this.$post(API.auth.logout).then(res => {
         let data = res.data;
@@ -218,6 +235,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.van-dialog {
+  .van-dialog__confirm,
+  .van-dialog__confirm:active {
+    color: red;
+  }
+}
+</style>
+
 
 <style lang="scss" scoped>
 @import "~assets/scss/var";
