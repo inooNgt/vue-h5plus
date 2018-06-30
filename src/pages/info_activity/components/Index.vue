@@ -1,6 +1,6 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="课程详情" fixed left-arrow @click-left="goBack" />
+    <van-nav-bar title="活动详情" fixed left-arrow @click-left="goBack" />
     <van-tabs class="van-tabs-fixed" v-model="active" :line-width="75" @click="onTabsClick">
       <van-tab v-for="(title,index) in tabs" :title="title" :key="index"></van-tab>
     </van-tabs>
@@ -23,11 +23,11 @@
         </h4>
         <div class="part-content">
           <dl class="info-dl">
-            <dt>课程名称：</dt>
+            <dt>活动名称：</dt>
             <dd>{{data.title}}</dd>
           </dl>
           <dl class="info-dl">
-            <dt> 课程费用：</dt>
+            <dt> 活动费用：</dt>
             <dd>{{data.price_text}}</dd>
           </dl>
           <dl class="info-dl">
@@ -50,7 +50,7 @@
       </section>
       <section class="part part-2">
         <h4 class="part-title" ref="hook-1">
-          课程介绍
+          活动介绍
         </h4>
         <div class="part-content">
           <div class="part-rich" v-html="data.short_desc"></div>
@@ -58,7 +58,7 @@
       </section>
       <section class="part part-3">
         <h4 class="part-title" ref="hook-2">
-          课程大纲
+          活动大纲
         </h4>
         <div class="part-content">
           <div class="part-rich" v-html="data.structure"></div>
@@ -98,14 +98,14 @@ Vue.use(NavBar)
 
 const refreshId = "#pullrefresh";
 
-const courseId = getCachedData(config.keys.mycourseid);
+const activityId = getCachedData(config.keys.myactivityid);
 
 export default {
   name: "Index",
 
   created() {
     // 更新所有子页面
-    window.addEventListener("event_update", function(event) {
+    window.addEventListener("event_update", event => {
       // 获得事件参数
       let detail = event.detail;
       console.log("event_nav_update");
@@ -123,8 +123,6 @@ export default {
   data() {
     return {
       active: 0,
-      courseJoinedList: [],
-      courseOwnedList: [],
       msg: "Welcome to Your Vue.js App",
       loading: false,
       data: {
@@ -141,16 +139,16 @@ export default {
       },
       starttime: "",
       endtime: "",
-      tabs: ["基本信息", "课程介绍", "课程大纲", "讲师资源"]
+      tabs: ["基本信息", "活动介绍", "活动大纲", "讲师资源"]
     };
   },
   methods: {
     init() {
-      this.loadCourseInfo(courseId);
+      this.loadInfo(activityId);
     },
-    loadCourseInfo(id) {
+    loadInfo(id) {
       this.loading = true;
-      this.$get(API.auth.courseinfo, {
+      this.$get(API.auth.activityinfo, {
         params: {
           id
         }
@@ -178,8 +176,8 @@ export default {
       mui.back();
     },
     goSignup() {
-      MTOOL.storage.setItem(config.keys.signupcourseid, this.data.id);
-      MTOOL.openWindow("signup_course.html");
+      MTOOL.storage.setItem(config.keys.signupactivityid, this.data.id);
+      MTOOL.openWindow("signup_activity.html");
     },
     onTabsClick(index, title) {
       this.toHook(index);
@@ -221,6 +219,11 @@ body {
     &::after {
       display: none;
     }
+  }
+}
+.part-rich {
+  img {
+    max-width: 100%;
   }
 }
 </style>
@@ -271,7 +274,7 @@ body {
 .cover {
   height: 0;
   width: 100%;
-  padding-top: 49%;
+  padding-top: 57.14%;
   border: solid 1px #dddddd;
   position: relative;
   .cover-img {
@@ -321,6 +324,9 @@ body {
 .part-rich {
   font-size: 12px;
   color: $color-border;
+  img {
+    max-width: 100%;
+  }
 }
 </style>
 

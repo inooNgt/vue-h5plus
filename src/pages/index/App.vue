@@ -10,7 +10,7 @@ import Footer from "../../components/Footer";
 import MTOOL from "mtool";
 
 export default {
-  name: "App", 
+  name: "App",
   components: {
     MFooter: Footer
   },
@@ -21,7 +21,7 @@ export default {
   },
   created() {
     // 更新tab
-    window.addEventListener("index_update_tab", function(event) {
+    window.addEventListener("index_update_tab", event => {
       // 获得事件参数
       let detail = event.detail;
       console.log("detail.to" + detail.to);
@@ -29,7 +29,7 @@ export default {
     });
 
     // 更新所有子页面
-    window.addEventListener("index_update_subpages", function(event) {
+    window.addEventListener("index_update_subpages", event => {
       // 获得事件参数
       let detail = event.detail;
       console.log("index_update_subpages");

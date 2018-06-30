@@ -280,11 +280,19 @@
 					"static/css/index.2c36a427.css",
 					"static/js/index.5b78f963.js",
 					"static/css/index.5b78f963.css",
-					"static/js/manifest.9359d106.js"
+					"static/js/manifest.9359d106.js",
+					"static/js/index.cab9429e.js",
+					"static/css/index.02275b92.css",
+					"static/js/index.02275b92.js",
+					"static/js/index.be6d86d4.js",
+					"static/css/index.be6d86d4.css",
+					"static/js/manifest.3f73e54a.js"
 				],
 				"refer": [
 					"my.html",
-					"login.html"
+					"login.html",
+					"course.html",
+					"activity.html"
 				]
 			},
 			"vigour.html": {
@@ -331,9 +339,16 @@
 					"static/css/home.bfff8abe.css",
 					"static/js/manifest.9359d106.js",
 					"static/css/home.675686a0.css",
-					"static/js/home.675686a0.js"
+					"static/js/home.675686a0.js",
+					"static/js/home.7016db54.js",
+					"static/css/home.7016db54.css",
+					"static/css/home.b3ec4102.css",
+					"static/js/home.b3ec4102.js",
+					"static/js/manifest.3f73e54a.js"
 				],
-				"refer": [],
+				"refer": [
+					"speed_up.html"
+				],
 				"priority": 0
 			},
 			"my.html": {
@@ -362,7 +377,13 @@
 					"static/js/my.366b1cdc.js",
 					"static/js/manifest.9359d106.js",
 					"static/js/my.12efd095.js",
-					"static/css/my.12efd095.css"
+					"static/css/my.12efd095.css",
+					"static/css/my.3112c503.css",
+					"static/js/my.3112c503.js",
+					"static/js/manifest.c6392fab.js",
+					"static/css/my.3c5138a9.css",
+					"static/js/my.3c5138a9.js",
+					"static/js/manifest.3f73e54a.js"
 				],
 				"refer": [
 					"login.html",
@@ -471,7 +492,10 @@
 					"static/js/vendor.e002ddca.js",
 					"mui/mui.js",
 					"mui/mtool.js",
-					"static/css/my_auth.11573a5b.css"
+					"static/css/my_auth.11573a5b.css",
+					"static/css/my_auth.3de1f9b3.css",
+					"static/js/my_auth.3de1f9b3.js",
+					"static/js/manifest.c6392fab.js"
 				],
 				"refer": [
 					"my_auth_msg.html",
@@ -565,7 +589,8 @@
 				"resources": [],
 				"refer": [
 					"login_invite.html",
-					"login_areacode.html"
+					"login_areacode.html",
+					"login_protocol.html"
 				],
 				"priority": 0
 			},
@@ -609,6 +634,43 @@
 					"static/js/manifest.9359d106.js"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"my_activity.html": {
+				"resources": [],
+				"refer": [
+					"info_activity.html"
+				],
+				"priority": 0
+			},
+			"course.html": {
+				"resources": [
+					"static/css/course.13ac005b.css",
+					"static/js/course.13ac005b.js",
+					"static/js/manifest.c6392fab.js",
+					"static/js/course.4dc0893f.js",
+					"static/css/course.4dc0893f.css",
+					"static/js/vendor.e002ddca.js",
+					"static/js/manifest.3f73e54a.js"
+				],
+				"refer": [
+					"info_course.html"
+				],
+				"priority": 0
+			},
+			"activity.html": {
+				"resources": [
+					"static/css/activity.02981084.css",
+					"static/js/activity.02981084.js",
+					"static/js/vendor.e002ddca.js",
+					"static/js/manifest.c6392fab.js",
+					"static/js/activity.bcfcd799.js",
+					"static/css/activity.bcfcd799.css",
+					"static/js/manifest.3f73e54a.js"
+				],
+				"refer": [
+					"info_activity.html"
+				],
 				"priority": 0
 			}
 		},

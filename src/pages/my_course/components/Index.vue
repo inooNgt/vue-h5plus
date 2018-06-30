@@ -50,11 +50,11 @@ export default {
   },
   created() {
     // 更新所有子页面
-    window.addEventListener("event_update", function(event) {
+    window.addEventListener("event_update", event => {
       // 获得事件参数
       let detail = event.detail;
-      console.log("event_nav_update");
-      console.log("detail.to" + detail.to);
+      console.log("mycourse update");
+      this.update();
     });
   },
   mounted() {
@@ -62,7 +62,6 @@ export default {
       this.init();
     });
   },
-
   data() {
     return {
       active: 0,
@@ -80,6 +79,7 @@ export default {
           down: {
             style: "circle",
             offset: "44px", // 可选 默认0px,下拉刷新控件的起始位置
+            color: "#305085",
             callback: this.pulldownRefresh
           }
           // up: {
@@ -90,16 +90,28 @@ export default {
         }
       });
 
-      this.loadJoinedCourse();
-      this.loadPublishedCourse();
+      this.loadJoinedData();
+      this.loadPublishedData();
     },
-    updagte() {
-      this.loadJoinedCourse();
-      this.loadPublishedCourse();
+    update() {
+      this.loadJoinedData();
+      this.loadPublishedData();
     },
-    loadJoinedCourse() {
-      this.loading = true;
-      this.$post(API.auth.coursejoining)
+    pulldownRefresh() {
+      let pullRefreshApi = mui(refreshId).pullRefresh();
+
+      if (this.active === 0) {
+        this.loadJoinedData().finally(() => {
+          pullRefreshApi.endPulldownToRefresh();
+        });
+      } else {
+        this.loadPublishedData().finally(() => {
+          pullRefreshApi.endPulldownToRefresh();
+        });
+      }
+    },
+    loadJoinedData() {
+      return this.$post(API.auth.coursejoining)
         .then(res => {
           res = res && res.data;
           let data = res.data;
@@ -113,14 +125,10 @@ export default {
         .catch(e => {
           console.log(e);
           e.message && Toast(e.message);
-        })
-        .finally(() => {
-          this.loading = false;
         });
     },
-    loadPublishedCourse() {
-      this.loading = true;
-      this.$post(API.auth.courseown)
+    loadPublishedData() {
+      return this.$post(API.auth.courseown)
         .then(res => {
           res = res && res.data;
           let data = res.data;
@@ -134,22 +142,12 @@ export default {
         .catch(e => {
           console.log(e);
           e.message && Toast(e.message);
-        })
-        .finally(() => {
-          this.loading = false;
         });
     },
     goBack() {
       mui.back();
     },
-    pulldownRefresh() {
-      this.updagte();
-      let pullRefreshApi = mui(refreshId).pullRefresh();
-      setTimeout(() => {
-        // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
-        pullRefreshApi.endPulldownToRefresh();
-      }, 1000);
-    },
+
     pullupRefresh() {
       let pullRefreshApi = mui(refreshId).pullRefresh();
       console.log("pullupRefresh");
@@ -178,9 +176,9 @@ export default {
       let pullRefreshApi = mui(refreshId).pullRefresh();
       console.log(index);
       if (index === 0) {
-        this.loadJoinedCourse();
+        this.loadJoinedData();
       } else {
-        this.loadPublishedCourse();
+        this.loadPublishedData();
       }
       setTimeout(() => {
         pullRefreshApi.refresh(true);

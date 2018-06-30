@@ -3,7 +3,7 @@
    * tabbar子页面配置
    */
   var config = {
-    subpages: ["home.html", "vigour.html", "my.html"],
+    subpages: ["home.html", "course.html", "activity.html", "my.html"],
     top: "0px",
     bottom: "49px",
     loginPages: ["my.html"],
@@ -155,9 +155,9 @@
       url: url,
       id: url,
       extras: extras,
-      // show: {
-      //   aniShow: "slide-in-bottom"
-      // },
+      show: {
+        aniShow: "slide-in-bottom"
+      },
       style: style,
       waiting: {
         autoShow: false
@@ -192,7 +192,10 @@
           subpages[i], //子页id
           {
             top: config.top, //设置距离顶部的距离
-            bottom: config.bottom //设置距离底部的距离
+            bottom: config.bottom, //设置距离底部的距离
+            bounce: "vertical",
+            render: "always",
+            statusbar: {}
           }
         );
         //如不是我们设置的默认的子页则隐藏，否则添加到窗口中

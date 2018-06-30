@@ -105,7 +105,7 @@ export default {
 
   created() {
     // 更新所有子页面
-    window.addEventListener("event_update", function(event) {
+    window.addEventListener("event_update", event => {
       // 获得事件参数
       let detail = event.detail;
       console.log("event_nav_update");
@@ -223,6 +223,11 @@ body {
     }
   }
 }
+.part-rich {
+  img {
+    max-width: 100%;
+  }
+}
 </style>
 
 <style lang="scss" scoped>
@@ -237,6 +242,11 @@ body {
 
 .page-content {
   padding-bottom: 50px;
+}
+.part-content {
+  img {
+    max-width: 100%;
+  }
 }
 
 .part {
@@ -271,7 +281,7 @@ body {
 .cover {
   height: 0;
   width: 100%;
-  padding-top: 49%;
+  padding-top: 57.14%;
   border: solid 1px #dddddd;
   position: relative;
   .cover-img {
@@ -321,6 +331,9 @@ body {
 .part-rich {
   font-size: 12px;
   color: $color-border;
+  img {
+    max-width: 100%;
+  }
 }
 </style>
 

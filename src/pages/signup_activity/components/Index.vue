@@ -20,19 +20,19 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item" @click="setMsg('qq')">
-        <div class="item-left">QQ</div>
+      <li class="list-item" @click="setMsg('wx')">
+        <div class="item-left">微信</div>
         <div class="item-right">
-          <input readonly :value="qq" placeholder="请输入QQ号" />
+          <input readonly :value="wx" placeholder="请输入微信号" />
         </div>
         <div class="item-arrow">
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item" @click="setMsg('wx')">
-        <div class="item-left">微信</div>
+      <li class="list-item" @click="setMsg('qq')">
+        <div class="item-left">QQ</div>
         <div class="item-right">
-          <input readonly :value="wx" placeholder="请输入微信号" />
+          <input readonly :value="qq" placeholder="请输入QQ号" />
         </div>
         <div class="item-arrow">
           <van-icon name="arrow" />
@@ -73,6 +73,9 @@ const cachedwx = getCachedData(config.keys.coursesignupwx);
 
 const canUseCached = !MTOOL.isPlus;
 
+// signup type 1：课程，2：活动
+const SIGN_TYPE = 2;
+
 export default {
   name: "Index",
   data() {
@@ -111,13 +114,35 @@ export default {
       }
     },
     signup() {
+      let param = {
+        type: SIGN_TYPE,
+        id: courseId,
+        name: this.name,
+        mobile_phone: this.phone,
+        wechat: this.wx,
+        sns_qq: this.qq
+      };
+
+      if (this.name.trim() === "") {
+        Toast("姓名不能为空");
+        return;
+      }
+
+      if (this.phone.trim() === "") {
+        Toast("姓名不能为空");
+        return;
+      }
+
       this.loading = true;
-      this.$post(API.auth.courseown)
+      this.$post(API.auth.signup)
         .then(res => {
           res = res && res.data;
           let data = res.data;
           if (res.status === 200 && data) {
             Toast("报名成功");
+            setTimeout(() => {
+              mui.back();
+            }, 400);
           } else {
             res.message && Toast(res.message);
           }

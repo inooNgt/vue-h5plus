@@ -1,17 +1,29 @@
 <template>
   <div class="footer">
-    <div class="footer-link" v-bind:class="{ active: activePath === 'vigour.html' }" @click="handleNavTap('vigour.html',$event)">
-      <van-icon class="footer-icon" name="shop" />
-      <span>Vitality</span>
-    </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
-      <van-icon class="footer-icon" name="wap-home" />
-      <span>Activity</span>
+      <div class="footer-icon-wrap">
+        <span class="md-icon icon-home-star"></span>
+      </div>
+      <span class="link-text">首页</span>
+    </div>
+    <div class="footer-link" v-bind:class="{ active: activePath === 'course.html' }" @click="handleNavTap('course.html',$event)">
+      <div class="footer-icon-wrap">
+        <span class="md-icon icon-home-course"></span>
+      </div>
+      <span class="link-text">课程</span>
+    </div>
+    <div class="footer-link" v-bind:class="{ active: activePath === 'activity.html' }" @click="handleNavTap('activity.html',$event)">
+      <div class="footer-icon-wrap">
+        <span class="md-icon icon-home-activity"></span>
+      </div>
+      <span class="link-text">活动</span>
     </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
-      <van-icon class="footer-icon" name="contact" />
-      <span>My</span>
-    </div>   
+      <div class="footer-icon-wrap">
+        <span class="md-icon icon-home-my"></span>
+      </div>
+      <span class="link-text">我的</span>
+    </div>
   </div>
 </template>
 
@@ -78,26 +90,30 @@ export default {
   border: solid 1px #dddddd;
   background-color: #ffffff;
 
-  .footer-icon {
+  .footer-icon-wrap {
     display: block;
-    height: 21px;
-    line-height: 21px;
-    font-size: 18px;
+    height: 20px;
     margin: 0 auto;
   }
   .footer-link {
     display: block;
     font-size: 10px;
-    padding: 5px 0;
+    padding: 7px 0 3px;
     flex: 1 0 auto;
     border-radius: 0;
     transition: 0.2s ease;
     &:active {
-      box-shadow: 0 0 100px inset #ddd;
+      // box-shadow: 0 0 100px inset #ddd;
     }
     &.active {
       color: $color-main;
     }
+  }
+  .link-text {
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    padding-top: 1px;
   }
   .router-link-active {
     color: #1296db;

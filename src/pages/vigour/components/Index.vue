@@ -107,7 +107,7 @@ export default {
   name: "Index",
   created() {
     // 更新所有子页面
-    window.addEventListener("event_update", function(event) {
+    window.addEventListener("event_update", event => {
       // 获得事件参数
       let detail = event.detail;
       console.log("event_nav_update");
@@ -135,6 +135,7 @@ export default {
           down: {
             style: "circle",
             offset: "44px", // 可选 默认0px,下拉刷新控件的起始位置
+            color: "#305085",
             callback: this.pulldownRefresh
           }
         }

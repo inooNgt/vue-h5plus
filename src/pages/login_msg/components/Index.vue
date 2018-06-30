@@ -81,9 +81,9 @@ export default {
     return {
       active: 0,
       username: "",
-      password: "000000",
-      phone: "1310002010",
-      sms: "000000",
+      password: "",
+      phone: "",
+      sms: "",
       loading: false,
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,

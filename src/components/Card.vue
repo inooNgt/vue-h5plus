@@ -6,14 +6,14 @@
     <h5 class="row-title">{{data.title}}</h5>
     <div class="row-msg">
       <div class="col-left">
-        <div>
+        <div class="cell-info">
           <i class="md-icon md-icon-add"></i>
           {{data.organizer}}
         </div>
         <div class="cell-info">
           <span class="info-area">
             <i class="md-icon md-icon-add"></i>
-            {{data.location_city}} {{data.location_district}}
+            {{data.location_city}}
           </span>
           <time class="info-time">
             <i class="md-icon md-icon-add"></i>
@@ -26,7 +26,7 @@
         <van-button slot="button" class="btn btn-sub-mini" @click="onsignupclick($event,data.id)">立即报名</van-button>
       </div>
     </div>
-    <div class="row-status" :class="statusclass">{{data.status_text}}</div>
+    <div class="row-status" v-show="data.status_text" :class="statusclass">{{data.status_text}}</div>
   </div>
 </template>
 
@@ -61,10 +61,13 @@ export default {
   },
   computed: {},
   beforeUpdate() {
+    console.log("beforeUpdate");
     this.statusclass = this.getStatusClass(this.$props.data.status);
   },
   mounted() {
-    this.$nextTick(() => {});
+    this.$nextTick(() => {
+      this.statusclass = this.getStatusClass(this.$props.data.status);
+    });
   },
   methods: {
     formatTime(time) {
@@ -103,8 +106,8 @@ export default {
 .row-status {
   position: absolute;
   text-align: center;
-  top: -23px;
-  right: -37px;
+  top: -21px;
+  right: -35px;
   width: 90px;
   height: 60px;
   padding-top: 39px;
@@ -113,11 +116,14 @@ export default {
   transform: rotate(45deg);
   font-size: 10px;
   color: $color-main;
+  &.ended {
+    color: $color-gray;
+  }
 }
 .card-cover {
   height: 0;
   width: 100%;
-  padding-top: 49%;
+  padding-top: 57.14%;
   border: solid 1px #dddddd;
   position: relative;
   .cover-img {
@@ -136,15 +142,17 @@ export default {
     color: $color-gray;
     font-size: 12px;
     padding-top: 8px;
+    .cell-info {
+      width: 200px;
+      @extend %text-over;
+    }
   }
   .col-right {
-    width: 180px;
+    width: 110px;
     font-size: 12px;
     line-height: 22px;
     color: #000;
     text-align: right;
-    padding-left: 20px;
-
     &.finished {
       color: rgba(0, 0, 0, 0.6);
     }
@@ -159,8 +167,7 @@ export default {
     top: -2px;
   }
 }
-.cell-info {
-}
+
 .info-prize {
   height: 26px;
   font-size: 14px;

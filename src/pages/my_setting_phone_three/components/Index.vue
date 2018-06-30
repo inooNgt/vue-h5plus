@@ -56,8 +56,8 @@ export default {
   name: "Index",
   data() {
     return {
-      password1: "131****0000",
-      password2: "131****0000",
+      password1: "",
+      password2: "",
       loading: false,
       phone: cachedUser.mobile_phone || "- -"
     };

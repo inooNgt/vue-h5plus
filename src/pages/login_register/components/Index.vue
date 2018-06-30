@@ -21,10 +21,10 @@
           <van-button slot="button" @click="getSmscode" size="large">发送验证码</van-button>
         </van-field>
         <div class="row-msg">
-          <van-checkbox shape="square" v-model="checked">
+          <van-checkbox shape="square" v-model="checkedprotocol">
             我已阅读并同意
-            <span class="text-blue">《DIC用户协议》</span>
           </van-checkbox>
+          <span class="text-blue" @click="goProtocol">《DIC用户协议》</span>
         </div>
       </van-cell-group>
       <div class="btn-box">
@@ -88,9 +88,9 @@ export default {
       active: 0,
       msg: "",
       name: "",
-      phone: "1310002010",
-      sms: "000000",
-      checked: "false",
+      phone: "",
+      sms: "",
+      checkedprotocol: false,
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,
       phonecodekey: cachedPhonecodekey
@@ -184,6 +184,9 @@ export default {
     goLogin() {
       MTOOL.openWindow("login.html");
     },
+    goProtocol() {
+      MTOOL.openWindow("login_protocol.html");
+    },
     getSmscode() {
       this.$post(API.smscode, {
         mobile_phone: this.phone
@@ -208,9 +211,21 @@ export default {
         sms_code: this.sms
       };
 
-      if (this.phone.trim() === "") Toast("手机号不能为空");
+      if (this.phone.trim() === "") {
+        Toast("手机号不能为空");
+        return;
+      }
+      if (this.sms.trim() === "") {
+        Toast("输入短信验证码");
+        return;
+      }
 
-      if (this.sms.trim() === "") Toast("输入短信验证码");
+      console.log("this.checkedprotocol", this.checkedprotocol);
+
+      if (!this.checkedprotocol) {
+        Toast("请阅读并同意《DIC用户协议》");
+        return;
+      }
 
       console.log("param", param);
 
@@ -265,7 +280,7 @@ export default {
         }
         // 未激活
         if (user && user.status * 1 === STATUS_NOT_ACTIVE) {
-          Toast("该账户未激活");
+          Toast("注册成功,请激活账户");
           setTimeout(() => {
             MTOOL.openWindow("login_invite.html");
           }, 400);
@@ -386,6 +401,9 @@ html {
       border: solid 1px $color-main;
     }
   }
+  .van-checkbox__icon {
+    font-size: 9px;
+  }
 }
 </style>
 
@@ -447,6 +465,8 @@ html {
 .row-msg {
   font-size: 11px;
   color: #000;
+  display: flex;
+  align-items: center;
 }
 </style>
 

@@ -19,6 +19,11 @@ const config = {
     coursesignupqq: "ml.help.coursesignupqq",
     coursesignupphone: "ml.help.coursesignphoneme",
     coursesignupwx: "ml.help.coursesignuwxe",
+    activityignupmsg: "ml.help.activityignupmsg",
+    activityignupname: "ml.help.activityignupname",
+    activityignupqq: "ml.help.activityignupqq",
+    activityignupphone: "ml.help.activityignphoneme",
+    activityignupwx: "ml.help.activityignuwxe",
     signupcourseid: "ml.help.signupcourseid",
     smskey: "ml.setting.smskey"
   },

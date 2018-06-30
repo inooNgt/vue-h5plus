@@ -35,6 +35,13 @@ if (signupmsg === "wx") msgText = "微信";
 
 console.log("signupmsg:", signupmsg);
 
+try {
+  MTOOL.plusReady(() => {
+    if (MTOOL.isPlus) plus.key.showSoftKeybord();
+  });
+} catch (error) {
+  console.log(error);
+}
 export default {
   name: "Index",
   data() {
@@ -44,6 +51,7 @@ export default {
       placeholder: signupmsg && "请输入" + msgText
     };
   },
+  created() {},
   mounted() {
     this.$nextTick(() => {
       console.log(this.$refs["input"]);

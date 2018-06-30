@@ -1,6 +1,5 @@
 @import "var";
 
-
 .van-nav-bar.van-nav-bar {
   z-index: 999 !important;
   height: 44px;
@@ -25,9 +24,12 @@
   .van-nav-bar__left {
     left: 18px;
     i {
-      width: 11px;
-      height: 20px;
       transform: none;
+      width: 11px;
+      height: 19px;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
       background-image: url(~assets/img/arrow_left.png);
       &::before {
         display: none;
@@ -47,6 +49,7 @@
   padding: 8px 18px;
   border-radius: 0;
   font-size: 12px;
+  text-align: center;
 }
 
 .login-nav.login-nav.login-nav {
@@ -57,7 +60,7 @@
   }
 }
 
-/* tabs start */
+/* van start */
 .van-tab--active {
   color: $color-main !important;
 }
@@ -133,7 +136,13 @@
   }
 }
 
-/* tabs end */
+.van-cell.van-cell {
+  &::after {
+    border: none;
+  }
+}
+
+/* van end */
 
 /* mui start  */
 .mui-content.mui-content {
@@ -145,5 +154,11 @@
 }
 .mui-pull {
   font-weight: normal;
+}
+
+.mui-pull-loading {
+  &::before {
+    display: none;
+  }
 }
 /* mui end */

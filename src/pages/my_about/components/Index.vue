@@ -1,19 +1,21 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="关于我们" fixed left-arrow @click-left="goBack" />
+    <van-nav-bar :title="title" fixed left-arrow @click-left="goBack" />
     <div class="about-content">
-      <div class="qr-wrap">
+      <!-- <div class="qr-wrap">
         <img class="qr-img" src="~assets/img/icon_empty.png" />
       </div>
       <div class="msg">
         <div class="msg-row">渠道合作：sddd@biilian.com</div>
         <div class="msg-row">业务合作：sddd@biilian.com</div>
         <div class="msg-wx">微信公众号</div>
-      </div>
+      </div> -->
+      <div class="rich" v-html="article"></div>
+      <div v-if="!article" class="text-center">暂无内容</div>
     </div>
-    <div class="version">
+    <!-- <div class="version">
       DIC V{{version}}
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -23,6 +25,7 @@ import { NavBar } from "vant";
 import MTOOL from "mtool";
 import mui from "mui";
 import config from "utils/config";
+import API from "utils/api";
 
 Vue.use(NavBar);
 
@@ -34,6 +37,11 @@ export default {
       article: "",
       version: config.version
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.getArtical();
+    });
   },
   methods: {
     goBack() {
@@ -53,7 +61,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
-          Toast(e);
+          e.message && Toast(e.message);
         });
     }
   }
@@ -83,6 +91,11 @@ body {
 @import "~assets/scss/var";
 .about-content {
   padding: 36px 0 86px;
+}
+.rich {
+  padding: 0 36px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
 }
 .msg-wx {
   padding-top: 10px;

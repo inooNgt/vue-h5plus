@@ -27,70 +27,70 @@
     <ul class="my-list">
       <li class="list-item" @click="goAuth">
         <div class="item-left">
-          <span class="my-icon"></span>
+          <span class="md-icon md-icon-auth"></span>
           <span class="item-title">实名认证</span>
         </div>
         <div class="item-right">
           认证中
         </div>
         <div class="item-arrow">
-          <van-icon name="arrow" />
+          <span class="md-icon md-icon-arrow-right"></span>
         </div>
       </li>
       <li class="list-item" @click="goFund">
         <div class="item-left">
-          <span class="my-icon"></span>
+          <span class="md-icon md-icon-fund"></span>
           <div class="item-title">我的资产</div>
         </div>
         <div class="item-right">
           100 DIC
         </div>
         <div class="item-arrow">
-          <van-icon name="arrow" />
+          <span class="md-icon md-icon-arrow-right"></span>
         </div>
       </li>
       <li class="list-item" @click="goCourse">
         <div class="item-left">
-          <span class="my-icon"></span>
+          <span class="md-icon md-icon-mycourse"></span>
           <div class="item-title">我的课程</div>
         </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
-          <van-icon name="arrow" />
+          <span class="md-icon md-icon-arrow-right"></span>
         </div>
       </li>
       <li class="list-item" @click="goActivity">
         <div class="item-left">
-          <span class="my-icon"></span>
+          <span class="md-icon md-icon-myactivity"></span>
           <div class="item-title">我的活动</div>
         </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
-          <van-icon name="arrow" />
+          <span class="md-icon md-icon-arrow-right"></span>
         </div>
       </li>
       <li class="list-item" @click="goHelp">
         <div class="item-left">
-          <span class="my-icon"></span>
+          <span class="md-icon md-icon-help"></span>
           <div class="item-title">帮助中心</div>
         </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
-          <van-icon name="arrow" />
+          <span class="md-icon md-icon-arrow-right"></span>
         </div>
       </li>
       <li class="list-item" @click="goAbout">
         <div class="item-left">
-          <span class="my-icon"></span>
+          <span class="md-icon md-icon-about"></span>
           <div class="item-title">关于我们</div>
         </div>
         <div class="item-right">
         </div>
         <div class="item-arrow">
-          <van-icon name="arrow" />
+          <span class="md-icon md-icon-arrow-right"></span>
         </div>
       </li>
     </ul>
@@ -283,14 +283,14 @@ export default {
 .page-content.broswer-content {
   padding-bottom: 68px;
 }
-.my-icon {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
+.item-left {
+  .md-icon {
+    position: relative;
+    top: -1px;
+  }
+}
+.md-icon {
   margin-right: 16px;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-image: url(~assets/img/icon_empty.png);
 }
 
 .my-info {

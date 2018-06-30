@@ -62,8 +62,8 @@ export default {
   name: "Index",
   data() {
     return {
-      sms: "000",
-      alteringPhone: "131****0000",
+      sms: "",
+      alteringPhone: "",
       loading: false,
       phone: cachedUser.mobile_phone || "- -"
     };

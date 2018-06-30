@@ -197,10 +197,10 @@ img {
 }
 
 .btn-main-large.btn-main-large.btn-main-large {
+  @extend .btn-main;
   width: 100%;
   height: 49px;
   line-height: 49px;
-  @extend .btn-main;
 }
 
 /* my list start */
@@ -304,13 +304,82 @@ img {
 }
 .md-icon-arrow-left {
   width: 11px;
-  height: 20px;
+  height: 19px;
   background-image: url(~assets/img/arrow_left.png);
+}
+.md-icon-arrow-right {
+  width: 11px;
+  height: 19px;
+  background-image: url(~assets/img/arrow_right.png);
 }
 .md-icon-closenav {
   width: 14px;
   height: 14px;
   background-image: url(~assets/img/close_nav.png);
+}
+.md-icon-auth {
+  width: 18px;
+  height: 19.5px;
+  background-image: url(~assets/img/icon_auth.png);
+}
+.md-icon-fund {
+  width: 19px;
+  height: 19px;
+  background-image: url(~assets/img/icon_fund.png);
+}
+.md-icon-mycourse {
+  width: 20px;
+  height: 18.5px;
+  background-image: url(~assets/img/icon_my_course.png);
+}
+.md-icon-myactivity {
+  width: 14px;
+  height: 20px;
+  background-image: url(~assets/img/icon_my_activity.png);
+}
+.md-icon-help {
+  width: 19px;
+  height: 19px;
+  background-image: url(~assets/img/icon_help.png);
+}
+.md-icon-about {
+  width: 19px;
+  height: 19px;
+  background-image: url(~assets/img/icon_about.png);
+}
+.icon-home-my {
+  width: 17px;
+  height: 20px;
+  background-image: url(~assets/img/home_my.png);
+}
+.icon-home-course {
+  width: 20.6px;
+  height: 20px;
+  background-image: url(~assets/img/home_course.png);
+}
+.icon-home-activity {
+  width: 18px;
+  height: 20px;
+  background-image: url(~assets/img/home_activity.png);
+}
+.icon-home-star {
+  width: 27.5px;
+  height: 20px;
+  background-image: url(~assets/img/home_star.png);
+}
+.footer-link.active {
+  .icon-home-my {
+    background-image: url(~assets/img/home_my_h.png);
+  }
+  .icon-home-course {
+    background-image: url(~assets/img/home_course_h.png);
+  }
+  .icon-home-activity {
+    background-image: url(~assets/img/home_activity_h.png);
+  }
+  .icon-home-star {
+    background-image: url(~assets/img/home_star_h.png);
+  }
 }
 /* icon end */
 /* step start */

@@ -1,23 +1,14 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar title="我的活动" fixed left-arrow @click-left="goBack" />
-    <van-tabs class="van-tabs-fixed" v-model="active" :line-width="75" @click="onTabsClick">
-      <van-tab title="我参与的活动" v-bind:key="1"></van-tab>
-      <van-tab title="我发布的活动" v-bind:key="2"></van-tab>
-    </van-tabs>
+    <van-nav-bar title="课程" fixed />
+
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll">
-        <section class="md-tab-content" v-show="active==0">
+        <section class="md-tab-content">
           <div class="card-list">
-            <Card v-for="(item,index) in joinedList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
+            <Card v-for="(item,index) in dataList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
           </div>
         </section>
-        <section class="md-tab-content" v-show="active==1">
-          <div class="card-list">
-            <Card v-for="(item,index) in ownedList" :key="index" :oncardclick="goInfo" :onsignupclick="goSignup" :data="item" />
-          </div>
-        </section>
-
       </div>
     </div>
 
@@ -53,7 +44,7 @@ export default {
     window.addEventListener("event_update", event => {
       // 获得事件参数
       let detail = event.detail;
-      console.log("myactivity update");
+      console.log("course update");
       this.update();
     });
   },
@@ -66,8 +57,8 @@ export default {
   data() {
     return {
       active: 0,
-      joinedList: [],
-      ownedList: [],
+      dataList: [],
+      courseOwnedList: [],
       msg: "Welcome to Your Vue.js App",
       loading: false
     };
@@ -91,68 +82,44 @@ export default {
         }
       });
 
-      this.loadJoinedData();
-      this.loadPublishedData();
+      this.loadData();
     },
     updagte() {
-      this.loadJoinedData();
-      this.loadPublishedData();
+      this.loadData();
+    },
+    loadData() {
+      return this.$post(API.auth.coursejoining)
+        .then(res => {
+          res = res && res.data;
+          let data = res.data;
+          if (res.status === 200 && data) {
+            this.dataList = data;
+          } else {
+            res.message && Toast(res.message);
+          }
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          e.message && Toast(e.message);
+        });
+    },
+
+    goBack() {
+      mui.back();
     },
     pulldownRefresh() {
       let pullRefreshApi = mui(refreshId).pullRefresh();
 
-      if (this.active === 0) {
-        this.loadJoinedData().finally(() => {
-          pullRefreshApi.endPulldownToRefresh();
-        });
-      } else {
-        this.loadPublishedData().finally(() => {
-          pullRefreshApi.endPulldownToRefresh();
-        });
-      }
+      this.loadData().finally(() => {
+        pullRefreshApi.endPulldownToRefresh();
+      });
     },
-    loadJoinedData() {
-      return this.$post(API.auth.activityjoining)
-        .then(res => {
-          res = res && res.data;
-          let data = res.data;
-          if (res.status === 200 && data) {
-            this.joinedList = data;
-          } else {
-            res.message && Toast(res.message);
-          }
-          console.log(res);
-        })
-        .catch(e => {
-          console.log(e);
-          e.message && Toast(e.message);
-        });
-    },
-    loadPublishedData() {
-      return this.$post(API.auth.activityown)
-        .then(res => {
-          res = res && res.data;
-          let data = res.data;
-          if (res.status === 200 && data) {
-            this.ownedList = data;
-          } else {
-            res.message && Toast(res.message);
-          }
-          console.log(res);
-        })
-        .catch(e => {
-          console.log(e);
-          e.message && Toast(e.message);
-        });
-    },
-    goBack() {
-      mui.back();
-    },
-
     pullupRefresh() {
       let pullRefreshApi = mui(refreshId).pullRefresh();
       console.log("pullupRefresh");
       if (this.active === 1 && 1) {
+        // 没有更多内容了,endPulldownToRefresh传入true,不再执行下拉刷新
         pullRefreshApi.endPullupToRefresh(false);
       } else {
         pullRefreshApi.refresh(true);
@@ -166,24 +133,12 @@ export default {
       if (id === undefined) {
         return;
       }
-      MTOOL.storage.setItem(config.keys.myactivityid, id);
-      MTOOL.openWindow("info_activity.html");
+      MTOOL.storage.setItem(config.keys.mycourseid, id);
+      MTOOL.openWindow("info_course.html");
     },
     goSignup(e) {
       e.cancelBubble = true;
-      MTOOL.openWindow("signup_activity.html");
-    },
-    onTabsClick(index, title) {
-      let pullRefreshApi = mui(refreshId).pullRefresh();
-      console.log(index);
-      if (index === 0) {
-        this.loadJoinedData();
-      } else {
-        this.loadPublishedData();
-      }
-      setTimeout(() => {
-        pullRefreshApi.refresh(true);
-      });
+      MTOOL.openWindow("signup_course.html");
     }
   }
 };
@@ -194,7 +149,7 @@ export default {
 @import "~assets/scss/common";
 
 .mui-scroll-wrapper.mui-scroll-wrapper {
-  top: 84px;
+  top: 44px;
 }
 </style>
 

@@ -50,7 +50,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
-          Toast(e);
+          e.message && Toast(e.message);
         });
     },
     contactus() {

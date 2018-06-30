@@ -1,6 +1,6 @@
 <template>
   <div class="page-content nav-content">
-    <van-nav-bar :title="title" fixed left-arrow @click-left="goBack" @click-right="contactus" right-text="联系客服" />
+    <van-nav-bar :title="title" fixed left-arrow @click-left="goBack" />
     <article class="detail-content">
       <div v-html="article"></div>
       <div v-if="!article" class="text-center">暂无内容</div>
@@ -17,13 +17,6 @@ import config from "utils/config";
 import API from "utils/api";
 import { getCachedObject } from "utils/utils";
 
-let cachedDetail;
-try {
-  cachedDetail = getCachedObject(config.keys.helpdetail) || null;
-} catch (e) {
-  console.log(e);
-}
-
 Vue.use(NavBar)
   .use(Toast)
   .use(Button)
@@ -33,42 +26,21 @@ export default {
   name: "Index",
   data() {
     return {
-      title: (!MTOOL.isPlus && cachedDetail && cachedDetail.title) || "",
+      title: "用户协议",
       article: ""
     };
   },
   mounted() {
     this.$nextTick(() => {
-      if (MTOOL.isPlus) {
-        MTOOL.plusReady(() => {
-          let wv = plus.webview.currentWebview();
-
-          let id = wv && wv.questionId;
-
-          this.getArtical(id);
-
-          console.log("wv");
-          console.log(wv);
-          console.log(id);
-        });
-      } else {
-        if (cachedDetail && cachedDetail.id) this.getArtical(cachedDetail.id);
-      }
-      console.log(cachedDetail);
-      // test
-      // if (!MTOOL.isPlus) this.getArtical(1);
+      this.getArtical();
     });
   },
   methods: {
-    getArtical(id) {
-      this.$get(API.helpview, {
-        params: {
-          id
-        }
-      })
+    getArtical() {
+      this.$get(API.agreement)
         .then(res => {
           let data = res.data && res.data.data;
-          console.log(data);
+          console.log("data:", data);
           if (res.status === 200) {
             if (data.title) this.title = data.title;
             if (data.body) this.article = data.body;
@@ -77,12 +49,9 @@ export default {
           }
         })
         .catch(e => {
-          console.log(e);
+          console.log("异常:", e);
           e.message && Toast(e.message);
         });
-    },
-    contactus() {
-      MTOOL.openWindow("my_contactus.html");
     },
     goBack() {
       mui.back();

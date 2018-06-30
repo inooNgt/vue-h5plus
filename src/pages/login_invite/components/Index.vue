@@ -81,9 +81,9 @@ export default {
       active: 0,
       username: "",
       inviteCode: "",
-      password: "000000",
-      phone: "1310002010",
-      sms: "000000",
+      password: "",
+      phone: "",
+      sms: "",
       inputFocus: false,
       areacode: cachedPhonecode && cachedCountrycode.code,
       phonecode: cachedPhonecode,
@@ -92,7 +92,7 @@ export default {
   },
   created() {
     // 更新页面
-    window.addEventListener("event_update", function(event) {
+    window.addEventListener("event_update", event => {
       console.log("event_update");
       this.init();
     });
@@ -245,6 +245,10 @@ export default {
           MTOOL.plusReady(function() {
             let loginwv = plus.webview.getWebviewById("login.html");
             if (loginwv) plus.webview.close(loginwv, "none");
+
+            let regwv = plus.webview.getWebviewById("login_register.html");
+            if (regwv) plus.webview.close(regwv, "none");
+
             setTimeout(() => {
               mui.back();
             }, 400);
