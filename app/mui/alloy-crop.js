@@ -110,13 +110,15 @@
             var tempo = evt.zoom;
             var dw = (cr.width * tempo - cr.width) / 2;
             var dh = (cr.height - cr.height * tempo) / 2;
+            console.log("tempo " + tempo);
             if (
               self.initScale * tempo <= 1.6 &&
-              self.initScale * tempo >= self.originScale &&
-              dw >= cr.left &&
-              -dw <= cr.right - self.width &&
-              dh <= boxOffY - cr.top &&
-              dh <= cr.bottom - boxOffY - self.height
+              1
+              // self.initScale * tempo >= self.originScale &&
+              // dw >= cr.left &&
+              // -dw <= cr.right - self.width &&
+              // dh <= boxOffY - cr.top &&
+              // dh <= cr.bottom - boxOffY - self.height
             ) {
               self.img.scaleX = self.img.scaleY = self.initScale * tempo;
             }
@@ -125,20 +127,22 @@
             var cr = self.img.getBoundingClientRect();
             var boxOffY =
               (document.documentElement.clientHeight - self.height) / 2;
-            if (
-              boxOffY - cr.top - evt.deltaY >= 0 &&
-              cr.bottom + evt.deltaY - boxOffY >= self.height
-            ) {
-              self.img.translateY += evt.deltaY;
-            }
+            // if (
+            //   boxOffY - cr.top - evt.deltaY >= 0 &&
+            //   cr.bottom + evt.deltaY - boxOffY >= self.height
+            // ) {
+            //   self.img.translateY += evt.deltaY;
+            // }
             var boxOffX =
               (document.documentElement.clientWidth - self.width) / 2;
-            if (
-              cr.left + evt.deltaX <= boxOffX &&
-              cr.right + evt.deltaX - boxOffX >= self.width
-            ) {
-              self.img.translateX += evt.deltaX;
-            }
+            // if (
+            //   cr.left + evt.deltaX <= boxOffX &&
+            //   cr.right + evt.deltaX - boxOffX >= self.width
+            // ) {
+            //   self.img.translateX += evt.deltaX;
+            // }
+            self.img.translateY += evt.deltaY;
+            self.img.translateX += evt.deltaX;
             evt.preventDefault();
           }
         })

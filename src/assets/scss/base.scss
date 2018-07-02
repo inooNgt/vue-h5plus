@@ -176,6 +176,8 @@ img {
 
 .btn-sub-mini.btn-sub-mini.btn-sub-mini {
   @extend .btn-sub;
+  background-color: #305085;
+  color: #fff;
   width: 75px;
   padding: 0 5px;
   height: 22px;
@@ -380,6 +382,21 @@ img {
   .icon-home-star {
     background-image: url(~assets/img/home_star_h.png);
   }
+}
+.md-icon-adress {
+  width: 7px;
+  height: 9px;
+  background-image: url(~assets/img/icon_adress.png);
+}
+.md-icon-time {
+  width: 8px;
+  height: 8px;
+  background-image: url(~assets/img/icon_time.png);
+}
+.md-icon-organizer {
+  width: 8px;
+  height: 8.5px;
+  background-image: url(~assets/img/icon_organizer.png);
 }
 /* .icon-auth-fail {
   width: 53px;

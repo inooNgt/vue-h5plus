@@ -7,16 +7,16 @@
     <div class="row-msg">
       <div class="col-left">
         <div class="cell-info">
-          <i class="md-icon md-icon-add"></i>
+          <i class="md-icon md-icon-organizer"></i>
           {{data.organizer}}
         </div>
         <div class="cell-info">
           <span class="info-area">
-            <i class="md-icon md-icon-add"></i>
+            <i class="md-icon md-icon-adress"></i>
             {{data.location_city}}
           </span>
           <time class="info-time">
-            <i class="md-icon md-icon-add"></i>
+            <i class="md-icon md-icon-time"></i>
             {{data.time_text}}
           </time>
         </div>
@@ -161,10 +161,10 @@ export default {
     margin-left: 3px;
   }
   .md-icon {
-    width: 12px;
-    height: 12px;
+    // width: 12px;
+    // height: 12px;
     position: relative;
-    top: -2px;
+    top: -1px;
   }
 }
 

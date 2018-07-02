@@ -1,7 +1,7 @@
 <template>
   <div class="page-content nav-content">
     <van-nav-bar title="活动详情" fixed left-arrow @click-left="goBack" />
-    <van-tabs class="van-tabs-fixed" v-model="active" :line-width="75" @click="onTabsClick">
+    <van-tabs class="van-tabs-fixed" v-show="canshowbar" v-model="active" :line-width="75" @click="onTabsClick">
       <van-tab v-for="(title,index) in tabs" :title="title" :key="index"></van-tab>
     </van-tabs>
     <article class="course-content">
@@ -54,22 +54,6 @@
         </h4>
         <div class="part-content">
           <div class="part-rich" v-html="data.short_desc"></div>
-        </div>
-      </section>
-      <section class="part part-3">
-        <h4 class="part-title" ref="hook-2">
-          活动大纲
-        </h4>
-        <div class="part-content">
-          <div class="part-rich" v-html="data.structure"></div>
-        </div>
-      </section>
-      <section class="part part-4">
-        <h4 class="part-title" ref="hook-3">
-          讲师资源
-        </h4>
-        <div class="part-content">
-          <div class="part-rich" v-html="data.resource"></div>
         </div>
       </section>
       <div class="box-btn box-btn-fixed">
@@ -137,9 +121,10 @@ export default {
         notice: "",
         location_city: ""
       },
+      canshowbar: false,
       starttime: "",
       endtime: "",
-      tabs: ["基本信息", "活动介绍", "活动大纲", "讲师资源"]
+      tabs: ["基本信息", "活动介绍"]
     };
   },
   methods: {
@@ -185,7 +170,6 @@ export default {
     toHook: function(index) {
       let element = this.$refs["hook-" + index];
       let y = Math.max(0, MTOOL.elementPosition(element).y - 84);
-      console.log(element, y);
       if (element) {
         window.scrollTo(0, y);
       }
@@ -195,10 +179,17 @@ export default {
       let scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
 
+      let y1 = Math.max(0, MTOOL.elementPosition(this.$refs["hook-0"]).y - 84);
+      if (scrollTop > 100) {
+        this.canshowbar = true;
+      } else {
+        this.canshowbar = false;
+      }
+
       this.tabs.forEach((v, index) => {
         let element = this.$refs["hook-" + index];
         let y = Math.max(0, MTOOL.elementPosition(element).y - 84);
-        if (scrollTop > y) {
+        if (scrollTop > y - 20) {
           this.active = index;
         }
       });

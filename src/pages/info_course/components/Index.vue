@@ -1,7 +1,7 @@
 <template>
   <div class="page-content nav-content">
     <van-nav-bar title="课程详情" fixed left-arrow @click-left="goBack" />
-    <van-tabs class="van-tabs-fixed" v-model="active" :line-width="75" @click="onTabsClick">
+    <van-tabs class="van-tabs-fixed" v-show="canshowbar" v-model="active" :line-width="75" @click="onTabsClick">
       <van-tab v-for="(title,index) in tabs" :title="title" :key="index"></van-tab>
     </van-tabs>
     <article class="course-content">
@@ -139,6 +139,7 @@ export default {
         notice: "",
         location_city: ""
       },
+      canshowbar: false,
       starttime: "",
       endtime: "",
       tabs: ["基本信息", "课程介绍", "课程大纲", "讲师资源"]
@@ -187,7 +188,6 @@ export default {
     toHook: function(index) {
       let element = this.$refs["hook-" + index];
       let y = Math.max(0, MTOOL.elementPosition(element).y - 84);
-      console.log(element, y);
       if (element) {
         window.scrollTo(0, y);
       }
@@ -197,10 +197,17 @@ export default {
       let scrollTop =
         document.body.scrollTop || document.documentElement.scrollTop;
 
+      let y1 = Math.max(0, MTOOL.elementPosition(this.$refs["hook-0"]).y - 84);
+      if (scrollTop > 100) {
+        this.canshowbar = true;
+      } else {
+        this.canshowbar = false;
+      }
+
       this.tabs.forEach((v, index) => {
         let element = this.$refs["hook-" + index];
         let y = Math.max(0, MTOOL.elementPosition(element).y - 84);
-        if (scrollTop > y) {
+        if (scrollTop > y - 20) {
           this.active = index;
         }
       });

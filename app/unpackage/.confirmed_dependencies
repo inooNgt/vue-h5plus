@@ -96,7 +96,8 @@
 			"static/css/my.47a7b92a.css",
 			"static/js/my.9b3301d4.js",
 			"static/css/my.9b3301d4.css",
-			"static/js/vendor.8f6e52aa.js"
+			"static/js/vendor.8f6e52aa.js",
+			"static/js/my.f7222b5b.js"
 		],
 		"refer": [
 			"index.html",
@@ -161,7 +162,8 @@
 			"static/js/home.b3ec4102.js",
 			"static/js/manifest.3f73e54a.js",
 			"static/js/vendor.8f6e52aa.js",
-			"static/js/manifest.c6392fab.js"
+			"static/js/manifest.c6392fab.js",
+			"static/js/home.e9bd5448.js"
 		],
 		"refer": [
 			"speed_up.html"
@@ -392,7 +394,8 @@
 			"static/css/course.4dc0893f.css",
 			"static/js/vendor.e002ddca.js",
 			"static/js/manifest.3f73e54a.js",
-			"static/js/vendor.8f6e52aa.js"
+			"static/js/vendor.8f6e52aa.js",
+			"static/js/course.fd6e7879.js"
 		]
 	},
 	"activity.html": {
@@ -407,7 +410,8 @@
 			"static/js/activity.bcfcd799.js",
 			"static/css/activity.bcfcd799.css",
 			"static/js/manifest.3f73e54a.js",
-			"static/js/vendor.8f6e52aa.js"
+			"static/js/vendor.8f6e52aa.js",
+			"static/js/activity.192050e2.js"
 		]
 	}
 }

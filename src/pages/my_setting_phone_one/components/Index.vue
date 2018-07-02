@@ -193,7 +193,7 @@ html {
   text-align: center;
 }
 .box {
-  padding: 0 $padding-main;
+  padding: 0 $padding-main 60px;
 }
 .box-field {
   margin-top: 61px;

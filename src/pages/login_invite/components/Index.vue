@@ -21,7 +21,7 @@
             <span class="invite-input" :class="inputFocus && inviteCode.length>=3?'invite-input-focus':''" :ref="'inviteInput3'">{{inviteCode[3]}}</span>
           </div>
         </div>
-        <div class="row-country">
+        <!-- <div class="row-country">
           <div class="col-left">国家代码</div>
           <div class="col-right" @click="goAreaCode">
             <span>{{areacode}}</span>
@@ -32,7 +32,7 @@
         <van-field class="row-sms" center v-model="sms" placeholder="请输入短信验证码">
           <van-button slot="button" @click="getSmscode" v-if="cansendsms" size="large">发送验证码</van-button>
           <van-button slot="button" @click="getSmscode" v-if="!cansendsms" size="large">{{timing}}s</van-button>
-        </van-field>
+        </van-field> -->
       </van-cell-group>
       <div class="btn-box">
         <van-button slot="button" class="btn-main" size="large" @click="login">登录</van-button>
@@ -250,20 +250,20 @@ export default {
         return;
       }
 
-      if (this.phone.trim() === "") {
-        Toast("手机号不能为空");
-        return;
-      }
+      // if (this.phone.trim() === "") {
+      //   Toast("手机号不能为空");
+      //   return;
+      // }
 
-      if (!checkPhone(this.phone)) {
-        Toast("请输入正确格式的手机号");
-        return;
-      }
+      // if (!checkPhone(this.phone)) {
+      //   Toast("请输入正确格式的手机号");
+      //   return;
+      // }
 
-      if (this.sms.trim() === "") {
-        Toast("验证码不能为空");
-        return;
-      }
+      // if (this.sms.trim() === "") {
+      //   Toast("验证码不能为空");
+      //   return;
+      // }
 
       param = {
         invite_code: this.inviteCode
@@ -298,6 +298,9 @@ export default {
               mui.back();
             }, 400);
           });
+
+          // 刷新所有页面
+          MTOOL.invokeAll("event_update");
         } else {
           location.href = "home.html";
         }

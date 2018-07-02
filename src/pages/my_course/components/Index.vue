@@ -115,6 +115,7 @@ export default {
         .then(res => {
           res = res && res.data;
           let data = res.data;
+          console.log("data", data);
           if (res.status === 200 && data) {
             this.courseJoinedList = data;
           } else {

@@ -160,6 +160,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.init();
+      console.log("token" + MTOOL.storage.getItem(config.keys.token));
     });
   },
   methods: {
@@ -269,9 +270,14 @@ export default {
 
     openAuthPage(url) {
       if (!this.isLogin()) return;
-      this.checkUserStatus().then(() => {
-        MTOOL.openWindow(url);
-      });
+      this.checkUserStatus()
+        .then(() => {
+          MTOOL.openWindow(url);
+        })
+        .catch(e => {
+          console.log(e.message);
+          e.message && Toast(e.message);
+        });
     },
 
     goSetting() {

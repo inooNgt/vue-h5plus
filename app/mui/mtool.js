@@ -375,8 +375,10 @@
   var invokeAll = function(event, data) {
     if (!isPlus) return;
     let pages = plus.webview.all();
-    for (var i = 0; i < pages.length; i++) {
-      mui.fire(wvs[i], event, data);
+    if (pages.length) {
+      for (var i = 0; i < pages.length; i++) {
+        mui.fire(wvs[i], event, data);
+      }
     }
   };
 

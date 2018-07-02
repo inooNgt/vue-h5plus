@@ -157,26 +157,7 @@
         "password": "" /*Android应用打包使用密钥库中证书的密码*/,
         "aliasname": "" /*Android应用打包使用密钥库中证书的别名*/,
         "ImmersedStatusbar": true /*Android平台开启沉浸式状态栏样式*/,
-        "permissions": [
-          "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-          "<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>",
-          "<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
-          "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
-          "<uses-permission android:name=\"android.permission.INTERNET\"/>",
-          "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-          "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-          "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-          "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-          "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-          "<uses-feature android:name=\"android.hardware.camera\"/>",
-          "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
-          "<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>",
-          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-          "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
-          "<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>",
-          "<uses-permission android:name=\"android.permission.CAMERA\"/>",
-          "<uses-permission android:name=\"android.permission.READ_SMS\"/>"
-        ]
+        "permissions": ["<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
       },
       "orientation": [
         "portrait-primary"
@@ -271,7 +252,7 @@
         "payment": {},
         "oauth": {}
       }
-    }
+    },"adid":"129537030406"
   },
   "dependencies": {
 		"pages": {
@@ -369,7 +350,8 @@
 					"static/js/home.b3ec4102.js",
 					"static/js/manifest.3f73e54a.js",
 					"static/js/vendor.8f6e52aa.js",
-					"static/js/manifest.c6392fab.js"
+					"static/js/manifest.c6392fab.js",
+					"static/js/home.e9bd5448.js"
 				],
 				"refer": [
 					"speed_up.html"
@@ -415,7 +397,8 @@
 					"static/css/my.47a7b92a.css",
 					"static/js/my.9b3301d4.js",
 					"static/css/my.9b3301d4.css",
-					"static/js/vendor.8f6e52aa.js"
+					"static/js/vendor.8f6e52aa.js",
+					"static/js/my.f7222b5b.js"
 				],
 				"refer": [
 					"login.html",
@@ -686,7 +669,8 @@
 					"static/css/course.4dc0893f.css",
 					"static/js/vendor.e002ddca.js",
 					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js"
+					"static/js/vendor.8f6e52aa.js",
+					"static/js/course.fd6e7879.js"
 				],
 				"refer": [
 					"info_course.html"
@@ -702,7 +686,8 @@
 					"static/js/activity.bcfcd799.js",
 					"static/css/activity.bcfcd799.css",
 					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js"
+					"static/js/vendor.8f6e52aa.js",
+					"static/js/activity.192050e2.js"
 				],
 				"refer": [
 					"info_activity.html"

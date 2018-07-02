@@ -84,7 +84,7 @@ export default {
 
       this.loadData();
     },
-    updagte() {
+    update() {
       this.loadData();
     },
     loadData() {

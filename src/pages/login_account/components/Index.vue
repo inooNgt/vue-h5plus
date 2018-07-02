@@ -216,25 +216,13 @@ export default {
       // 跳转 plus环境
       if (MTOOL.isPlus) {
         MTOOL.plusReady(function() {
-          var wv = plus.webview.currentWebview();
-          var origin = wv.from;
-          // 来自tabbar子页面的登录，返回tabbar子页面,然后再更新tabbar子页
-          console.log("origin: " + origin);
+          let loginwv = plus.webview.getWebviewById("login.html");
+          if (loginwv) plus.webview.close(loginwv, "none");
           setTimeout(() => {
-            // 关闭当前页
             mui.back();
-            // 更新页面
-            MTOOL.invoke("HBuilder", "index_update_subpages", { to: origin });
           }, 400);
-
-          // 带参处理
-          // if (origin && MTOOL.config.subpages.indexOf(origin)) {
-          //   MTOOL.switchNav({
-          //     from: "login.html",
-          //     to: origin
-          //   });
-          //   MTOOL.invoke("HBuilder", "index_update_tab", { to: origin });
-          // }
+          // 刷新所有页面
+          MTOOL.invokeAll("event_update");
         });
       } else {
         location.href = "home.html";

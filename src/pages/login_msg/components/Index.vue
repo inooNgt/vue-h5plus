@@ -237,6 +237,8 @@ export default {
           setTimeout(() => {
             mui.back();
           }, 400);
+          // 刷新所有页面
+          MTOOL.invokeAll("event_update");
         });
       } else {
         location.href = "home.html";
