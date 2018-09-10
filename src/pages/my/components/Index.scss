@@ -1,0 +1,166 @@
+@import "~assets/scss/var";
+@import "~assets/scss/common";
+
+.page-content {
+  padding-bottom: 18px;
+  overflow-x: hidden;
+}
+.page-content.broswer-content {
+  padding-bottom: 68px;
+}
+.item-left {
+  .md-icon {
+    position: relative;
+    margin-right: 16px;
+    top: -1px;
+  }
+  .iconfont {
+    width: 22px;
+    text-align: center;
+    font-size: 17px;
+    margin-right: 11px;
+    color: #000;
+  }
+}
+
+.my-list {
+  padding-right: 0;
+  .list-item {
+    padding-right: $padding-main;
+  }
+}
+
+.my-list .item-left .item-title {
+  width: 135px;
+}
+
+.my-info {
+  height: px2rem(72px);
+  overflow: hidden;
+  color: #fff;
+  display: flex;
+  background-color: #18235d;
+  .info-item {
+  }
+  .info-left,
+  .info-right {
+    padding: 0 $padding-main;
+    // flex: 1;
+    width: 50%;
+    text-align: center;
+  }
+  .info-left {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      margin-top: -20px;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(
+        0deg,
+        #2c3648 0%,
+        $color-main 50%,
+        #2c3648 100%
+      );
+      border-image-slice: 1;
+    }
+  }
+  .info-title {
+    height: px2rem(32px);
+    padding-top: px2rem(12px);
+    font-family: San-Francisco-Text-Medium;
+    font-size: 16px;
+    color: #5160bf;
+  }
+  .info-value {
+    font-family: San-Francisco-Text-Regular;
+    font-size: 18px;
+    padding-top: px2rem(5px);
+    color: rgba(255, 255, 255, 0.6);
+    @extend %text-over;
+  }
+}
+.my-header {
+  height: px2rem(210px);
+  padding: 0 $padding-main;
+  // background: $color-main;
+  color: #fff;
+  position: relative;
+}
+.row-img {
+  text-align: center;
+  padding: px2rem(7px) 0 px2rem(7px);
+}
+.img-wrap {
+  position: relative;
+}
+.header-img {
+  display: block;
+  width: px2rem(93px);
+  height: px2rem(93px);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: #fff;
+  margin: 0 auto;
+}
+.row-msg {
+  line-height: px2rem(30px);
+  text-align: center;
+  .msg-name {
+    @extend %text-over;
+    font-size: 16px;
+    font-weight: 600;
+    text-shadow: 0 1px 1px #000;
+  }
+  .msg-login {
+  }
+}
+.bar-setting {
+  height: px2rem(40px);
+  padding: 0 $padding-main;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.icon-setting {
+  font-size: 20px;
+  padding: 8px 10px;
+  position: relative;
+  right: -10px;
+}
+.my-header-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.my-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.signin-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  z-index: 9;
+  width: 64px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 15px 0 0 15px;
+  color: #fff;
+  font-size: 14px;
+}
+.icon-article {
+  font-size: 16px;
+}

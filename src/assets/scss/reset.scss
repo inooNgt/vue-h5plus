@@ -1,0 +1,88 @@
+@import "var";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 50px;
+  font-size: 13.33333vw;
+}
+
+html,
+body {
+  background: #fff;
+  color: #000;
+  overflow-x: hidden;
+  font-family: PingFang-SC-Regular, "微软雅黑";
+}
+
+body {
+  // height: 100%;
+  font-size: 14px;
+  word-break: break-all;
+  user-select: none;
+}
+
+input,
+textarea {
+  user-select: initial;
+}
+
+a {
+  color: #333;
+}
+a:active {
+  color: #333;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+img {
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 4px;
+  background-color: #f5f5f5;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: rgba(90, 90, 90, 0.7);
+}
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 3px;
+  background-color: rgba(90, 90, 90, 1);
+}
+
+::-webkit-input-placeholder {
+  color: $color-tip;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: $color-tip;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $color-tip;
+}
+:-ms-input-placeholder {
+  color: $color-tip;
+}
