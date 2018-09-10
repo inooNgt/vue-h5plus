@@ -1,23 +1,22 @@
 {
   "@platforms": ["android", "iPhone", "iPad"],
-  "id": "H505FB26D" /*应用的标识，创建应用时自动生成，勿手动修改*/,
-  "name": "MultiPages" /*应用名称，程序桌面图标名称*/,
+  "id": "dic.club" /*应用的标识，创建应用时自动生成，勿手动修改*/,
+  "name": "币链江湖" /*应用名称，程序桌面图标名称*/,
   "version": {
-    "name": "2.1.2" /*应用版本名称*/,
-    "code": "20102"
+    "name": "1.0.6" /*应用版本名称*/,
+    "code": ""
   },
-  "description": "Multipages" /*应用描述信息*/,
+  "description": "" /*应用描述信息*/,
   "icons": {
-    "144": "icon.png"
+    "72": "icon.png"
   },
   "launch_path":
     "index.html" /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/,
   "developer": {
     "name": "" /*开发者名称*/,
     "email": "" /*开发者邮箱地址*/,
-    "url": "http://www.dcloud.io"
+    "url": ""
   },
-  "orientation": ["portrait"],
   "permissions": {
     "Accelerometer": {
       "description": "加速度传感器"
@@ -96,20 +95,25 @@
     },
     "Barcode": {
       "description": "二维码扫描"
-    },
-    "Maps": {},
-    "OAuth": {},
-    "Fingerprint": {}
+    }
   },
   "plus": {
     "splashscreen": {
-      "autoclose": true /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/,
-      "waiting": false,
-      "delay": "0"
+      "autoclose": false /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/,
+      "waiting": false
     },
     "statusbar": {
       "immersed": "none",
-      "style": "light"
+      "style": "light",
+      "background": "#eb2000"
+    },
+    "secondwebview": {
+      "launch_path": "home.html",
+      "id": "home.html",
+      "top": "0px",
+      "bottom": "49px",
+      //   "bounce": "vertical",
+      "render": "always"
     },
     "popGesture":
       "close" /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/,
@@ -125,30 +129,7 @@
         "password": "" /*iOS应用打包个人证书导入密码*/,
         "p12": "" /*iOS应用打包个人证书，打包配置文件关联的个人证书*/,
         "devices":
-          "iphone" /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/,
-        "urlschemewhitelist": [
-          /*iOS9调用第三方应用urlscheme白名单*/
-          "baidumap",
-          "iosamap"
-        ],
-        "shortcuts": [
-          /*3D Touch快捷菜单项*/
-          {
-            "type": "share",
-            "title": "分 享",
-            "subtitle": "分享到微信、微博、QQ",
-            "icontype": "UIApplicationShortcutIconTypeShare"
-          },
-          {
-            "type": "about",
-            "title": "关 于",
-            "subtitle": "www.dcloud.io",
-            "iconfile": "sa.png",
-            "userinfo": {
-              "key3": "value3"
-            }
-          }
-        ],
+          "universal" /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/,
         "frameworks": []
       },
       "google": {
@@ -156,8 +137,7 @@
         "keystore": "" /*Android应用打包使用的密钥库文件*/,
         "password": "" /*Android应用打包使用密钥库中证书的密码*/,
         "aliasname": "" /*Android应用打包使用密钥库中证书的别名*/,
-        "ImmersedStatusbar": true /*Android平台开启沉浸式状态栏样式*/,
-        "permissions": ["<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+        "permissions": ["<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.INTERNET\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
       },
       "orientation": [
         "portrait-primary"
@@ -165,47 +145,63 @@
       "icons": {
         "ios": {
           "prerendered": true /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/,
-          "auto":
-            "" /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/,
+          /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
           "iphone": {
             "normal": "" /*iPhone3/3GS程序图标，分辨率：57x57*/,
             "retina": "" /*iPhone4程序图标，分辨率：114x114*/,
-            "retina7": "" /*iPhone4S/5/6程序图标，分辨率：120x120*/,
-            "retina8": "" /*iPhone6 Plus程序图标，分辨率：180x180*/,
+            /*iPhone4S/5/6程序图标，分辨率：120x120*/
+            /*iPhone6 Plus程序图标，分辨率：180x180*/
             "spotlight-normal":
               "" /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/,
             "spotlight-retina":
               "" /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/,
-            "spotlight-retina7":
-              "" /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/,
+            /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
             "settings-normal": "" /*iPhone4设置页面程序图标，分辨率：29x29*/,
-            "settings-retina":
-              "" /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/,
-            "settings-retina8": ""
+            /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+            "app@2x": "unpackage/res/icons/120x120.png",
+            "app@3x": "unpackage/res/icons/180x180.png",
+            "settings@3x": "unpackage/res/icons/87x87.png",
+            "settings@2x": "unpackage/res/icons/58x58.png",
+            "spotlight@2x": "unpackage/res/icons/80x80.png",
+            "spotlight@3x": "unpackage/res/icons/120x120.png",
+            "notification@3x": "unpackage/res/icons/60x60.png",
+            "notification@2x": "unpackage/res/icons/40x40.png"
           },
           "ipad": {
             "normal": "" /*iPad普通屏幕程序图标，分辨率：72x72*/,
             "retina": "" /*iPad高分屏程序图标，分辨率：144x144*/,
-            "normal7": "" /*iPad iOS7程序图标，分辨率：76x76*/,
-            "retina7": "" /*iPad iOS7高分屏程序图标，分辨率：152x152*/,
+            /*iPad iOS7程序图标，分辨率：76x76*/
+            /*iPad iOS7高分屏程序图标，分辨率：152x152*/
             "spotlight-normal":
               "" /*iPad Spotlight搜索程序图标，分辨率：50x50*/,
             "spotlight-retina":
               "" /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/,
-            "spotlight-normal7":
-              "" /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/,
-            "spotlight-retina7":
-              "" /*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/,
-            "settings-normal": "" /*iPad设置页面程序图标，分辨率：29x29*/,
-            "settings-retina": ""
-          }
+            /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+            /*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+            /*iPad设置页面程序图标，分辨率：29x29*/
+            "app": "unpackage/res/icons/76x76.png",
+            "app@2x": "unpackage/res/icons/152x152.png",
+            "settings": "unpackage/res/icons/29x29.png",
+            "proapp@2x": "unpackage/res/icons/167x167.png",
+            "spotlight": "unpackage/res/icons/40x40.png",
+            "settings@2x": "unpackage/res/icons/58x58.png",
+            "spotlight@2x": "unpackage/res/icons/80x80.png",
+            "notification": "unpackage/res/icons/20x20.png",
+            "notification@2x": "unpackage/res/icons/40x40.png"
+          },
+          "appstore": "unpackage/res/icons/1024x1024.png"
         },
         "android": {
-          "mdpi": "" /*普通屏程序图标，分辨率：48x48*/,
-          "ldpi": "" /*大屏程序图标，分辨率：48x48*/,
-          "hdpi": "" /*高分屏程序图标，分辨率：72x72*/,
-          "xhdpi": "" /*720P高分屏程序图标，分辨率：96x96*/,
-          "xxhdpi": ""
+          "mdpi":
+            "unpackage/res/icons/48x48.png" /*普通屏程序图标，分辨率：48x48*/,
+          "ldpi":
+            "unpackage/res/icons/48x48.png" /*大屏程序图标，分辨率：48x48*/,
+          "hdpi":
+            "unpackage/res/icons/72x72.png" /*高分屏程序图标，分辨率：72x72*/,
+          "xhdpi":
+            "unpackage/res/icons/96x96.png" /*720P高分屏程序图标，分辨率：96x96*/,
+          "xxhdpi": "unpackage/res/icons/144x144.png",
+          "xxxhdpi": "unpackage/res/icons/192x192.png"
         }
       },
       "splashscreen": {
@@ -213,482 +209,581 @@
           "iphone": {
             "default": "" /*iPhone3启动图片选，分辨率：320x480*/,
             "retina35":
-              "C:/Users/admin/Downloads/0.png" /*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/,
+              "D:/app/dic-hybrid/appicon/start/Iphone/640 x 960.png" /*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/,
             "retina40":
-              "" /*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/,
-            "retina47": "" /*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/,
+              "D:/app/dic-hybrid/appicon/start/Iphone/640 x 1136.png" /*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/,
+            "retina47":
+              "D:/app/dic-hybrid/appicon/start/Iphone/750 x 1330.png" /*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/,
             "retina55":
-              "" /*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/,
-            "retina55l": ""
+              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208.png" /*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/,
+            "retina55l":
+              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208h.png"
           },
           "ipad": {
             "portrait": "" /*iPad竖屏启动图片，分辨率：768x1004*/,
-            "portrait-retina": "" /*iPad高分屏竖屏图片，分辨率：1536x2008*/,
-            "landscape": "" /*iPad横屏启动图片，分辨率：1024x748*/,
+            "portrait-retina":
+              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208.png" /*iPad高分屏竖屏图片，分辨率：1536x2008*/,
+            "landscape":
+              "D:/app/dic-hybrid/appicon/start/Iphone/1125 x 2436h.png" /*iPad横屏启动图片，分辨率：1024x748*/,
             "landscape-retina":
-              "" /*iPad高分屏横屏启动图片，分辨率：2048x1496*/,
-            "portrait7": "" /*iPad iOS7竖屏启动图片，分辨率：768x1024*/,
+              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208h.png" /*iPad高分屏横屏启动图片，分辨率：2048x1496*/,
+            "portrait7":
+              "D:/app/dic-hybrid/appicon/start/Iphone/750 x 1330.png" /*iPad iOS7竖屏启动图片，分辨率：768x1024*/,
             "portrait-retina7":
-              "" /*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/,
-            "landscape7": "" /*iPad iOS7横屏启动图片，分辨率：1024x768*/,
-            "landscape-retina7": ""
+              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208.png" /*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/,
+            "landscape7":
+              "D:/app/dic-hybrid/appicon/start/Iphone/1125 x 2436h.png" /*iPad iOS7横屏启动图片，分辨率：1024x768*/,
+            "landscape-retina7":
+              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208h.png"
           }
         },
         "android": {
           "mdpi": "" /*普通屏启动图片，分辨率：240x282*/,
           "ldpi": "" /*大屏启动图片，分辨率：320x442*/,
           "hdpi":
-            "C:/Users/admin/Downloads/0.png" /*高分屏启动图片，分辨率：480x762*/,
+            "D:/app/dic-hybrid/appicon/start/Android/480 x 762.png" /*高分屏启动图片，分辨率：480x762*/,
           "xhdpi":
-            "C:/Users/admin/Downloads/0.png" /*720P高分屏启动图片，分辨率：720x1242*/,
-          "xxhdpi": "C:/Users/admin/Downloads/0.png"
+            "D:/app/dic-hybrid/appicon/start/Android/720 x 1242.png" /*720P高分屏启动图片，分辨率：720x1242*/,
+          "xxhdpi": "D:/app/dic-hybrid/appicon/start/Android/1080 x 1882.png"
         }
-      },
-      "plugins": {
-        "statics": {},
-        "maps": {},
-        "push": {},
-        "share": {},
-        "payment": {},
-        "oauth": {}
       }
-    },"adid":"129537030406"
+    },
+    "adid": "129537030406"
   },
   "dependencies": {
 		"pages": {
-			"index.html": {
-				"href": "index.html",
-				"priority": 29,
+			"energy.html": {
+				"href": "energy.html",
 				"resources": [
-					"/mui/mui.js",
-					"vigour.html",
-					"home.html",
-					"static/js/index.js",
-					"static/css/index.css",
-					"static/js/manifest.js",
-					"static/js/vendor.js",
-					"static/js/index.c35643d4.js",
-					"static/js/manifest.f01ddb6b.js",
-					"static/css/index.c35643d4.css",
-					"static/js/vendor.bda0a263.js",
+					"static/css/energy.css",
+					"mui/polyfill.js",
 					"mui/mui.js",
 					"mui/mtool.js",
-					"static/js/vendor.e002ddca.js",
-					"static/css/index.5258ea3d.css",
-					"static/js/index.5258ea3d.js",
-					"static/js/manifest.a933dbb5.js",
-					"static/js/index.2c36a427.js",
-					"static/css/index.2c36a427.css",
-					"static/js/index.5b78f963.js",
-					"static/css/index.5b78f963.css",
-					"static/js/manifest.9359d106.js",
-					"static/js/index.cab9429e.js",
-					"static/css/index.02275b92.css",
-					"static/js/index.02275b92.js",
-					"static/js/index.be6d86d4.js",
-					"static/css/index.be6d86d4.css",
-					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js",
-					"static/js/index.c657ad73.js",
-					"static/js/manifest.c6392fab.js"
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/energy.js",
+					"static/img/speedup_bg.png",
+					"static/img/energy_invite.png",
+					"static/img/energy_xiu.png"
 				],
+				"priority": 0,
 				"refer": [
-					"my.html",
-					"login.html",
-					"course.html",
-					"activity.html"
+					"energy_seclusion.html",
+					"my_invite.html",
+					"energy_rank.html"
 				]
 			},
-			"vigour.html": {
-				"resources": [
-					"static/css/vigour.css",
-					"static/js/vigour.js",
-					"static/js/manifest.js",
-					"static/js/vendor.js",
-					"static/js/vigour.6ac092cb.js",
-					"static/js/manifest.f01ddb6b.js",
-					"static/css/vigour.ff34adfe.css",
-					"static/js/vigour.ff34adfe.js",
-					"static/js/vendor.bda0a263.js",
-					"static/img/bg.png",
-					"static/js/vigour.d867fbd3.js",
-					"static/css/vigour.87534fb0.css",
-					"static/js/vendor.e002ddca.js",
-					"static/js/vigour.87534fb0.js",
-					"static/js/manifest.9359d106.js",
-					"static/js/vigour.1d0c4add.js",
-					"static/css/vigour.1d0c4add.css"
-				],
-				"refer": [
-					"speed_up.html"
-				],
-				"priority": 0
-			},
 			"home.html": {
+				"href": "home.html",
 				"resources": [
-					"static/js/home.js",
+					"mui/css/mui.css",
 					"static/css/home.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
 					"static/js/manifest.js",
 					"static/js/vendor.js",
-					"static/css/home.b911ac76.css",
-					"static/js/manifest.f01ddb6b.js",
-					"static/js/home.b911ac76.js",
-					"static/js/vendor.bda0a263.js",
-					"static/js/vendor.c0628292.js",
-					"static/js/vendor.e002ddca.js",
-					"static/js/manifest.a933dbb5.js",
-					"static/css/home.03a2f7f1.css",
-					"static/js/home.03a2f7f1.js",
-					"static/js/home.bfff8abe.js",
-					"static/css/home.bfff8abe.css",
-					"static/js/manifest.9359d106.js",
-					"static/css/home.675686a0.css",
-					"static/js/home.675686a0.js",
-					"static/js/home.7016db54.js",
-					"static/css/home.7016db54.css",
-					"static/css/home.b3ec4102.css",
-					"static/js/home.b3ec4102.js",
-					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js",
-					"static/js/manifest.c6392fab.js",
-					"static/js/home.e9bd5448.js"
+					"static/js/home.js",
+					"static/css/chunk-vendors.css",
+					"static/css/chunk-common.css"
 				],
+				"priority": 1,
 				"refer": [
-					"speed_up.html"
-				],
-				"priority": 0
+					"common_article.html",
+					"home_list_article.html",
+					"menpai_create.html",
+					"home_list_menpai.html",
+					"common_shade.html",
+					"sweepcode.html",
+					"login.html"
+				]
 			},
-			"my.html": {
+			"info_activity.html": {
+				"href": "info_activity.html",
 				"resources": [
-					"static/css/my.css",
+					"static/css/info_activity.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
 					"static/js/manifest.js",
 					"static/js/vendor.js",
-					"static/js/my.js",
-					"static/css/my.cec143f2.css",
-					"static/js/my.cec143f2.js",
-					"static/js/manifest.f01ddb6b.js",
-					"static/js/vendor.bda0a263.js",
-					"static/css/my.b5aae99b.css",
-					"static/js/my.b5aae99b.js",
-					"static/css/my.74c46b28.css",
-					"static/js/my.74c46b28.js",
-					"static/js/my.14ec862a.js",
-					"static/css/my.14ec862a.css",
-					"static/js/vendor.c0628292.js",
-					"static/css/my.2c560ba7.css",
-					"static/js/my.2c560ba7.js",
-					"static/js/vendor.e002ddca.js",
-					"static/js/my.cda26dde.js",
-					"static/css/my.cda26dde.css",
-					"static/css/my.366b1cdc.css",
-					"static/js/my.366b1cdc.js",
-					"static/js/manifest.9359d106.js",
-					"static/js/my.12efd095.js",
-					"static/css/my.12efd095.css",
-					"static/css/my.3112c503.css",
-					"static/js/my.3112c503.js",
-					"static/js/manifest.c6392fab.js",
-					"static/css/my.3c5138a9.css",
-					"static/js/my.3c5138a9.js",
-					"static/js/manifest.3f73e54a.js",
-					"static/css/my.e3d083f2.css",
-					"static/js/my.e3d083f2.js",
-					"static/js/my.47a7b92a.js",
-					"static/css/my.47a7b92a.css",
-					"static/js/my.9b3301d4.js",
-					"static/css/my.9b3301d4.css",
-					"static/js/vendor.8f6e52aa.js",
-					"static/js/my.f7222b5b.js"
+					"static/js/info_activity.js"
 				],
-				"refer": [
-					"login.html",
-					"my_setting.html",
-					"my_fund.html",
-					"my_auth.html",
-					"my_course.html",
-					"my_help.html",
-					"my_about.html",
-					"my_activity.html",
-					"login_invite.html"
-				],
-				"priority": 0
+				"priority": 2,
+				"refer": []
 			},
-			"contacts.html": {
+			"info_course.html": {
+				"href": "info_course.html",
 				"resources": [
-					"static/css/contacts.css",
-					"static/js/contacts.js",
+					"static/css/info_course.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
 					"static/js/manifest.js",
-					"static/js/vendor.js"
+					"static/js/vendor.js",
+					"static/js/info_course.js"
 				],
-				"refer": [],
-				"priority": 0
+				"priority": 4,
+				"refer": []
 			},
-			"login.html": {
+			"menpai_member.html": {
+				"href": "menpai_member.html",
 				"resources": [
-					"static/js/login.1ac75167.js",
-					"static/css/login.1ac75167.css",
-					"static/js/manifest.9359d106.js",
-					"static/js/vendor.e002ddca.js"
+					"mui/css/mui.css",
+					"static/css/menpai_member.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/iscroll-probe.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/menpai_member.js"
+				],
+				"priority": 5,
+				"refer": []
+			},
+			"home_info_menpai.html": {
+				"href": "home_info_menpai.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/home_info_menpai.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/iscroll-probe.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/home_info_menpai.js"
+				],
+				"priority": 11,
+				"refer": []
+			},
+			"common_article.html": {
+				"href": "common_article.html",
+				"resources": [
+					"static/css/common_article.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_article.js"
+				],
+				"priority": 12,
+				"refer": []
+			},
+			"common_embed.html": {
+				"href": "common_embed.html",
+				"resources": [
+					"static/css/common_embed.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_embed.js"
 				],
 				"refer": [
-					"login_register.html",
-					"login_findps.html",
-					"login_msg.html",
-					"login_account.html"
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
 				],
-				"priority": 0
+				"priority": 7
+			},
+			"my_about.html": {
+				"href": "my_about.html",
+				"resources": [
+					"static/css/my_about.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_about.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 11
+			},
+			"my_help.html": {
+				"href": "my_help.html",
+				"resources": [
+					"static/css/my_help.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_help.js"
+				],
+				"priority": 12,
+				"refer": []
+			},
+			"my_fund.html": {
+				"href": "my_fund.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/my_fund.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_fund.js"
+				],
+				"priority": 14,
+				"refer": []
+			},
+			"sign_in.html": {
+				"href": "sign_in.html",
+				"resources": [
+					"static/css/sign_in.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/sign_in.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 15
+			},
+			"common_invite.html": {
+				"href": "common_invite.html",
+				"resources": [
+					"static/css/common_invite.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_invite.js"
+				],
+				"priority": 22,
+				"refer": []
+			},
+			"my_invite.html": {
+				"href": "my_invite.html",
+				"resources": [
+					"mui/img/invite_bg.png",
+					"static/css/my_invite.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_invite.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_invite.html",
+					"common_article.html"
+				],
+				"priority": 17
+			},
+			"my_article.html": {
+				"href": "my_article.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/my_article.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_article.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 19
+			},
+			"my_feedback.html": {
+				"href": "my_feedback.html",
+				"resources": [
+					"static/css/my_feedback.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_feedback.js"
+				],
+				"priority": 21,
+				"refer": []
 			},
 			"my_setting.html": {
+				"href": "my_setting.html",
 				"resources": [
 					"static/css/my_setting.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
 					"static/js/manifest.js",
 					"static/js/vendor.js",
 					"static/js/my_setting.js",
-					"static/css/my_setting.df3dd985.css",
-					"static/css/my_setting.5c69278b.css",
-					"static/js/my_setting.5c69278b.js",
-					"static/css/my_setting.bfc1c102.css",
-					"static/js/my_setting.bfc1c102.js",
-					"static/js/my_setting.4f49139f.js",
-					"static/js/my_setting.bf48400e.js",
-					"static/js/my_setting.dcbd6d0b.js",
-					"static/css/my_setting.45d2dbd8.css",
-					"static/js/my_setting.3e432b32.js",
-					"static/css/my_setting.3e432b32.css",
-					"static/css/my_setting.e2b14c4b.css",
-					"static/js/my_setting.badf1cbf.js",
-					"static/css/my_setting.badf1cbf.css",
-					"static/js/manifest.f01ddb6b.js",
-					"static/js/vendor.bda0a263.js",
-					"static/js/my_setting.5d28fef7.js",
-					"static/css/my_setting.5d28fef7.css",
-					"static/js/my_setting.453b63d8.js",
-					"static/css/my_setting.453b63d8.css",
-					"static/css/my_setting.06c4b17d.css",
-					"static/js/my_setting.06c4b17d.js",
-					"static/js/my_setting.3e4e35f3.js",
-					"static/css/my_setting.3e4e35f3.css",
-					"static/js/vendor.c0628292.js",
-					"static/js/my_setting.393771a8.js"
+					"mui/transform.js",
+					"mui/alloy-finger.js",
+					"mui/alloy-crop.js"
 				],
+				"priority": 22,
 				"refer": [
 					"my_setting_head.html",
 					"my_setting_name.html",
 					"my_setting_phone.html",
 					"login.html"
-				],
-				"priority": 0
+				]
 			},
-			"my_setting_phone.html": {
+			"my_message.html": {
+				"href": "my_message.html",
 				"resources": [
-					"static/css/my_setting_phone.css",
-					"static/js/my_setting_phone.js",
-					"static/js/manifest.js",
-					"static/js/vendor.js",
-					"static/js/vendor.c0628292.js",
-					"static/js/my_setting_phone.f944d1cf.js"
-				],
-				"refer": [
-					"my_setting_phone_done.html",
-					"my_setting_phone_one.html"
-				],
-				"priority": 0
-			},
-			"my_setting_phone_done.html": {
-				"resources": [
-					"static/css/my_setting_phone_done.css",
-					"static/js/my_setting_phone_done.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"my_auth.html": {
-				"resources": [
-					"static/css/my_auth.99a26e1b.css",
-					"static/js/my_auth.99a26e1b.js",
-					"static/js/vendor.e002ddca.js",
+					"mui/css/mui.css",
+					"static/css/my_message.css",
+					"mui/polyfill.js",
 					"mui/mui.js",
 					"mui/mtool.js",
-					"static/css/my_auth.11573a5b.css",
-					"static/css/my_auth.3de1f9b3.css",
-					"static/js/my_auth.3de1f9b3.js",
-					"static/js/manifest.c6392fab.js"
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_message.js"
 				],
+				"priority": 23,
+				"refer": []
+			},
+			"my_auth.html": {
+				"href": "my_auth.html",
+				"resources": [
+					"static/css/my_auth.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_auth.js"
+				],
+				"priority": 24,
 				"refer": [
-					"my_auth_msg.html",
-					"my_auth_name.html",
-					"my_auth_number.html",
 					"my_auth_type.html",
-					"my_auth_areacode.html"
-				],
-				"priority": 0
+					"my_auth_number.html",
+					"my_auth_areacode.html",
+					"my_auth_name.html"
+				]
 			},
-			"login_msg.html": {
-				"resources": [],
-				"refer": [
-					"login_areacode.html",
-					"login_account.html"
-				],
-				"priority": 0
-			},
-			"login_account.html": {
-				"resources": [],
-				"refer": [
-					"login_areacode.html",
-					"login_msg.html"
-				],
-				"priority": 0
-			},
-			"my_setting_head.html": {
+			"login.html": {
+				"href": "login.html",
 				"resources": [
-					"static/js/my_setting_head.62338e34.js",
-					"static/css/my_setting_head.62338e34.css",
-					"static/js/my_setting_head.b09bbc00.js",
-					"static/css/my_setting_head.b09bbc00.css",
-					"static/css/my_setting_head.7b319251.css",
-					"static/js/my_setting_head.7b319251.js",
-					"static/js/my_setting_head.749952a6.js",
-					"static/css/my_setting_head.749952a6.css",
-					"static/js/my_setting_head.bbe8fd26.js",
-					"static/css/my_setting_head.bbe8fd26.css"
+					"static/css/login.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/login.js"
 				],
-				"refer": [],
-				"priority": 0
+				"priority": 28,
+				"refer": []
 			},
-			"my_setting_name.html": {
+			"my.html": {
+				"href": "my.html",
 				"resources": [
-					"static/css/my_setting_name.87d00212.css",
-					"static/js/my_setting_name.87d00212.js",
-					"static/js/manifest.f01ddb6b.js",
-					"static/js/vendor.bda0a263.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"my_setting_phone_two.html": {
-				"resources": [
-					"static/js/my_setting_phone_two.e246aaa3.js",
-					"static/css/my_setting_phone_two.e246aaa3.css"
+					"mui/css/mui.css",
+					"mui/img/my_bg.png",
+					"static/css/my.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my.js",
+					"static/img/head.png"
 				],
 				"refer": [
-					"my_setting_phone_three.html",
-					"login_areacode.html"
-				],
-				"priority": 0
-			},
-			"my_setting_phone_one.html": {
-				"resources": [],
-				"refer": [
-					"my_setting_phone_two.html"
-				],
-				"priority": 0
-			},
-			"my_setting_phone_three.html": {
-				"resources": [
-					"static/css/my_setting_phone_three.1f5a396a.css",
-					"static/js/my_setting_phone_three.1f5a396a.js",
-					"static/js/my_setting_phone_three.4a0cd49d.js",
-					"static/css/my_setting_phone_three.4a0cd49d.css",
-					"static/js/my_setting_phone_three.9faa80c5.js",
-					"static/css/my_setting_phone_three.9faa80c5.css"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"my_help.html": {
-				"resources": [],
-				"refer": [
-					"my_help_question.html"
-				],
-				"priority": 0
-			},
-			"login_register.html": {
-				"resources": [],
-				"refer": [
-					"login_invite.html",
-					"login_areacode.html",
-					"login_protocol.html"
-				],
-				"priority": 0
-			},
-			"my_help_question.html": {
-				"resources": [
-					"static/css/my_help_question.31191aa7.css",
-					"static/js/my_help_question.31191aa7.js"
-				],
-				"refer": [],
-				"priority": 0
-			},
-			"my_course.html": {
-				"resources": [],
-				"refer": [
-					"signup.html",
+					"info_activity.html",
+					"my_about.html",
+					"my_help.html",
 					"info_course.html",
-					"signup_course.html"
+					"my_fund.html",
+					"sign_in.html",
+					"menpai_member.html",
+					"my_invite.html",
+					"energy.html",
+					"my_article.html",
+					"common_embed.html",
+					"my_feedback.html",
+					"my_setting.html",
+					"my_message.html",
+					"my_auth.html",
+					"home_info_menpai.html",
+					"menpai.html",
+					"my.html",
+					"login.html",
+					"common_article.html"
 				],
-				"priority": 0
+				"priority": 10
 			},
-			"info_course.html": {
-				"resources": [],
-				"refer": [
-					"signup_course.html"
-				],
-				"priority": 0
-			},
-			"signup_course.html": {
+			"menpai.html": {
+				"href": "menpai.html",
 				"resources": [
-					"static/css/signup_course.77ddad93.css",
-					"static/js/signup_course.77ddad93.js"
+					"mui/css/mui.css",
+					"static/css/menpai.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/menpai.js"
 				],
 				"refer": [
-					"signup_msg.html"
+					"info_activity.html",
+					"index.html",
+					"info_course.html",
+					"menpai_member.html",
+					"energy.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"menpai.html",
+					"my.html",
+					"home.html",
+					"common_article.html"
+				],
+				"priority": 2
+			},
+			"common_guide.html": {
+				"href": "common_guide.html",
+				"resources": [
+					"static/css/common_guide.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_guide.js",
+					"static/img/guide_bg.png",
+					"static/img/guide_4.png"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"home.html",
+					"common_article.html",
+					"login.html"
+				],
+				"priority": 3
+			},
+			"common_update.html": {
+				"href": "common_update.html",
+				"resources": [
+					"static/css/common_update.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_update.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 6
+			},
+			"index.html": {
+				"href": "index.html",
+				"resources": [
+					"static/css/index.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/index.js",
+					"home.html",
+					"menpai.html",
+					"static/css/chunk-vendors.css",
+					"static/css/chunk-common.css"
+				],
+				"refer": [
+					"energy.html",
+					"common_guide.html",
+					"my.html",
+					"login.html",
+					"common_update.html"
 				],
 				"priority": 0
 			},
-			"login_areacode.html": {
+			"home_list_article.html": {
 				"resources": [
-					"static/js/vendor.e002ddca.js",
-					"static/js/manifest.9359d106.js"
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/css/home_list_article.css",
+					"static/js/home_list_article.js"
 				],
 				"refer": [],
 				"priority": 0
 			},
-			"my_activity.html": {
-				"resources": [],
+			"home_list_menpai.html": {
+				"resources": [
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/css/home_list_menpai.css",
+					"static/js/home_list_menpai.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"energy_seclusion.html": {
+				"resources": [
+					"static/js/energy_seclusion.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/css/energy_seclusion.css",
+					"static/img/game_bg.png"
+				],
 				"refer": [
-					"info_activity.html"
+					"home_rule.html"
 				],
 				"priority": 0
 			},
-			"course.html": {
-				"resources": [
-					"static/css/course.13ac005b.css",
-					"static/js/course.13ac005b.js",
-					"static/js/manifest.c6392fab.js",
-					"static/js/course.4dc0893f.js",
-					"static/css/course.4dc0893f.css",
-					"static/js/vendor.e002ddca.js",
-					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js",
-					"static/js/course.fd6e7879.js"
-				],
+			"menpai_course.html": {
+				"resources": [],
 				"refer": [
 					"info_course.html"
 				],
 				"priority": 0
 			},
-			"activity.html": {
-				"resources": [
-					"static/css/activity.02981084.css",
-					"static/js/activity.02981084.js",
-					"static/js/vendor.e002ddca.js",
-					"static/js/manifest.c6392fab.js",
-					"static/js/activity.bcfcd799.js",
-					"static/css/activity.bcfcd799.css",
-					"static/js/manifest.3f73e54a.js",
-					"static/js/vendor.8f6e52aa.js",
-					"static/js/activity.192050e2.js"
-				],
+			"menpai_activity.html": {
+				"resources": [],
 				"refer": [
 					"info_activity.html"
 				],
@@ -697,18 +792,66 @@
 		},
 		"idle": {
 			"resources": [
-				"plus/webview_pullrefresh.html",
-				"doc/splashscreen.html",
-				"plus/webview_pullhead.html",
-				"doc/ui.html",
-				"doc/key.html",
-				"doc/contacts.html",
-				"doc/statistic.html",
-				"doc/interface-orientation.html",
-				"doc/cache.html",
-				"doc/console.html"
+				"static/js/signup.js",
+				"static/js/common_shade.js",
+				"static/css/sweepcode.css",
+				"static/css/my_auth_name.css",
+				"static/css/signup.css",
+				"static/css/home_rule.css",
+				"static/js/menpai_article.js",
+				"static/js/my_setting_head.js",
+				"static/img/teshu2.png",
+				"static/js/menpai_setting.js",
+				"static/css/my_setting_head.css",
+				"static/css/menpai_editor.css",
+				"static/img/rule_bg.png",
+				"menpai_setting.html",
+				"menpai_editor.html",
+				"static/js/menpai_activity.js",
+				"static/js/my_setting_name.js",
+				"static/js/login_areacode.js",
+				"my_contactus.html",
+				"static/css/my_auth_areacode.css",
+				"static/fonts/iconfont.eot",
+				"static/js/sweepcode.js",
+				"static/css/login_areacode.css",
+				"static/js/menpai_create.js",
+				"static/fonts/iconfont.svg",
+				"login_areacode.html",
+				"static/css/menpai_activity.css",
+				"static/js/my_auth_number.js",
+				"static/css/my_auth_number.css",
+				"static/css/my_contactus.css",
+				"static/js/energy_rank.js",
+				"static/css/menpai_article.css",
+				"static/js/my_contactus.js",
+				"static/img/teshu3.png",
+				"static/css/energy_rank.css",
+				"mui/editor/wangEditor.js",
+				"static/js/menpai_course.js",
+				"static/img/teshu.png",
+				"mui/editor/fonts/w-e-icon.woff",
+				"static/js/my_auth_type.js",
+				"mui/editor/wangEditor.css",
+				"static/js/menpai_editor.js",
+				"static/css/menpai_create.css",
+				"static/css/menpai_course.css",
+				"static/js/my_setting_phone.js",
+				"static/js/home_rule.js",
+				"static/css/menpai_setting.css",
+				"static/css/my_setting_name.css",
+				"signup_msg.html",
+				"static/css/my_auth_type.css",
+				"signup.html",
+				"static/css/common_shade.css",
+				"static/js/my_auth_name.js",
+				"static/css/my_setting_phone.css",
+				"static/img/my_bg.png",
+				"static/js/my_auth_areacode.js",
+				"static/fonts/vant-icon-243435.ttf",
+				"menpai_article.html",
+				"static/fonts/iconfont.ttf"
 			]
 		}
-	},
-  "unpackage": ["js/update.json"]
+	}
 }

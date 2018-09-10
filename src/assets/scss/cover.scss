@@ -1,20 +1,26 @@
 @import "var";
+@import "common";
 
 .van-nav-bar.van-nav-bar {
   z-index: 999 !important;
   height: 44px;
   line-height: 44px;
-  border-bottom: solid 1px #dddddd;
-
+  border-bottom: none;
+  background: $color-main;
+  box-shadow: 0px 2px 4px -3px rgba(0, 0, 0, 0.21);
+  &.van-nav-im {
+    border-bottom: none;
+  }
   .van-nav-bar__title {
-    color: #000;
-    font-size: 17px;
+    color: #fff;
+
+    font-size: 18px;
   }
   .van-nav-bar__text {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
   }
   .van-icon.van-icon {
-    color: rgba(0, 0, 0, 0.5);
+    color: #fff;
   }
   &.van-hairline--bottom {
     &::after {
@@ -22,18 +28,26 @@
     }
   }
   .van-nav-bar__left {
-    left: 18px;
+    // left: 14px;
+    left: 0;
+    padding-left: 16px;
+    padding-right: 10px;
     i {
-      transform: none;
-      width: 11px;
-      height: 19px;
+      font-size: 16px;
+      font-weight: 600;
+      width: 14px;
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
-      background-image: url(~assets/img/arrow_left.png);
-      &::before {
-        display: none;
-      }
+      // background-image: url(~assets/img/arrow_left.png);
+      // &::before {
+      //   display: none;
+      // }
+      position: relative;
+      top: -1px;
+    }
+    .icon-close {
+      top: 0;
     }
   }
 }
@@ -45,11 +59,14 @@
 .van-toast.van-toast {
   top: initial;
   bottom: 65px;
-  min-width: 105px;
+  min-width: 190px;
   padding: 8px 18px;
   border-radius: 0;
   font-size: 12px;
   text-align: center;
+  background-color: #969696;
+  border-radius: 8px;
+  font-size: 12px;
 }
 
 .login-nav.login-nav.login-nav {
@@ -66,6 +83,7 @@
 }
 .van-tabs__line {
   background-color: $color-main !important;
+  border-radius: 2px;
 }
 .van-tabs {
   &.van-tabs-fixed {
@@ -75,6 +93,7 @@
       width: 100%;
     }
   }
+
   &.van-tabs-main {
     .van-tabs__wrap {
       position: fixed;
@@ -93,7 +112,7 @@
       line-height: 44px;
       &::after {
         margin-top: -20px;
-        height: 40px;
+        height: 44px;
         background: linear-gradient(0deg, #ffffff 7%, #dddddd 50%, #ffffff 93%);
       }
     }
@@ -103,17 +122,17 @@
     background: #fff;
   }
   &.van-tabs--line {
-    padding-top: 40px;
+    padding-top: 44px;
     & .van-tabs__wrap {
-      height: 40px;
-      line-height: 40px;
+      height: 44px;
+      line-height: 44px;
     }
   }
   .van-tab {
     position: relative;
     font-size: 14px;
     color: $color-gray;
-    line-height: 40px;
+    line-height: 44px;
     &.van-tab--active {
       color: $color-main;
     }
@@ -136,12 +155,53 @@
   }
 }
 
+.van-tabs-bg {
+  .van-tabs__nav {
+    background-color: $color-main;
+  }
+  .van-tabs__line {
+    background-color: #fff !important;
+  }
+  .van-tab--active {
+    color: #fff !important;
+  }
+  .van-tabs .van-tab::after {
+  }
+  .van-tabs__content {
+    background-color: $color-main;
+  }
+  .van-tab {
+    color: #fff;
+    background-color: $color-main;
+    &::after {
+      content: "";
+      position: absolute;
+      right: -0.5px;
+      top: 50%;
+      z-index: 1;
+      margin-top: -18px;
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(
+        0deg,
+        $color-main 3%,
+        #c72c14 50%,
+        $color-main 97%
+      );
+    }
+  }
+  .van-tab:active {
+    background-color: $color-main;
+  }
+  .van-hairline--top-bottom::after {
+    border: none;
+  }
+}
 .van-cell.van-cell {
   &::after {
     border: none;
   }
 }
-
 .van-dialog {
   .van-dialog__content {
     text-align: center;
@@ -154,24 +214,99 @@
     color: red;
   }
 }
-
+.tab-home-wrap {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0 50px;
+  z-index: 9999;
+  background: $color-main;
+  box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.21);
+  .icon-iconjia {
+    position: absolute;
+    margin-top: -10px;
+    right: 11px;
+    top: 50%;
+    color: #fff;
+    font-size: 18px;
+  }
+  .van-tabs.van-tabs--line {
+    width: 160px;
+    margin: 0 auto;
+  }
+  .van-tab.van-tab {
+    background: $color-main;
+    color: #fff;
+    font-size: 18px;
+    &::after {
+      display: none;
+    }
+  }
+  .van-tabs .van-tab.van-tab--active {
+    color: #fff !important;
+  }
+  .van-tabs__line {
+    background: #fff !important;
+  }
+  .van-tabs__nav {
+    background: none;
+  }
+  .van-hairline--top-bottom::after {
+    display: none;
+  }
+}
+.van-nav-bar__text:active {
+  background-color: #c12119;
+}
+i.van-swipe__indicator {
+  background-color: #fff;
+}
+i.van-swipe__indicator--active {
+  background-color: $color-main;
+}
+.van-nav-bar__right {
+  right: 14px;
+  .iconfont {
+    color: #fff;
+  }
+}
+.van-dialog__content::after {
+  border: none;
+  display: none;
+}
+.bar-transparent {
+  &.van-nav-bar.van-nav-bar {
+    background: none;
+    box-shadow: none;
+    .van-icon.van-icon {
+      color: #fff;
+    }
+    .nav-title {
+    }
+  }
+}
+.van-dialog__footer--buttons {
+  padding-top: 1px;
+  @extend %border-top;
+}
 /* van end */
-
-/* mui start  */
+/* mui start */
 .mui-content.mui-content {
   background: none;
 }
 .mui-pull-caption.mui-pull-caption {
-  color: $color-gray;
-  font-size: 14px;
+  color: $color-tip;
+  font-size: 12px;
 }
 .mui-pull {
   font-weight: normal;
 }
-
 .mui-pull-loading {
   &::before {
     display: none;
   }
+}
+.content-no-pull .mui-pull-bottom-pocket {
+  display: none !important;
 }
 /* mui end */

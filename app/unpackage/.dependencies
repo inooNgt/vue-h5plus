@@ -1,1 +1,7 @@
-null
+{
+  "my_setting.html": {
+    "href": "my_setting.html",
+    "resources": [],
+    "priority": 22
+  }
+}

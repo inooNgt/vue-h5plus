@@ -1,24 +1,32 @@
 (function(global, undefined) {
+  if (global.MTOOL) return;
   /**
-   * tabbar子页面配置
+   * 页面配置
    */
   var config = {
-    subpages: ["home.html", "course.html", "activity.html", "my.html"],
-    mypreloadpages: ["my_course.html", "my_auth.html", "my_acitvity.html"],
+    subpages: ["home.html", "menpai.html", "energy.html", "my.html"],
+    loginPages: ["menpai.html", "energy.html", "my.html"],
+    barHeight: 44,
     top: "0px",
     bottom: "49px",
-    loginPages: ["my.html"],
-    loginPath: "login.html",
     keys: {
       activenav: "md.index.activeNavPath",
-      token: "ml.login.token"
+      token: "ml.login.token",
+      shade: "ml.index.shade",
+      guide: "ml.index.guide"
     },
-    aniShow: "slide-in-bottom",
-    duration: 180,
-    style: {
-      background: "#e8e8e8"
+    statusbar: "#eb2000",
+    aniShow: "pop-in",
+    styles: { titleNView: null },
+    titleNView: {
+      titleSize: "18px",
+      autoBackButton: true,
+      titleColor: "#ffffff",
+      backgroundColor: "#eb2000"
     }
   };
+  // 已经加载的页面
+  var loadedPage = { "home.html": true };
 
   var isPlus = false;
   // 判断runtime是否支持5+ API
@@ -38,10 +46,6 @@
       ? plus.storage
       : global.localStorage;
   })();
-
-  const logined = function() {
-    return !!storage.getItem(config.keys.token);
-  };
 
   /**
    * 初始化页面
@@ -63,8 +67,11 @@
 
     if (isPlus) {
       plusReady(function() {
+        console.log("init page:" + plus.webview.currentWebview().id);
         // 隐藏滚动条
         plus.webview.currentWebview().setStyle({ scrollIndicator: "none" });
+        // 强制竖屏
+        plus.screen.lockOrientation("portrait-primary");
       });
     }
 
@@ -75,55 +82,150 @@
     if (isPlus && config.subpages.indexOf(pathname) !== -1) {
       pathname = storage.getItem(config.keys.activenav) || config.subpages[0];
     }
-
-    console.log("current pathname: " + pathname);
-
-    // cwmc注册接口
-    initExpose();
-
-    //检查登录
-    checkLogin(pathname);
-  }
-
-  function initExpose() {
-    if (!isPlus) return;
-    // 暴露统一接口
-    MTOOL.cwcs.expose("forceUpdate", function() {
-      console.log("forceUpdate");
-      location.reload();
-    });
-
-    //为tabar子页面注册登陆回调
-    // if (config.subpages.indexOf(pathname) !== -1) {
-    //   MTOOL.cwcs.expose("tabbarUpdate", function() {
-    //     console.log("tabbarUpdate");
-    //   });
-    // }
   }
 
   /**
-   * 确认需要登录后,处理登录检查
+   * 初始化主页面
    */
-  function checkLogin(path) {
-    if (!needLogin(path)) {
-      return;
-    }
+  function initIndex() {
+    plusReady(function() {});
+  }
 
-    //todo by ngt
-    // var logined = MTOOL.storage.getItem(config.token);
-    // var logined = false;
-    // if (!logined) {
-    //   if (isPlus) {
-    //     mui.plusReady(function() {
-    //       var ws = plus.webview.currentWebview();
-    //       console.log("当前Webview窗口：" + ws.getURL());
-    //       openWindow(config.loginPath, { from: path });
-    //     });
-    //   } else {
-    //     // todo by ngt 可以带参数
-    //     window.location.href = config.loginPath;
-    //   }
-    // }
+  /**
+   * 主页面容器
+   * @param {Number} idx 页面索引
+   */
+  function initWebview(idx) {
+    if (!isPlus) return;
+
+    //设置默认打开首页显示的子页序号；
+    var index = idx || 0;
+    //把子页的路径写在数组里面
+    var subpages = config.subpages;
+
+    //所有的plus-*方法写在mui.plusReady中或者后面。
+    mui.plusReady(function() {
+      // 状态栏颜色
+      setStatusBarBg();
+
+      //获取当前页面所属的Webview窗口对象
+      var self = plus.webview.currentWebview();
+
+      var secondWebview = plus.webview.getSecondWebview();
+
+      if (secondWebview) {
+        // append引起闪屏问题
+        self.append(secondWebview);
+      }
+
+      for (var i = 1; i < subpages.length; i++) {
+        // 除secondWebview外的subpages
+        // 创建webview子页
+        var sub = plus.webview.create(
+          subpages[i], //子页url
+          subpages[i], //子页id
+          {
+            top: config.top, //设置距离顶部的距离
+            bottom: config.bottom, //设置距离底部的距离
+            // bounce: i == 1 ? "vertical" : "none",
+            render: "always",
+            // bounceBackground: "#FFFFFF",
+            scrollIndicator: "none",
+            statusbar: {}
+          }
+        );
+        // 如不是我们设置的默认的子页则隐藏，否则添加到窗口中
+        if (i != index) {
+          sub.hide();
+        }
+        // append引起闪屏问题
+        // 将webview对象填充到窗口
+        self.append(sub);
+      }
+
+      // console.log("webview.all:");
+      // var array = plus.webview.all();
+      // if (array) {
+      //   for (var i = 0, len = array.length; i < len; i++) {
+      //     console.log(array[i].getURL());
+      //   }
+      // }
+
+      storage.setItem(config.keys.activenav, subpages[index]);
+    });
+  }
+
+  function setStatusBarBg(color, style) {
+    // 设置系统状态栏背景
+    plus.navigator.setStatusBarBackground(color || config.statusbar);
+    plus.navigator.setStatusBarStyle(style || "light");
+    // var rgb = plus.navigator.getStatusBarBackground();
+  }
+
+  function floatWebview(url, opt) {
+    var floatw = plus.webview.getWebviewById(url);
+    if (floatw) {
+      // 避免快速多次点击创建多个窗口
+      floatw.show("fade-in");
+    } else {
+      floatw = plus.webview.create(
+        url,
+        url,
+        {
+          background: "transparent",
+          zindex: 10
+        },
+        (opt && opt.extras) || null
+      );
+      floatw.show("fade-in");
+    }
+  }
+
+  /**
+   * 切换tabbar
+   * @param {String} path
+   */
+  function switchNav(path, lastpath) {
+    if (typeof plus !== "undefined") {
+      if (loadedPage[path]) {
+        plus.webview.show(path, "none");
+      } else {
+        // console.log("aniShow :" + path);
+        plus.webview.show(path);
+      }
+      // 标记为已加载
+      loadedPage[path] = true;
+
+      // 不使用hide无闪屏，但卡顿
+      if (lastpath) {
+        plus.webview.hide(lastpath, "none");
+      } else {
+        config.subpages.forEach(function(v) {
+          if (v !== path) {
+            plus.webview.hide(v, "none");
+          }
+        });
+      }
+    } else {
+      window.location.href = path;
+    }
+    storage.setItem(config.keys.activenav, path);
+  }
+
+  /**
+   * 返回主页
+   */
+  function goHome() {
+    switchNav("home.html");
+    invoke("Hbuilder", "index_update_tab", {
+      path: "home.html"
+    });
+
+    plusReady(function() {
+      invoke(plus.runtime.appid, "index_update_tab", {
+        path: "home.html"
+      });
+    });
   }
 
   /**
@@ -132,16 +234,19 @@
    */
 
   function openWindow(url, options) {
+    if (!url) {
+      return;
+    }
+
     var from = "";
-    var style = config.style;
+    var styles = config.styles;
     if (options && options.from) {
       from = options.from;
     }
 
-    if (options && typeof options.style === "object") {
-      style = Object.assign(style, options.style);
+    if (options && typeof options.styles === "object") {
+      styles = Object.assign(styles, options.styles);
     }
-
     var extras = {
       name: url,
       from: from
@@ -151,142 +256,47 @@
       extras = Object.assign(extras, options.extras);
     }
 
-    console.log("extras:");
-    console.log(extras);
+    // id去掉hash和query
+    var id = url;
+    if (id.indexOf("#") !== -1) {
+      id = id.substring(0, id.indexOf("#"));
+    }
+    if (id.indexOf("?") !== -1) {
+      id = id.substring(0, id.indexOf("?"));
+    }
+
+    // 比shade高
+    if (id === "login.html") {
+      styles.zindex = 11;
+    }
 
     mui.openWindow({
       url: url,
-      id: url,
+      id: id,
       extras: extras,
-      style: style,
+      styles: styles,
       show: {
-        aniShow: config.aniShow
+        aniShow: (options && options.aniShow) || config.aniShow
       },
       waiting: {
         autoShow: false
       }
     });
   }
-  /**
-   * 预加载页面配置
-   * @param {Array} pages
-   */
-  function genProadpages(pages) {
-    let result = [];
-    pages.forEach(pagepath => {
-      result.push({
-        url: pagepath,
-        id: pagepath,
-        styles: {
-          render: "always" //一直渲染
-        }
-      });
-    });
-    return result;
-  }
 
-  /**
-   * 主页面容器
-   * @param {*} idx 页面索引
-   */
-  function initWebview(idx) {
-    //设置默认打开首页显示的子页序号；
-    var index = idx || 0;
-    //把子页的路径写在数组里面
-    var subpages = config.subpages;
+  function openWindowWithTitle(url, options) {
+    if (!options) options = {};
 
-    //需要登录
-    if (needLogin(subpages[index])) {
-      console.log(subpages[index] + " need login");
-    }
+    if (!options.styles) options.styles = {};
+    if (!options.styles.titleNView) options.styles.titleNView = {};
 
-    //所有的plus-*方法写在mui.plusReady中或者后面。
-    mui.plusReady(function() {
-      //获取当前页面所属的Webview窗口对象
-      var self = plus.webview.currentWebview();
+    Object.assign(options.styles.titleNView, config.titleNView);
 
-      for (var i = 0; i < subpages.length; i++) {
-        //创建webview子页
-        var sub = plus.webview.create(
-          subpages[i], //子页url
-          subpages[i], //子页id
-          {
-            top: config.top, //设置距离顶部的距离
-            bottom: config.bottom, //设置距离底部的距离
-            bounce: "vertical",
-            render: "always",
-            statusbar: {}
-          }
-        );
-        //如不是我们设置的默认的子页则隐藏，否则添加到窗口中
-        if (i != index) {
-          sub.hide();
-        }
-        //将webview对象填充到窗口
-        self.append(sub);
-      }
+    // console.log("openWindowWithTitle:" + url);
+    // console.log("openWindowWithTitle:" + options.styles.titleNView);
+    // console.log("openWindowWithTitle:" + options.styles.titleNView.titleSize);
 
-      storage.setItem(config.keys.activenav, subpages[index]);
-
-      // var loginwv = plus.webview.create("login.html", "login.html");
-    });
-  }
-
-  /**
-   * 对应path是否需要登录
-   * @param {String} path
-   */
-  function needLogin(path) {
-    return config.loginPages.indexOf(path) !== -1;
-  }
-
-  /**
-   * 切换tabbar
-   * @param {Object} options
-   * @param {Function} fn
-   */
-  function switchNav(options) {
-    if (typeof plus !== "undefined") {
-      plus.webview.hide(options.from, "none");
-      plus.webview.show(options.to, "none");
-
-      //检查更新
-      // if (needLogin(options.to)) {
-      //   MTOOL.cwcs.invoke(options.to, "tabbarUpdate");
-      // }
-    } else {
-      window.location.href = options.to;
-    }
-    storage.setItem(config.keys.activenav, options.to);
-  }
-
-  /**
-   * 调用系统分享
-   * @param {Object} opt
-   */
-  function shareSystem(opt) {
-    // if ("iOS" == plus.os.name) {
-    //   //iOS平台添加链接地址
-    //   opt.msg.href = "http://www.xxx.com/";
-    // }
-
-    if (!opt.success) {
-      opt.success = function() {
-        console.log("success");
-      };
-    }
-
-    if (!opt.fail) {
-      opt.fail = function() {
-        console.log("fail");
-      };
-    }
-
-    if (isPlus && plus.share.sendWithSystem) {
-      plus.share.sendWithSystem(opt.msg, opt.success, opt.fail);
-    } else {
-      console.log("非H5+环境，无分享功能");
-    }
+    openWindow(url, options);
   }
 
   /**
@@ -303,103 +313,39 @@
     }
   }
 
-  /**
-   * 获取元素位置
-   * @param {Object} obj
-   */
-  function elementPosition(obj) {
-    if (!obj) return;
-
-    var curleft = 0,
-      curtop = 0;
-    if (obj.offsetParent) {
-      curleft = obj.offsetLeft;
-      curtop = obj.offsetTop;
-      while ((obj = obj.offsetParent)) {
-        curleft += obj.offsetLeft;
-        curtop += obj.offsetTop;
-      }
-    }
-    return { x: curleft, y: curtop };
-  }
-
-  /**
-   *跨webview通信系统（ Cross webview communication syetem）
-   */
-  var cwcs = {
-    exposed: {},
-    // 注册可被调用的接口
-    expose: function(fnName, fn) {
-      var self = this;
-      if (self.exposed[fnName] !== undefined) {
-        throw new Error("cwcs.expose: function already exists: " + fnName);
-      }
-      self.exposed[fnName] = fn;
-    },
-    // 被其它webview调用的入口
-    invoked: function(fnName, params) {
-      var fn = this.exposed[fnName];
-      if (typeof fn != "function") {
-        throw new Error("cwcs.invoke: function not found: " + fnName);
-      }
-      fn(params);
-    },
-    // 调用其它webview js函数
-    invoke: function(vId, fnName, params) {
-      plusReady(function() {
-        var view = plus.webview.getWebviewById(vId);
-        if (!view) {
-          throw new Error("cwcs webview not found: " + vId);
-        }
-
-        var js = "MTOOL.cwcs.invoked(" + JSON.stringify(fnName);
-        if (params) js += "," + JSON.stringify(params);
-        js += ")";
-
-        try {
-          view.evalJS(js);
-        } catch (e) {
-          console.log(e);
-        }
-      });
-    }
-  };
-
   // 封装mui.fire
   var invoke = function(targetId, event, data) {
     if (!isPlus) return;
-    let page = plus.webview.getWebviewById(targetId);
+    var page = plus.webview.getWebviewById(targetId);
     return mui.fire(page, event, data);
   };
 
   var invokeAll = function(event, data) {
     if (!isPlus) return;
-    let pages = plus.webview.all();
+    var pages = plus.webview.all();
     if (pages.length) {
       for (var i = 0; i < pages.length; i++) {
-        mui.fire(wvs[i], event, data);
+        mui.fire(pages[i], event, data);
       }
     }
   };
 
   var MTOOL = {
     initPage: initPage,
+    initIndex: initIndex,
     initWebview: initWebview,
     switchNav: switchNav,
     isPlus: isPlus,
+    floatWebview: floatWebview,
     storage: storage,
     config: config,
-    cwcs: cwcs,
-    logined: logined,
     plusReady: plusReady,
-    needLogin: needLogin,
-    checkLogin: checkLogin,
-    shareSystem: shareSystem,
     openWindow: openWindow,
+    openWindowWithTitle: openWindowWithTitle,
     invoke: invoke,
     invokeAll: invokeAll,
-    genProadpages: genProadpages,
-    elementPosition: elementPosition
+    goHome: goHome,
+    setStatusBarBg: setStatusBarBg
   };
 
   global.MTOOL = MTOOL;

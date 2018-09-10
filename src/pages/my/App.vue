@@ -31,4 +31,9 @@ export default {
 
 <style lang="scss">
 @import "~assets/scss/base.scss";
+html,
+body {
+  background: #ddd;
+  min-height: 100%;
+}
 </style>

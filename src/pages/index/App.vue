@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <router-view/>
     <MFooter ref="footer" />
   </div>
 </template>
@@ -23,29 +22,12 @@ export default {
     // 更新tab
     window.addEventListener("index_update_tab", event => {
       // 获得事件参数
-      let detail = event.detail;
-      console.log("detail.to" + detail.to);
-      if (data.to) this.$refs.footer.activePath = data.to;
-    });
 
-    // 更新所有子页面
-    window.addEventListener("index_update_subpages", event => {
-      // 获得事件参数
       let detail = event.detail;
-      console.log("index_update_subpages");
-      console.log("detail.to" + detail.to);
-
-      // 更新
-      MTOOL.config.subpages.forEach(path => {
-        MTOOL.invoke(path, "event_update", { to: path });
-      });
+      if (detail.path) this.$refs["footer"].activePath = detail.path;
     });
   },
-  mounted() {
-    console.log(
-      "this.$refs.footer.activePath: " + this.$refs.footer.activePath
-    );
-  }
+  mounted() {}
 };
 </script>
 

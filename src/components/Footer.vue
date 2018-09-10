@@ -1,28 +1,13 @@
 <template>
   <div class="footer">
     <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
-      <div class="footer-icon-wrap">
-        <span class="md-icon icon-home-star"></span>
-      </div>
-      <span class="link-text">首页</span>
+      <span class="md-icon icon-home-tab1"></span>
     </div>
-    <div class="footer-link" v-bind:class="{ active: activePath === 'course.html' }" @click="handleNavTap('course.html',$event)">
-      <div class="footer-icon-wrap">
-        <span class="md-icon icon-home-course"></span>
-      </div>
-      <span class="link-text">课程</span>
-    </div>
-    <div class="footer-link" v-bind:class="{ active: activePath === 'activity.html' }" @click="handleNavTap('activity.html',$event)">
-      <div class="footer-icon-wrap">
-        <span class="md-icon icon-home-activity"></span>
-      </div>
-      <span class="link-text">活动</span>
+    <div class="footer-link" v-bind:class="{ active: activePath === 'energy.html' }" @click="handleNavTap('energy.html',$event)">
+      <span class="md-icon icon-home-tab2"></span>
     </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
-      <div class="footer-icon-wrap">
-        <span class="md-icon icon-home-my"></span>
-      </div>
-      <span class="link-text">我的</span>
+      <span class="md-icon icon-home-tab3"></span>
     </div>
   </div>
 </template>
@@ -59,14 +44,11 @@ export default {
         return;
       }
 
-      MTOOL.switchNav({
-        from: this.activePath,
-        to: path
-      });
+      MTOOL.switchNav(path, this.activePath);
       this.activePath = path;
 
       // 更新
-      MTOOL.invoke(path, "event_update", { to: path });
+      MTOOL.invoke(path, "event_update");
     }
   }
 };
@@ -76,32 +58,67 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/var";
 @import "~assets/scss/common";
+
+.icon-home-tab1 {
+  width: 36px;
+  height: 36px;
+  background-image: url(~assets/img/home_tab1.png);
+}
+.icon-home-tab2 {
+  width: 36px;
+  height: 36px;
+  background-image: url(~assets/img/home_tab2.png);
+}
+
+.icon-home-tab3 {
+  width: 36px;
+  height: 36px;
+  background-image: url(~assets/img/home_tab3.png);
+}
+.footer-link.active {
+  .icon-home-tab1 {
+    background-image: url(~assets/img/home_tab1_h.png);
+  }
+  .icon-home-tab2 {
+    background-image: url(~assets/img/home_tab2_h.png);
+  }
+
+  .icon-home-tab3 {
+    background-image: url(~assets/img/home_tab3_h.png);
+  }
+}
+
 .footer {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 99;
   height: 49px;
 
   display: flex;
   text-align: center;
 
-  border: solid 1px #dddddd;
   background-color: #ffffff;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
 
   .footer-icon-wrap {
     display: block;
-    height: 20px;
+    height: 22px;
     margin: 0 auto;
   }
   .footer-link {
-    display: block;
+    display: flex;
     font-size: 10px;
-    padding: 7px 0 3px;
+    padding: 0;
     flex: 1 0 auto;
     border-radius: 0;
     transition: 0.2s ease;
+    color: $color-gray;
+
+    justify-content: center;
+    align-items: center;
+
     &:active {
       // box-shadow: 0 0 100px inset #ddd;
     }
@@ -120,4 +137,4 @@ export default {
   }
 }
 </style>
- 
+
