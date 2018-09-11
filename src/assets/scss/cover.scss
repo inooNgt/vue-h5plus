@@ -28,10 +28,6 @@
     }
   }
   .van-nav-bar__left {
-<<<<<<< HEAD
-=======
-    // left: 14px;
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     left: 0;
     padding-left: 16px;
     padding-right: 10px;
@@ -42,13 +38,6 @@
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
-<<<<<<< HEAD
-=======
-      // background-image: url(~assets/img/arrow_left.png);
-      // &::before {
-      //   display: none;
-      // }
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
       position: relative;
       top: -1px;
     }
@@ -161,154 +150,22 @@
   }
 }
 
-<<<<<<< HEAD
-=======
-.van-tabs-bg {
-  .van-tabs__nav {
-    background-color: $color-main;
-  }
-  .van-tabs__line {
-    background-color: #fff !important;
-  }
-  .van-tab--active {
-    color: #fff !important;
-  }
-  .van-tabs .van-tab::after {
-  }
-  .van-tabs__content {
-    background-color: $color-main;
-  }
-  .van-tab {
-    color: #fff;
-    background-color: $color-main;
-    &::after {
-      content: "";
-      position: absolute;
-      right: -0.5px;
-      top: 50%;
-      z-index: 1;
-      margin-top: -18px;
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(
-        0deg,
-        $color-main 3%,
-        #c72c14 50%,
-        $color-main 97%
-      );
-    }
-  }
-  .van-tab:active {
-    background-color: $color-main;
-  }
-  .van-hairline--top-bottom::after {
-    border: none;
-  }
-}
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 .van-cell.van-cell {
   &::after {
     border: none;
   }
 }
-<<<<<<< HEAD
 .van-nav-bar__text:active {
   background-color: #c12119;
 }
 
-=======
-.van-dialog {
-  .van-dialog__content {
-    text-align: center;
-    color: #000;
-  }
-}
-.dialog-out {
-  .van-dialog__confirm,
-  .van-dialog__confirm:active {
-    color: red;
-  }
-}
-.tab-home-wrap {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 0 50px;
-  z-index: 9999;
-  background: $color-main;
-  box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.21);
-  .icon-iconjia {
-    position: absolute;
-    margin-top: -10px;
-    right: 11px;
-    top: 50%;
-    color: #fff;
-    font-size: 18px;
-  }
-  .van-tabs.van-tabs--line {
-    width: 160px;
-    margin: 0 auto;
-  }
-  .van-tab.van-tab {
-    background: $color-main;
-    color: #fff;
-    font-size: 18px;
-    &::after {
-      display: none;
-    }
-  }
-  .van-tabs .van-tab.van-tab--active {
-    color: #fff !important;
-  }
-  .van-tabs__line {
-    background: #fff !important;
-  }
-  .van-tabs__nav {
-    background: none;
-  }
-  .van-hairline--top-bottom::after {
-    display: none;
-  }
-}
-.van-nav-bar__text:active {
-  background-color: #c12119;
-}
-i.van-swipe__indicator {
-  background-color: #fff;
-}
-i.van-swipe__indicator--active {
-  background-color: $color-main;
-}
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 .van-nav-bar__right {
   right: 14px;
   .iconfont {
     color: #fff;
   }
 }
-<<<<<<< HEAD
 
-=======
-.van-dialog__content::after {
-  border: none;
-  display: none;
-}
-.bar-transparent {
-  &.van-nav-bar.van-nav-bar {
-    background: none;
-    box-shadow: none;
-    .van-icon.van-icon {
-      color: #fff;
-    }
-    .nav-title {
-    }
-  }
-}
-.van-dialog__footer--buttons {
-  padding-top: 1px;
-  @extend %border-top;
-}
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 /* van end */
 /* mui start */
 .mui-content.mui-content {

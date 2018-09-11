@@ -71,7 +71,6 @@ module.exports = {
     https: false,
     hotOnly: false,
     open: false,
-<<<<<<< HEAD
     contentBase: resolve("app"),
     proxy: {
       "/api": {
@@ -79,8 +78,5 @@ module.exports = {
         changeOrigin: true
       }
     }
-=======
-    contentBase: resolve("app")
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
   }
 };

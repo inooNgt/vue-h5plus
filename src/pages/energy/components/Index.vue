@@ -1,21 +1,13 @@
 <template>
   <div class="page-content nav-content" :class="isPlus?'':'broswer-content'">
-<<<<<<< HEAD
     <van-nav-bar title="功力" fixed />
-=======
-    <van-nav-bar title="功力" fixed right-text="排行" />
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     <header class="header">
       <img class="header-bg" src="~assets/img/speedup_bg.png" />
       <div class="header-content">
         <div class="row-beat">已击败{{0}}%的用户</div>
         <div class="row-ball">
           <div class="ball-cell" @click="update">
-<<<<<<< HEAD
             <div class="md-icon-speedball "></div>
-=======
-            <div class="md-icon md-icon-speedball "></div>
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
             <div class="cell-label">当前功力值</div>
             <div class="cell-value">{{0}}</div>
           </div>
@@ -209,11 +201,7 @@ html {
       left: 0;
       width: 100%;
       height: 100%;
-<<<<<<< HEAD
       background-size: cover;
-=======
-
->>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
       background-image: url(~assets/img/speedup_ball.png);
     }
   }
