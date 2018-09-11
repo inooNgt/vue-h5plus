@@ -22,16 +22,30 @@ Vue.use(Icon);
 Vue.use(Button);
 
 export default {
+<<<<<<< HEAD
   name: "Footer",
   data() {
     return {
       activePath: "home.html"
+=======
+  name: "Nav",
+  props: ["selected"],
+  data() {
+    return {
+      activePath: "home.html",
+      msg: "Welcome to Your Vue.js App"
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     };
   },
   mounted() {
     this.$nextTick(() => {});
     let pathname = window.location.pathname || "";
     pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
+<<<<<<< HEAD
+=======
+    // console.log("infooter pathname:");
+    // console.log(pathname);
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     this.activePath = pathname === "index.html" ? "home.html" : pathname;
   },
   methods: {
@@ -55,11 +69,14 @@ export default {
 @import "~assets/scss/var";
 @import "~assets/scss/common";
 
+<<<<<<< HEAD
 .md-icon {
   display: inline-block;
   background-size: cover;
 }
 
+=======
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 .icon-home-tab1 {
   width: 36px;
   height: 36px;

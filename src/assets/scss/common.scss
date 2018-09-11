@@ -6,17 +6,91 @@
   white-space: nowrap;
 }
 
+<<<<<<< HEAD
 %border-bottom {
   border-bottom: 0.5px solid rgba(150, 150, 150, 0.25) !important;
 }
 
+=======
+%icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+%border-left {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: -0.5px;
+    top: 50%;
+    z-index: 1;
+    width: 1px;
+    height: 100%;
+    transform: translateY(-50%);
+    background: linear-gradient(0deg, #ffffff 7%, #dddddd 50%, #ffffff 93%);
+  }
+}
+%border-right {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    right: -0.5px;
+    top: 50%;
+    z-index: 1;
+    width: 1px;
+    height: 100%;
+    transform: translateY(-50%);
+    background: linear-gradient(0deg, #ffffff 7%, #dddddd 50%, #ffffff 93%);
+  }
+}
+%border-bottom {
+  border-bottom: 0.5px solid rgba(150, 150, 150, 0.25) !important;
+}
+%border-bottom-light {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5px;
+    left: 50%;
+    z-index: 1;
+    height: 1px;
+    width: 100%;
+    transform: translateX(-50%) scaleY(0.5);
+    background-image: linear-gradient(
+        90deg,
+        #000 0%,
+        rgba(150, 150, 150, 0.5) 50%,
+        #000 100%
+      ),
+      linear-gradient(#969696, #969696);
+    background-blend-mode: normal, normal;
+  }
+  &:last-child::after {
+    display: none;
+  }
+}
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 %border-top {
   border-top: 0.5px solid rgba(150, 150, 150, 0.25) !important;
 }
 %border {
   border: 0.5px solid rgba(150, 150, 150, 0.25) !important;
 }
+<<<<<<< HEAD
 
+=======
+%border-bottom-dark {
+  border-bottom: 1px solid rgba(150, 150, 150, 0.25);
+}
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 %img-wrap {
   position: relative;
   overflow: hidden;
@@ -24,7 +98,27 @@
   border: 0.5px solid rgba(150, 150, 150, 0.25);
   border-radius: 4px;
 }
+<<<<<<< HEAD
 
+=======
+%img-border {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-image-source: linear-gradient(
+    0deg,
+    #969696 0%,
+    #dddddd 7%,
+    #969696 50%,
+    #dddddd 95%,
+    #969696 100%
+  );
+  border-image-slice: 1;
+}
+%shadow-bottom {
+  box-shadow: 0px 2px 8px -3px rgba(0, 0, 0, 0.21);
+}
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 @function px2rem($px) {
   $rem: 50px;
   @return ($px/$rem) + rem;

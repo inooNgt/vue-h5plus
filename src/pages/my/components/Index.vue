@@ -21,7 +21,27 @@
     <ul class="my-list ">
       <li class="list-item">
         <div class="item-left">
+<<<<<<< HEAD
+=======
+          <i class="iconfont icon-article"></i>
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
           <div class="item-title">我的文章</div>
+        </div>
+        <div class="item-right">
+        </div>
+        <div class="item-arrow">
+          <van-icon name="arrow" />
+        </div>
+      </li>
+<<<<<<< HEAD
+      <li class="list-item">
+        <div class="item-left">
+=======
+
+      <li class="list-item">
+        <div class="item-left">
+          <i class="iconfont icon-help"></i>
+          <div class="item-title">帮助中心</div>
         </div>
         <div class="item-right">
         </div>
@@ -31,6 +51,19 @@
       </li>
       <li class="list-item">
         <div class="item-left">
+          <i class="iconfont icon-yijian"></i>
+          <div class="item-title">意见反馈</div>
+        </div>
+        <div class="item-right">
+        </div>
+        <div class="item-arrow">
+          <van-icon name="arrow" />
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="item-left">
+          <i class="iconfont icon-que"></i>
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
           <div class="item-title">关于我们</div>
         </div>
         <div class="item-right">
@@ -48,7 +81,11 @@ import Vue from "vue";
 import MTOOL from "mtool";
 import mui from "mui";
 import config from "utils/config";
+<<<<<<< HEAD
 import { preload } from "utils/utils";
+=======
+import { getCachedUser, loadUserInfo, preload } from "utils/utils";
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 import API from "utils/api";
 import { Cell, CellGroup, Icon, Toast } from "vant";
 

@@ -1,9 +1,16 @@
 {
   "@platforms": ["android", "iPhone", "iPad"],
+<<<<<<< HEAD
   "id": "gank" /*应用的标识，创建应用时自动生成，勿手动修改*/,
   "name": "Gank" /*应用名称，程序桌面图标名称*/,
   "version": {
     "name": "1.0.0" /*应用版本名称*/,
+=======
+  "id": "dic.club" /*应用的标识，创建应用时自动生成，勿手动修改*/,
+  "name": "币链江湖" /*应用名称，程序桌面图标名称*/,
+  "version": {
+    "name": "1.0.6" /*应用版本名称*/,
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     "code": ""
   },
   "description": "" /*应用描述信息*/,
@@ -118,7 +125,11 @@
     "popGesture":
       "close" /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/,
     "runmode":
+<<<<<<< HEAD
       "normal" /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/,
+=======
+      "liberate" /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/,
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     "signature":
       "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==" /*可选，保留给应用签名，暂不使用*/,
     "distribute": {
@@ -731,10 +742,17 @@
 					"home.html",
 					"menpai.html",
 					"static/css/chunk-vendors.css",
+<<<<<<< HEAD
 					"static/css/chunk-common.css",
 					"energy.html"
 				],
 				"refer": [
+=======
+					"static/css/chunk-common.css"
+				],
+				"refer": [
+					"energy.html",
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
 					"common_guide.html",
 					"my.html",
 					"login.html",

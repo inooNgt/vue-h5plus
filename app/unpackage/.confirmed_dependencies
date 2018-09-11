@@ -32,8 +32,12 @@
       "mui/mtool.js",
       "mui/polyfill.js",
       "static/css/chunk-vendors.css",
+<<<<<<< HEAD
       "static/css/chunk-common.css",
       "energy.html"
+=======
+      "static/css/chunk-common.css"
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     ],
     "refer": [
       "seclusion.html",

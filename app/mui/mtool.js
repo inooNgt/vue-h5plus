@@ -114,6 +114,10 @@
       var secondWebview = plus.webview.getSecondWebview();
 
       if (secondWebview) {
+<<<<<<< HEAD
+=======
+        // append引起闪屏问题
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
         self.append(secondWebview);
       }
 
@@ -137,6 +141,10 @@
         if (i != index) {
           sub.hide();
         }
+<<<<<<< HEAD
+=======
+        // append引起闪屏问题
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
         // 将webview对象填充到窗口
         self.append(sub);
       }

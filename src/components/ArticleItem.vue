@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="article-item md-item-border " :class="data.cover?'item-cover':''" @click="onitemclick && onitemclick(data.id)||null">
     <h4 class="article-title">{{data.title}}</h4>
     <article class="article-body">
@@ -9,6 +10,18 @@
     </aside>
     <div class="cover-wrap">
       <img class="cover-img" v-if="data.cover" :src="data.cover" alt="">
+=======
+  <div class="article-item md-item-border " :class="data.thumb?'item-cover':''" @click="onitemclick && onitemclick(data.id)||null">
+    <h4 class="article-title">{{data.title}}</h4>
+    <article class="article-body">
+      {{data.summary}}
+    </article>
+    <aside class="aside">{{data.username}}
+      <span>@{{data.group_name}}</span>
+    </aside>
+    <div class="cover-wrap">
+      <img class="cover-img" v-if="data.thumb" :src="data.thumb" alt="">
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
     </div>
   </div>
 </template>
@@ -23,7 +36,13 @@ export default {
     onitemclick: Function
   },
   data() {
+<<<<<<< HEAD
     return {};
+=======
+    return {
+      msg: "Welcome to Your Vue.js App"
+    };
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
   }
 };
 </script>
@@ -57,7 +76,12 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
+<<<<<<< HEAD
         height: auto;
+=======
+        height: 100%;
+        // @extend %img-border;
+>>>>>>> fc685a0410f5b22f7430a4d88d94b94db6228fbd
       }
     }
   }
