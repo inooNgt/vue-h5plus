@@ -1,0 +1,35 @@
+{
+  "name": "dic-hybrid-1",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --max_old_space_size=4096 node_modules/@vue/cli-service/bin/vue-cli-service.js  serve ",
+    "build": "vue-cli-service build --no-clean",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "eslint": "^5.5.0",
+    "fastclick": "https://github.com/mingge8888/fastclick.git",
+    "gsap": "^2.0.1",
+    "lodash": "^4.17.10",
+    "node-gyp": "^3.8.0",
+    "pinyin": "^2.8.3",
+    "qs": "^6.5.2",
+    "vant": "^1.3.0",
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0",
+    "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-service": "^3.0.0",
+    "@vue/eslint-config-prettier": "^3.0.1",
+    "babel-plugin-import": "^1.8.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-vue": "^4.7.1",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
