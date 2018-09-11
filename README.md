@@ -1,6 +1,6 @@
 <img alt="MobX unidirectional flow" src="src/assets/img/logo.png" align="center" width="240" style="display:block;margin:0 auto;"/>
 
-# Dic-Hybrid
+# H5+ Hybrid APP
 
 A Hybrid APP project.
 
