@@ -4,7 +4,7 @@
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll" id="homeScroller" ref="scrollContent" :class="isPlus?'':'broswer-content'">
 
-        <ul class="lsit-speech" v-if="dataList.length">
+        <ul class="list" v-if="dataList.length">
           <ArticleItem v-for="(item,index) in dataList" :data="item" :key="index" />
         </ul>
         <div class="empty-wrap" v-else>
@@ -122,7 +122,7 @@ export default {
     },
 
     loadData() {
-      return this.$get(API.qdaily)
+      return this.$get(API.ifanr)
         .then(res => {
           let data = res.data;
           if (res.status === 200 && data) {
@@ -163,11 +163,8 @@ export default {
   padding-bottom: 49px;
 }
 
-.list-recommend {
-}
-
-.lsit-speech {
-  padding: $padding-main 0 $padding-main $padding-main;
+.list {
+  padding: $padding-main;
 }
 </style>
 

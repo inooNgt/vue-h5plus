@@ -2,7 +2,6 @@
   <div class="article-item md-item-border " :class="data.cover?'item-cover':''" @click="onitemclick && onitemclick(data.id)||null">
     <h4 class="article-title">{{data.title}}</h4>
     <article class="article-body">
-      {{data.content}}
     </article>
     <aside class="aside">{{data.who}}
       <span> {{data.site && data.site.name}}</span>
@@ -42,22 +41,23 @@ export default {
     display: none;
   }
   &.item-cover {
-    padding-right: 134px;
+    padding-right: 115px;
     .cover-wrap {
       display: block;
-      @extend %img-wrap;
-      width: 105px;
-      height: 79px;
+      width: 100px;
+      height: 78px;
       position: absolute;
-      right: $padding-main;
+      right: 0;
       top: 0;
+      overflow: hidden;
+      border-radius: 5px;
       .cover-img {
         border-radius: 5px;
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
-        height: auto;
+        width: auto;
+        height: 100%;
       }
     }
   }
@@ -66,18 +66,15 @@ export default {
   }
 }
 .article-title {
-  font-weight: 600;
+  font-weight: normal;
   color: #000;
   font-size: 16px;
   line-height: 18px;
-  padding-top: 2px;
-  margin-bottom: 3px;
   @include clamp(2);
 }
 .article-body {
   color: $color-tip;
   height: 38px;
-  line-height: 19px;
   overflow: hidden;
   font-size: 12px;
   @include clamp(2);

@@ -1,6 +1,6 @@
 .DS_Store
 node_modules/
-app/static
+app/dist
 app/*.html
 app/unpackage/release
 

@@ -20,8 +20,10 @@ function generatePages() {
     let pageHtml = filepath.substring(0, index) + `.html`;
 
     if (!fs.existsSync(pageHtml)) {
-      pageHtml = filepath.substring(0, index) + "/_default.html";
+      pageHtml = "src/pages/default.html";
     }
+
+    console.log(pageHtml);
 
     pages[filename] = {
       entry: filepath,
@@ -37,7 +39,7 @@ function generatePages() {
 module.exports = {
   baseUrl: "",
   outputDir: "app",
-  assetsDir: "static",
+  assetsDir: "dist",
   pages: generatePages(),
   productionSourceMap: false,
   filenameHashing: false,
@@ -50,7 +52,6 @@ module.exports = {
       resolve: {
         alias: {
           vue$: "vue/dist/vue.esm.js",
-          "@": resolve("src"),
           utils: resolve("src/utils"),
           components: resolve("src/components"),
           assets: resolve("src/assets")
@@ -59,8 +60,7 @@ module.exports = {
       },
       externals: {
         mui: "window.mui",
-        mtool: "window.MTOOL",
-        mAlloyCrop: "window.mAlloyCrop"
+        mtool: "window.MTOOL"
       }
     });
   },

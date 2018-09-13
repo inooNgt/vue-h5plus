@@ -237,7 +237,7 @@
     }
 
     var from = "";
-    var styles = config.styles;
+    var styles = Object.assign({}, config.styles);
     if (options && options.from) {
       from = options.from;
     }
