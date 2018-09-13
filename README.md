@@ -1,4 +1,4 @@
-<img alt="MobX unidirectional flow" src="src/assets/img/logo.png" align="center" width="240" style="display:block;margin:0 auto;"/>
+<!-- <img alt="" src="src/assets/img/logo.png" align="center" width="240" style="display:block;margin:0 auto;"/> -->
 
 # H5+ Hybrid APP
 

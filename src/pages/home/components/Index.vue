@@ -5,7 +5,7 @@
       <div class="mui-scroll" id="homeScroller" ref="scrollContent" :class="isPlus?'':'broswer-content'">
 
         <ul class="list" v-if="dataList.length">
-          <ArticleItem v-for="(item,index) in dataList" :data="item" :key="index" />
+          <ArticleItem v-for="(item,index) in dataList" :data="item" :key="index" :onitemclick="goInfo" />
         </ul>
         <div class="empty-wrap" v-else>
           <div class="empty-cell">
@@ -46,7 +46,7 @@ const cachedMenpaiList = getCachedObject(config.keys.menpailist);
 const cachedArticleList = getCachedObject(config.keys.articlelist);
 const cachedBannerList = getCachedObject(config.keys.bannerist);
 
-const preloadPages = [];
+const preloadPages = ["article.html"];
 
 export default {
   name: "Index",
@@ -141,6 +141,18 @@ export default {
           console.log(e);
           e.message && Toast(e.message);
         });
+    },
+    goInfo(id) {
+      if (id === undefined) {
+        return;
+      }
+
+      console.log("goInfo: " + id);
+      // 两种传参方式用于非plus/plus环境
+      MTOOL.invoke("article.html", "event_update", { id });
+      setTimeout(() => {
+        MTOOL.openWindow(`article.html?id=${id}`);
+      }, 150);
     }
   }
 };

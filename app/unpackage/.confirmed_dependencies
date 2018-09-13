@@ -69,7 +69,8 @@
       "login.html",
       "home.html",
       "info_activity.html",
-      "info_course.html"
+      "info_course.html",
+      "article.html"
     ],
     "resources": [
       "static/js/manifest.js",

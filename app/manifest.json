@@ -295,7 +295,8 @@
 					"home_list_menpai.html",
 					"common_shade.html",
 					"sweepcode.html",
-					"login.html"
+					"login.html",
+					"article.html"
 				]
 			},
 			"info_activity.html": {

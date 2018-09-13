@@ -1,5 +1,5 @@
 <template>
-  <div class="article-item md-item-border " :class="data.cover?'item-cover':''" @click="onitemclick && onitemclick(data.id)||null">
+  <div class="article-item md-item-border " :class="data.cover?'item-cover':''" @click="onitemclick && onitemclick(data._id)||null">
     <h4 class="article-title">{{data.title}}</h4>
     <article class="article-body">
     </article>

@@ -32,7 +32,7 @@ export default {
 <style lang="scss" >
 @import "~assets/scss/var";
 @import "~assets/scss/common";
-@import "../../assets/scss/base.scss";
+@import "~assets/scss/base.scss";
 html,
 body {
   background: #dddddd;
