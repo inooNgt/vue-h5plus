@@ -1,6 +1,6 @@
 <template>
   <div class="page-content nav-content" :class="isPlus?'':'broswer-content'">
-    <van-nav-bar title="功力" fixed />
+    <van-nav-bar title="功能" fixed />
     <header class="header">
       <img class="header-bg" src="~assets/img/speedup_bg.png" />
       <div class="header-content">
@@ -12,7 +12,6 @@
             <div class="cell-value">{{0}}</div>
           </div>
         </div>
-        <div class="row-bottom">功力越高，赚得的银两越多哦，快去修炼功力吧</div>
       </div>
     </header>
     <section class="cell-wrap">
@@ -33,7 +32,6 @@
         </div>
       </div>
     </section>
-    <div class="row-tip">更多功力修炼玩法，即将上线...</div>
   </div>
 </template>
 

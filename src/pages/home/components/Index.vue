@@ -1,18 +1,11 @@
 <template>
-  <div class="page-content nav-content" :class="active==0?'content-no-pull':''">
+  <div class="page-content nav-content">
     <van-nav-bar title="江湖" fixed/>
     <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
       <div class="mui-scroll" id="homeScroller" ref="scrollContent" :class="isPlus?'':'broswer-content'">
-
         <ul class="list" v-if="dataList.length">
           <ArticleItem v-for="(item,index) in dataList" :data="item" :key="index" :onitemclick="goInfo" />
         </ul>
-        <div class="empty-wrap" v-else>
-          <div class="empty-cell">
-            <div class="empty-tip">空空如也</div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -42,10 +35,6 @@ Vue.use(Toast)
 
 const refreshId = "#pullrefresh";
 
-const cachedMenpaiList = getCachedObject(config.keys.menpailist);
-const cachedArticleList = getCachedObject(config.keys.articlelist);
-const cachedBannerList = getCachedObject(config.keys.bannerist);
-
 const preloadPages = ["article.html"];
 
 export default {
@@ -63,10 +52,7 @@ export default {
 
     MTOOL.plusReady(() => {
       if (MTOOL.isPlus) {
-        if (!this.preloaded) {
-          preload(preloadPages);
-          this.preloaded = true;
-        }
+        preload(preloadPages);
       }
     });
   },
@@ -78,16 +64,9 @@ export default {
 
   data() {
     return {
-      active: 0,
       isPlus: MTOOL.isPlus,
-      showPopup: false,
-      imagelist: cachedBannerList || [],
-      articleList: cachedArticleList || [],
-      menpaiList: cachedMenpaiList || [],
-      groupCount: 0,
-      menPaiReady: false,
       dataList: [],
-      preloaded: false
+      loading: false
     };
   },
   methods: {
@@ -122,16 +101,16 @@ export default {
     },
 
     loadData() {
+      if (this.loading) return Promise.resolve();
+
+      this.loading = true;
+
       return this.$get(API.ifanr)
         .then(res => {
           let data = res.data;
           if (res.status === 200 && data) {
-            let temp = [];
             if (data.results) {
-              for (let key in data.results) {
-                temp = temp.concat(data.results[key]);
-              }
-              this.dataList = temp;
+              this.dataList = data.results;
             }
           } else {
             res.message && Toast(res.message);
@@ -140,6 +119,9 @@ export default {
         .catch(e => {
           console.log(e);
           e.message && Toast(e.message);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     goInfo(id) {

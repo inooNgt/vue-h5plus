@@ -7,13 +7,16 @@
       <span> {{data.site && data.site.name}}</span>
     </aside>
     <div class="cover-wrap">
-      <img class="cover-img" v-if="data.cover" :src="data.cover" alt="">
+      <img class="cover-img" v-if="data.cover" v-lazy="data.cover">
     </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
+import { Lazyload } from "vant";
+
+Vue.use(Lazyload);
 
 export default {
   name: "ArticleItem",
@@ -38,19 +41,21 @@ export default {
   margin-bottom: $padding-main;
   padding-right: $padding-main;
   .cover-wrap {
+    width: 100px;
+    height: 78px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background: #ddd;
+
     display: none;
   }
   &.item-cover {
     padding-right: 115px;
     .cover-wrap {
       display: block;
-      width: 100px;
-      height: 78px;
-      position: absolute;
-      right: 0;
-      top: 0;
-      overflow: hidden;
-      border-radius: 5px;
       .cover-img {
         border-radius: 5px;
         position: absolute;

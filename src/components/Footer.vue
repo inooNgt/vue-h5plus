@@ -66,8 +66,8 @@ export default {
   background-image: url(~assets/img/home_tab1.png);
 }
 .icon-home-tab2 {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 35px;
   background-image: url(~assets/img/home_tab2.png);
 }
 

@@ -4,7 +4,6 @@
     <article class="content">
       <h2 class="title">{{title}}</h2>
       <div v-html="content" class="content-html"></div>
-      <div v-if="!content" class="text-center">暂无内容</div>
     </article>
   </div>
 </template>
