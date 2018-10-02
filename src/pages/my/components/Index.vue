@@ -1,7 +1,6 @@
 <template>
   <div class="page-content" :class="!isPlus?'broswer-content':''">
     <div class="my-header">
-      <img src="~assets/img/my_bg.png" class="my-bg-img" alt="">
       <div class="my-header-content">
         <nav class="bar-setting">
           <van-icon class="icon-setting" name="setting" />

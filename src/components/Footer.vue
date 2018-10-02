@@ -61,13 +61,13 @@ export default {
 }
 
 .icon-home-tab1 {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background-image: url(~assets/img/home_tab1.png);
 }
 .icon-home-tab2 {
-  width: 30px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   background-image: url(~assets/img/home_tab2.png);
 }
 
