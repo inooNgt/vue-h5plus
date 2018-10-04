@@ -40,7 +40,7 @@ export default {
         return;
       }
 
-      MTOOL.switchNav(path, this.activePath);
+      MTOOL.switchTab(path, this.activePath);
       this.activePath = path;
 
       // 更新

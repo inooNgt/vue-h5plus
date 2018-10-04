@@ -40,11 +40,8 @@ import Vue from "vue";
 import mui from "mui";
 import MTOOL from "mtool";
 import { Button, NavBar } from "vant";
-import { preload } from "utils/utils";
 
 Vue.use(Button).use(NavBar);
-
-const preloadPages = ["energy_seclusion.html"];
 
 export default {
   name: "Index",
@@ -52,8 +49,7 @@ export default {
     return {
       energyTotal: 0,
       topRange: 0,
-      isPlus: MTOOL.isPlus,
-      preloaded: false
+      isPlus: MTOOL.isPlus
     };
   },
   computed: {},
@@ -72,11 +68,6 @@ export default {
         self.addEventListener("hide", () => {
           this.clear();
         });
-
-        if (!this.preloaded) {
-          preload(preloadPages);
-          this.preloaded = true;
-        }
       });
     }
   },
@@ -98,17 +89,6 @@ export default {
     update() {
       // 首次显示没有触发hide事件
       this.clear();
-    },
-
-    goInvite() {
-      MTOOL.openWindowWithTitle("my_invite.html");
-    },
-
-    goSeclusion() {
-      MTOOL.openWindow("energy_seclusion.html");
-    },
-    goRank() {
-      MTOOL.openWindowWithTitle("energy_rank.html");
     }
   }
 };

@@ -1,6 +1,6 @@
 {
   "@platforms": ["android", "iPhone", "iPad"],
-  "id": "H58016FE1" /*应用的标识，创建应用时自动生成，勿手动修改*/,
+  "id": "H53DF1B81" /*应用的标识，创建应用时自动生成，勿手动修改*/,
   "name": "Gank" /*应用名称，程序桌面图标名称*/,
   "version": {
     "name": "1.0.0" /*应用版本名称*/,
@@ -207,48 +207,18 @@
       "splashscreen": {
         "ios": {
           "iphone": {
-            "default": "" /*iPhone3启动图片选，分辨率：320x480*/,
-            "retina35":
-              "D:/app/dic-hybrid/appicon/start/Iphone/640 x 960.png" /*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/,
-            "retina40":
-              "D:/app/dic-hybrid/appicon/start/Iphone/640 x 1136.png" /*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/,
-            "retina47":
-              "D:/app/dic-hybrid/appicon/start/Iphone/750 x 1330.png" /*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/,
-            "retina55":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208.png" /*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/,
-            "retina55l":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208h.png"
+            "default": "" /*iPhone3启动图片选，分辨率：320x480*/
           },
           "ipad": {
-            "portrait": "" /*iPad竖屏启动图片，分辨率：768x1004*/,
-            "portrait-retina":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208.png" /*iPad高分屏竖屏图片，分辨率：1536x2008*/,
-            "landscape":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1125 x 2436h.png" /*iPad横屏启动图片，分辨率：1024x748*/,
-            "landscape-retina":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208h.png" /*iPad高分屏横屏启动图片，分辨率：2048x1496*/,
-            "portrait7":
-              "D:/app/dic-hybrid/appicon/start/Iphone/750 x 1330.png" /*iPad iOS7竖屏启动图片，分辨率：768x1024*/,
-            "portrait-retina7":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208.png" /*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/,
-            "landscape7":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1125 x 2436h.png" /*iPad iOS7横屏启动图片，分辨率：1024x768*/,
-            "landscape-retina7":
-              "D:/app/dic-hybrid/appicon/start/Iphone/1242 x 2208h.png"
+            "portrait": "" /*iPad竖屏启动图片，分辨率：768x1004*/
           }
         },
         "android": {
           "mdpi": "" /*普通屏启动图片，分辨率：240x282*/,
-          "ldpi": "" /*大屏启动图片，分辨率：320x442*/,
-          "hdpi":
-            "D:/app/dic-hybrid/appicon/start/Android/480 x 762.png" /*高分屏启动图片，分辨率：480x762*/,
-          "xhdpi":
-            "D:/app/dic-hybrid/appicon/start/Android/720 x 1242.png" /*720P高分屏启动图片，分辨率：720x1242*/,
-          "xxhdpi": "D:/app/dic-hybrid/appicon/start/Android/1080 x 1882.png"
+          "ldpi": "" /*大屏启动图片，分辨率：320x442*/
         }
       }
-    },
-    "adid": "129537030406"
+    }
   },
   "dependencies": {
 		"pages": {

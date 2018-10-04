@@ -1,23 +1,19 @@
-(function(global, undefined) {
+(function (global, undefined) {
   if (global.MTOOL) return;
   /**
    * 页面配置
    */
   var config = {
-    subpages: ["home.html", "menpai.html", "energy.html", "my.html"],
-    loginPages: ["menpai.html", "energy.html", "my.html"],
+    subpages: ["home.html", "energy.html", "my.html"],
     barHeight: 44,
     top: "0px",
     bottom: "49px",
     keys: {
-      activenav: "md.index.activeNavPath",
       token: "ml.login.token",
-      shade: "ml.index.shade",
       guide: "ml.index.guide"
     },
     statusbar: "#eb2000",
     aniShow: "pop-in",
-    styles: { titleNView: null },
     titleNView: {
       titleSize: "18px",
       autoBackButton: true,
@@ -41,7 +37,7 @@
   /**
    * 本地存储
    */
-  var storage = (function() {
+  var storage = (function () {
     return isPlus && typeof plus !== "undefined"
       ? plus.storage
       : global.localStorage;
@@ -54,19 +50,19 @@
     //取消浏览器的所有事件，使得active的样式在手机上正常生效
     document.addEventListener(
       "touchstart",
-      function() {
+      function () {
         return false;
       },
       true
     );
 
     // 禁止选择
-    document.oncontextmenu = function() {
+    document.oncontextmenu = function () {
       return false;
     };
 
     if (isPlus) {
-      plusReady(function() {
+      plusReady(function () {
         console.log("init page:" + plus.webview.currentWebview().id);
         // 隐藏滚动条
         plus.webview.currentWebview().setStyle({ scrollIndicator: "none" });
@@ -75,21 +71,9 @@
       });
     }
 
-    var pathname = window.location.pathname || "";
-    pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
-
-    //Plus环境下的tabbar子页面检查activeNavPath
-    if (isPlus && config.subpages.indexOf(pathname) !== -1) {
-      pathname = storage.getItem(config.keys.activenav) || config.subpages[0];
-    }
   }
 
-  /**
-   * 初始化主页面
-   */
-  function initIndex() {
-    plusReady(function() {});
-  }
+
 
   /**
    * 主页面容器
@@ -104,7 +88,7 @@
     var subpages = config.subpages;
 
     //所有的plus-*方法写在mui.plusReady中或者后面。
-    mui.plusReady(function() {
+    mui.plusReady(function () {
       // 状态栏颜色
       setStatusBarBg();
 
@@ -141,15 +125,6 @@
         self.append(sub);
       }
 
-      // console.log("webview.all:");
-      // var array = plus.webview.all();
-      // if (array) {
-      //   for (var i = 0, len = array.length; i < len; i++) {
-      //     console.log(array[i].getURL());
-      //   }
-      // }
-
-      storage.setItem(config.keys.activenav, subpages[index]);
     });
   }
 
@@ -157,7 +132,6 @@
     // 设置系统状态栏背景
     plus.navigator.setStatusBarBackground(color || config.statusbar);
     plus.navigator.setStatusBarStyle(style || "light");
-    // var rgb = plus.navigator.getStatusBarBackground();
   }
 
   function floatWebview(url, opt) {
@@ -183,7 +157,7 @@
    * 切换tabbar
    * @param {String} path
    */
-  function switchNav(path, lastpath) {
+  function switchTab(path, lastpath) {
     if (typeof plus !== "undefined") {
       if (loadedPage[path]) {
         plus.webview.show(path, "none");
@@ -198,7 +172,7 @@
       if (lastpath) {
         plus.webview.hide(lastpath, "none");
       } else {
-        config.subpages.forEach(function(v) {
+        config.subpages.forEach(function (v) {
           if (v !== path) {
             plus.webview.hide(v, "none");
           }
@@ -207,19 +181,18 @@
     } else {
       window.location.href = path;
     }
-    storage.setItem(config.keys.activenav, path);
   }
 
   /**
    * 返回主页
    */
   function goHome() {
-    switchNav("home.html");
+    switchTab("home.html");
     invoke("Hbuilder", "index_update_tab", {
       path: "home.html"
     });
 
-    plusReady(function() {
+    plusReady(function () {
       invoke(plus.runtime.appid, "index_update_tab", {
         path: "home.html"
       });
@@ -236,36 +209,24 @@
       return;
     }
 
-    var from = "";
-    var styles = Object.assign({}, config.styles);
-    if (options && options.from) {
-      from = options.from;
-    }
+    var styles = {};
+    var extras = {}
 
     if (options && typeof options.styles === "object") {
       styles = Object.assign(styles, options.styles);
     }
-    var extras = {
-      name: url,
-      from: from
-    };
 
     if (options && typeof options.extras === "object") {
       extras = Object.assign(extras, options.extras);
     }
 
-    // id去掉hash和query
+    // id为url去掉hash和query
     var id = url;
     if (id.indexOf("#") !== -1) {
       id = id.substring(0, id.indexOf("#"));
     }
     if (id.indexOf("?") !== -1) {
       id = id.substring(0, id.indexOf("?"));
-    }
-
-    // 比shade高
-    if (id === "login.html") {
-      styles.zindex = 11;
     }
 
     mui.openWindow({
@@ -290,10 +251,6 @@
 
     Object.assign(options.styles.titleNView, config.titleNView);
 
-    // console.log("openWindowWithTitle:" + url);
-    // console.log("openWindowWithTitle:" + options.styles.titleNView);
-    // console.log("openWindowWithTitle:" + options.styles.titleNView.titleSize);
-
     openWindow(url, options);
   }
 
@@ -305,20 +262,22 @@
     if (isPlus) {
       return mui.plusReady(fn);
     } else {
-      setTimeout(function() {
+      setTimeout(function () {
         fn && fn();
       }, 0);
     }
   }
 
   // 封装mui.fire
-  var invoke = function(targetId, event, data) {
+  var invoke = function (targetId, event, data) {
     if (!isPlus) return;
-    var page = plus.webview.getWebviewById(targetId);
-    return mui.fire(page, event, data);
+    plusReady(function () {
+      var page = plus.webview.getWebviewById(targetId);
+      mui.fire(page, event, data);
+    })
   };
 
-  var invokeAll = function(event, data) {
+  var invokeAll = function (event, data) {
     if (!isPlus) return;
     var pages = plus.webview.all();
     if (pages.length) {
@@ -330,9 +289,8 @@
 
   var MTOOL = {
     initPage: initPage,
-    initIndex: initIndex,
     initWebview: initWebview,
-    switchNav: switchNav,
+    switchTab: switchTab,
     isPlus: isPlus,
     floatWebview: floatWebview,
     storage: storage,

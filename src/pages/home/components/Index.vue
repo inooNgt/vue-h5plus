@@ -17,14 +17,7 @@ import { Icon, Button, Toast, NavBar } from "vant";
 import MTOOL from "mtool";
 import mui from "mui";
 import config from "utils/config";
-import {
-  loadUserInfo,
-  stopPropagation,
-  redirect,
-  preload,
-  getCachedData,
-  getCachedObject
-} from "utils/utils";
+import { loadUserInfo, stopPropagation, redirect, preload } from "utils/utils";
 import API from "utils/api";
 import ArticleItem from "components/ArticleItem";
 

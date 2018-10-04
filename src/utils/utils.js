@@ -92,37 +92,6 @@ function checkAuth(url) {
   return result;
 }
 
-// 获取缓存的对象信息
-const getCachedObject = key => {
-  let cached;
-  let content = MTOOL.storage.getItem(key);
-  try {
-    if (content) cached = JSON.parse(content);
-  } catch (error) {
-    console.log("getcached error", error);
-  }
-  return cached;
-};
-
-// 获取缓存的信息
-const getCachedData = key => {
-  let cached;
-  try {
-    cached = MTOOL.storage.getItem(key);
-  } catch (error) {
-    console.log("getcached error", error);
-  }
-  return cached;
-};
-
-const MToast = msg => {
-  if (typeof window.plus !== "undefined") {
-    plus.nativeUI.toast(msg);
-  } else {
-    Toast(msg);
-  }
-};
-
 /**
  * 对象深拷贝
  * @param {Object} obj
@@ -146,7 +115,7 @@ const clone = obj => {
 const preload = pages => {
   let result = [];
   if (pages.length && MTOOL.isPlus) {
-    MTOOL.plusReady(function() {
+    MTOOL.plusReady(function () {
       pages.forEach(pagepath => {
         let page = mui.preload({
           url: pagepath,
@@ -236,7 +205,4 @@ export {
   preload,
   clone,
   selectImg,
-  getCachedObject,
-  getCachedData,
-  MToast
 };
