@@ -106,10 +106,6 @@ html {
 @import "~assets/scss/var";
 @import "~assets/scss/common";
 .page-content {
-  // background-image: url(~assets/img/1.png);
-  // background-repeat: no-repeat;
-  // background-size: 100%;
-  // background-position: 0 -20px;
   padding-bottom: 20px;
   position: relative;
 }

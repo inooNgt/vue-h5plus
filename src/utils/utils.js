@@ -196,6 +196,30 @@ const selectImg = callback => {
   }
 };
 
+
+// 获取缓存的对象信息
+const getCachedObject = key => {
+  let cached;
+  let content = MTOOL.storage.getItem(key);
+  try {
+    if (content) cached = JSON.parse(content);
+  } catch (error) {
+    console.log("getcached error", error);
+  }
+  return cached;
+};
+
+// 获取缓存的信息
+const getCachedData = key => {
+  let cached;
+  try {
+    cached = MTOOL.storage.getItem(key);
+  } catch (error) {
+    console.log("getcached error", error);
+  }
+  return cached;
+};
+
 export {
   http,
   get,
@@ -204,5 +228,7 @@ export {
   getQuery,
   preload,
   clone,
+  getCachedObject,
+  getCachedData,
   selectImg,
 };

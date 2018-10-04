@@ -14,7 +14,8 @@ import { NavBar, Icon, Button, Toast } from "vant";
 import MTOOL from "mtool";
 import mui from "mui";
 import API from "utils/api";
-import { getQuery } from "utils/utils";
+import config from "utils/config";
+import { getQuery, getCachedObject } from "utils/utils";
 
 Vue.use(NavBar)
   .use(Toast)
@@ -67,26 +68,18 @@ export default {
         return;
       }
 
-      return this.$get(API.ifanr)
-        .then(res => {
-          let data = res.data;
-          if (res.status === 200 && data) {
-            let dataList = data.results;
-            dataList.forEach(item => {
-              if (item._id === id) {
-                this.title = item.title || "";
-                this.content = item.content || "";
-                console.log("item.title: " + this.title);
-              }
-            });
-          } else {
-            res.message && Toast(res.message);
+      // 由于gank.io 没有新闻的详情接口，这里缓存读取数据
+      let dataList = getCachedObject(config.keys.newslist);
+
+      if (dataList.length) {
+        dataList.forEach(item => {
+          if (item._id === id) {
+            this.title = item.title || "";
+            this.content = item.content || "";
+            console.log("item.title: " + this.title);
           }
-        })
-        .catch(e => {
-          console.log(e);
-          e.message && Toast(e.message);
         });
+      }
     }
   }
 };

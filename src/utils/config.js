@@ -7,7 +7,9 @@ const config = {
     titleSize: "18px",
     backgroundColor: "#eb2000"
   },
-  keys: {}
+  keys: {
+    newslist: "vh.home.newslist"
+  }
 };
 
 export default config;

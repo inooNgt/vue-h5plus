@@ -104,6 +104,10 @@ export default {
           if (res.status === 200 && data) {
             if (data.results) {
               this.dataList = data.results;
+              MTOOL.storage.setItem(
+                config.keys.newslist,
+                JSON.stringify(this.dataList)
+              );
             }
           } else {
             res.message && Toast(res.message);
