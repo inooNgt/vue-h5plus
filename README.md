@@ -41,3 +41,9 @@ yarn dev
 # build for production with minification
 yarn build
 ```
+
+## 体验
+
+安卓版
+
+![安卓版](http://p42jcfxfo.bkt.clouddn.com/app/vue_h5plus.png)
