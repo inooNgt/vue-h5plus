@@ -3,7 +3,7 @@
     <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
       <span class="md-icon icon-home-tab1"></span>
     </div>
-    <div class="footer-link" v-bind:class="{ active: activePath === 'energy.html' }" @click="handleNavTap('energy.html',$event)">
+    <div class="footer-link" v-bind:class="{ active: activePath === 'demo.html' }" @click="handleNavTap('demo.html',$event)">
       <span class="md-icon icon-home-tab2"></span>
     </div>
     <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
@@ -13,47 +13,47 @@
 </template>
 
 <script>
-import Vue from "vue";
-import { Button, Icon } from "vant";
-import MTOOL from "mtool";
-import config from "utils/config";
+import Vue from 'vue'
+import { Button, Icon } from 'vant'
+import MTOOL from 'mtool'
+import config from 'utils/config'
 
-Vue.use(Icon);
-Vue.use(Button);
+Vue.use(Icon)
+Vue.use(Button)
 
 export default {
-  name: "Footer",
+  name: 'Footer',
   data() {
     return {
-      activePath: "home.html"
-    };
+      activePath: 'home.html'
+    }
   },
   mounted() {
-    this.$nextTick(() => {});
-    let pathname = window.location.pathname || "";
-    pathname = pathname.substr(pathname.lastIndexOf("/") + 1);
-    this.activePath = pathname === "index.html" ? "home.html" : pathname;
+    this.$nextTick(() => {})
+    let pathname = window.location.pathname || ''
+    pathname = pathname.substr(pathname.lastIndexOf('/') + 1)
+    this.activePath = pathname === 'index.html' ? 'home.html' : pathname
   },
   methods: {
     handleNavTap: function(path, event) {
       if (this.activePath === path && MTOOL.isPlus) {
-        return;
+        return
       }
 
-      MTOOL.switchTab(path, this.activePath);
-      this.activePath = path;
+      MTOOL.switchTab(path, this.activePath)
+      this.activePath = path
 
       // 更新
-      MTOOL.invoke(path, "event_update");
+      MTOOL.invoke(path, 'event_update')
     }
   }
-};
+}
 </script>
 
 
 <style lang="scss" scoped>
-@import "~assets/scss/var";
-@import "~assets/scss/common";
+@import '~assets/scss/var';
+@import '~assets/scss/common';
 
 .md-icon {
   display: inline-block;

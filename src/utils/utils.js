@@ -115,7 +115,7 @@ const clone = obj => {
 const preload = pages => {
   let result = [];
   if (pages.length && MTOOL.isPlus) {
-    MTOOL.plusReady(function () {
+    MTOOL.plusReady(function() {
       pages.forEach(pagepath => {
         let page = mui.preload({
           url: pagepath,
@@ -158,22 +158,18 @@ const selectImg = callback => {
   });
 
   function gallerySuccess(path) {
-    console.log("gallerySuccess");
-    console.log(path);
     changeToLocalUrl(path);
   }
   function galleryFail(error) {
-    console.log("galleryFail");
     console.log(error);
   }
   function captureImage() {
     let cmr = plus.camera.getCamera();
     let res = cmr.supportedImageResolutions[0];
     let fmt = cmr.supportedImageFormats[0];
-    console.log("Resolution: " + res + ", Format: " + fmt);
     cmr.captureImage(
       path => {
-        console.log("Capture image success: " + path);
+        console.log("Capture image success");
         changeToLocalUrl(path);
       },
       error => {
@@ -183,19 +179,11 @@ const selectImg = callback => {
     );
   }
   function changeToLocalUrl(path) {
-    console.log("in changeToLocalUrl path:" + path);
     plus.io.resolveLocalFileSystemURL(path, entry => {
       callback && callback(path, entry);
-      // MTOOL.openWindow("my_setting_head.html", {
-      //   extras: {
-      //     localurl: entry.toLocalURL(),
-      //     imgpath: path
-      //   }
-      // });
     });
   }
 };
-
 
 // 获取缓存的对象信息
 const getCachedObject = key => {
@@ -230,5 +218,5 @@ export {
   clone,
   getCachedObject,
   getCachedData,
-  selectImg,
+  selectImg
 };

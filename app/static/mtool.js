@@ -1,10 +1,10 @@
-(function (global, undefined) {
+(function(global, undefined) {
   if (global.MTOOL) return;
   /**
    * 页面配置
    */
   var config = {
-    subpages: ["home.html", "energy.html", "my.html"],
+    subpages: ["home.html", "demo.html", "my.html"],
     barHeight: 44,
     top: "0px",
     bottom: "49px",
@@ -37,7 +37,7 @@
   /**
    * 本地存储
    */
-  var storage = (function () {
+  var storage = (function() {
     return isPlus && typeof plus !== "undefined"
       ? plus.storage
       : global.localStorage;
@@ -50,19 +50,19 @@
     //取消浏览器的所有事件，使得active的样式在手机上正常生效
     document.addEventListener(
       "touchstart",
-      function () {
+      function() {
         return false;
       },
       true
     );
 
     // 禁止选择
-    document.oncontextmenu = function () {
+    document.oncontextmenu = function() {
       return false;
     };
 
     if (isPlus) {
-      plusReady(function () {
+      plusReady(function() {
         console.log("init page:" + plus.webview.currentWebview().id);
         // 隐藏滚动条
         plus.webview.currentWebview().setStyle({ scrollIndicator: "none" });
@@ -70,10 +70,7 @@
         plus.screen.lockOrientation("portrait-primary");
       });
     }
-
   }
-
-
 
   /**
    * 主页面容器
@@ -88,7 +85,7 @@
     var subpages = config.subpages;
 
     //所有的plus-*方法写在mui.plusReady中或者后面。
-    mui.plusReady(function () {
+    mui.plusReady(function() {
       // 状态栏颜色
       setStatusBarBg();
 
@@ -124,7 +121,6 @@
         // 将webview对象填充到窗口
         self.append(sub);
       }
-
     });
   }
 
@@ -172,7 +168,7 @@
       if (lastpath) {
         plus.webview.hide(lastpath, "none");
       } else {
-        config.subpages.forEach(function (v) {
+        config.subpages.forEach(function(v) {
           if (v !== path) {
             plus.webview.hide(v, "none");
           }
@@ -192,7 +188,7 @@
       path: "home.html"
     });
 
-    plusReady(function () {
+    plusReady(function() {
       invoke(plus.runtime.appid, "index_update_tab", {
         path: "home.html"
       });
@@ -210,7 +206,7 @@
     }
 
     var styles = {};
-    var extras = {}
+    var extras = {};
 
     if (options && typeof options.styles === "object") {
       styles = Object.assign(styles, options.styles);
@@ -262,22 +258,22 @@
     if (isPlus) {
       return mui.plusReady(fn);
     } else {
-      setTimeout(function () {
+      setTimeout(function() {
         fn && fn();
       }, 0);
     }
   }
 
   // 封装mui.fire
-  var invoke = function (targetId, event, data) {
+  var invoke = function(targetId, event, data) {
     if (!isPlus) return;
-    plusReady(function () {
+    plusReady(function() {
       var page = plus.webview.getWebviewById(targetId);
       mui.fire(page, event, data);
-    })
+    });
   };
 
-  var invokeAll = function (event, data) {
+  var invokeAll = function(event, data) {
     if (!isPlus) return;
     var pages = plus.webview.all();
     if (pages.length) {

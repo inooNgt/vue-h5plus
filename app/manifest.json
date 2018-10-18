@@ -237,596 +237,606 @@
     "adid": "129537030406"
   },
   "dependencies": {
-    "pages": {
-      "energy.html": {
-        "href": "energy.html",
-        "resources": [
-          "static/css/energy.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/energy.js",
-          "static/img/speedup_bg.png",
-          "static/img/energy_invite.png",
-          "static/img/energy_xiu.png"
-        ],
-        "priority": 0,
-        "refer": ["energy_seclusion.html", "my_invite.html", "energy_rank.html"]
-      },
-      "home.html": {
-        "href": "home.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/home.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/home.js",
-          "static/css/chunk-vendors.css",
-          "static/css/chunk-common.css"
-        ],
-        "priority": 1,
-        "refer": [
-          "common_article.html",
-          "home_list_article.html",
-          "menpai_create.html",
-          "home_list_menpai.html",
-          "common_shade.html",
-          "sweepcode.html",
-          "login.html",
-          "article.html"
-        ]
-      },
-      "info_activity.html": {
-        "href": "info_activity.html",
-        "resources": [
-          "static/css/info_activity.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/info_activity.js"
-        ],
-        "priority": 2,
-        "refer": []
-      },
-      "info_course.html": {
-        "href": "info_course.html",
-        "resources": [
-          "static/css/info_course.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/info_course.js"
-        ],
-        "priority": 4,
-        "refer": []
-      },
-      "menpai_member.html": {
-        "href": "menpai_member.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/menpai_member.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/menpai_member.js"
-        ],
-        "priority": 5,
-        "refer": []
-      },
-      "home_info_menpai.html": {
-        "href": "home_info_menpai.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/home_info_menpai.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/home_info_menpai.js"
-        ],
-        "priority": 11,
-        "refer": []
-      },
-      "common_article.html": {
-        "href": "common_article.html",
-        "resources": [
-          "static/css/common_article.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/common_article.js"
-        ],
-        "priority": 12,
-        "refer": []
-      },
-      "common_embed.html": {
-        "href": "common_embed.html",
-        "resources": [
-          "static/css/common_embed.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/common_embed.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "common_article.html"
-        ],
-        "priority": 7
-      },
-      "my_about.html": {
-        "href": "my_about.html",
-        "resources": [
-          "static/css/my_about.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_about.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "common_article.html"
-        ],
-        "priority": 11
-      },
-      "my_help.html": {
-        "href": "my_help.html",
-        "resources": [
-          "static/css/my_help.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_help.js"
-        ],
-        "priority": 12,
-        "refer": []
-      },
-      "my_fund.html": {
-        "href": "my_fund.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/my_fund.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_fund.js"
-        ],
-        "priority": 14,
-        "refer": []
-      },
-      "sign_in.html": {
-        "href": "sign_in.html",
-        "resources": [
-          "static/css/sign_in.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/sign_in.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "common_article.html"
-        ],
-        "priority": 15
-      },
-      "common_invite.html": {
-        "href": "common_invite.html",
-        "resources": [
-          "static/css/common_invite.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/common_invite.js"
-        ],
-        "priority": 22,
-        "refer": []
-      },
-      "my_invite.html": {
-        "href": "my_invite.html",
-        "resources": [
-          "mui/img/invite_bg.png",
-          "static/css/my_invite.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_invite.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "common_invite.html",
-          "common_article.html"
-        ],
-        "priority": 17
-      },
-      "my_article.html": {
-        "href": "my_article.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/my_article.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_article.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "common_article.html"
-        ],
-        "priority": 19
-      },
-      "my_feedback.html": {
-        "href": "my_feedback.html",
-        "resources": [
-          "static/css/my_feedback.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_feedback.js"
-        ],
-        "priority": 21,
-        "refer": []
-      },
-      "my_setting.html": {
-        "href": "my_setting.html",
-        "resources": [
-          "static/css/my_setting.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_setting.js",
-          "mui/transform.js",
-          "mui/alloy-finger.js",
-          "mui/alloy-crop.js"
-        ],
-        "priority": 22,
-        "refer": [
-          "my_setting_head.html",
-          "my_setting_name.html",
-          "my_setting_phone.html",
-          "login.html"
-        ]
-      },
-      "my_message.html": {
-        "href": "my_message.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/my_message.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_message.js"
-        ],
-        "priority": 23,
-        "refer": []
-      },
-      "my_auth.html": {
-        "href": "my_auth.html",
-        "resources": [
-          "static/css/my_auth.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my_auth.js"
-        ],
-        "priority": 24,
-        "refer": [
-          "my_auth_type.html",
-          "my_auth_number.html",
-          "my_auth_areacode.html",
-          "my_auth_name.html"
-        ]
-      },
-      "login.html": {
-        "href": "login.html",
-        "resources": [
-          "static/css/login.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/login.js"
-        ],
-        "priority": 28,
-        "refer": []
-      },
-      "my.html": {
-        "href": "my.html",
-        "resources": [
-          "mui/css/mui.css",
-          "mui/img/my_bg.png",
-          "static/css/my.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/my.js",
-          "static/img/head.png"
-        ],
-        "refer": [
-          "info_activity.html",
-          "my_about.html",
-          "my_help.html",
-          "info_course.html",
-          "my_fund.html",
-          "sign_in.html",
-          "menpai_member.html",
-          "my_invite.html",
-          "energy.html",
-          "my_article.html",
-          "common_embed.html",
-          "my_feedback.html",
-          "my_setting.html",
-          "my_message.html",
-          "my_auth.html",
-          "home_info_menpai.html",
-          "menpai.html",
-          "my.html",
-          "login.html",
-          "common_article.html"
-        ],
-        "priority": 10
-      },
-      "menpai.html": {
-        "href": "menpai.html",
-        "resources": [
-          "mui/css/mui.css",
-          "static/css/menpai.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/menpai.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "index.html",
-          "info_course.html",
-          "menpai_member.html",
-          "energy.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "menpai.html",
-          "my.html",
-          "home.html",
-          "common_article.html"
-        ],
-        "priority": 2
-      },
-      "common_guide.html": {
-        "href": "common_guide.html",
-        "resources": [
-          "static/css/common_guide.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/common_guide.js",
-          "static/img/guide_bg.png",
-          "static/img/guide_4.png"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "home.html",
-          "common_article.html",
-          "login.html"
-        ],
-        "priority": 3
-      },
-      "common_update.html": {
-        "href": "common_update.html",
-        "resources": [
-          "static/css/common_update.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/common_update.js"
-        ],
-        "refer": [
-          "info_activity.html",
-          "info_course.html",
-          "menpai_member.html",
-          "common_embed.html",
-          "home_info_menpai.html",
-          "common_article.html"
-        ],
-        "priority": 6
-      },
-      "index.html": {
-        "href": "index.html",
-        "resources": [
-          "static/css/index.css",
-          "mui/polyfill.js",
-          "mui/mui.js",
-          "mui/mtool.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/js/index.js",
-          "home.html",
-          "menpai.html",
-          "static/css/chunk-vendors.css",
-          "static/css/chunk-common.css",
-          "energy.html"
-        ],
-        "refer": [
-          "common_guide.html",
-          "my.html",
-          "login.html",
-          "common_update.html"
-        ],
-        "priority": 0
-      },
-      "home_list_article.html": {
-        "resources": [
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/css/home_list_article.css",
-          "static/js/home_list_article.js"
-        ],
-        "refer": [],
-        "priority": 0
-      },
-      "home_list_menpai.html": {
-        "resources": [
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/css/home_list_menpai.css",
-          "static/js/home_list_menpai.js"
-        ],
-        "refer": [],
-        "priority": 0
-      },
-      "energy_seclusion.html": {
-        "resources": [
-          "static/js/energy_seclusion.js",
-          "static/js/manifest.js",
-          "static/js/vendor.js",
-          "static/css/energy_seclusion.css",
-          "static/img/game_bg.png"
-        ],
-        "refer": ["home_rule.html"],
-        "priority": 0
-      },
-      "menpai_course.html": {
-        "resources": [],
-        "refer": ["info_course.html"],
-        "priority": 0
-      },
-      "menpai_activity.html": {
-        "resources": [],
-        "refer": ["info_activity.html"],
-        "priority": 0
-      }
-    },
-    "idle": {
-      "resources": [
-        "static/js/signup.js",
-        "static/js/common_shade.js",
-        "static/css/sweepcode.css",
-        "static/css/my_auth_name.css",
-        "static/css/signup.css",
-        "static/css/home_rule.css",
-        "static/js/menpai_article.js",
-        "static/js/my_setting_head.js",
-        "static/img/teshu2.png",
-        "static/js/menpai_setting.js",
-        "static/css/my_setting_head.css",
-        "static/css/menpai_editor.css",
-        "static/img/rule_bg.png",
-        "menpai_setting.html",
-        "menpai_editor.html",
-        "static/js/menpai_activity.js",
-        "static/js/my_setting_name.js",
-        "static/js/login_areacode.js",
-        "my_contactus.html",
-        "static/css/my_auth_areacode.css",
-        "static/fonts/iconfont.eot",
-        "static/js/sweepcode.js",
-        "static/css/login_areacode.css",
-        "static/js/menpai_create.js",
-        "static/fonts/iconfont.svg",
-        "login_areacode.html",
-        "static/css/menpai_activity.css",
-        "static/js/my_auth_number.js",
-        "static/css/my_auth_number.css",
-        "static/css/my_contactus.css",
-        "static/js/energy_rank.js",
-        "static/css/menpai_article.css",
-        "static/js/my_contactus.js",
-        "static/img/teshu3.png",
-        "static/css/energy_rank.css",
-        "mui/editor/wangEditor.js",
-        "static/js/menpai_course.js",
-        "static/img/teshu.png",
-        "mui/editor/fonts/w-e-icon.woff",
-        "static/js/my_auth_type.js",
-        "mui/editor/wangEditor.css",
-        "static/js/menpai_editor.js",
-        "static/css/menpai_create.css",
-        "static/css/menpai_course.css",
-        "static/js/my_setting_phone.js",
-        "static/js/home_rule.js",
-        "static/css/menpai_setting.css",
-        "static/css/my_setting_name.css",
-        "signup_msg.html",
-        "static/css/my_auth_type.css",
-        "signup.html",
-        "static/css/common_shade.css",
-        "static/js/my_auth_name.js",
-        "static/css/my_setting_phone.css",
-        "static/img/my_bg.png",
-        "static/js/my_auth_areacode.js",
-        "static/fonts/vant-icon-243435.ttf",
-        "menpai_article.html",
-        "static/fonts/iconfont.ttf"
-      ]
-    }
-  }
+		"pages": {
+			"energy.html": {
+				"href": "energy.html",
+				"resources": [
+					"static/css/energy.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/energy.js",
+					"static/img/speedup_bg.png",
+					"static/img/energy_invite.png",
+					"static/img/energy_xiu.png"
+				],
+				"priority": 0,
+				"refer": [
+					"energy_seclusion.html",
+					"my_invite.html",
+					"energy_rank.html"
+				]
+			},
+			"home.html": {
+				"href": "home.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/home.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/home.js",
+					"static/css/chunk-vendors.css",
+					"static/css/chunk-common.css"
+				],
+				"priority": 1,
+				"refer": [
+					"common_article.html",
+					"home_list_article.html",
+					"menpai_create.html",
+					"home_list_menpai.html",
+					"common_shade.html",
+					"sweepcode.html",
+					"login.html",
+					"article.html"
+				]
+			},
+			"info_activity.html": {
+				"href": "info_activity.html",
+				"resources": [
+					"static/css/info_activity.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/info_activity.js"
+				],
+				"priority": 2,
+				"refer": []
+			},
+			"info_course.html": {
+				"href": "info_course.html",
+				"resources": [
+					"static/css/info_course.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/info_course.js"
+				],
+				"priority": 4,
+				"refer": []
+			},
+			"menpai_member.html": {
+				"href": "menpai_member.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/menpai_member.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/menpai_member.js"
+				],
+				"priority": 5,
+				"refer": []
+			},
+			"home_info_menpai.html": {
+				"href": "home_info_menpai.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/home_info_menpai.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/home_info_menpai.js"
+				],
+				"priority": 11,
+				"refer": []
+			},
+			"common_article.html": {
+				"href": "common_article.html",
+				"resources": [
+					"static/css/common_article.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_article.js"
+				],
+				"priority": 12,
+				"refer": []
+			},
+			"common_embed.html": {
+				"href": "common_embed.html",
+				"resources": [
+					"static/css/common_embed.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_embed.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 7
+			},
+			"my_about.html": {
+				"href": "my_about.html",
+				"resources": [
+					"static/css/my_about.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_about.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 11
+			},
+			"my_help.html": {
+				"href": "my_help.html",
+				"resources": [
+					"static/css/my_help.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_help.js"
+				],
+				"priority": 12,
+				"refer": []
+			},
+			"my_fund.html": {
+				"href": "my_fund.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/my_fund.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_fund.js"
+				],
+				"priority": 14,
+				"refer": []
+			},
+			"sign_in.html": {
+				"href": "sign_in.html",
+				"resources": [
+					"static/css/sign_in.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/sign_in.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 15
+			},
+			"common_invite.html": {
+				"href": "common_invite.html",
+				"resources": [
+					"static/css/common_invite.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_invite.js"
+				],
+				"priority": 22,
+				"refer": []
+			},
+			"my_invite.html": {
+				"href": "my_invite.html",
+				"resources": [
+					"mui/img/invite_bg.png",
+					"static/css/my_invite.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_invite.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_invite.html",
+					"common_article.html"
+				],
+				"priority": 17
+			},
+			"my_article.html": {
+				"href": "my_article.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/my_article.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_article.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 19
+			},
+			"my_feedback.html": {
+				"href": "my_feedback.html",
+				"resources": [
+					"static/css/my_feedback.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_feedback.js"
+				],
+				"priority": 21,
+				"refer": []
+			},
+			"my_setting.html": {
+				"href": "my_setting.html",
+				"resources": [
+					"static/css/my_setting.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_setting.js",
+					"mui/transform.js",
+					"mui/alloy-finger.js",
+					"mui/alloy-crop.js"
+				],
+				"priority": 22,
+				"refer": [
+					"my_setting_head.html",
+					"my_setting_name.html",
+					"my_setting_phone.html",
+					"login.html"
+				]
+			},
+			"my_message.html": {
+				"href": "my_message.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/my_message.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_message.js"
+				],
+				"priority": 23,
+				"refer": []
+			},
+			"my_auth.html": {
+				"href": "my_auth.html",
+				"resources": [
+					"static/css/my_auth.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my_auth.js"
+				],
+				"priority": 24,
+				"refer": [
+					"my_auth_type.html",
+					"my_auth_number.html",
+					"my_auth_areacode.html",
+					"my_auth_name.html"
+				]
+			},
+			"login.html": {
+				"href": "login.html",
+				"resources": [
+					"static/css/login.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/login.js"
+				],
+				"priority": 28,
+				"refer": []
+			},
+			"my.html": {
+				"href": "my.html",
+				"resources": [
+					"mui/css/mui.css",
+					"mui/img/my_bg.png",
+					"static/css/my.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/my.js",
+					"static/img/head.png"
+				],
+				"refer": [
+					"info_activity.html",
+					"my_about.html",
+					"my_help.html",
+					"info_course.html",
+					"my_fund.html",
+					"sign_in.html",
+					"menpai_member.html",
+					"my_invite.html",
+					"energy.html",
+					"my_article.html",
+					"common_embed.html",
+					"my_feedback.html",
+					"my_setting.html",
+					"my_message.html",
+					"my_auth.html",
+					"home_info_menpai.html",
+					"menpai.html",
+					"my.html",
+					"login.html",
+					"common_article.html"
+				],
+				"priority": 10
+			},
+			"menpai.html": {
+				"href": "menpai.html",
+				"resources": [
+					"mui/css/mui.css",
+					"static/css/menpai.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/menpai.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"index.html",
+					"info_course.html",
+					"menpai_member.html",
+					"energy.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"menpai.html",
+					"my.html",
+					"home.html",
+					"common_article.html"
+				],
+				"priority": 2
+			},
+			"common_guide.html": {
+				"href": "common_guide.html",
+				"resources": [
+					"static/css/common_guide.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_guide.js",
+					"static/img/guide_bg.png",
+					"static/img/guide_4.png"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"home.html",
+					"common_article.html",
+					"login.html"
+				],
+				"priority": 3
+			},
+			"common_update.html": {
+				"href": "common_update.html",
+				"resources": [
+					"static/css/common_update.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/common_update.js"
+				],
+				"refer": [
+					"info_activity.html",
+					"info_course.html",
+					"menpai_member.html",
+					"common_embed.html",
+					"home_info_menpai.html",
+					"common_article.html"
+				],
+				"priority": 6
+			},
+			"index.html": {
+				"href": "index.html",
+				"resources": [
+					"static/css/index.css",
+					"mui/polyfill.js",
+					"mui/mui.js",
+					"mui/mtool.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/js/index.js",
+					"home.html",
+					"menpai.html",
+					"static/css/chunk-vendors.css",
+					"static/css/chunk-common.css",
+					"energy.html"
+				],
+				"refer": [
+					"common_guide.html",
+					"my.html",
+					"login.html",
+					"common_update.html"
+				],
+				"priority": 0
+			},
+			"home_list_article.html": {
+				"resources": [
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/css/home_list_article.css",
+					"static/js/home_list_article.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"home_list_menpai.html": {
+				"resources": [
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/css/home_list_menpai.css",
+					"static/js/home_list_menpai.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"energy_seclusion.html": {
+				"resources": [
+					"static/js/energy_seclusion.js",
+					"static/js/manifest.js",
+					"static/js/vendor.js",
+					"static/css/energy_seclusion.css",
+					"static/img/game_bg.png"
+				],
+				"refer": [
+					"home_rule.html"
+				],
+				"priority": 0
+			},
+			"menpai_course.html": {
+				"resources": [],
+				"refer": [
+					"info_course.html"
+				],
+				"priority": 0
+			},
+			"menpai_activity.html": {
+				"resources": [],
+				"refer": [
+					"info_activity.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"static/js/signup.js",
+				"static/js/common_shade.js",
+				"static/css/sweepcode.css",
+				"static/css/my_auth_name.css",
+				"static/css/signup.css",
+				"static/css/home_rule.css",
+				"static/js/menpai_article.js",
+				"static/js/my_setting_head.js",
+				"static/img/teshu2.png",
+				"static/js/menpai_setting.js",
+				"static/css/my_setting_head.css",
+				"static/css/menpai_editor.css",
+				"static/img/rule_bg.png",
+				"menpai_setting.html",
+				"menpai_editor.html",
+				"static/js/menpai_activity.js",
+				"static/js/my_setting_name.js",
+				"static/js/login_areacode.js",
+				"my_contactus.html",
+				"static/css/my_auth_areacode.css",
+				"static/fonts/iconfont.eot",
+				"static/js/sweepcode.js",
+				"static/css/login_areacode.css",
+				"static/js/menpai_create.js",
+				"static/fonts/iconfont.svg",
+				"login_areacode.html",
+				"static/css/menpai_activity.css",
+				"static/js/my_auth_number.js",
+				"static/css/my_auth_number.css",
+				"static/css/my_contactus.css",
+				"static/js/energy_rank.js",
+				"static/css/menpai_article.css",
+				"static/js/my_contactus.js",
+				"static/img/teshu3.png",
+				"static/css/energy_rank.css",
+				"mui/editor/wangEditor.js",
+				"static/js/menpai_course.js",
+				"static/img/teshu.png",
+				"mui/editor/fonts/w-e-icon.woff",
+				"static/js/my_auth_type.js",
+				"mui/editor/wangEditor.css",
+				"static/js/menpai_editor.js",
+				"static/css/menpai_create.css",
+				"static/css/menpai_course.css",
+				"static/js/my_setting_phone.js",
+				"static/js/home_rule.js",
+				"static/css/menpai_setting.css",
+				"static/css/my_setting_name.css",
+				"signup_msg.html",
+				"static/css/my_auth_type.css",
+				"signup.html",
+				"static/css/common_shade.css",
+				"static/js/my_auth_name.js",
+				"static/css/my_setting_phone.css",
+				"static/img/my_bg.png",
+				"static/js/my_auth_areacode.js",
+				"static/fonts/vant-icon-243435.ttf",
+				"menpai_article.html",
+				"static/fonts/iconfont.ttf"
+			]
+		}
+	}
 }
