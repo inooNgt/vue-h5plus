@@ -308,7 +308,6 @@
       "static/js/vendor.js",
       "static/js/menpai_member.js",
       "static/img/my_bg.png",
-      "mui/iscroll-probe.js",
       "mui/polyfill.js"
     ],
     "refer": [
@@ -614,7 +613,6 @@
       "mui/css/mui.css",
       "static/css/home_info_menpai.css",
       "mui/mui.js",
-      "mui/iscroll-probe.js",
       "mui/mtool.js",
       "static/js/manifest.js",
       "static/js/vendor.js",
