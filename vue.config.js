@@ -8,6 +8,7 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
+// 页面入口配置
 function generatePages() {
   let pages = {};
   let entries = glob("src/pages/*/*.js", { sync: true });
@@ -22,8 +23,6 @@ function generatePages() {
     if (!fs.existsSync(pageHtml)) {
       pageHtml = "src/pages/default.html";
     }
-
-    console.log(pageHtml);
 
     pages[filename] = {
       entry: filepath,
