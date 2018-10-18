@@ -2,11 +2,11 @@
   <div class="page-content nav-content" :class="isPlus?'':'broswer-content'">
     <van-nav-bar title="Vant组件演示" fixed />
     <section class="cell-wrap">
-      <div class="item-cell" @click="showDialog">
+      <div class="item-cell" @click="showShade">
         <div class="cell-padding">
           <img src="~assets/img/demo_1.png" class="cell-img" alt="">
           <div class="cell-content">
-            <div class="cell-text">Dialog</div>
+            <div class="cell-text">Shade</div>
           </div>
         </div>
       </div>
@@ -69,13 +69,8 @@ export default {
     showToast() {
       Toast('泥融飞燕子，沙暖睡鸳鸯。')
     },
-    showDialog() {
-      Dialog.alert({
-        title: '标题',
-        message: '迟日江山丽，春风花草香。'
-      }).then(() => {
-        // on close
-      })
+    showShade() {
+      MTOOL.floatWebview('shade.html')
     },
     clear() {},
     init() {},

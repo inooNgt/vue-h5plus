@@ -141,7 +141,7 @@
         url,
         {
           background: "transparent",
-          zindex: 10
+          zindex: 99
         },
         (opt && opt.extras) || null
       );

@@ -45,7 +45,8 @@
       "common_guide.html",
       "energy.html",
       "common_shade.html",
-      "common_update.html"
+      "common_update.html",
+      "demo.html"
     ]
   },
   "home.html": {
@@ -900,5 +901,10 @@
     ],
     "refer": [],
     "priority": 0
+  },
+  "demo.html": {
+    "refer": [
+      "shade.html"
+    ]
   }
 }

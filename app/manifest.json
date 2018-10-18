@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "H58016FE1"/*应用的标识，创建应用时自动生成，勿手动修改*/,
-	"name": "Gank"/*应用名称，程序桌面图标名称*/,
+	"name": "Vue-H5Plus"/*应用名称，程序桌面图标名称*/,
 	"version": {
 		"name": "1.0.0"/*应用版本名称*/,
 		"code": ""
@@ -226,32 +226,16 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "",
-						"iphonex": "D:/project/vue-h5plus/appicon/start.png",
-						"iphonexl": "D:/project/vue-h5plus/appicon/start.png",
-						"retina47": "D:/project/vue-h5plus/appicon/start.png",
-						"retina55": "D:/project/vue-h5plus/appicon/start.png",
-						"retina35": "D:/project/vue-h5plus/appicon/start.png",
-						"retina40": "D:/project/vue-h5plus/appicon/start.png",
-						"retina55l": "D:/project/vue-h5plus/appicon/start.png"
+						"default": ""
 					},
-					"ipad": {
-						"portrait": "D:/project/vue-h5plus/appicon/start.png",
-						"landscape": "D:/project/vue-h5plus/appicon/start.png",
-						"portrait7": "D:/project/vue-h5plus/appicon/start.png",
-						"landscape7": "D:/project/vue-h5plus/appicon/start.png",
-						"portrait-retina": "D:/project/vue-h5plus/appicon/start.png",
-						"portrait-retina7": "D:/project/vue-h5plus/appicon/start.png",
-						"landscape-retina": "D:/project/vue-h5plus/appicon/start.png",
-						"landscape-retina7": "D:/project/vue-h5plus/appicon/start.png"
-					}
+					"ipad": {}
 				},
 				"android": {
 					"mdpi": ""/*普通屏启动图片，分辨率：240x282*/,
 					"ldpi": "",
-					"hdpi": "D:/project/vue-h5plus/appicon/start.png",
-					"xhdpi": "D:/project/vue-h5plus/appicon/start.png",
-					"xxhdpi": "D:/project/vue-h5plus/appicon/start.png"
+					"hdpi": "D:/project/vue-h5plus/appicon/start/start_480.png",
+					"xhdpi": "D:/project/vue-h5plus/appicon/start/start_720.png",
+					"xxhdpi": "D:/project/vue-h5plus/appicon/start/start_1080.png"
 				}
 			}
 		},
@@ -744,7 +728,8 @@
 					"common_guide.html",
 					"my.html",
 					"login.html",
-					"common_update.html"
+					"common_update.html",
+					"demo.html"
 				],
 				"priority": 0
 			},
@@ -792,6 +777,13 @@
 				"resources": [],
 				"refer": [
 					"info_activity.html"
+				],
+				"priority": 0
+			},
+			"demo.html": {
+				"resources": [],
+				"refer": [
+					"shade.html"
 				],
 				"priority": 0
 			}
@@ -859,5 +851,6 @@
 				"static/fonts/iconfont.ttf"
 			]
 		}
-	}
+	},
+	"fullscreen": false
 }
