@@ -1,12 +1,18 @@
-# Vue-H5Plus
+# vue-h5plus
 
 基于 vue-cli3 搭建的 vue 多页面 H5Plus 项目,同时结合了 vant、mui 进行开发。
 
-## Vue-H5Plus 的特点
+## vue-h5plus 的特点
 
 - 基于 webpack4 和 vue-cli3 多页面模式开发，体验极致的打包速度
 - 自动构建 pags 目录下的页面，快速新建页面
 - Hbuilder 项目目录和 vue 工程目录分离，Hbuilder 不打包多余的配置文件
+
+## 项目说明
+
+- pages 目录下每个子目录作为一个页面，pagename.js 为 webpack 打包入口，pagename.html 为页面模板（若子目录下无 pagename.html ，则使用 default.html 作为模板）
+- 项目包含了 webview 模式的 tabbar，对应页面为 index
+- 项目引入了 mui 和 vant 组件库，开发者可以灵活选择
 
 ## 目录结构
 
@@ -23,8 +29,8 @@
 | +-- components // 公共 vue 组件目录
 | +-- pages // 页面
 | | +--somepage // 页面
-| |  | ---somepage.html // html模板
-| |  | ---somepage.js // 入口文件
+| |  | ---pagename.html // html模板
+| |  | ---pagename.js // 入口文件
 | | --- default.html // 默认 html 模板
 | +-- utils // 公用 js
 ```
@@ -42,8 +48,10 @@ yarn dev
 yarn build
 ```
 
-## 体验
+## 快速体验
 
-安卓版
+![安卓版](http://p42jcfxfo.bkt.clouddn.com/app/h5plusvue_h5plus.png)
 
-![安卓版](http://p42jcfxfo.bkt.clouddn.com/app/vue_h5plus.png)
+## Licence
+
+MIT
