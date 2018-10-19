@@ -119,10 +119,6 @@ export default {
 
     justify-content: center;
     align-items: center;
-
-    &:active {
-      // box-shadow: 0 0 100px inset #ddd;
-    }
     &.active {
       color: $color-main;
     }
