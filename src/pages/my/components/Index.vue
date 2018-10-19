@@ -12,16 +12,6 @@
       </div>
     </div>
     <ul class="my-list ">
-      <li class="list-item">
-        <div class="item-left">
-          <div class="item-title">我的文章</div>
-        </div>
-        <div class="item-right">
-        </div>
-        <div class="item-arrow">
-          <van-icon name="arrow" />
-        </div>
-      </li>
       <li class="list-item" @click="goAbout">
         <div class="item-left">
           <div class="item-title">关于我们</div>

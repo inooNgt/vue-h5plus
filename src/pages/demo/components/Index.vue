@@ -1,6 +1,6 @@
 <template>
   <div class="page-content nav-content" :class="isPlus?'':'broswer-content'">
-    <van-nav-bar title="Vant组件演示" fixed />
+    <van-nav-bar title="演示" fixed />
     <section class="cell-wrap">
       <ul class="list">
         <li class="item-cell" @click="showShade">
@@ -17,31 +17,17 @@
             </div>
           </div>
         </li>
-        <li class="item-cell" @click="showToast">
+        <li class="item-cell" @click="showActionsheet">
           <div class="cell-padding cell-bg-3">
             <div class="cell-content">
-              <div class="cell-text">提示</div>
+              <div class="cell-text">原生上拉菜单</div>
             </div>
           </div>
         </li>
-        <li class="item-cell" @click="showToast">
+        <li class="item-cell" @click="viewImg">
           <div class="cell-padding cell-bg-4">
             <div class="cell-content">
-              <div class="cell-text">提示</div>
-            </div>
-          </div>
-        </li>
-        <li class="item-cell" @click="showToast">
-          <div class="cell-padding cell-bg-5">
-            <div class="cell-content">
-              <div class="cell-text">提示</div>
-            </div>
-          </div>
-        </li>
-        <li class="item-cell" @click="showToast">
-          <div class="cell-padding cell-bg-6">
-            <div class="cell-content">
-              <div class="cell-text">提示</div>
+              <div class="cell-text">图片预览</div>
             </div>
           </div>
         </li>
@@ -54,7 +40,7 @@
 import Vue from 'vue'
 import mui from 'mui'
 import MTOOL from 'mtool'
-import { Button, NavBar, Toast, Dialog } from 'vant'
+import { Button, NavBar, Toast, Dialog, ImagePreview } from 'vant'
 
 Vue.use(Button).use(NavBar)
 
@@ -85,11 +71,7 @@ export default {
       })
     }
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.init()
-    })
-  },
+  mounted() {},
   methods: {
     goBack() {
       mui.back()
@@ -100,8 +82,25 @@ export default {
     showShade() {
       MTOOL.floatWebview('shade.html')
     },
-    clear() {},
-    init() {},
+    showActionsheet() {
+      plus.nativeUI.actionSheet(
+        {
+          cancel: '取消',
+          buttons: [{ title: '选项一' }, { title: '选项二' }]
+        },
+        e => {
+          Toast(`已选${e.index}`)
+        }
+      )
+    },
+    viewImg() {
+      ImagePreview([
+        'http://p42jcfxfo.bkt.clouddn.com/images/thinkin/demo_4.png'
+      ])
+    },
+    clear() {
+      console.log('clear data')
+    },
     update() {
       // 首次显示没有触发hide事件
       this.clear()

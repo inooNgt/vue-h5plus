@@ -20,8 +20,6 @@ const http = options => {
 const get = (url, options) => {
   options = setHeaders(url, options);
 
-  // console.log("options", options);
-
   if (typeof url !== "undefined") {
     url = config.host + url;
   }
