@@ -2,22 +2,50 @@
   <div class="page-content nav-content" :class="isPlus?'':'broswer-content'">
     <van-nav-bar title="Vant组件演示" fixed />
     <section class="cell-wrap">
-      <div class="item-cell" @click="showShade">
-        <div class="cell-padding">
-          <img src="~assets/img/demo_1.png" class="cell-img" alt="">
-          <div class="cell-content">
-            <div class="cell-text">Shade</div>
+      <ul class="list">
+        <li class="item-cell" @click="showShade">
+          <div class="cell-padding cell-bg-1">
+            <div class="cell-content ">
+              <div class="cell-text">原生弹层</div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="item-cell" @click="showToast">
-        <div class="cell-padding">
-          <img src="~assets/img/demo_2.png" class="cell-img" alt="">
-          <div class="cell-content">
-            <div class="cell-text">Toast</div>
+        </li>
+        <li class="item-cell" @click="showToast">
+          <div class="cell-padding cell-bg-2">
+            <div class="cell-content">
+              <div class="cell-text">提示</div>
+            </div>
           </div>
-        </div>
-      </div>
+        </li>
+        <li class="item-cell" @click="showToast">
+          <div class="cell-padding cell-bg-3">
+            <div class="cell-content">
+              <div class="cell-text">提示</div>
+            </div>
+          </div>
+        </li>
+        <li class="item-cell" @click="showToast">
+          <div class="cell-padding cell-bg-4">
+            <div class="cell-content">
+              <div class="cell-text">提示</div>
+            </div>
+          </div>
+        </li>
+        <li class="item-cell" @click="showToast">
+          <div class="cell-padding cell-bg-5">
+            <div class="cell-content">
+              <div class="cell-text">提示</div>
+            </div>
+          </div>
+        </li>
+        <li class="item-cell" @click="showToast">
+          <div class="cell-padding cell-bg-6">
+            <div class="cell-content">
+              <div class="cell-text">提示</div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </section>
   </div>
 </template>
@@ -103,51 +131,68 @@ html {
 }
 
 .cell-wrap {
-  display: flex;
-  align-items: center;
   padding: $padding-main;
+  .list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 }
 
 .item-cell {
-  flex: 1;
+  // flex: 1;
+  width: 48%;
   background-color: #fff;
   position: relative;
   border-radius: 4px;
+  box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.21);
+  overflow: hidden;
+  margin-bottom: $padding-main;
+
   .cell-padding {
     position: relative;
     width: 100%;
     height: 0;
     padding-top: 100%;
-    border-radius: 5px;
-    overflow: hidden;
   }
-  &:first-child {
-    margin-right: $padding-main;
+  .cell-bg-1 {
+    background: url(~assets/img/demo_1.png) center/cover;
   }
-  .cell-content,
-  .cell-img {
+  .cell-bg-2 {
+    background: url(~assets/img/demo_2.png) center/cover;
+  }
+  .cell-bg-3 {
+    background: url(~assets/img/demo_3.png) center/cover;
+  }
+  .cell-bg-4 {
+    background: url(~assets/img/demo_4.png) center/cover;
+  }
+  .cell-bg-5 {
+    background: url(~assets/img/demo_5.png) center/cover;
+  }
+  .cell-bg-6 {
+    background: url(~assets/img/demo_6.png) center/cover;
+  }
+  &:nth-child(2n - 1) {
+    // margin-right: $padding-main;
+  }
+  .cell-content {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  .cell-content {
-    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.21);
+
     z-index: 1;
     padding: $padding-main;
 
+    font-size: 16px;
     display: flex;
-    flex-direction: column;
     justify-content: flex-end;
-
-    font-size: 22px;
-    line-height: 22px;
-    font-weight: 600;
   }
-  .cell-img {
+  .cell-text {
+    writing-mode: vertical-rl;
   }
 }
 </style>

@@ -1,19 +1,14 @@
 <template>
   <div class="page-content" :class="!isPlus?'broswer-content':''">
     <div class="my-header">
-      <div class="my-header-content">
-        <nav class="bar-setting">
-          <van-icon class="icon-setting" name="setting" />
-        </nav>
-        <div class="row-img">
-          <div class="img-wrap" @click="changeAvatar">
-            <img class="header-img" v-if="avatar" :src="avatar" />
-            <img class="header-img" v-if="!avatar" src="~assets/img/head.png" />
-          </div>
+      <div class="row-img">
+        <div class="img-wrap" @click="changeAvatar">
+          <img class="header-img" v-if="avatar" :src="avatar" />
+          <img class="header-img" v-if="!avatar" src="~assets/img/head.png" />
         </div>
-        <div class="row-msg">
-          <div class="msg-name">登录有惊喜哟</div>
-        </div>
+      </div>
+      <div class="row-msg">
+        <div class="msg-name">大侠哟~</div>
       </div>
     </div>
     <ul class="my-list ">
@@ -27,7 +22,7 @@
           <van-icon name="arrow" />
         </div>
       </li>
-      <li class="list-item">
+      <li class="list-item" @click="goAbout">
         <div class="item-left">
           <div class="item-title">关于我们</div>
         </div>

@@ -80,7 +80,7 @@
 }
 .my-header {
   height: px2rem(210px);
-  padding: 0 $padding-main;
+  padding: 50px $padding-main 0;
   background-image: linear-gradient(0deg, #eb2a00, #ffad87);
   color: #fff;
   position: relative;
@@ -88,9 +88,6 @@
 .row-img {
   text-align: center;
   padding: px2rem(7px) 0 px2rem(7px);
-}
-.img-wrap {
-  position: relative;
 }
 .header-img {
   display: block;
@@ -110,52 +107,4 @@
     font-weight: 600;
     text-shadow: 0 1px 1px #000;
   }
-  .msg-login {
-  }
-}
-.bar-setting {
-  height: px2rem(40px);
-  padding: 0 $padding-main;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.icon-setting {
-  font-size: 20px;
-  padding: 8px 10px;
-  position: relative;
-  right: -10px;
-}
-.my-header-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-.my-bg-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.signin-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 0;
-  z-index: 9;
-  width: 64px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  padding: 0 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 15px 0 0 15px;
-  color: #fff;
-  font-size: 14px;
-}
-.icon-article {
-  font-size: 16px;
 }

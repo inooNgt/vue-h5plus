@@ -226,16 +226,32 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": ""
+						"default": "",
+						"iphonex": "D:/project/vue-h5plus/appicon/start/start.png",
+						"iphonexl": "D:/project/vue-h5plus/appicon/start/start.png",
+						"retina47": "D:/project/vue-h5plus/appicon/start/start.png",
+						"retina55": "D:/project/vue-h5plus/appicon/start/start.png",
+						"retina35": "D:/project/vue-h5plus/appicon/start/start.png",
+						"retina40": "D:/project/vue-h5plus/appicon/start/start.png",
+						"retina55l": "D:/project/vue-h5plus/appicon/start/start.png"
 					},
-					"ipad": {}
+					"ipad": {
+						"portrait": "D:/project/vue-h5plus/appicon/start/start.png",
+						"portrait7": "D:/project/vue-h5plus/appicon/start/start.png",
+						"landscape": "D:/project/vue-h5plus/appicon/start/start.png",
+						"landscape7": "D:/project/vue-h5plus/appicon/start/start.png",
+						"portrait-retina": "D:/project/vue-h5plus/appicon/start/start.png",
+						"portrait-retina7": "D:/project/vue-h5plus/appicon/start/start.png",
+						"landscape-retina": "D:/project/vue-h5plus/appicon/start/start.png",
+						"landscape-retina7": "D:/project/vue-h5plus/appicon/start/start.png"
+					}
 				},
 				"android": {
 					"mdpi": ""/*普通屏启动图片，分辨率：240x282*/,
 					"ldpi": "",
 					"hdpi": "D:/project/vue-h5plus/appicon/start/start_480.png",
 					"xhdpi": "D:/project/vue-h5plus/appicon/start/start_720.png",
-					"xxhdpi": "D:/project/vue-h5plus/appicon/start/start_1080.png"
+					"xxhdpi": "D:/project/vue-h5plus/appicon/start/start_720.png"
 				}
 			}
 		},
