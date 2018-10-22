@@ -1,25 +1,21 @@
 <template>
-  <div class="footer">
-    <div class="footer-link" v-bind:class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
+  <ul class="footer">
+    <li class="footer-link" :class="{ active: activePath === 'home.html' }" @click="handleNavTap('home.html',$event)">
       <span class="md-icon icon-home-tab1"></span>
-    </div>
-    <div class="footer-link" v-bind:class="{ active: activePath === 'demo.html' }" @click="handleNavTap('demo.html',$event)">
+    </li>
+    <li class="footer-link" :class="{ active: activePath === 'demo.html' }" @click="handleNavTap('demo.html',$event)">
       <span class="md-icon icon-home-tab2"></span>
-    </div>
-    <div class="footer-link" v-bind:class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
+    </li>
+    <li class="footer-link" :class="{ active: activePath === 'my.html' }" @click="handleNavTap('my.html',$event)">
       <span class="md-icon icon-home-tab3"></span>
-    </div>
-  </div>
+    </li>
+  </ul>
 </template>
 
 <script>
 import Vue from 'vue'
-import { Button, Icon } from 'vant'
 import MTOOL from 'mtool'
 import config from 'utils/config'
-
-Vue.use(Icon)
-Vue.use(Button)
 
 export default {
   name: 'Footer',
@@ -29,7 +25,6 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {})
     let pathname = window.location.pathname || ''
     pathname = pathname.substr(pathname.lastIndexOf('/') + 1)
     this.activePath = pathname === 'index.html' ? 'home.html' : pathname
