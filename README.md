@@ -50,7 +50,7 @@ yarn build
 
 ## 快速体验
 
-![安卓版](http://p42jcfxfo.bkt.clouddn.com/app/h5plusvue_h5plus.png)
+![安卓版](http://inoongt.oss-cn-shenzhen.aliyuncs.com/images/1544062594.png)
 
 ## Licence
 
